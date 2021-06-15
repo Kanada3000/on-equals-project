@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>OnEquals - Вхід</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/sign.css">
+    <link rel="stylesheet" href="css/sign-1440.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <th:block th:include="/block/block-header.html :: header"></th:block>
+</header>
+<div id="sign">
+    <form id="sign-in" class="in" action="/">
+        <input type="text" placeholder="Ел. пошта або телефон">
+        <div class="pass">
+            <input type='password' placeholder="Пароль">
+            <div class="image">
+                <img src="images/eye-open.png">
+            </div>
+        </div>
+
+    </form>
+    <a href="">Забули пароль?</a>
+</div>
+<div id="sign-button">
+    <div class="sign-in">
+        <button form="sign-in">Увійти&nbsp→</button>
+    </div>
+    <div class="account">
+        <button class="google">Продовжити з&nbspGoogle</button>
+        <button class="fb">Продовжити з&nbspFB</button>
+    </div>
+</div>
+
+<script src="script/script.js"></script>
+</body>
+</html>

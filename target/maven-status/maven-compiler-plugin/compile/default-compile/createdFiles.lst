@@ -1,0 +1,3 @@
+org\onequals\controllers\HelloController.class
+org\onequals\config\MySpringMvcDispatcherServletInitializer.class
+org\onequals\config\SpringConfig.class

@@ -1,0 +1,222 @@
+
+#about{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding: calc(209px - 4.8vw) calc(-388px + 31.3vw) calc(360px - 10.4vw);
+    background-color: black;
+    font-size: 32px;
+    color: white;
+    box-sizing: border-box;
+    width: 100%;
+    margin: auto;
+}
+
+#about .video{
+    width: calc(373px + 27.1vw);
+    height: calc(211px + 15.2vw);
+}
+
+#about iframe{
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+#about .text{
+    text-align: left;
+}
+
+#about .text span{
+    display: block;
+    width: 533px;
+}
+
+#about .text p{
+    padding-top: calc(-40px + 4.2vw);
+}
+
+#about .text a:hover{
+    text-decoration: underline;
+}
+
+
+
+#sticker-pack{
+    background-color: white;
+    padding: calc(187px - 2.1vw) calc(-420px + 49vw) calc(210px - 6.3vw);
+    font-size: 32px;
+    text-align: center;
+}
+
+#sticker-pack .button{
+    width: 100%;
+    height: 137px;
+    font-size: 46px;
+    border-radius: 500px;
+    background-color: #FDD749;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#sticker-pack span.text{
+    display: block;
+    font-size: inherit;
+    margin-top: 43px;
+}
+
+
+
+
+
+
+
+
+.arrow-1 {
+    top: -60px;
+    left: -15.62vw;
+    position: absolute;
+}
+
+.arrow-1 img {
+    width: 10.52vw;
+    height: auto;
+}
+
+.arrow-2 {
+    top: 138px;
+    left: -15.62vw;
+    position: absolute;
+}
+
+.arrow-2 img {
+    width: 7.34vw;
+    height: auto;
+}
+
+.heart {
+    top: 151px;
+    right: -18.64vw;
+    position: absolute;
+}
+
+.heart img {
+    width: 19.27vw;
+    height: auto;
+}
+
+@media screen and (max-width: 1420px){
+    #about{
+        padding: 100px calc(366px - 21.2vw) 140px;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    #about .video{
+        width: 100%;
+        height: calc(360px + 4.8vw);
+    }
+
+    #about .text span{
+        padding-top: 57px;
+        width: 100%;
+    }
+
+    #about .text p{
+        padding-top: 20px;
+    }
+
+
+    #sticker-pack{
+        padding: calc(219px - 4.3vw) calc(-217px + 34.9vw) calc(16px + 7.2vw)
+    }
+}
+
+@media screen and (max-width: 1024px){
+    #about{
+        padding: 100px calc(-336px + 47.4vw) 140px;
+    }
+
+    #about .video{
+        height: calc(370px + 4vw);
+    }
+
+    #about .text span{
+        padding-top: calc(154px - 9.5vw);
+    }
+
+    #sticker-pack{
+        padding: 175px calc(-305px + 43.5vw) calc(130px - 4vw)
+    }
+
+    #sticker-pack .button{
+        font-size: calc(30px + 1.6vw);
+    }
+
+    #sticker-pack span.text{
+        margin-top: calc(15px + 2.8vw);
+    }
+}
+
+@media screen and (max-width: 775px){
+    #about{
+        padding: calc(29px + 8.6vw) 30px calc(87px + 6.9vw);
+        font-size: calc(16px + 2.1vw);
+    }
+
+    #about .video{
+        height: calc(-32px + 56vw);
+    }
+
+    #about .text span{
+        padding-top: calc(7px + 9.6vw);
+    }
+
+
+    #sticker-pack{
+        padding: calc(235px - 7.9vw) 30px 100px;
+        font-size: calc(16px + 2.1vw);
+    }
+
+    #sticker-pack .button{
+        font-size: 42px;
+        height: calc(333px - 25.4vw);
+    }
+
+    #sticker-pack span.text{
+        margin-top: calc(15px + 2.7vw);
+    }
+}
+
+@media screen and (max-width: 480px){
+    #about{
+        padding: calc(1px + 14.4vw) calc(-15px + 9.4vw) 25vw;
+        font-size: calc(14px + 2.5vw);
+    }
+
+    #about .video{
+        height: calc(15px + 46.3vw);
+    }
+
+    #about .text span{
+        padding-top: calc(29px + 5vw);
+    }
+
+
+    #sticker-pack{
+        padding: calc(-28px + 46.9vw) calc(-15px + 9.4vw) 100px;
+        font-size: calc(2px + 5vw);
+    }
+
+    #sticker-pack .button{
+        font-size: calc(12px + 6.3vw);
+        height: calc(49px + 21vw);
+    }
+
+    #sticker-pack span.text{
+        margin-top: calc(1px + 5.6vw);
+    }
+}

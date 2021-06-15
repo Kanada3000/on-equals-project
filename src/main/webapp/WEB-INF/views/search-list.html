@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>OnEquals - Список вакансій</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main-adapt.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/search-1440.css">
+</head>
+<body>
+<header>
+    <th:block th:include="/block/block-header.html :: header"></th:block>
+</header>
+<main>
+    <div class="main__block">
+        <div class="search">
+            <form id="search">
+                <label>
+                    <input type="text" name="key_words" class="search_input" placeholder="Ключові слова">
+                </label>
+                <label>
+                    <select form="search" name="specialization" class="search_input">
+                        <option hidden disabled selected>Спеціалізація</option>
+                        <option>IT</option>
+                        <option>Освіта</option>
+                        <option>Что-то там</option>
+                        <option>Что-то там2</option>
+                    </select>
+                </label>
+                <label>
+                    <select form="search" name="town" class="search_input">
+                        <option hidden disabled selected>Пошук за містом</option>
+                        <option>Київ</option>
+                        <option>Харків</option>
+                        <option>Львів</option>
+                        <option>Одеса</option>
+                    </select>
+                </label>
+            </form>
+        </div>
+        <div class="main__button">
+            <button form="search">Знайти!</button>
+        </div>
+    </div>
+</main>
+<div id="search-list">
+
+
+    <div id="sort">
+        <div class="summary">
+            <h4>Всього:</h4>
+            <span>315 вакансій</span>
+        </div>
+        <div class="sort-by">
+            <h4 class="sort">Сортувати:</h4>
+            <div class="buttons">
+                <input id='date' type="radio" name="sort">
+                <label for="date" class="radio">
+                    за датою
+                </label>
+                <input id="salary" type="radio" name="sort">
+                <label for="salary" class="radio">
+                    за зарплатою
+                </label>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="category">
+        <div class="cat-list">
+            <h3>Категорія:</h3>
+
+            <input id="cat-1" type="checkbox">
+            <label class="checkbox" for="cat-1">
+                маркетинг, реклама, PR&nbsp<span>76</span>
+            </label>
+            <input id="cat-2" type="checkbox">
+            <label class="checkbox" for="cat-2">
+                адміністрація <span>34</span>
+            </label>
+            <input id="cat-3" type="checkbox">
+            <label class="checkbox" for="cat-3">
+                дизайн <span>40</span>
+            </label>
+        </div>
+
+
+        <div class="type-list">
+            <h3>Вид зайнятості:</h3>
+
+            <input id="type-1" type="checkbox">
+            <label class="checkbox" for="type-1">
+                повна зайнятість <span>65</span>
+            </label>
+            <input id="type-2" type="checkbox">
+            <label class="checkbox" for="type-2">
+                неповна зайнятість <span>43</span>
+            </label>
+            <input id="type-3" type="checkbox">
+            <label class="checkbox" for="type-3">
+                дистанційна робота <span>34</span>
+            </label>
+        </div>
+
+        <div class="salary">
+            <h3>Зарплата:</h3>
+
+            <span>від</span>
+            <div class="input">
+                <label for="min" id="min-output"></label>
+                <input type="range" id="min" step="1000">
+            </div>
+            <span>до</span>
+            <div class="input">
+                <label for="max" id="max-output"></label>
+                <input type="range" id="max" step="1000">
+            </div>
+        </div>
+
+    </div>
+
+    <div id="vacancies">
+        <div class="vacancy">
+            <div class="text">
+                <h3>Анастасія<br/>Левицька</h3>
+                <ul>
+                    <li>графічний дизайн</li>
+                    <li>дистанційна зайнятість</li>
+                    <li>20 000 грн</li>
+                    <li>Україна / Київ</li>
+                </ul>
+                <div class="hide">
+                    <span>розгорнути ↓</span>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="mail">
+                    <img src="images/mail-vacancy.png" alt="mail">
+                </div>
+                <div class="heart">
+                    <img src="images/heart-vacancy.png" alt="like">
+                </div>
+                <div class="eye">
+                    <img src="images/eye-vacancy.png" alt="eye">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script/script.js"></script>
+<script src="script/script-search.js"></script>
+</body>
+</html>

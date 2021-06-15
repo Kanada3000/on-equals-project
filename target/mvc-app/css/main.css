@@ -1,0 +1,142 @@
+main {
+    background-color: #E5E5E5;
+    display: block;
+    position: relative;
+    width: 100%;
+    font-size: 46px;
+}
+
+main .search {
+    padding: 143px calc(-388px + 31.3vw) 0;
+    position: relative;
+}
+
+main .search form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main input[type="text"] {
+    box-sizing: border-box;
+}
+
+main ::placeholder {
+    color: #999999;
+}
+
+main select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    color: #999999;
+}
+
+
+main option[selected] {
+    color: #999999;
+}
+
+main .search_input {
+    border: black 2px solid;
+    height: 98px;
+    width: calc(317px + 7.3vw);
+    padding-left: 24px;
+    font-size: 22px;
+}
+
+main .lightnings {
+    position: relative;
+    display: flex;
+    flex-flow: row wrap-reverse;
+    justify-content: space-around;
+    height: 1px;
+    bottom: -50px;
+}
+
+main .lightning-1 {
+
+}
+
+main .lightning-1 img {
+    height: 24.16vh;
+    width: auto;
+    transform: rotate(-17.97deg);
+
+}
+
+main .lightning-2 {
+}
+
+main .lightning-2 img {
+    height: 26.8vh;
+    width: auto;
+}
+
+
+main .main__button {
+    text-align: center;
+    padding-top: 49px;
+    padding-bottom: 78px;
+    height: 137px;
+    width: calc(807px + 4.4vw);
+    font-size: inherit;
+    margin: auto;
+}
+
+main .main__button button {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    background-color: #509FC8;
+}
+
+
+main .main__place {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: calc(86px + 2.1vw) calc(-388px + 31.3vw);
+    margin: auto;
+    font-size: inherit;
+}
+
+main .main__place .smile-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: calc(389px + 17.9vw);
+    height: 210px;
+    border: 4px solid black;
+    border-radius: 500px;
+    box-sizing: border-box;
+    padding: 0 calc(-45px + 9.6vw);
+}
+
+main .main__place .smile-button.right{
+    flex-direction: row-reverse;
+}
+
+main .main__place .smile-button span{
+    width: 254px;
+    text-align: center;
+}
+
+main .main__place .smile-button .smile-image{
+    padding: 0 calc(76px - 1.7vw);
+}
+
+main .main__place .smile-button .smile-image.left{
+    padding-left: 0;
+}
+
+main .main__place .smile-button .smile-image.right{
+    padding-right: 0;
+}
+
+main .main__place .smile-button .smile-image img{
+    width: 152px;
+    height: auto;
+}

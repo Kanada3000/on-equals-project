@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>OnEquals - Крок 1. Про шукача</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/list.css">
+    <link rel="stylesheet" href="css/reg-1.css">
+    <link rel="stylesheet" href="css/reg-1-1024.css">
+    <link rel="stylesheet" href="css/reg-1-775.css">
+    <link rel="stylesheet" href="css/reg-1-480.css">
+    <link rel="stylesheet" href="css/reg-1-320.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <th:block th:include="/block/block-header.html :: header"></th:block>
+</header>
+<div id="reg2">
+    <div class="reg-head">
+        <h1>крок 1 / про шукача</h1>
+    </div>
+    <span>поля з зірочкою обов’язкові для заповнення&nbsp<span class="text-red">*</span></span>
+
+    <form id="form-reg-employer" action="/sign-in-3">
+        <label for="company-name">
+            1. ПІБ<span class="text-red"> *</span>
+        </label>
+        <input id="company-name" type="text" placeholder="Яков Якович Яковлєв" required>
+
+        <label for="area">
+            2. Оберіть, в якій сфері ви працюєте&nbsp<span class="text-red">*</span>
+        </label>
+        <div class="list">
+            <input id="area" type="text" class="select-label" placeholder="почніть вводити назву">
+            <div class="select">
+                <ul>
+                    <li>
+                        <div class="li">Маркетинг, реклама, Pr</div>
+                    </li>
+                    <li>
+                        <div class="li">Туризм</div>
+                    </li>
+                    <li>
+                        <div class="li">Дизайн</div>
+                    </li>
+                    <li>
+                        <div class="li">Готельний бізнес</div>
+                    </li>
+                    <li>
+                        <div class="li">Мережа магазинів</div>
+                    </li>
+                    <li>
+                        <div class="li">Туризм</div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <label for="email">
+            3. Пошта, на яку будуть приходити листи&nbsp<span class="text-red">*</span>
+        </label>
+        <input id="email" type="email" placeholder="вставте лінк" required>
+
+        <label>
+            4. Ваше розташування&nbsp<span class="text-red">*</span>
+        </label>
+
+        <div class="country">
+            <label class="label-inner" style="margin-top: 9.2vh;">
+                <span>Країна</span>
+                <input list="country-list">
+                <datalist id="country-list">
+                    <option value="Україна">
+                    <option value="Росія">
+                    <option value="Білорусь">
+                    <option value="Польша">
+                </datalist>
+            </label>
+
+            <label class="label-inner">
+                <span>Міста</span>
+                <input list="city-list">
+                <datalist id="city-list">
+                    <option value="Київ">
+                    <option value="Харків">
+                    <option value="Запоріжжя">
+                    <option value="Одеса">
+                    <option value="Львів">
+                </datalist>
+            </label>
+        </div>
+        <div class="accept add">
+            <label>
+                <input type="button" name="accept0">
+                <span>додати країну чи місто</span>
+            </label>
+        </div>
+
+        <label for="link">
+            5. Ваш сайт, якщо він є
+        </label>
+        <input id="link" type="url" placeholder="вставте лінк">
+
+        <label>
+            6. Соціальні мережі
+        </label>
+
+        <label class="label-inner" style="margin-top: 9.2vh;">
+            <span>Facebook</span>
+            <input type="text" placeholder="вставте лінк">
+        </label>
+
+        <label class="label-inner">
+            <span>Instagram</span>
+            <input type="text" placeholder="вставте лінк">
+        </label>
+
+        <label class="label-inner">
+            <span>Twitter</span>
+            <input type="text" placeholder="вставте лінк">
+        </label>
+
+        <label class="label-inner">
+            <span>LinkedIn</span>
+            <input type="text" placeholder="вставте лінк">
+        </label>
+
+        <label for="story">
+            7. Розкажіть про себе (коротка інформація про досвід роботи, інтереси, освіту,
+            необхідні умови для праці тощо)
+        </label>
+        <input id="story" type="text" placeholder="до 1000 знаків">
+
+        <div class="accept">
+            <input id='accept1' type="checkbox" name="accept1" required>
+            <label for="accept1">
+                <span>погоджуюсь з умовами публічної оферти</span>
+            </label>
+
+            <input id="accept2" type="checkbox" name="accept2">
+            <label for="accept2">
+                <span>погоджуюсь на особисте листування з шукачем</span>
+            </label>
+        </div>
+        <div class="submit">
+            <button type="submit" formnovalidate>Зберегти і далі!</button>
+        </div>
+
+    </form>
+</div>
+
+<script src="script/script-list.js"></script>
+<script src="script/script.js"></script>
+</body>
+</html>

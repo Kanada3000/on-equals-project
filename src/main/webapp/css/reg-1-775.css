@@ -1,0 +1,158 @@
+@media screen and (max-width: 835px) {
+
+    #reg2 {
+        padding: 0 4vw;
+    }
+
+    #reg2 h1 {
+        margin-bottom: 0;
+    }
+
+    #reg2 span {
+        font-size: 42px;
+    }
+
+    #reg2 label.first {
+        margin-top: 90px;
+    }
+
+    #reg2 label {
+        font-size: 42px;
+        margin-top: 100px;
+    }
+
+    #reg2 .green-choice {
+        margin-top: 65px;
+    }
+
+    #reg2 .green-choice label:nth-of-type(2), .green-choice label:nth-of-type(3) {
+        margin-left: 10%;
+    }
+
+    #reg2 .green-choice label:nth-of-type(4) {
+        margin-top: 20px;
+    }
+
+    #reg2 .green-choice label:nth-of-type(5) {
+        margin-top: 20px;
+    }
+
+    #reg2 .label-inner input {
+        width: 74%;
+    }
+
+    #reg2 input[list] {
+        background-size: 15px auto;
+    }
+
+    #reg2 input[list]:focus {
+        background-size: 15px auto;
+    }
+
+    #reg2 input {
+        margin-top: 46px;
+    }
+
+    #reg2_sub {
+        padding: 0 3.74%
+    }
+
+    #reg2_sub .submit {
+        margin: 152px 0 128px;
+    }
+
+    #reg2_sub .add-vacancy {
+        height: 320px;
+    }
+
+    #reg2_sub .add-vacancy label {
+        width: 61%;
+    }
+
+    #reg2_sub button {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 775px) {
+
+    #reg1 {
+        width: calc(-55px + 99vw);
+        font-size: 42px;
+    }
+
+    #reg1 span.title {
+        margin-bottom: 70px;
+    }
+
+    #reg1 .button-2 {
+        margin-top: 43px;
+    }
+
+    #footer-reg {
+        padding: calc(-5px + 17.2vw) 0 103px;
+    }
+
+    #footer-reg .star {
+        top: -46px;
+        left: 15.35%;
+    }
+
+    #footer-reg .download {
+        padding: 0 40px;
+        width: 91.3%;
+        min-width: 420px;
+        height: calc(328px - 25vw);
+    }
+
+    #footer-reg p {
+        margin: 35px auto 0;
+        width: 80.7%;
+        min-width: 416px;
+    }
+
+    #reg2 .submit button {
+        width: 90vw;
+        height: 42vw;
+        min-height: 210px;
+        margin: 100px auto 112px;
+    }
+
+    #reg-last{
+        padding-top: 69px;
+    }
+
+    #reg-last .text{
+        padding-top: calc(7px + 6.9vw);
+        width: calc(-53px + 98.6vw);
+        font-size: 42px;
+    }
+}
+
+@media screen and (max-width: 722px) {
+
+    #reg2 .green-choice label:nth-of-type(2), .green-choice label:nth-of-type(3) {
+        margin-left: 2%;
+    }
+
+    #reg2 .green-choice label:nth-of-type(4) {
+        margin-top: 20px;
+    }
+
+    #reg2 .green-choice label:nth-of-type(5) {
+        margin-top: 20px;
+    }
+
+    #reg2 .submit button {
+        width: 87vw;
+    }
+
+    #reg2 .choice .cell .head {
+        height: 105px;
+    }
+
+    #reg2 .label-inner span {
+        float: left;
+        font-size: 4.58vw;
+    }
+}

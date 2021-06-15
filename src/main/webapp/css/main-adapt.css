@@ -1,0 +1,171 @@
+@media screen and (max-width: 1440px){
+    main .search {
+        padding: calc(195px - 3.6vw) 60px 0;
+    }
+
+    main .search_input {
+        height: calc(43px + 3.8vw);
+        width: calc(-83px + 35.1vw);
+    }
+
+    main .main__button {
+        padding-top: calc(104px - 3.8vw);
+        padding-bottom: calc(286px - 14.4vw);
+        width: calc(448px + 29.3vw);
+    }
+
+    main .main__place {
+        padding: calc(26px + 6.3vw) 60px;
+    }
+
+    main .main__place .smile-button{
+        width: calc(-70px + 49.8vw);
+        padding: 0 60px;
+    }
+}
+
+@media screen and (max-width: 1350px){
+    main .main__place .smile-button .smile-image{
+        display: none;
+    }
+
+    main .main__place .smile-button{
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 1023px){
+    main {
+        font-size: calc(30px + 1.6vw);
+    }
+
+    main .search {
+        padding: 15.5vw calc(180px - 11.5vw) 0;
+    }
+
+    main .search form {
+        flex-direction: column;
+        height: 360px;
+    }
+
+    main label{
+        width: 100%;
+    }
+
+    main .search_input {
+        height: 82px;
+        width: 100%;
+    }
+
+    main .main__button {
+        padding-top: 65px;
+        padding-bottom: calc(330px - 19vw);
+        width: calc(582px + 16.2vw);
+    }
+
+    main .main__place {
+        flex-direction: column;
+        padding: calc(479px - 37.9vw) calc(-53px + 11.1vw) calc(251px - 15.8vw);
+        height: 484px;
+    }
+
+    main .main__place .smile-button .smile-image{
+        display: block;
+        padding: 0 40px;
+    }
+
+    main .main__place .smile-button{
+        justify-content: flex-start;
+        width: 100%;
+        padding: 0 calc(267px - 17vw);
+    }
+
+    main .main__place .smile-button.right{
+        padding-left: 0;
+    }
+
+    main .main__place .smile-button.left{
+        padding-right: 0;
+    }
+}
+
+@media screen and (max-width: 775px){
+    main {
+        font-size: 42px;
+    }
+
+    main .search {
+        padding: calc(77px + 5.5vw) calc(-12px + 13.4vw) 0;
+    }
+
+    main .search form {
+        height: calc(254px + 13.7vw);
+    }
+
+    main .main__button {
+        padding-top: calc(46px + 2.4vw);
+        padding-bottom: calc(158px + 3.4vw);
+        width: calc(-53px + 98.6vw);
+    }
+
+    main .main__place {
+        padding: calc(-10px + 25.4vw) 31px calc(56px + 9.6vw);
+        height: calc(420px + 8.2vw);
+    }
+
+    main .main__place .smile-button .smile-image{
+        display: block;
+        padding: 0 40px;
+    }
+
+    main .main__place .smile-button{
+        padding: 0 calc(22px + 14.8vw);
+    }
+}
+
+@media screen and (max-width: 666px){
+    main .main__place .smile-button .smile-image{
+        display: none;
+    }
+
+    main .main__place .smile-button{
+        justify-content: center;
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 480px){
+    main {
+        font-size: calc(12px + 6.3vw);
+    }
+
+    main .search {
+        padding: calc(-56px + 33.1vw) calc(-5px + 11.9vw) 0;
+    }
+
+    main .search form {
+        height: calc(76px + 51.3vw);
+    }
+
+    main .search_input {
+        height: calc(16px + 13.8vw);
+        font-size: calc(-2px + 5vw);
+    }
+
+    main .main__button {
+        padding-top: calc(4px + 11.3vw);
+        padding-bottom: calc(12px + 33.8vw);
+        width: calc(30px + 81.3vw);
+        height: calc(-4px + 29.4vw);
+    }
+
+    main .main__place {
+        padding: calc(76px + 7.5vw) calc(-15px + 9.4vw) 21.3vw;
+        height: calc(100px + 75vw);
+    }
+
+    main .main__place .smile-button{
+        height: calc(30px + 37.5vw);
+    }
+}
+

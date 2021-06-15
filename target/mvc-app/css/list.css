@@ -1,0 +1,61 @@
+.select-label{
+    border-bottom: 2px solid black;
+    width: 100%;
+    font-size: 1.8vw;
+    padding: 0 0 0.78vw 0;
+    background: url(../images/arrow-list.png) no-repeat right;
+    background-size: 17px auto;
+}
+
+/*.select-label:hover{*/
+/*    background: url(../images/arrow-list.png) no-repeat right;*/
+/*    background-size: 1.3vw;*/
+/*}*/
+
+.select {
+    display: none;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.select ul {
+    border: 2px solid black;
+    width: 100%;
+    position: absolute;
+    z-index: 990;
+    top:-2px;
+    left:0;
+    display: block;
+    margin: 0;
+    background-color: white;
+    font-size: 1.8vw;
+    padding: 1vw 0 0;
+}
+
+.select li {
+    width: auto;
+    border: 0;
+    cursor: pointer;
+}
+
+.select .li {
+    width: auto;
+    display: inline;
+    padding: 0.4vw 0.94vw;
+
+}
+
+.select .li-hover {
+    background-color: #fed849;
+    border-radius: 2vw;
+}
+
+.select .li-green {
+    background-color: #c4de95;
+    border-radius: 2vw;
+}
+
+.input[type=hidde] {
+    color: black;
+}
