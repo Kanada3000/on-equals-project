@@ -1,11 +1,11 @@
 package org.onequals.services;
 
+import org.onequals.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.onequals.repo.UserRepo;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -13,7 +13,7 @@ public class UserService implements UserDetailsService {
     private UserRepo userRepo;
 
     @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        return userRepo.findByLogin(login);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepo.findByUsername(username);
     }
 }

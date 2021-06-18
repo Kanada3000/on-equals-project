@@ -6,8 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="mvc-app" />
+        <module name="beauty" />
+        <module name="project" />
+        <module name="0_project" />
       </profile>
     </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="0_project" options="-parameters" />
+      <module name="beauty" options="-parameters" />
+      <module name="project" options="-parameters" />
+    </option>
   </component>
 </project>

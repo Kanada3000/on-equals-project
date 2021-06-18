@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>OnEquals Register</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/list.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/reg-1.css">
+    <link rel="stylesheet" href="/css/reg-1-1024.css">
+    <link rel="stylesheet" href="/css/reg-1-775.css">
+    <link rel="stylesheet" href="/css/reg-1-480.css">
+    <link rel="stylesheet" href="/css/reg-1-320.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<header></header>
+<div id="reg2">
+    <div class="reg-head">
+        <h1>крок 2 / моє резюме</h1>
+    </div>
+    <span>поля з зірочкою обов’язкові для заповнення&nbsp<span class="text-red">*</span></span>
+
+    <form id="form-reg-employer" action="index.html">
+        <label for="vacancy" class="first">
+            1. Оберіть вакансію, яка вам потрібна&nbsp<span class="text-red">*</span>
+        </label>
+        <div class="list">
+            <input id="vacancy" type="text" class="select-label" placeholder="почніть вводити назву">
+            <div class="select green">
+                <ul>
+                    <li>
+                        <div class="li">Маркетинг, реклама, Pr</div>
+                    </li>
+                    <li>
+                        <div class="li">1</div>
+                    </li>
+                    <li>
+                        <div class="li">2</div>
+                    </li>
+                    <li>
+                        <div class="li">3</div>
+                    </li>
+                    <li>
+                        <div class="li">4</div>
+                    </li>
+                    <li>
+                        <div class="li">5</div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <label>
+            2. Оберіть тип зайнятості&nbsp<span class="text-red">*</span>
+        </label>
+        <div class="green-choice">
+            <input id="type-0" type="radio" name="type" required>
+            <label for="type-0">Повна</label>
+            <input id="type-1" type="radio" name="type" required>
+            <label for="type-1">Неповна</label>
+            <input id="type-2" type="radio" name="type" required>
+            <label for="type-2">Дистанційна</label>
+            <input id="type-3" type="radio" name="type" required>
+            <label for="type-3">Часткова</label>
+            <input id="type-4" type="radio" name="type" required>
+            <label for="type-4">Проектна</label>
+        </div>
+
+        <label>
+            3. Ваше розташування&nbsp<span class="text-red">*</span>
+        </label>
+
+        <div class="country">
+            <label class="label-inner" style="margin-top: 9.2vh;">
+                <span>Країна</span>
+                <input list="country-list">
+                <datalist id="country-list">
+                    <option value="Україна">
+                    <option value="Росія">
+                    <option value="Білорусь">
+                    <option value="Польша">
+                </datalist>
+            </label>
+
+            <label class="label-inner">
+                <span>Міста</span>
+                <input list="city-list">
+                <datalist id="city-list">
+                    <option value="Київ">
+                    <option value="Харків">
+                    <option value="Запоріжжя">
+                    <option value="Одеса">
+                    <option value="Львів">
+                </datalist>
+            </label>
+        </div>
+        <div class="accept add green-button">
+            <label>
+                <input type="button" name="accept0">
+                <span>додати країну і місто</span>
+            </label>
+        </div>
+
+        <label for="story">
+            4. Додаткова інформація про себе (досвід роботи у цій сфері, освіту, необхідні умови для праці
+            тощо)&nbsp<span class="text-red">*</span>
+        </label>
+        <input id="story" type="text" placeholder="до 1000 знаків">
+    </form>
+</div>
+<div id="reg2_sub">
+    <div class="submit">
+        <div class="add-vacancy">
+            <input id="add-button" type="button" name="add" form="form-reg-employer">
+            <label for="add-button">Додати&nbspще резюме&nbsp+</label>
+        </div>
+        <div class="add-vacancy-btn">
+            <button type="submit" form="form-reg-employer">Зберегти і далі!</button>
+            <button form="skip">Пропустити</button>
+        </div>
+    </div>
+    <form id="skip" action="index.html"></form>
+</div>
+<div id="footer-reg">
+    <div class="download">
+        <input id="download" type="file" accept="application/pdf" name="resume-file">
+        <label for="download">
+            Завантажити готове&nbsp<span>↓</span>
+        </label>
+    </div>
+    <div class="star">
+        <img src="/images/star-1.png" alt="star">
+    </div>
+    <p>Ви також можете завантажити своє готове резюме на свій профіль у форматі pdf</p>
+</div>
+
+<script src="/script/script-list.js"></script>
+<script src="/script/script.js"></script>
+</body>
+</html>
