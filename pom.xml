@@ -16,10 +16,6 @@
     <name>onequals</name>
     <description>Demo project for Spring Boot</description>
 
-    <properties>
-        <java.version>16</java.version>
-        <spring.version>5.0.8.RELEASE</spring.version>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -79,5 +75,19 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
