@@ -1,22 +1,19 @@
-.select-label{
+.select-label {
     border-bottom: 2px solid black;
     width: 100%;
-    font-size: 1.8vw;
+    font-size: inherit;
     padding: 0 0 0.78vw 0;
     background: url(../images/arrow-list.png) no-repeat right;
     background-size: 17px auto;
+    position: relative;
 }
-
-/*.select-label:hover{*/
-/*    background: url(../images/arrow-list.png) no-repeat right;*/
-/*    background-size: 1.3vw;*/
-/*}*/
 
 .select {
     display: none;
     position: relative;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 .select ul {
@@ -24,8 +21,8 @@
     width: 100%;
     position: absolute;
     z-index: 990;
-    top:-2px;
-    left:0;
+    top: -2px;
+    left: 0;
     display: block;
     margin: 0;
     background-color: white;

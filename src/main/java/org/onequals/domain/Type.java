@@ -12,6 +12,14 @@ public class Type {
     private String name;
     private int total = 0;
 
+    public Type() {
+    }
+
+    public Type(Long id, Long total) {
+        this.id = id;
+        this.total = total.intValue();
+    }
+
     public Long getId(){
         return id;
     }

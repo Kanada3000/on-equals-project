@@ -16,6 +16,9 @@ public interface UserRepo extends JpaRepository<User, Long> {
     List<User> findAllByRoleUser(Set<Role> roles);
 
     @Query("SELECT u FROM User u WHERE u.id = :id")
-    User findUserById(@Param("id") Long id);
+    User findByVacancy(@Param("id") Long id);
+
+    @Query("SELECT u FROM User u WHERE u.link = ?1")
+    User findUserByLink(String link);
 
 }

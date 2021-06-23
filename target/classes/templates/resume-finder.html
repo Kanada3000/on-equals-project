@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>OnEquals Register</title>
+    <title>OnEquals Resume</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/list.css">
@@ -16,40 +16,28 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-<header></header>
+<header>
+    <th:block th:if="${nameProfile == null}" th:include="/block/block-header.html :: header"></th:block>
+    <th:block th:if="${nameProfile != null}" th:include="/block/block-header-autho.html :: header"></th:block>
+</header>
 <div id="reg2">
     <div class="reg-head">
         <h1>крок 2 / моє резюме</h1>
     </div>
     <span>поля з зірочкою обов’язкові для заповнення&nbsp<span class="text-red">*</span></span>
 
-    <form id="form-reg-employer" action="index.html">
-        <label for="vacancy" class="first">
+    <form id="form-reg-employer" action="/resume/new" method="POST">
+        <label for="resume" class="first">
             1. Оберіть вакансію, яка вам потрібна&nbsp<span class="text-red">*</span>
         </label>
-        <div class="list">
-            <input id="vacancy" type="text" class="select-label" placeholder="почніть вводити назву">
-            <div class="select green">
+        <div class="list" id="categoryList">
+            <input autocomplete="off" name="category" id="resume" type="text" class="select-label"
+                   placeholder="почніть вводити назву" required>
+            <div class="select green" id="employer-div">
                 <ul>
-                    <li>
-                        <div class="li">Маркетинг, реклама, Pr</div>
+                    <li th:each="c: ${categories}">
+                        <div class="li" th:text="${c.getLongName()}"></div>
                     </li>
-                    <li>
-                        <div class="li">1</div>
-                    </li>
-                    <li>
-                        <div class="li">2</div>
-                    </li>
-                    <li>
-                        <div class="li">3</div>
-                    </li>
-                    <li>
-                        <div class="li">4</div>
-                    </li>
-                    <li>
-                        <div class="li">5</div>
-                    </li>
-
                 </ul>
             </div>
         </div>
@@ -58,15 +46,15 @@
             2. Оберіть тип зайнятості&nbsp<span class="text-red">*</span>
         </label>
         <div class="green-choice">
-            <input id="type-0" type="radio" name="type" required>
+            <input id="type-0" type="radio" name="type" value="Повна" required="required">
             <label for="type-0">Повна</label>
-            <input id="type-1" type="radio" name="type" required>
+            <input id="type-1" type="radio" name="type" value="Неповна" required>
             <label for="type-1">Неповна</label>
-            <input id="type-2" type="radio" name="type" required>
+            <input id="type-2" type="radio" name="type" value="Дистанційна" required>
             <label for="type-2">Дистанційна</label>
-            <input id="type-3" type="radio" name="type" required>
+            <input id="type-3" type="radio" name="type" value="Часткова" required>
             <label for="type-3">Часткова</label>
-            <input id="type-4" type="radio" name="type" required>
+            <input id="type-4" type="radio" name="type" value="Проектна" required>
             <label for="type-4">Проектна</label>
         </div>
 
@@ -75,28 +63,38 @@
         </label>
 
         <div class="country">
-            <label class="label-inner" style="margin-top: 9.2vh;">
-                <span>Країна</span>
-                <input list="country-list">
-                <datalist id="country-list">
-                    <option value="Україна">
-                    <option value="Росія">
-                    <option value="Білорусь">
-                    <option value="Польша">
-                </datalist>
-            </label>
-
-            <label class="label-inner">
-                <span>Міста</span>
-                <input list="city-list">
-                <datalist id="city-list">
-                    <option value="Київ">
-                    <option value="Харків">
-                    <option value="Запоріжжя">
-                    <option value="Одеса">
-                    <option value="Львів">
-                </datalist>
-            </label>
+            <div class="country-label">
+                <label for="country" class="label-inner">
+                    <span>Країна</span>
+                </label>
+                <div class="list" id="countryList">
+                    <input autocomplete="off" name="countString" id="country" type="text" class="select-label"
+                           placeholder="почніть вводити назву" required>
+                    <div class="select green" id="country-div">
+                        <ul>
+                            <li th:each="c: ${country}">
+                                <div class="li" th:text="${c}"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="country-label">
+                <label for="city" class="label-inner">
+                    <span>Міста</span>
+                </label>
+                <div class="list" id="cityList">
+                    <input autocomplete="off" name="citString" id="city" type="text" class="select-label"
+                           placeholder="почніть вводити назву" required>
+                    <div class="select green" id="city-div">
+                        <ul>
+                            <li th:each="c: ${city}">
+                                <div class="li" th:text="${c.getCity()}"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="accept add green-button">
             <label>
@@ -109,7 +107,12 @@
             4. Додаткова інформація про себе (досвід роботи у цій сфері, освіту, необхідні умови для праці
             тощо)&nbsp<span class="text-red">*</span>
         </label>
-        <input id="story" type="text" placeholder="до 1000 знаків">
+        <input id="story" type="text" placeholder="до 1000 знаків" name="description" required>
+
+        <label for="salary">
+            5. Вкажіть зарплату (у гривнях)&nbsp<span class="text-red">*</span>
+        </label>
+        <input id="salary" type="text" name="salary">
     </form>
 </div>
 <div id="reg2_sub">

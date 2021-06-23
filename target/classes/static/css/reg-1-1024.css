@@ -41,7 +41,7 @@
     }
 
     #reg2 {
-        padding: 0 6vw;
+        padding: 0 calc(-61px + 11.9vw);
     }
 
     #reg2 label.first {
@@ -52,8 +52,12 @@
         margin-top: 121px;
     }
 
+    #reg2 .country-label input {
+        width: calc(87px + 56.9vw);
+    }
+
     #reg2 .label-inner input {
-        width: 75.5%;
+        width: calc(87px + 56.9vw);
     }
 
     #reg2_sub{

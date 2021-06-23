@@ -49,6 +49,7 @@
     -moz-appearance: none;
     appearance: none;
     position: relative;
+    cursor: pointer;
 }
 
 #category span{

@@ -13,8 +13,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -42,7 +43,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/admin" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -50,7 +52,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -61,11 +63,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Work\0_project\src\main\resources\templates\admin" />
+      <recent name="E:\Work\0_project\src\main\resources\templates\block" />
+      <recent name="E:\Work\0_project\src\main\resources\static\script" />
       <recent name="E:\KPI\3 курс\1 семестр\Course\project\src\main\resources\templates\block" />
       <recent name="E:\KPI\3 курс\Course\beauty\src\main\resources\templates" />
-      <recent name="E:\KPI\3 курс\Course\beauty\src\main\resources\templates\master" />
-      <recent name="E:\KPI\3 курс\Course\beauty\src\main\resources\templates\blocks" />
-      <recent name="E:\KPI\3 курс\Course\beauty\src\main\resources\static\styles" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\KPI\3 курс\Course\beauty\src\main\resources\templates\blocks" />
@@ -73,11 +75,11 @@
       <recent name="E:\KPI\3 курс\Course\beauty\src\main\resources\static\styles" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.onequals.controller" />
       <recent name="org.onequals.repo" />
       <recent name="org.onequals.domain" />
-      <recent name="org.onequals.controller" />
+      <recent name="org.onequals.services" />
       <recent name="org.onequals.config" />
-      <recent name="salon.beauty.domain" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.Application">
@@ -130,6 +132,12 @@
       <workItem from="1623745586906" duration="8948000" />
       <workItem from="1623763952684" duration="23348000" />
       <workItem from="1623956750020" duration="4222000" />
+      <workItem from="1624002002481" duration="34920000" />
+      <workItem from="1624114734674" duration="7118000" />
+      <workItem from="1624172497107" duration="11629000" />
+      <workItem from="1624277939840" duration="24707000" />
+      <workItem from="1624354202001" duration="30338000" />
+      <workItem from="1624425426418" duration="4481000" />
     </task>
     <servers />
   </component>

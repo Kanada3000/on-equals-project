@@ -22,16 +22,28 @@ public class Vacancy{
     @JoinColumn(name="type_id")
     private Type type;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name="user_id")
     private User user;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinColumn(name="city_id")
+    private City city;
+
     private int salary = 20000;
-    private String country;
-    private String city;
     private String description;
 
     public Vacancy(){
+    }
+
+    public Vacancy(Long id, Category category, Type type, User user, City city, int salary, String description) {
+        this.id = id;
+        this.category = category;
+        this.type = type;
+        this.user = user;
+        this.city = city;
+        this.salary = salary;
+        this.description = description;
     }
 
     public Long getId() {
@@ -66,28 +78,20 @@ public class Vacancy{
         this.user = user;
     }
 
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
     public int getSalary() {
         return salary;
     }
 
     public void setSalary(int salary) {
         this.salary = salary;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public String getDescription() {

@@ -23,7 +23,8 @@
 <body>
 
 <header>
-    <th:block th:include="/block/block-header.html :: header"></th:block>
+    <th:block th:if="${nameProfile == null}" th:include="/block/block-header.html :: header"></th:block>
+    <th:block th:if="${nameProfile != null}" th:include="/block/block-header-autho.html :: header"></th:block>
 </header>
 <!--<noscript>-->
 <!--    Для повної функціональності цього сайту необхідно включити JavaScript.-->
@@ -33,40 +34,48 @@
 <main>
     <div class="main__block">
         <div class="search">
-            <form id="search" action="/vacancy/search" method="post">
+            <form id="search" action="/vacancy/list" method="get">
                 <label>
                     <input type="text" name="key_words" class="search_input" placeholder="Ключові слова">
                 </label>
                 <label>
-                    <select name="specialization" class="search_input">
-                        <option hidden disabled selected>Спеціалізація</option>
-                        <option value="spec1">Маркетинг</option>
-                        <option value="spec2">Адміністрація</option>
-                        <option value="spec3">Дизайн</option>
-                    </select>
+                    <div class="list" id="categoryList">
+                        <input autocomplete="off" id="category" type="text" class="select-label" placeholder="Спеціалізація">
+                        <div class="select green" id="category-div">
+                            <ul>
+                                <li th:each="c: ${category}">
+                                    <div class="li" th:text="${c.getLongName()}"></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </label>
                 <label>
-                    <select name="town" class="search_input">
-                        <option hidden disabled selected>Пошук за містом</option>
-                        <option value="town1">Київ</option>
-                        <option value="town2">Харків</option>
-                        <option value="town3">Львів</option>
-                        <option value="town4">Одеса</option>
-                    </select>
+                    <div class="list" id="cityList">
+                        <input autocomplete="off" name="citString" id="city" type="text" class="select-label"
+                               placeholder="Пошук за містом">
+                        <div class="select" id="city-div">
+                            <ul>
+                                <li th:each="c: ${city}">
+                                    <div class="li" th:text="${c.getCity()}"></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </label>
             </form>
         </div>
         <div class="main__button">
             <button form="search">Знайти!</button>
         </div>
-<!--        <div class="lightnings">-->
-<!--            <div class="lightning-2">-->
-<!--                <img src="images/lightning-2.png" alt="lightning2">-->
-<!--            </div>-->
-<!--            <div class="lightning-1">-->
-<!--                <img src="images/lightning-1.png" alt="lightning1">-->
-<!--            </div>-->
-<!--        </div>-->
+        <!--        <div class="lightnings">-->
+        <!--            <div class="lightning-2">-->
+        <!--                <img src="images/lightning-2.png" alt="lightning2">-->
+        <!--            </div>-->
+        <!--            <div class="lightning-1">-->
+        <!--                <img src="images/lightning-1.png" alt="lightning1">-->
+        <!--            </div>-->
+        <!--        </div>-->
     </div>
 
 
@@ -79,7 +88,7 @@
                 <span>Розмістити вакансію</span>
             </div>
         </a>
-        <a href="resume-finder.html">
+        <a href="/resume/new">
             <div class="smile-button right">
                 <div class="smile-image right">
                     <img src="/images/smile-2.png" alt="smile2">
@@ -116,15 +125,15 @@
 
 <div id="sticker-pack">
 
-<!--    <div class="arrow-1">-->
-<!--        <img src="images/arrow-1.png" alt="arrow1">-->
-<!--    </div>-->
-<!--    <div class="arrow-2">-->
-<!--        <img src="images/arrow-2.png" alt="arrow2">-->
-<!--    </div>-->
-<!--    <div class="heart">-->
-<!--        <img src="images/heart.png" alt="heart">-->
-<!--    </div>-->
+    <!--    <div class="arrow-1">-->
+    <!--        <img src="images/arrow-1.png" alt="arrow1">-->
+    <!--    </div>-->
+    <!--    <div class="arrow-2">-->
+    <!--        <img src="images/arrow-2.png" alt="arrow2">-->
+    <!--    </div>-->
+    <!--    <div class="heart">-->
+    <!--        <img src="images/heart.png" alt="heart">-->
+    <!--    </div>-->
 
     <a href="#">
         <div class="button">
@@ -201,7 +210,8 @@
 <div id="support">
     <span>
         Якщо ви хочете підтримати ініціативу «На рівних», у вас є змога підключити щомісячний донат або одноразовий
-        внесок за реквізитами на розвиток та роботу платформи або <a href="#" class="underline">придбати унікальний мерч</a>
+        внесок за реквізитами на розвиток та роботу платформи або <a href="#"
+                                                                     class="underline">придбати унікальний мерч</a>
         та допомогти в зборі коштів на сертифікати на навчання в різних сферах для людей з інвалідністю.
     </span>
     <div class="buttons">
@@ -241,20 +251,21 @@
             <a href="#">E-mail</a>
         </li>
     </ul>
-        <div class="ukf">
-            <div class="image">
-                <img src="/images/ukf.png" alt="ukf">
-            </div>
-            <div class="text">
-                <p>За підтримки Українського культурного фонду</p>
-            </div>
+    <div class="ukf">
+        <div class="image">
+            <img src="/images/ukf.png" alt="ukf">
         </div>
-        <div class="scroll">
-            на початок ↑
+        <div class="text">
+            <p>За підтримки Українського культурного фонду</p>
         </div>
+    </div>
+    <div class="scroll">
+        на початок ↑
+    </div>
 </footer>
 
 <script src="/script/script.js"></script>
+<script src="/script/script-list.js"></script>
 <script src="/script/script-up.js"></script>
 <script src="/script/script-sticker.js"></script>
 <script src="/script/script-slideshow.js"></script>

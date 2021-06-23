@@ -1,53 +1,44 @@
 package org.onequals.controller;
 
-import org.onequals.domain.Role;
 import org.onequals.domain.User;
-import org.onequals.repo.UserRepo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.onequals.services.CategoryService;
+import org.onequals.services.CityService;
+import org.onequals.services.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Collections;
-import java.util.Map;
+import java.security.Principal;
 
 @Controller
 public class PageController {
+    private final UserService userService;
+    private final CategoryService categoryService;
+    private final CityService cityService;
+
+    public PageController(UserService userService, CategoryService categoryService, CityService cityService) {
+        this.userService = userService;
+        this.categoryService = categoryService;
+        this.cityService = cityService;
+    }
 
     @GetMapping("/")
-    public String indexPage() {
+    public String indexPage(Principal principal, Model model) {
+        if (principal != null) {
+            User user = userService.findUser(principal.getName());
+            model.addAttribute("nameProfile", user.getName());
+        }
+        model.addAttribute("category", categoryService.getAll());
+        model.addAttribute("city", cityService.getAll());
         return "index";
     }
 
     @GetMapping("/log-in")
-    public String signInPage() {
+    public String signInPage(Principal principal, Model model) {
+        if (principal != null) {
+            User user = userService.findUser(principal.getName());
+            model.addAttribute("nameProfile", user.getName());
+        }
         return "log-in";
-    }
-
-    @GetMapping("/sign-in2")
-    public String signIn2Page() {
-        return "sign-in-2";
-    }
-
-    @GetMapping("/sign-in3")
-    public String signIn3Page() {
-        return "sign-in-3";
-    }
-
-    @GetMapping("/reg-finder")
-    public String regFinderPage() {
-        return "reg-finder";
-    }
-
-    @GetMapping("/reg-employer")
-    public String regEmpPage() {
-        return "reg-employer";
-    }
-
-    @GetMapping("/resume")
-    public String resumePage() {
-        return "resume-finder";
     }
 }

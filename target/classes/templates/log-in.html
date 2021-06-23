@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>OnEquals Register</title>
+    <title>OnEquals Log-in</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/menu.css">
@@ -13,7 +13,8 @@
 </head>
 <body>
 <header>
-    <th:block th:include="block/block-header.html :: header"></th:block>
+    <th:block th:if="${nameProfile == null}" th:include="/block/block-header.html :: header"></th:block>
+    <th:block th:if="${nameProfile != null}" th:include="/block/block-header-autho.html :: header"></th:block>
 </header>
 <div id="sign">
     <form id="sign-in" class="in" method="POST" action="/log-in">

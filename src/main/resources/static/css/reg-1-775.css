@@ -1,9 +1,5 @@
 @media screen and (max-width: 835px) {
 
-    #reg2 {
-        padding: 0 4vw;
-    }
-
     #reg2 h1 {
         margin-bottom: 0;
     }
@@ -35,10 +31,6 @@
 
     #reg2 .green-choice label:nth-of-type(5) {
         margin-top: 20px;
-    }
-
-    #reg2 .label-inner input {
-        width: 74%;
     }
 
     #reg2 input[list] {
@@ -111,11 +103,23 @@
         min-width: 416px;
     }
 
+    #reg2 {
+        padding: 0 30px;
+    }
+
     #reg2 .submit button {
         width: 90vw;
         height: 42vw;
         min-height: 210px;
         margin: 100px auto 112px;
+    }
+
+    #reg2 .country-label input {
+        width: calc(-91px + 80.1vw);
+    }
+
+    #reg2 .label-inner input {
+        width: calc(-91px + 80.1vw);
     }
 
     #reg-last{
@@ -151,8 +155,7 @@
         height: 105px;
     }
 
-    #reg2 .label-inner span {
-        float: left;
+    #reg2 .country-label span {
         font-size: 4.58vw;
     }
 }

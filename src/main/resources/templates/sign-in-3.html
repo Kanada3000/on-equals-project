@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ua">
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -15,14 +15,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-<header></header>
+<header>
+    <th:block th:if="${nameProfile == null}" th:include="/block/block-header.html :: header"></th:block>
+    <th:block th:if="${nameProfile != null}" th:include="/block/block-header-autho.html :: header"></th:block>
+</header>
 <div id="reg-last">
     <div class="image">
         <img src="/images/lightnings.png" alt="lightnings">
     </div>
     <div class="text">
         <span>Вам на пошту надійшов лист з підтвердженням.
-            <br/>Будь ласка, перейдіть за лінком для продовження реєстрації.</span>
+            <br/>Будь ласка, перейдіть за лінком для продовження реєстрації.
+            <br/><a th:href="${link}">Цей лінк</a>
+        </span>
     </div>
 </div>
 

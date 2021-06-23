@@ -12,7 +12,7 @@
     font-size: inherit;
 }
 
-#reg1 .button, .button-2 {
+#reg1 button, .button-2 {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,7 +32,7 @@
 }
 
 #reg2 {
-    padding: 0 11vw;
+    padding: 0 calc(-399px + 31.9vw);
     position: relative;
 }
 
@@ -152,23 +152,6 @@
     display: none;
 }
 
-#reg2 label.label-inner {
-    margin-top: 58px !important;
-}
-
-#reg2 .label-inner span {
-    float: left;
-    font-size: 32px;
-}
-
-#reg2 .label-inner input {
-    float: right;
-    font-size: 22px;
-    margin-top: 0;
-    width: 82.25%;
-    padding: 0 0 15px 0;
-}
-
 #reg2 .accept {
     display: block;
     padding-top: 120px;
@@ -241,6 +224,51 @@
 #reg2 input[list]:focus {
     background: url(../images/arrow-list-rotate.png) no-repeat right;
     background-size: 17px auto;
+}
+
+#reg2 .country{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#reg2 .country-label{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 60px;
+}
+
+#reg2 .country-label span {
+    font-size: 32px;
+}
+
+#reg2 .country-label input {
+    font-size: 22px;
+    margin-top: 0;
+    width: calc(630px + 29.2vw);
+    padding: 0 0 15px 0;
+}
+
+#reg2 .social{
+    display: flex;
+    flex-direction: column;
+}
+
+#reg2 .social label{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 60px;
+}
+
+#reg2 .social label input{
+    margin: 0;
+    width: calc(630px + 29.2vw);
+}
+
+#reg2 .country-label .list{
+    align-self: flex-end;
 }
 
 input[type="checkbox"] + label {
@@ -422,6 +450,10 @@ input[type="checkbox"]:checked + label{
         margin-top: calc(25px + 2.4vw);
     }
 
+    #reg2 {
+        padding: 0 60px;
+    }
+
     #reg2 .submit button {
         margin: 9.3vw auto 13.5vw;
     }
@@ -499,8 +531,8 @@ input[type="checkbox"]:checked + label{
         min-width: 749px;
     }
 
-    #reg2 .label-inner input {
-        width: 79.6%;
+    #reg2 .country-label input {
+        width: calc(-265px + 91.3vw);
     }
 
     #reg-last{

@@ -13,7 +13,8 @@
 </head>
 <body>
 <header>
-    <th:block th:include="/block/block-header.html :: header"></th:block>
+    <th:block th:if="${nameProfile == null}" th:include="/block/block-header.html :: header"></th:block>
+    <th:block th:if="${nameProfile != null}" th:include="/block/block-header-autho.html :: header"></th:block>
 </header>
 <div id="sign" class="upp">
     <form id="sign-up" class="up" method="POST" action="/register">

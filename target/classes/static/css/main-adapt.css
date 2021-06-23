@@ -3,7 +3,7 @@
         padding: calc(195px - 3.6vw) 60px 0;
     }
 
-    main .search_input {
+    main .search_input, main .list {
         height: calc(43px + 3.8vw);
         width: calc(-83px + 35.1vw);
     }
@@ -52,7 +52,7 @@
         width: 100%;
     }
 
-    main .search_input {
+    main .search_input, main .list {
         height: 82px;
         width: 100%;
     }
@@ -147,7 +147,7 @@
         height: calc(76px + 51.3vw);
     }
 
-    main .search_input {
+    main .search_input, main .list {
         height: calc(16px + 13.8vw);
         font-size: calc(-2px + 5vw);
     }

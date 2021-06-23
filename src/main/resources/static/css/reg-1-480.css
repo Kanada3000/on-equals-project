@@ -44,8 +44,8 @@
         margin: 6.67vw 0 0;
     }
 
-    #reg2 .label-inner input {
-        width: 70%;
+    #reg2 .country-label input {
+        width: calc(-31px + 67.5vw);
         font-size: 18px;
         padding: 0 0 6px 0;
     }
@@ -71,7 +71,7 @@
         margin-bottom: calc(37px + 6.9vw);
     }
 
-    #reg1 .button, .button-2 {
+    #reg1 button, .button-2 {
         height: calc(-4px + 29.4vw);
     }
 
@@ -80,7 +80,7 @@
     }
 
     #reg2 {
-        padding: 0 6.45vw;
+        padding: 0 calc(-21px + 10.6vw);
     }
 
     #reg2 h1 {
@@ -114,13 +114,19 @@
         font-size: 6.7vw;
     }
 
-    #reg2 .label-inner input {
-        width: 70%;
+    #reg2 .country-label input {
+        width: calc(-31px + 67.5vw);
         font-size: 22px;
         padding: 0 0 6px 0;
     }
 
-    #reg2 .label-inner span {
+    #reg2 .label-inner input {
+        width: calc(-31px + 67.5vw);
+        font-size: 22px;
+        padding: 0 0 6px 0;
+    }
+
+    #reg2 .country-label span {
         font-size: 22px;
     }
 
@@ -265,7 +271,7 @@
 }
 
 @media screen and (max-width: 390px) {
-    #reg2 .label-inner span {
+    #reg2 .country-label span {
         font-size: 18px;
     }
 

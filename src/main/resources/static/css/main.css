@@ -38,12 +38,74 @@ main option[selected] {
     color: #999999;
 }
 
-main .search_input {
+main .search_input, main .list {
     border: black 2px solid;
     height: 98px;
     width: calc(317px + 7.3vw);
     padding-left: 24px;
     font-size: 22px;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.select-label {
+    width: 100%;
+    height: 100%;
+    font-size: inherit;
+    border: none;
+    padding: 0;
+    background: url(../images/arrow-list.png) no-repeat right 10px top 50%;
+    background-size: 17px auto;
+    position: relative;
+}
+
+.select {
+    display: none;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.select ul {
+    border: 2px solid black;
+    width: 100%;
+    position: absolute;
+    z-index: 990;
+    top: -2px;
+    left: 0;
+    display: block;
+    margin: 0;
+    background-color: white;
+    font-size: inherit;
+    padding: 1vw 0 0;
+}
+
+.select li {
+    width: auto;
+    border: 0;
+    cursor: pointer;
+}
+
+.select .li {
+    width: auto;
+    display: inline;
+    padding: 0.4vw 0.94vw;
+
+}
+
+.select .li-hover {
+    background-color: #fed849;
+    border-radius: 2vw;
+}
+
+.select .li-green {
+    background-color: #c4de95;
+    border-radius: 2vw;
+}
+
+.input[type=hidde] {
+    color: black;
 }
 
 main .lightnings {

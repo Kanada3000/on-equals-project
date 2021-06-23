@@ -13,6 +13,21 @@ public class Category {
 
     private int total = 0;
 
+    public Category(Long id, String longName, int total) {
+        this.id = id;
+        this.longName = longName;
+        this.total = total;
+    }
+
+    public Category(Long id, Long total) {
+        this.id = id;
+        this.total = total.intValue();
+    }
+
+    public Category() {
+
+    }
+
     public Long getId(){
         return id;
     }

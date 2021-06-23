@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ua">
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -15,23 +15,28 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-<header></header>
+<header>
+    <th:block th:if="${nameProfile == null}" th:include="/block/block-header.html :: header"></th:block>
+    <th:block th:if="${nameProfile != null}" th:include="/block/block-header-autho.html :: header"></th:block>
+</header>
+<form id="emp" action="/employer" method="get">
+    <input type="hidden" name="id" th:value="${id}">
+</form>
+<form id="seek" action="/seeker" method="get">
+    <input type="hidden" name="id" th:value="${id}">
+</form>
 <div id="reg1">
     <span class="title">Хто ви? :)</span>
-    <a href="reg-employer.html">
-        <div class="button">
+    <button type="submit" form="emp" class="button-1">
             <span>
                 Працедавець
             </span>
-        </div>
-    </a>
-    <a href="reg-finder.html">
-        <div class="button-2">
+    </button>
+    <button type="submit" form="seek" class="button-2">
             <span>
                 Шукач
             </span>
-        </div>
-    </a>
+    </button>
 </div>
 
 <script src="/script/script.js"></script>

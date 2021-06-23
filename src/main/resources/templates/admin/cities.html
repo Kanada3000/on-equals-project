@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>OnEquals Admin Cities</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <th:block th:if="${nameProfile == null}" th:include="/block/block-header.html :: header"></th:block>
+    <th:block th:if="${nameProfile != null}" th:include="/block/block-header-autho.html :: header"></th:block>
+</header>
+
+<form th:object="${city}" id="form" action="/admin/cities/add" method="post">
+</form>
+<input id='id' type='hidden' name='id' form='form'>
+
+<div id="admin">
+    <div id="sidebar">
+        <div class="button">
+            <a href="/admin/users">Користувачі</a>
+        </div>
+        <div class="button">
+            <a href="/admin/vacancies">Вакансії</a>
+        </div>
+        <div class="button">
+            <a href="/admin/resumes">Резюме</a>
+        </div>
+        <div class="button active">
+            <a>Країни та міста</a>
+        </div>
+        <div class="button">
+            <a href="/admin/category">Категорії</a>
+        </div>
+    </div>
+    <div id="body">
+        <h1>Країни та міста</h1>
+        <a href="#" class="first">Додати нове місто &#10133;</a>
+        <table border="1">
+            <tr class="head">
+                <td>id</td>
+                <td>city</td>
+                <td>country</td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <tr class="hidden">
+                <td class="id"></td>
+                <td><input id="city" type="text"></td>
+                <td><input id="country" type="text"></td>
+                <td class="accept">&#10004;</td>
+                <td class="cancel">&#10060;</td>
+            </tr>
+<!--            <tr class="subhead">-->
+<!--                <td colspan="4">Country-1</td>-->
+<!--            </tr>-->
+            <tr th:each="c: ${city}">
+                <td class="id" th:text="${c.getId()}"></td>
+                <td class="city" th:text="${c.getCity()}"></td>
+                <td class="country" th:text="${c.getCountry()}"></td>
+                <td class="edit">&#9998;</td>
+                <td class="delete" id="cities">&#10060;</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div id="accept-delete">
+    <span>Ви впевнені, що хочете видалити цей запис назавжди?</span>
+    <div class="buttons">
+        <div class="button yes">Так</div>
+        <div class="button no">Ні</div>
+    </div>
+</div>
+
+<div class="backdrop"></div>
+<script src="/script/script.js"></script>
+<script src="/script/script-admin.js"></script>
+</body>
+</html>

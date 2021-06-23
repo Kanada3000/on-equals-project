@@ -9,7 +9,7 @@
         margin-bottom: calc(37px + 6.9vw);
     }
 
-    #reg1 .button, .button-2 {
+    #reg1 button, .button-2 {
         height: 90px;
     }
 
@@ -18,7 +18,7 @@
     }
 
     #reg2 {
-        padding: 0 4vw;
+        padding: 0 13px;
     }
 
     #reg2 h1 {
@@ -71,8 +71,12 @@
         margin-right: auto;
     }
 
+    #reg2 .country-label input {
+        font-size: 14px;
+        padding: 0 0 6px 0;
+    }
+
     #reg2 .label-inner input {
-        width: 63%;
         font-size: 14px;
         padding: 0 0 6px 0;
     }
