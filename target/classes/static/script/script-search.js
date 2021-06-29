@@ -130,6 +130,12 @@ $(function () {
             $("#sortForm").submit()
         }, 1500)
     });
+
+    $("#vacancies .vacancy .buttons .heart").click(function (){
+        $(this).css("background-color", "#FF5C55")
+        let value = $("input#likes-input").val() +
+        $("input#likes-input").val()
+    })
 })
 
 function numberFormat(x) {

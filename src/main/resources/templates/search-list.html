@@ -24,11 +24,13 @@
         <div class="search">
             <form id="search" action="/vacancy/list" method="get">
                 <label>
-                    <input type="text" name="key_words" class="search_input" placeholder="Ключові слова">
+                    <input type="text" name="key_words" class="search_input" placeholder="Ключові слова"
+                           th:value="${key_wordsVal}">
                 </label>
                 <label>
                     <div class="list" id="categoryList">
-                        <input autocomplete="off" id="categorySearch" type="text" class="select-label" placeholder="Спеціалізація">
+                        <input autocomplete="off" id="categorySearch" type="text" class="select-label"
+                               placeholder="Спеціалізація" name="catString" th:value="${catStringVal}">
                         <div class="select green" id="category-div">
                             <ul>
                                 <li th:each="c: ${category}">
@@ -41,7 +43,7 @@
                 <label>
                     <div class="list" id="cityList">
                         <input autocomplete="off" name="citString" id="city" type="text" class="select-label"
-                               placeholder="Пошук за містом">
+                               placeholder="Пошук за містом" th:value="${citStringVal}">
                         <div class="select" id="city-div">
                             <ul>
                                 <li th:each="c: ${city}">
@@ -63,6 +65,7 @@
     <form id="sortForm" method="get" action="/vacancy/list">
     </form>
 
+    <input id="likes-input" type="hidden" form="sortForm" name="likes">
 
     <div id="sort">
         <div class="summary">
@@ -105,28 +108,12 @@
             <h3>Вид зайнятості:</h3>
 
             <div th:each="t: ${type}" th:remove="tag">
-                <input th:id="'type-' + ${t.getId()}" type="checkbox" name="type" form="sortForm" th:value="${t.getId()}">
+                <input th:id="'type-' + ${t.getId()}" type="checkbox" name="type" form="sortForm"
+                       th:value="${t.getId()}">
                 <label class="checkbox" th:for="'type-' + ${t.getId()}">
                     <span th:text="${t.getName()}" th:remove="tag"></span> <span th:text="${t.getTotal()}"></span>
                 </label>
             </div>
-
-<!--            <input id="type-2" type="checkbox" name="type" form="sortForm">-->
-<!--            <label class="checkbox" for="type-2">-->
-<!--                неповна зайнятість <span th:text="${type[1].getTotal()}"></span>-->
-<!--            </label>-->
-<!--            <input id="type-3" type="checkbox" name="type" form="sortForm">-->
-<!--            <label class="checkbox" for="type-3">-->
-<!--                дистанційна робота <span th:text="${type[2].getTotal()}"></span>-->
-<!--            </label>-->
-<!--            <input id="type-4" type="checkbox" name="type" form="sortForm">-->
-<!--            <label class="checkbox" for="type-4">-->
-<!--                часткова робота <span th:text="${type[3].getTotal()}"></span>-->
-<!--            </label>-->
-<!--            <input id="type-5" type="checkbox" name="type" form="sortForm">-->
-<!--            <label class="checkbox" for="type-5">-->
-<!--                проект <span th:text="${type[4].getTotal()}"></span>-->
-<!--            </label>-->
         </div>
 
         <div class="salary">
@@ -154,8 +141,9 @@
                     <li th:text="${v.getCategory().getLongName()}"></li>
                     <li th:text="${v.getType().getName()}"></li>
                     <li th:text="${#numbers.formatInteger(v.getSalary(), 3, 'WHITESPACE') + ' грн'}"></li>
-                    <li><span th:text="${v.getCity().getCountry()}" th:remove="tag"></span> / <span th:text="${v.getCity().getCity()}"
-                                                                                          th:remove="tag"></span></li>
+                    <li><span th:text="${v.getCity().getCountry()}" th:remove="tag"></span> / <span
+                            th:text="${v.getCity().getCity()}"
+                            th:remove="tag"></span></li>
                 </ul>
                 <div class="hide">
                     <span>розгорнути ↓</span>

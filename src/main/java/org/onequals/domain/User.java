@@ -28,6 +28,13 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = Collections.singleton(Role.USER);
 
+    @ManyToMany
+    @JoinTable(
+            name = "vacancy_like",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "vacancy_id"))
+    private Set<Vacancy> likedVacancy;
+
     public User(Long id, String name, String username, String password, Boolean blocked, Boolean activated,
                 String link, Set<Role> roles) {
         this.id = id;
@@ -125,6 +132,14 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Vacancy> getLikedVacancy() {
+        return likedVacancy;
+    }
+
+    public void setLikedVacancy(Set<Vacancy> likedVacancy) {
+        this.likedVacancy = likedVacancy;
     }
 
     @Override

@@ -34,13 +34,13 @@
 <main>
     <div class="main__block">
         <div class="search">
-            <form id="search" action="/vacancy/list" method="get">
+            <form id="search" action="/vacancy/list" method="GET">
                 <label>
                     <input type="text" name="key_words" class="search_input" placeholder="Ключові слова">
                 </label>
                 <label>
                     <div class="list" id="categoryList">
-                        <input autocomplete="off" id="category" type="text" class="select-label" placeholder="Спеціалізація">
+                        <input autocomplete="off" id="category" type="text" class="select-label" placeholder="Спеціалізація" name="catString">
                         <div class="select green" id="category-div">
                             <ul>
                                 <li th:each="c: ${category}">
@@ -137,7 +137,7 @@
 
     <a href="#">
         <div class="button">
-            <div>Завантажити стікерпак&nbsp<span class="underline">↓</span></div>
+            <div>Завантажити стікерпак&nbsp;<span class="underline">↓</span></div>
         </div>
     </a>
     <span class="text">

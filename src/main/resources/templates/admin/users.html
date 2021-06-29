@@ -73,14 +73,13 @@
                 <td class="cancel">&#10060;</td>
             </tr>
 
-            <tr th:each="u: ${user}">
+            <tr th:if="${user}" th:each="u: ${user}">
                 <td class="id" th:text="${u.getId()}"></td>
                 <td class="name" th:text="${u.getName()}"></td>
                 <td class="username" th:text="${u.getUsername()}"></td>
                 <td class="password" th:text="${u.getPassword()}"></td>
                 <td class="blocked" th:if="${u.getBlocked()}">Так</td>
                 <td class="blocked" th:unless="${u.getBlocked()}">Ні</td>
-                <td class="userType" th:text="${u.getUserType()}"></td>
                 <td class="edit">&#9998;</td>
                 <td id="users" class="delete">&#10060;</td>
             </tr>

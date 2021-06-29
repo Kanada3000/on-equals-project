@@ -1,5 +1,6 @@
 package org.onequals.controller;
 
+import antlr.StringUtils;
 import org.onequals.domain.User;
 import org.onequals.domain.Vacancy;
 import org.onequals.services.*;
@@ -34,19 +35,26 @@ public class VacancyController {
 
     @GetMapping("/list")
     public String vacancyList(Principal principal, Model model,
-                              @RequestParam(name = "sort", defaultValue = "id")  String sort,
-                              @RequestParam(name = "min", required = false)  Integer min,
-                              @RequestParam(name = "max", required = false)  Integer max,
-                              @RequestParam(name = "category", required = false)  List<Long> category,
-                              @RequestParam(name = "type", required = false)  List<Long> type){
+                              @RequestParam(name = "sort", defaultValue = "id") String sort,
+                              @RequestParam(name = "min", required = false) Integer min,
+                              @RequestParam(name = "max", required = false) Integer max,
+                              @RequestParam(name = "category", required = false) List<Long> category,
+                              @RequestParam(name = "type", required = false) List<Long> type,
+                              @RequestParam(required = false) String key_words,
+                              @RequestParam(required = false) String catString,
+                              @RequestParam(required = false) String citString){
         if(principal != null){
             User user = userService.findUser(principal.getName());
             model.addAttribute("nameProfile", user.getName());
         }
 
         HashMap<Object, Object> map = vacancyService.findMinMax(min, max);
-        List<Vacancy> vacancies = vacancyService.sortAndFilter((Integer) map.get("min"), (Integer) map.get("max"), sort, category, type);
+        List<Vacancy> vacancies = vacancyService.sortAndFilter(key_words, catString, citString,
+                (Integer) map.get("min"), (Integer) map.get("max"), sort, category, type);
 
+        model.addAttribute("key_wordsVal", key_words);
+        model.addAttribute("catStringVal", catString);
+        model.addAttribute("citStringVal", citString);
         model.addAttribute("min", map.get("minSalary"));
         model.addAttribute("max", map.get("maxSalary"));
         model.addAttribute("categories", categoryService.updateTotal(vacancies));
@@ -57,7 +65,6 @@ public class VacancyController {
         model.addAttribute("city", cityService.getAll());
         return "search-list";
     }
-
 
     @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     @GetMapping("/new")
@@ -77,7 +84,7 @@ public class VacancyController {
     public String addVacancy(Principal principal,
                              @RequestParam("category") String cat,
                              @RequestParam("type") String t,
-                             @RequestParam("cityString") String cityName,
+                             @RequestParam("citString") String cityName,
                              @RequestParam("description") String desc,
                              @RequestParam("salary") int salary){
         Vacancy vacancy = new Vacancy();

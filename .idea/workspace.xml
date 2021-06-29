@@ -52,8 +52,8 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.language.Kotlin.scripting" />
@@ -83,6 +83,17 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.Application">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="project" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="salon.beauty.Application" />
@@ -138,6 +149,11 @@
       <workItem from="1624277939840" duration="24707000" />
       <workItem from="1624354202001" duration="30338000" />
       <workItem from="1624425426418" duration="4481000" />
+      <workItem from="1624438930026" duration="119000" />
+      <workItem from="1624447748594" duration="8403000" />
+      <workItem from="1624527761733" duration="1009000" />
+      <workItem from="1624964614968" duration="5958000" />
+      <workItem from="1624992540715" duration="1275000" />
     </task>
     <servers />
   </component>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>OnEquals Profile</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/search.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <th:block th:if="${nameProfile == null}" th:include="/block/block-header.html :: header"></th:block>
+    <th:block th:if="${nameProfile != null}" th:include="/block/block-header-autho.html :: header"></th:block>
+</header>
+<div id="profile-head">
+    <div class="avatar">
+        <div class="out avatarblock"><a href="/logout">Вийти</a></div>
+        <img src="/images/avatar.png">
+    </div>
+    <div class="info">
+        <h1>Максим<br/>Денисенко</h1>
+        <span class="underline"><a href="#">www.denysenkko.com</a></span>
+        <span><img src="/images/location.png">Україна, Київ</span>
+        <div class="container">
+            <div class="social">
+                <a href="#"><img src="/images/facebook-f.png"></a>
+                <a href="#"><img src="/images/instagram.png"></a>
+                <a href="#"><img src="/images/twitter.png"></a>
+                <a href="#"><img src="/images/linkedin-in.png"></a>
+            </div>
+            <div class="out infoblock">
+                <a href="/logout">Вийти</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="profile-body">
+    <span>Прівит! Працюю на стику копірайтингу і PR. Вмію писати круті, цікаві тексти, які будуть просто читатися
+        та продавати. Розумію як зробити так, щоб тексти подобалися не тільки людям, а й пошуковим системам. <br/>
+        Вмію писати круті, цікаві тексти, які будуть просто читатися та продавати. Розумію як зробити так, щоб
+        тексти подобалися не тільки людям, а й пошуковим системам.
+    </span>
+    <div class="container">
+        <div class="block">
+            <div class="text">
+                <span>копірайтинг</span>
+                <span>повна зайнятість</span>
+                <span>22 000 грн</span>
+                <span>Україна / Київ / Чернігів</span>
+                <div class="hide">
+                    <span>розгорнути ↓</span>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="edit">
+                    <img src="/images/edit-vacancy.png">
+                </div>
+                <div class="delete">
+                    <img src="/images/trash-vacancy.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="buttons-container">
+    <div class="buttons-block">
+        <div class="button">
+            Додати ще резюме&nbsp;+
+        </div>
+        <div class="button">
+            Редагувати інформацію
+        </div>
+    </div>
+    <div class="buttons-block">
+        <div class="button green">
+            Приховати сторінку
+        </div>
+        <div class="button blue">
+            Видалити акаунт
+        </div>
+    </div>
+</div>
+<div id="likes">
+    <h2>збережені вакансії</h2>
+    <span class="hint">натисніть на сердечко, щоб видалити вакансію зі списку</span>
+    <div id="vacancies">
+        <div class="vacancy" th:each="v: ${vacancies}">
+            <div class="text">
+                <h3 th:text="${v.getUser().getName()}">Торговельна мережа “Сільпо”</h3>
+                <ul>
+                    <li th:text="${v.getCategory().getLongName()}">адміністратор/-ка</li>
+                    <li th:text="${v.getType().getName()}">повна зайнятість</li>
+                    <li th:text="${#numbers.formatInteger(v.getSalary(), 3, 'WHITESPACE') + ' грн'}">20 000 грн</li>
+                    <li><span th:text="${v.getCity().getCountry()}" th:remove="tag"></span> / <span th:text="${v.getCity().getCity()}"
+                                                                                                    th:remove="tag"></span></li>
+                </ul>
+                <div class="hide">
+                    <span>розгорнути ↓</span>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="mail">
+                    <img src="/images/mail-vacancy.png" alt="mail">
+                </div>
+                <div class="heart">
+                    <img src="/images/heart-vacancy.png" alt="like">
+                </div>
+                <div class="eye">
+                    <img src="/images/eye-vacancy.png" alt="eye">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/script/script.js"></script>
+</body>
+</html>

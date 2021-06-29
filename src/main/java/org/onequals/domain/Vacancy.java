@@ -33,10 +33,13 @@ public class Vacancy{
     private int salary = 20000;
     private String description;
 
+    @ManyToMany(mappedBy = "likedVacancy")
+    private Set<User> likes;
+
     public Vacancy(){
     }
 
-    public Vacancy(Long id, Category category, Type type, User user, City city, int salary, String description) {
+    public Vacancy(Long id, Category category, Type type, User user, City city, int salary, String description, Set<User> likes) {
         this.id = id;
         this.category = category;
         this.type = type;
@@ -44,6 +47,7 @@ public class Vacancy{
         this.city = city;
         this.salary = salary;
         this.description = description;
+        this.likes = likes;
     }
 
     public Long getId() {
@@ -100,5 +104,13 @@ public class Vacancy{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<User> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Set<User> likes) {
+        this.likes = likes;
     }
 }

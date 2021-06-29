@@ -24,15 +24,33 @@ public class VacancyService {
     }
 
     @Transactional
-    public List<Vacancy> sortAndFilter(int min, int max, String sort, List<Long> category, List<Long> type) {
-        if (category == null) {
-            if (type == null)
-                return vacancyRepo.findNeeded(min, max, Sort.by(sort));
-            return vacancyRepo.findNeededType(min, max, type, Sort.by(sort));
+    public List<Vacancy> sortAndFilter(String key_words, String catString, String citString, int min,
+                                       int max, String sort, List<Long> category, List<Long> type) {
+        List<Vacancy> vacancyList = vacancyRepo.findAll();
+        if(key_words != null)
+        if(!key_words.isEmpty()){
+            vacancyList = vacancyRepo.filterByKey(key_words, vacancyList);
         }
-        if (type == null)
-            return vacancyRepo.findNeededCategory(min, max, category, Sort.by(sort));
-        return vacancyRepo.findNeededCategoryType(min, max, category, type, Sort.by(sort));
+
+        if(catString != null)
+        if(!catString.isEmpty()){
+            vacancyList = vacancyRepo.filterByCategory(catString, vacancyList);
+        }
+
+        if(citString != null)
+        if(!citString.isEmpty()){
+            vacancyList = vacancyRepo.filterByCity(citString, vacancyList);
+        }
+
+        if(category != null){
+            vacancyList = vacancyRepo.filterByCategoryList(category, vacancyList);
+        }
+
+        if(type != null){
+            vacancyList = vacancyRepo.filterByTypeList(type, vacancyList);
+        }
+        vacancyList = vacancyRepo.sort(min, max, vacancyList, Sort.by(sort));
+        return vacancyList;
     }
 
     @Transactional
@@ -48,7 +66,7 @@ public class VacancyService {
     @Transactional
     public HashMap<Object, Object> findMinMax(Integer min, Integer max) {
         HashMap<Object, Object> minMax = new HashMap<Object, Object>();
-        List<Vacancy> vacancies = getAll();
+        List<Vacancy> vacancies = vacancyRepo.findAll(Sort.by("salary"));
         int minSalary = vacancies.get(0).getSalary();
         int maxSalary = vacancies.get(vacancies.size() - 1).getSalary();
 

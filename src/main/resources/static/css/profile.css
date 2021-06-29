@@ -1,0 +1,745 @@
+#profile-head {
+    background-color: #FDD749;
+    padding: 90px 0 42px calc(-398px + 31.3vw);
+    display: flex;
+    flex-direction: row;
+    font-size: 32px;
+}
+
+#profile-head .avatar {
+    width: auto;
+    height: auto;
+}
+
+#profile-head .avatar img {
+    width: 326px;
+    height: auto;
+}
+
+#profile-head .info {
+    margin-left: 109px;
+    width: auto;
+    min-width: 450px;
+}
+
+#profile-head .info h1 {
+    font-size: 80px;
+}
+
+#profile-head .info span {
+    display: block;
+    font-size: inherit;
+    margin: 10px 0 0;
+}
+
+#profile-head .info span img {
+    margin-right: 9px;
+    width: auto;
+    height: 27px;
+}
+
+
+#profile-head .info .social {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+#profile-head .info .social a {
+    display: block;
+    width: auto;
+    height: auto;
+    align-self: center;
+}
+
+#profile-head .info .social a img {
+    display: block;
+    margin: auto;
+}
+
+#profile-head .container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#profile-head .out {
+    border: 2px solid black;
+    width: 125px;
+    max-width: 125px;
+    max-height: 60px;
+    height: 60px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+    box-sizing: border-box;
+}
+
+#profile-head .out.avatarblock {
+    display: none;
+    align-self: flex-start;
+}
+
+#profile-head .out.infoblock {
+    display: none;
+}
+
+#profile-body {
+    padding: 88px calc(-399px + 31.9vw) 0;
+    box-sizing: border-box;
+    font-size: 32px;
+}
+
+#profile-body span {
+    display: block;
+    font-size: 46px;
+    padding-bottom: calc(8px + 4.8vw);
+}
+
+#profile-body .container {
+    display: flex;
+    flex-direction: column;
+    font-size: inherit;
+}
+
+#profile-body .container .block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 0 55px;
+    border-bottom: 4px solid black;
+    border-top: 4px solid black;
+    font-size: inherit;
+}
+
+#profile-body .container .block .text {
+    padding-top: 30px;
+}
+
+#profile-body .container .block .text span {
+    display: block;
+    width: calc(509px + 3.8vw);
+    border-bottom: 2px solid black;
+    padding: 10px 0;
+    font-size: inherit;
+}
+
+#profile-body .container .block .text span:first-of-type {
+    padding-top: 0;
+}
+
+#profile-body .container .block .text .hide {
+    padding-top: 29px;
+    font-size: 22px;
+    color: #999999;
+}
+
+#profile-body .container .block .text .hide span {
+    border: none;
+}
+
+#profile-body .container .block .buttons {
+    display: flex;
+    flex-direction: row;
+    padding-top: 43px;
+}
+
+#profile-body .container .block .buttons div {
+    box-sizing: border-box;
+    width: 124px;
+    height: 124px;
+    margin-left: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+}
+
+#profile-body .container .block .buttons .edit {
+    background-color: white;
+    border: 4px solid black;
+}
+
+#profile-body .container .block .buttons .delete {
+    background-color: #509FC8;
+}
+
+#buttons-container {
+    height: 571px;
+    padding: 128px 60px;
+    font-size: 46px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+#buttons-container .buttons-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#buttons-container .buttons-block .button {
+    height: 137px;
+    width: calc(-75px + 50vw);
+    border: 4px solid black;
+    border-radius: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 0 30px;
+}
+
+#buttons-container .buttons-block .green {
+    border: 0;
+    background-color: #C4DE95;
+}
+
+#buttons-container .buttons-block .blue {
+    border: 0;
+    background-color: #509FC8;
+}
+
+#likes {
+    background-color: #E5E5E5;
+    padding: calc(-60px + 8.3vw) calc(-407px + 32.3vw) 196px;
+    height: auto;
+}
+
+#vacancies {
+    float: unset;
+    border-top: 4px solid black;
+    width: 100%;
+    padding: 0;
+    margin-top: 120px;
+}
+
+#vacancies .vacancy {
+    border-right: none;
+    justify-content: space-between;
+}
+
+#vacancies .vacancy .text {
+    width: calc(509px + 3.8vw);
+}
+
+#vacancies .vacancy .buttons {
+    justify-content: flex-end;
+    padding-left: 0;
+    margin-top: -25px;
+    width: auto;
+    height: auto;
+}
+
+#vacancies .vacancy .buttons div {
+    width: 124px;
+    height: 124px;
+    margin: 25px 0 0 30px;
+}
+
+#vacancies .vacancy .buttons .heart {
+    background-color: #FF5C55;
+}
+
+#likes h2 {
+    font-size: 80px;
+    margin-bottom: 10px;
+}
+
+#likes span.hint {
+    font-size: 46px;
+}
+
+@media screen and (max-width: 1440px) {
+    #profile-head {
+        padding: calc(3px + 6vw) 0 calc(122px - 5.5vw) 52px;
+    }
+
+    #profile-head .info {
+        margin-left: calc(-43px + 10.6vw);
+        min-width: 410px;
+    }
+
+    #profile-head .info h1 {
+        font-size: calc(38px + 2.9vw);
+    }
+
+    #profile-head .info .social {
+        margin-top: calc(258px - 14.4vw);
+    }
+
+    #profile-body {
+        padding: calc(-50px + 9.6vw) 60px 0;
+    }
+
+    #profile-body span {
+        padding-bottom: 77px;
+    }
+
+    #profile-body .container .block .text span {
+        width: calc(501px + 4.3vw);
+        padding: 8px 0;
+    }
+
+    #likes {
+        padding: calc(29px + 2.2vw) 60px calc(-102px + 20.7vw);
+    }
+
+    #vacancies {
+        margin-top: calc(-115px + 16.3vw);
+    }
+
+    #vacancies .vacancy .text {
+        width: calc(660px - 6.7vw);
+    }
+
+    #likes h2 {
+        font-size: calc(38px + 2.9vw);
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    #buttons-container {
+        height: 955px;
+        padding: 100px 13.47vw;
+        flex-direction: column;
+    }
+
+    #buttons-container .buttons-block {
+        flex-grow: 1;
+        justify-content: space-around;
+    }
+
+    #buttons-container .buttons-block .button {
+        width: 100%;
+    }
+
+    #vacancies .vacancy .buttons {
+        justify-content: flex-start;
+        padding-left: 0;
+        margin-top: -25px;
+        width: auto;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 1140px) {
+    #vacancies .vacancy .buttons {
+        max-width: 311px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    #likes{
+        padding: calc(19px + 3.2vw) calc(-61px + 11.9vw) calc(195px - 8.3vw);
+    }
+
+    #likes span.hint{
+        font-size: calc(30px + 1.6vw);
+    }
+
+    #vacancies{
+        margin-top: calc(133px - 7.9vw);
+    }
+
+    #vacancies .vacancy{
+        padding: calc(91px - 4vw) 0 55px;
+    }
+
+    #vacancies .vacancy h3 {
+        font-size: calc(30px + 1.6vw);
+    }
+
+    #vacancies .vacancy .text {
+        width: calc(393px + 19.4vw);
+    }
+
+    #vacancies .vacancy .buttons {
+        margin-top: calc(-82px + 5.5vw);
+        width: 165px;
+    }
+
+    #vacancies .vacancy .buttons div {
+        width: calc(31px + 9.1vw);
+        height: calc(31px + 9.1vw);
+        margin: calc(82px - 5.5vw) 0 0 calc(151px - 11.9vw);
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #profile-head {
+        padding: calc(129px - 6.3vw) 4vw 62px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #profile-head .avatar {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #profile-head .avatar img {
+        width: calc(180px + 14.2vw);
+        min-width: 290px;
+    }
+
+    #profile-head .info {
+        width: 100%;
+        margin-top: 13px;
+        margin-left: 0;
+        text-align: center;
+        align-self: start;
+    }
+
+    #profile-head .info h1 {
+        font-size: 68px;
+    }
+
+    #profile-head .info .social {
+        width: 50.84vw;
+        margin-top: 110px;
+        padding-bottom: 15px;
+    }
+
+    #profile-head .out.infoblock {
+        display: flex;
+    }
+
+    #profile-body {
+        padding: calc(97px - 4.7vw) calc(-61px + 11.9vw) 0;
+    }
+
+    #profile-body span {
+        padding-bottom: calc(-4px + 7.9vw);
+        font-size: calc(30px + 1.6vw);
+    }
+
+    #profile-body .container .block .text span {
+        width: calc(363px + 17.8vw);
+        padding: 8px 0;
+    }
+
+    #profile-body .container .block .buttons div {
+        width: calc(27px + 9.5vw);
+        height: calc(27px + 9.5vw);
+    }
+
+    #profile-body .container .block .buttons img {
+        width: calc(10px + 2.8vw);
+    }
+
+    #buttons-container {
+        height: calc(736px + 21.3vw);
+        padding: calc(-13px + 11.1vw) calc(-291px + 41.9vw);
+        font-size: calc(30px + 1.6vw);
+    }
+}
+
+@media screen and (max-width: 910px) {
+    #profile-body .container .block .buttons {
+        flex-direction: column;
+    }
+
+    #profile-body .container .block .buttons .edit {
+        margin-bottom: 28px;
+    }
+}
+
+@media screen and (max-width: 771px) {
+    #profile-head {
+        padding: calc(129px - 6.3vw) 32px calc(-10px + 9.3vw);
+    }
+
+    #profile-head .avatar img {
+        width: calc(343px - 6.9vw);
+    }
+
+    #profile-head .info {
+        min-width: 0;
+    }
+
+    #profile-head .info h1 {
+        font-size: calc(31px + 4.8vw);
+    }
+
+    #profile-head .info .social {
+        margin-top: calc(9px + 13.1vw);
+    }
+
+    #profile-head .info .social img {
+        width: 91.3%;
+    }
+
+    #profile-body {
+        padding: calc(18px + 5.5vw) 30px 0;
+        font-size: calc(16px + 2.1vw)
+    }
+
+    #profile-body span {
+        padding-bottom: 60px;
+        font-size: calc(16px + 3.4vw);
+    }
+
+    #profile-body .container .block {
+        flex-direction: column;
+        padding-bottom: calc(31px + 3.1vw);
+    }
+
+    #profile-body .container .block .buttons {
+        flex-direction: row;
+    }
+
+    #profile-body .container .block .text span {
+        width: 100%;
+    }
+
+    #profile-body .container .block .buttons div {
+        width: calc(174px - 9.6vw);
+        height: calc(174px - 9.6vw);
+        margin-bottom: 0;
+        margin-left: 19px;
+    }
+
+    #profile-body .container .block .buttons img {
+        width: calc(54px - 3vw);
+    }
+
+    #profile-body .container .block .buttons .edit {
+        margin: 0;
+    }
+
+    #profile-body .container .block .text .hide {
+        padding-top: calc(-8px + 4.8vw);
+    }
+
+    #buttons-container {
+        height: calc(1508px - 78.7vw);
+        padding: calc(30px + 5.5vw) 32px;
+        font-size: 42px;
+    }
+
+    #buttons-container .buttons-block .button {
+        height: calc(330px - 25.1vw);
+    }
+
+    #likes {
+        padding: calc(-37px + 12.7vw) 30px 130px;
+    }
+
+    #likes h2 {
+        font-size: calc(31px + 4.8vw);
+    }
+
+    #likes span.hint {
+        font-size: calc(16px + 3.4vw);
+    }
+
+    #vacancies {
+        margin-top: calc(35px + 5.2vw);
+    }
+
+    #vacancies .vacancy {
+        flex-direction: column;
+        padding: calc(-31px + 12.7vw) 0 55px;
+    }
+
+    #vacancies .vacancy .text {
+        width: 100%;
+    }
+
+    #vacancies .vacancy h3 {
+        font-size: 42px;
+        margin-bottom: calc(-13px + 6.9vw);
+    }
+
+    #vacancies .vacancy .text li {
+        font-size: calc(16px + 2.1vw);
+    }
+
+    #vacancies .vacancy .text .hide {
+        padding-top: calc(-8px + 4.8vw);
+    }
+
+    #vacancies .vacancy .buttons {
+        display: flex;
+        flex-direction: row-reverse;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        /*align-items: start;*/
+        width: 100%;
+        max-width: unset;
+        margin-top: 41px;
+    }
+
+    #vacancies .vacancy .buttons div {
+        margin: 0;
+        width: 126px;
+        height: 126px;
+    }
+
+    #vacancies .vacancy .buttons div img {
+        width: 46px;
+    }
+
+    #vacancies .vacancy .buttons .eye img{
+        width: 52px;
+    }
+
+}
+
+@media screen and (max-width: 555px) {
+    #profile-head {
+        padding-top: 31px;
+        position: relative;
+    }
+
+    #profile-head .out.infoblock {
+        display: none;
+    }
+
+    #profile-head .out.avatarblock {
+        display: flex;
+    }
+
+    #profile-head .info .social {
+        width: 100%;
+        padding-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #profile-head {
+        padding: calc(16px + 3.1vw) calc(-19px + 10.6vw) 35px;
+        font-size: calc(2px + 6.3vw);
+    }
+
+    #profile-head .avatar img {
+        width: calc(-47px + 74.4vw);
+        min-width: 0;
+    }
+
+    #profile-head .info h1 {
+        font-size: calc(-12px + 13.8vw);
+    }
+
+    #profile-head .info .social {
+        margin-top: calc(6px + 13.8vw)
+    }
+
+    #profile-head .out {
+        width: calc(8px + 24.4vw);
+        height: calc(3px + 11.9vw);
+    }
+
+    #profile-head .info .social img {
+        width: 82.6%;
+    }
+
+    #profile-head .info span img {
+        height: calc(3px + 5vw);
+    }
+
+    #profile-body {
+        padding: calc(26px + 3.8vw) calc(-15px + 9.4vw) 0;
+        font-size: calc(14px + 2.5vw);
+    }
+
+    #profile-body span {
+        padding-bottom: calc(15px + 9.4vw);
+        font-size: calc(14px + 2.5vw);
+    }
+
+    #profile-body .container .block {
+        padding-bottom: calc(4px + 8.8vw);
+    }
+
+    #profile-body .container .block .buttons {
+        padding-top: calc(-23px + 13.8vw);
+    }
+
+    #profile-body .container .block .buttons div {
+        width: calc(2px + 26.3vw);
+        height: calc(2px + 26.3vw);
+        margin-left: 16px;
+    }
+
+    #profile-body .container .block .buttons img {
+        width: calc(1px + 8.1vw);
+    }
+
+    #profile-body .container .block .text .hide {
+        padding-top: 15px;
+        font-size: calc(-2px + 5vw);
+    }
+
+    #buttons-container {
+        height: calc(254px + 182.5vw);
+        padding: 56px calc(-13px + 9.4vw);
+        font-size: calc(12px + 6.3vw);
+    }
+
+    #buttons-container .buttons-block .button {
+        height: calc(30px + 37.5vw);
+    }
+
+    #likes {
+        padding: calc(-4px + 11.3vw) calc(-9px + 8.1vw) calc(16px + 23.8vw);
+    }
+
+    #likes h2 {
+        font-size: calc(-12px + 13.8vw);
+    }
+
+    #likes span.hint {
+        font-size: calc(2px + 6.3vw);
+    }
+
+    #vacancies {
+        margin-top: 12.5vw;
+    }
+
+    #vacancies .vacancy {
+        padding: calc(12px + 2.5vw) 0 calc(-23px + 16.3vw);
+    }
+
+    #vacancies .vacancy h3 {
+        font-size: calc(12px + 6.3vw);
+        margin-bottom: calc(-44px + 17.5vw);
+    }
+
+    #vacancies .vacancy .text li {
+        font-size: calc(14px + 2.5vw);
+    }
+
+    #vacancies .vacancy .text .hide {
+        padding-top: 15px;
+        font-size: calc(-2px + 5vw);
+    }
+
+    #vacancies .vacancy .buttons {
+        margin-top: calc(-10px + 10.6vw);
+    }
+
+    #vacancies .vacancy .buttons div {
+        width: calc(13px + 23.1vw);
+        height: calc(13px + 23.1vw);
+    }
+
+    #vacancies .vacancy .buttons div img {
+        width: calc(4px + 8.8vw);
+    }
+
+    #vacancies .vacancy .buttons .eye img{
+        width: calc(4px + 10vw);
+    }
+}
+
+
