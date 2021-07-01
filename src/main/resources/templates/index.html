@@ -5,9 +5,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <meta name="_csrf" content="${_csrf.token}"/>
-    <!-- default header name is X-CSRF-TOKEN -->
-    <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <title>OnEquals</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/style.css">
@@ -23,8 +20,8 @@
 <body>
 
 <header>
-    <th:block th:if="${nameProfile == null}" th:include="/block/block-header.html :: header"></th:block>
-    <th:block th:if="${nameProfile != null}" th:include="/block/block-header-autho.html :: header"></th:block>
+    <th:block sec:authorize="!isAuthenticated()" th:include="/block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="/block/block-header-autho.html :: header"></th:block>
 </header>
 <!--<noscript>-->
 <!--    Для повної функціональності цього сайту необхідно включити JavaScript.-->
@@ -34,7 +31,7 @@
 <main>
     <div class="main__block">
         <div class="search">
-            <form id="search" action="/vacancy/list" method="GET">
+            <form id="search" action="/list" method="GET">
                 <label>
                     <input type="text" name="key_words" class="search_input" placeholder="Ключові слова">
                 </label>

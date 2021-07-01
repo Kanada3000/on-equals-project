@@ -30,11 +30,7 @@ public class AdminController {
     }
 
     @GetMapping("/category")
-    public String adminCategoryPage(Principal principal, Model model) {
-        if(principal != null){
-            User user = userService.findUser(principal.getName());
-            model.addAttribute("nameProfile", user.getName());
-        }
+    public String adminCategoryPage(Model model) {
         model.addAttribute("category", categoryService.getAll());
         return "admin/category";
     }
@@ -52,11 +48,7 @@ public class AdminController {
     }
 
     @GetMapping("/cities")
-    public String adminCityPage(Principal principal, Model model) {
-        if(principal != null){
-            User user = userService.findUser(principal.getName());
-            model.addAttribute("nameProfile", user.getName());
-        }
+    public String adminCityPage(Model model) {
         model.addAttribute("city", cityService.getAll());
         return "admin/cities";
     }
@@ -81,11 +73,7 @@ public class AdminController {
     }
 
     @GetMapping("/users")
-    public String adminUsersPage(Principal principal, Model model) {
-        if(principal != null){
-            User user = userService.findUser(principal.getName());
-            model.addAttribute("nameProfile", user.getName());
-        }
+    public String adminUsersPage(Model model) {
         model.addAttribute("user", userService.getAll());
         return "admin/users";
     }
@@ -93,6 +81,7 @@ public class AdminController {
     @PostMapping("/users/add")
     public String adminUserAdd(@ModelAttribute() User user) {
         user.setPassword(userService.setPassword(user.getPassword()));
+        user.getRoles();
         userService.save(user);
         return "redirect:/admin/users";
     }
@@ -104,11 +93,7 @@ public class AdminController {
     }
 
     @GetMapping("/vacancies")
-    public String adminVacanciesPage(Principal principal, Model model) {
-        if(principal != null){
-            User user = userService.findUser(principal.getName());
-            model.addAttribute("nameProfile", user.getName());
-        }
+    public String adminVacanciesPage(Model model) {
         model.addAttribute("vacancy", vacancyService.getAll());
         model.addAttribute("user", userService.getAll());
         model.addAttribute("types", typeService.getAll());
@@ -153,11 +138,7 @@ public class AdminController {
     }
 
     @GetMapping("/resumes")
-    public String adminResumePage(Principal principal, Model model) {
-        if(principal != null){
-            User user = userService.findUser(principal.getName());
-            model.addAttribute("nameProfile", user.getName());
-        }
+    public String adminResumePage(Model model) {
         model.addAttribute("resume", resumeService.getAll());
         model.addAttribute("user", userService.getAll());
         model.addAttribute("types", typeService.getAll());

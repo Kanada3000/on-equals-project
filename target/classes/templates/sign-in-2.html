@@ -16,8 +16,8 @@
 </head>
 <body>
 <header>
-    <th:block th:if="${nameProfile == null}" th:include="/block/block-header.html :: header"></th:block>
-    <th:block th:if="${nameProfile != null}" th:include="/block/block-header-autho.html :: header"></th:block>
+    <th:block sec:authorize="!isAuthenticated()" th:include="/block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="/block/block-header-autho.html :: header"></th:block>
 </header>
 <form id="emp" action="/employer" method="get">
     <input type="hidden" name="id" th:value="${id}">

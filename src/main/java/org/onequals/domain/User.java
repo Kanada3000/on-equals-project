@@ -35,6 +35,13 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "vacancy_id"))
     private Set<Vacancy> likedVacancy;
 
+    @ManyToMany
+    @JoinTable(
+            name = "resume_like",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "resume_id"))
+    private Set<Resume> likedResume;
+
     public User(Long id, String name, String username, String password, Boolean blocked, Boolean activated,
                 String link, Set<Role> roles) {
         this.id = id;
@@ -140,6 +147,14 @@ public class User implements UserDetails {
 
     public void setLikedVacancy(Set<Vacancy> likedVacancy) {
         this.likedVacancy = likedVacancy;
+    }
+
+    public Set<Resume> getLikedResume() {
+        return likedResume;
+    }
+
+    public void setLikedResume(Set<Resume> likedResume) {
+        this.likedResume = likedResume;
     }
 
     @Override

@@ -13,8 +13,8 @@
 </head>
 <body>
 <header>
-    <th:block th:if="${nameProfile == null}" th:include="/block/block-header.html :: header"></th:block>
-    <th:block th:if="${nameProfile != null}" th:include="/block/block-header-autho.html :: header"></th:block>
+    <th:block sec:authorize="!isAuthenticated()" th:include="/block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="/block/block-header-autho.html :: header"></th:block>
 </header>
 <div id="profile-head">
     <div class="avatar">
@@ -22,15 +22,26 @@
         <img src="/images/avatar.png">
     </div>
     <div class="info">
-        <h1>Максим<br/>Денисенко</h1>
-        <span class="underline"><a href="#">www.denysenkko.com</a></span>
-        <span><img src="/images/location.png">Україна, Київ</span>
+        <h1 th:text="${user.getName()}">Максим<br/>Денисенко</h1>
+        <span class="underline"><a th:href="${user.getSite()}" th:text="${user.getSite()}">www.denysenkko.com</a></span>
+        <span>
+            <img src="/images/location.png"><span th:text="${user.getCity().getCountry()}" th:remove="tag"/>, <span
+                th:text="${user.getCity().getCity()}" th:remove="tag"/>
+        </span>
         <div class="container">
             <div class="social">
-                <a href="#"><img src="/images/facebook-f.png"></a>
-                <a href="#"><img src="/images/instagram.png"></a>
-                <a href="#"><img src="/images/twitter.png"></a>
-                <a href="#"><img src="/images/linkedin-in.png"></a>
+                <div th:if="${user.getLinkFacebook() != ''}" th:remove="tag">
+                    <a th:href="${user.getLinkFacebook()}"><img src="/images/facebook-f.png"></a>
+                </div>
+                <div th:if="${user.getLinkInstagram() != ''}" th:remove="tag">
+                    <a th:href="${user.getLinkInstagram()}"><img src="/images/instagram.png"></a>
+                </div>
+                <div th:if="${user.getLinkTwitter() != ''}" th:remove="tag">
+                    <a th:href="${user.getLinkTwitter()}"><img src="/images/twitter.png"></a>
+                </div>
+                <div th:if="${user.getLinkLinkedIn() != ''}" th:remove="tag">
+                    <a th:href="${user.getLinkLinkedIn()}"><img src="/images/linkedin-in.png"></a>
+                </div>
             </div>
             <div class="out infoblock">
                 <a href="/logout">Вийти</a>
@@ -40,18 +51,16 @@
     </div>
 </div>
 <div id="profile-body">
-    <span>Прівит! Працюю на стику копірайтингу і PR. Вмію писати круті, цікаві тексти, які будуть просто читатися
-        та продавати. Розумію як зробити так, щоб тексти подобалися не тільки людям, а й пошуковим системам. <br/>
-        Вмію писати круті, цікаві тексти, які будуть просто читатися та продавати. Розумію як зробити так, щоб
-        тексти подобалися не тільки людям, а й пошуковим системам.
+    <span th:text="${user.getDescription()}">
     </span>
     <div class="container">
-        <div class="block">
+        <div class="block" th:each="b: ${block}">
             <div class="text">
-                <span>копірайтинг</span>
-                <span>повна зайнятість</span>
-                <span>22 000 грн</span>
-                <span>Україна / Київ / Чернігів</span>
+                <span th:text="${b.getCategory().getLongName()}">копірайтинг</span>
+                <span th:text="${b.getType().getName()}">повна зайнятість</span>
+                <span th:text="${b.getSalary()}">22 000 грн</span>
+                <span><span th:text="${b.getCity().getCountry()}" th:remove="tag"/> / <span
+                        th:text="${user.getCity().getCity()}" th:remove="tag"/></span>
                 <div class="hide">
                     <span>розгорнути ↓</span>
                 </div>
@@ -89,15 +98,16 @@
     <h2>збережені вакансії</h2>
     <span class="hint">натисніть на сердечко, щоб видалити вакансію зі списку</span>
     <div id="vacancies">
-        <div class="vacancy" th:each="v: ${vacancies}">
+        <div class="vacancy" th:each="l: ${likes}">
+            <input id="likesId" type="hidden" name="likeId" th:value="${l.getId()}">
             <div class="text">
-                <h3 th:text="${v.getUser().getName()}">Торговельна мережа “Сільпо”</h3>
+                <h3 th:text="${l.getUser().getName()}">Торговельна мережа “Сільпо”</h3>
                 <ul>
-                    <li th:text="${v.getCategory().getLongName()}">адміністратор/-ка</li>
-                    <li th:text="${v.getType().getName()}">повна зайнятість</li>
-                    <li th:text="${#numbers.formatInteger(v.getSalary(), 3, 'WHITESPACE') + ' грн'}">20 000 грн</li>
-                    <li><span th:text="${v.getCity().getCountry()}" th:remove="tag"></span> / <span th:text="${v.getCity().getCity()}"
-                                                                                                    th:remove="tag"></span></li>
+                    <li th:text="${l.getCategory().getLongName()}">адміністратор/-ка</li>
+                    <li th:text="${l.getType().getName()}">повна зайнятість</li>
+                    <li th:text="${#numbers.formatInteger(l.getSalary(), 3, 'WHITESPACE') + ' грн'}">20 000 грн</li>
+                    <li><span th:text="${l.getCity().getCountry()}" th:remove="tag"></span> / <span
+                            th:text="${l.getCity().getCity()}" th:remove="tag"></span></li>
                 </ul>
                 <div class="hide">
                     <span>розгорнути ↓</span>
@@ -107,17 +117,20 @@
                 <div class="mail">
                     <img src="/images/mail-vacancy.png" alt="mail">
                 </div>
-                <div class="heart">
+                <div class="like">
                     <img src="/images/heart-vacancy.png" alt="like">
                 </div>
                 <div class="eye">
                     <img src="/images/eye-vacancy.png" alt="eye">
                 </div>
             </div>
-        </div>
+        </input>
     </div>
 </div>
 
+<form id="likeForm" action="/profile/deleteLike" method="POST"></form>
+
 <script src="/script/script.js"></script>
+<script src="/script/script-like.js"></script>
 </body>
 </html>

@@ -243,8 +243,12 @@
     margin: 25px 0 0 30px;
 }
 
-#vacancies .vacancy .buttons .heart {
+#vacancies .vacancy .buttons .like {
     background-color: #FF5C55;
+}
+
+#vacancies .vacancy .buttons .eye {
+    background-color: white;
 }
 
 #likes h2 {

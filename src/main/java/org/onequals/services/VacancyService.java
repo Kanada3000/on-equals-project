@@ -1,5 +1,6 @@
 package org.onequals.services;
 
+import org.onequals.domain.User;
 import org.onequals.domain.Vacancy;
 import org.onequals.repo.VacancyRepo;
 import org.springframework.data.domain.Sort;
@@ -61,6 +62,11 @@ public class VacancyService {
     @Transactional
     public void delete(Long id){
         vacancyRepo.deleteById(id);
+    }
+
+    @Transactional
+    public List<Vacancy> findByUser(User user){
+        return vacancyRepo.findByUser(user.getId());
     }
 
     @Transactional

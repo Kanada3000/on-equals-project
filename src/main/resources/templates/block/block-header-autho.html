@@ -13,8 +13,8 @@
 
     <div class="header__panel">
         <div class="header__sign">
-            <a href="/profile"><div class="button" th:text="${nameProfile}" sec:authorize="!hasRole('ADMIN')"></div></a>
-            <a href="/admin/users"><div class="button" th:text="${nameProfile}" sec:authorize="hasRole('ADMIN')"></div></a>
+            <a href="/profile"><div class="button" sec:authentication="name" sec:authorize="!hasRole('ADMIN')"></div></a>
+            <a href="/admin/users"><div class="button" sec:authorize="hasRole('ADMIN')">Admin Panel</div></a>
             <a href="/logout"><div class="button last">Вийти</div></a>
         </div>
         <div class="header__nav">

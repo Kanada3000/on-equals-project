@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class RegistrationController {
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
 
-    public RegistrationController(UserService userService, PasswordEncoder passwordEncoder) {
+    public RegistrationController(UserService userService) {
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/register")

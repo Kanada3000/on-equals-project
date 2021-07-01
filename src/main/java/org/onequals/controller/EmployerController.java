@@ -1,8 +1,8 @@
 package org.onequals.controller;
 
 import org.onequals.domain.Employer;
+import org.onequals.domain.Role;
 import org.onequals.domain.User;
-import org.onequals.domain.UserType;
 import org.onequals.services.CategoryService;
 import org.onequals.services.CityService;
 import org.onequals.services.EmployerService;
@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.security.Principal;
-import java.util.Collections;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/employer")
@@ -34,11 +33,7 @@ public class EmployerController {
     }
 
     @GetMapping()
-    public String indexPage(Principal principal, Model model, @RequestParam("id") Long id) {
-        if(principal != null){
-            User user = userService.findUser(principal.getName());
-            model.addAttribute("nameProfile", user.getName());
-        }
+    public String indexPage(Model model, @RequestParam("id") Long id) {
         model.addAttribute("id", id);
         model.addAttribute("categories", categoryService.getAll());
         model.addAttribute("city", cityService.getAll());
@@ -79,6 +74,10 @@ public class EmployerController {
         employer.setSize(size);
         employer.setDescription(description);
         employerService.save(employer);
+
+        Set<Role> roles = user.getRoles();
+        roles.add(Role.EMPLOYER);
+        user.setRoles(roles);
 
         user.setLink(null);
         userService.save(user);

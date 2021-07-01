@@ -13,8 +13,8 @@
 </head>
 <body>
 <header>
-    <th:block th:if="${nameProfile == null}" th:include="/block/block-header.html :: header"></th:block>
-    <th:block th:if="${nameProfile != null}" th:include="/block/block-header-autho.html :: header"></th:block>
+    <th:block sec:authorize="!isAuthenticated()" th:include="/block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="/block/block-header-autho.html :: header"></th:block>
 </header>
 <div id="sign">
     <form id="sign-in" class="in" method="POST" action="/log-in">

@@ -1,5 +1,6 @@
 package org.onequals.controller;
 
+import org.onequals.domain.Role;
 import org.onequals.domain.User;
 import org.onequals.services.CategoryService;
 import org.onequals.services.CityService;
@@ -23,22 +24,27 @@ public class PageController {
     }
 
     @GetMapping("/")
-    public String indexPage(Principal principal, Model model) {
-        if (principal != null) {
-            User user = userService.findUser(principal.getName());
-            model.addAttribute("nameProfile", user.getName());
-        }
+    public String indexPage(Model model) {
         model.addAttribute("category", categoryService.getAll());
         model.addAttribute("city", cityService.getAll());
         return "index";
     }
 
     @GetMapping("/log-in")
-    public String signInPage(Principal principal, Model model) {
+    public String signInPage(Model model) {
+        return "log-in";
+    }
+
+    @GetMapping("/list")
+    public String toList(Principal principal) {
         if (principal != null) {
             User user = userService.findUser(principal.getName());
-            model.addAttribute("nameProfile", user.getName());
+            if (user.getRoles().contains(Role.EMPLOYER)) {
+                return "redirect:/resume/list";
+            } else {
+                return "redirect:/vacancy/list";
+            }
         }
-        return "log-in";
+        return "redirect:/vacancy/list";
     }
 }

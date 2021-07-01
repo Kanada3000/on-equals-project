@@ -1,16 +1,18 @@
 package org.onequals.repo;
 
+import org.onequals.domain.Resume;
 import org.onequals.domain.Vacancy;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Set;
 
 public interface VacancyRepo extends JpaRepository<Vacancy, Long> {
 
     @Query("SELECT v FROM Vacancy v WHERE v.user.id = ?1")
-    Vacancy findByUser(Long id);
+    List<Vacancy> findByUser(Long id);
 
     @Query("SELECT v FROM Vacancy v WHERE (" +
             "v.city.city LIKE %?1% OR " +
@@ -35,4 +37,7 @@ public interface VacancyRepo extends JpaRepository<Vacancy, Long> {
 
     @Query("SELECT v FROM Vacancy v WHERE (v.salary BETWEEN ?1 and ?2) AND v IN ?3")
     List<Vacancy> sort(int min, int max, List<Vacancy> vacancy, Sort sort);
+
+    @Query("SELECT v FROM Vacancy v WHERE CONCAT(v.id,'') IN ?1")
+    Set<Vacancy> findByIdString (List<String> likes);
 }

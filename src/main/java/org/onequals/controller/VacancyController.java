@@ -1,6 +1,5 @@
 package org.onequals.controller;
 
-import antlr.StringUtils;
 import org.onequals.domain.User;
 import org.onequals.domain.Vacancy;
 import org.onequals.services.*;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,34 +42,57 @@ public class VacancyController {
                               @RequestParam(name = "type", required = false) List<Long> type,
                               @RequestParam(required = false) String key_words,
                               @RequestParam(required = false) String catString,
-                              @RequestParam(required = false) String citString){
-        if(principal != null){
-            User user = userService.findUser(principal.getName());
-            model.addAttribute("nameProfile", user.getName());
+                              @RequestParam(required = false) String citString,
+                              @RequestParam(required = false) String likes,
+                              @RequestParam(required = false) String dislikes) {
+        User user = new User();
+
+        if (principal != null) {
+            user = userService.findUser(principal.getName());
+        }
+
+        if (likes != null) {
+            List<String> items = Arrays.asList(likes.split("&"));
+            userService.addVacancyLikes(user, items);
+        }
+
+        if (dislikes != null) {
+            List<String> items = Arrays.asList(dislikes.split("&"));
+            userService.deleteVacancyLikes(user, items);
+        }
+
+        if (!user.getLikedVacancy().isEmpty()) {
+            StringBuilder s = new StringBuilder();
+            for (Vacancy v : user.getLikedVacancy()) {
+                s.append(v.getId()).append("&");
+            }
+            model.addAttribute("likesId", s);
         }
 
         HashMap<Object, Object> map = vacancyService.findMinMax(min, max);
         List<Vacancy> vacancies = vacancyService.sortAndFilter(key_words, catString, citString,
                 (Integer) map.get("min"), (Integer) map.get("max"), sort, category, type);
 
-        model.addAttribute("key_wordsVal", key_words);
-        model.addAttribute("catStringVal", catString);
-        model.addAttribute("citStringVal", citString);
         model.addAttribute("min", map.get("minSalary"));
         model.addAttribute("max", map.get("maxSalary"));
         model.addAttribute("categories", categoryService.updateTotal(vacancies));
         model.addAttribute("total", vacancies.size());
         model.addAttribute("type", typeService.updateTotal(vacancies));
         model.addAttribute("vacancies", vacancies);
+        model.addAttribute("key_wordsVal", key_words);
+        model.addAttribute("catStringVal", catString);
+        model.addAttribute("citStringVal", citString);
         model.addAttribute("category", categoryService.getAll());
         model.addAttribute("city", cityService.getAll());
+        model.addAttribute("userType", "seeker");
+
         return "search-list";
     }
 
     @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     @GetMapping("/new")
-    public String addVacancy(Principal principal, Model model){
-        if(principal != null){
+    public String addVacancy(Principal principal, Model model) {
+        if (principal != null) {
             User user = userService.findUser(principal.getName());
             model.addAttribute("nameProfile", user.getName());
         }
@@ -86,7 +109,7 @@ public class VacancyController {
                              @RequestParam("type") String t,
                              @RequestParam("citString") String cityName,
                              @RequestParam("description") String desc,
-                             @RequestParam("salary") int salary){
+                             @RequestParam("salary") int salary) {
         Vacancy vacancy = new Vacancy();
         vacancy.setUser(userService.findUser(principal.getName()));
         vacancy.setCity(cityService.findByName(cityName));

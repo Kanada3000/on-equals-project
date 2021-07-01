@@ -244,6 +244,7 @@
     justify-content: center;
     align-items: center;
     margin-right: 30px;
+    cursor: pointer;
 }
 
 #vacancies .vacancy .buttons div img{
@@ -263,8 +264,17 @@
 #vacancies .vacancy .buttons .heart{
     background-color: #F98DC0;
 }
+#vacancies .vacancy .buttons .heart.red{
+    background-color: #FF5C55;
+}
 
 #vacancies .vacancy .buttons .mail{
     background-color: #509FC8;
 
 }
+
+#idLike{
+    display: none;
+}
+
+

@@ -12,8 +12,8 @@
 </head>
 <body>
 <header>
-    <th:block th:if="${nameProfile == null}" th:include="/block/block-header.html :: header"></th:block>
-    <th:block th:if="${nameProfile != null}" th:include="/block/block-header-autho.html :: header"></th:block>
+    <th:block sec:authorize="!isAuthenticated()" th:include="/block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="/block/block-header-autho.html :: header"></th:block>
 </header>
 
 <form id="form" action="/admin/users/add" method="post">
@@ -47,6 +47,7 @@
                 <td>name</td>
                 <td>username</td>
                 <td>password</td>
+                <td>roles</td>
                 <td>blocked</td>
                 <td></td>
                 <td></td>
@@ -58,15 +59,15 @@
                 <td><input id="username" type="text"></td>
                 <td><input id="password" type="text"></td>
                 <td>
-                    <select id="blocked" name="blocked">
-                        <option value="false">Ні</option>
-                        <option value="true">Так</option>
+                    <select id="roles" name="roles">
+                        <option value="SEEKER">Шукач</option>
+                        <option value="EMPLOYER">Роботодавець</option>
                     </select>
                 </td>
                 <td>
-                    <select id="userType" name="blocked">
-                        <option value="SEEKER">Шукач</option>
-                        <option value="EMPLOYER">Роботодавець</option>
+                    <select id="blocked" name="blocked">
+                        <option value="false">Ні</option>
+                        <option value="true">Так</option>
                     </select>
                 </td>
                 <td class="accept">&#10004;</td>
@@ -78,6 +79,7 @@
                 <td class="name" th:text="${u.getName()}"></td>
                 <td class="username" th:text="${u.getUsername()}"></td>
                 <td class="password" th:text="${u.getPassword()}"></td>
+                <td class="roles" th:text="${u.getRoles()}"></td>
                 <td class="blocked" th:if="${u.getBlocked()}">Так</td>
                 <td class="blocked" th:unless="${u.getBlocked()}">Ні</td>
                 <td class="edit">&#9998;</td>

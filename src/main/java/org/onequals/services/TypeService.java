@@ -1,6 +1,7 @@
 package org.onequals.services;
 
 import org.onequals.domain.Category;
+import org.onequals.domain.Resume;
 import org.onequals.domain.Type;
 import org.onequals.domain.Vacancy;
 import org.onequals.repo.TypeRepo;
@@ -37,6 +38,27 @@ public class TypeService {
 
         List<Long> vacanciesId = vacancies.stream()
                 .map(Vacancy::getId)
+                .collect(Collectors.toList());
+
+        List<Type> test = typeRepo.countByTypeList(vacanciesId);
+
+        for (Type value : types) {
+            value.setTotal(0);
+            for (Type type : test) {
+                if (value.getId().equals(type.getId())) {
+                    value.setTotal(type.getTotal());
+                }
+            }
+        }
+        return types;
+    }
+
+    @Transactional
+    public List<Type> updateTotalResumes(List<Resume> resumes){
+        List<Type> types = typeRepo.findAll(Sort.by("id"));
+
+        List<Long> vacanciesId = resumes.stream()
+                .map(Resume::getId)
                 .collect(Collectors.toList());
 
         List<Type> test = typeRepo.countByTypeList(vacanciesId);

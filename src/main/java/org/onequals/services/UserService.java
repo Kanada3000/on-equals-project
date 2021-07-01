@@ -1,10 +1,7 @@
 package org.onequals.services;
 
 import org.onequals.domain.*;
-import org.onequals.repo.EmployerRepo;
-import org.onequals.repo.SeekerRepo;
-import org.onequals.repo.UserRepo;
-import org.onequals.repo.VacancyRepo;
+import org.onequals.repo.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,10 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -24,13 +18,15 @@ public class UserService implements UserDetailsService {
     private final EmployerRepo employerRepo;
     private final VacancyRepo vacancyRepo;
     private final PasswordEncoder passwordEncoder;
+    private final ResumeRepo resumeRepo;
 
-    public UserService(UserRepo userRepo, SeekerRepo seekerRepo, EmployerRepo employerRepo, VacancyRepo vacancyRepo, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepo userRepo, SeekerRepo seekerRepo, EmployerRepo employerRepo, VacancyRepo vacancyRepo, PasswordEncoder passwordEncoder, ResumeRepo resumeRepo) {
         this.userRepo = userRepo;
         this.seekerRepo = seekerRepo;
         this.employerRepo = employerRepo;
         this.vacancyRepo = vacancyRepo;
         this.passwordEncoder = passwordEncoder;
+        this.resumeRepo = resumeRepo;
     }
 
     @Transactional
@@ -39,7 +35,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public Optional<User> findById(Long id){
+    public Optional<User> findById(Long id) {
         return userRepo.findById(id);
     }
 
@@ -68,8 +64,8 @@ public class UserService implements UserDetailsService {
 //            Employer employer = employerRepo.findEmployerByUser(user);
 //            employerRepo.delete(employer);
 //        }
-        Vacancy vacancy = vacancyRepo.findByUser(id);
-        vacancyRepo.delete(vacancy);
+        List<Vacancy> vacancy = vacancyRepo.findByUser(id);
+        vacancyRepo.deleteAll(vacancy);
         userRepo.deleteById(id);
     }
 
@@ -86,8 +82,44 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public User getByLink(String link){
+    public User getByLink(String link) {
         return userRepo.findUserByLink(link);
+    }
+
+    @Transactional
+    public void addResumeLikes(User user, List<String> likes) {
+        Set<Resume> newLikes = resumeRepo.findByIdString(likes);
+        Set<Resume> oldLikes = user.getLikedResume();
+        oldLikes.addAll(newLikes);
+        user.setLikedResume(oldLikes);
+        save(user);
+    }
+
+    @Transactional
+    public void deleteResumeLikes(User user, List<String> dislikes) {
+        Set<Resume> newLikes = resumeRepo.findByIdString(dislikes);
+        Set<Resume> oldLikes = user.getLikedResume();
+        oldLikes.removeAll(newLikes);
+        user.setLikedResume(oldLikes);
+        save(user);
+    }
+
+    @Transactional
+    public void addVacancyLikes(User user, List<String> likes) {
+        Set<Vacancy> newLikes = vacancyRepo.findByIdString(likes);
+        Set<Vacancy> oldLikes = user.getLikedVacancy();
+        oldLikes.addAll(newLikes);
+        user.setLikedVacancy(oldLikes);
+        save(user);
+    }
+
+    @Transactional
+    public void deleteVacancyLikes(User user, List<String> dislikes) {
+        Set<Vacancy> newLikes = vacancyRepo.findByIdString(dislikes);
+        Set<Vacancy> oldLikes = user.getLikedVacancy();
+        oldLikes.removeAll(newLikes);
+        user.setLikedVacancy(oldLikes);
+        save(user);
     }
 
     @Override

@@ -43,7 +43,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/admin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/script" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -52,7 +52,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -63,9 +63,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Work\0_project\src\main\resources\static\script" />
       <recent name="E:\Work\0_project\src\main\resources\templates\admin" />
       <recent name="E:\Work\0_project\src\main\resources\templates\block" />
-      <recent name="E:\Work\0_project\src\main\resources\static\script" />
       <recent name="E:\KPI\3 курс\1 семестр\Course\project\src\main\resources\templates\block" />
       <recent name="E:\KPI\3 курс\Course\beauty\src\main\resources\templates" />
     </key>
@@ -95,14 +95,24 @@
       </method>
     </configuration>
     <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="project" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="salon.beauty.Application" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SHORTEN_COMMAND_LINE" value="NONE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="onequals" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.onequals.Application" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SHORTEN_COMMAND_LINE" value="NONE" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="0_project" />
+      <module name="onequals" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.onequals.Application" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SHORTEN_COMMAND_LINE" value="NONE" />
@@ -113,6 +123,7 @@
     <list>
       <item itemvalue="Spring Boot.Application" />
       <item itemvalue="Spring Boot.Application (1)" />
+      <item itemvalue="Spring Boot.Application (2)" />
     </list>
   </component>
   <component name="SQLScriptSettings">
@@ -153,7 +164,9 @@
       <workItem from="1624447748594" duration="8403000" />
       <workItem from="1624527761733" duration="1009000" />
       <workItem from="1624964614968" duration="5958000" />
-      <workItem from="1624992540715" duration="1275000" />
+      <workItem from="1624992540715" duration="2002000" />
+      <workItem from="1625040891421" duration="22485000" />
+      <workItem from="1625130773310" duration="8254000" />
     </task>
     <servers />
   </component>

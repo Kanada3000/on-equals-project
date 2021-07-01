@@ -2,7 +2,6 @@ package org.onequals.controller;
 
 import org.onequals.domain.Resume;
 import org.onequals.domain.User;
-import org.onequals.domain.Vacancy;
 import org.onequals.services.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,37 +33,60 @@ public class ResumeController {
         this.resumeService = resumeService;
     }
 
-//    @GetMapping("/list")
-//    public String vacancyList(Principal principal, Model model,
-//                              @RequestParam(name = "sort", defaultValue = "id")  String sort,
-//                              @RequestParam(name = "min", required = false)  Integer min,
-//                              @RequestParam(name = "max", required = false)  Integer max,
-//                              @RequestParam(name = "category", required = false)  List<Long> category,
-//                              @RequestParam(name = "type", required = false)  List<Long> type){
-//        if(principal != null){
-//            User user = userService.findUser(principal.getName());
-//            model.addAttribute("nameProfile", user.getName());
-//        }
-//
-//        HashMap<Object, Object> map = vacancyService.findMinMax(min, max);
-//        List<Vacancy> vacancies = vacancyService.sortAndFilter((Integer) map.get("min"), (Integer) map.get("max"), sort, category, type);
-//
-//        model.addAttribute("min", map.get("minSalary"));
-//        model.addAttribute("max", map.get("maxSalary"));
-//        model.addAttribute("categories", categoryService.updateTotal(vacancies));
-//        model.addAttribute("total", vacancies.size());
-//        model.addAttribute("type", typeService.updateTotal(vacancies));
-//        model.addAttribute("vacancies", vacancies);
-//        model.addAttribute("category", categoryService.getAll());
-//        model.addAttribute("city", cityService.getAll());
-//        return "search-list";
-//    }
+    @PreAuthorize("hasAuthority('EMPLOYER') or hasAuthority('ADMIN')")
+    @GetMapping("/list")
+    public String vacancyList(Principal principal, Model model,
+                              @RequestParam(name = "sort", defaultValue = "id") String sort,
+                              @RequestParam(name = "min", required = false) Integer min,
+                              @RequestParam(name = "max", required = false) Integer max,
+                              @RequestParam(name = "category", required = false) List<Long> category,
+                              @RequestParam(name = "type", required = false) List<Long> type,
+                              @RequestParam(required = false) String key_words,
+                              @RequestParam(required = false) String catString,
+                              @RequestParam(required = false) String citString,
+                              @RequestParam(required = false) String likes,
+                              @RequestParam(required = false) String dislikes) {
+        User user = userService.findUser(principal.getName());
 
+        if (likes != null) {
+            List<String> items = Arrays.asList(likes.split("&"));
+            userService.addResumeLikes(user, items);
+        }
 
-    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
+        if (dislikes != null) {
+            List<String> items = Arrays.asList(dislikes.split("&"));
+            userService.deleteResumeLikes(user, items);
+        }
+
+        if (!user.getLikedResume().isEmpty()) {
+            StringBuilder s = new StringBuilder();
+            for (Resume r : user.getLikedResume()) {
+                s.append(r.getId()).append("&");
+            }
+            model.addAttribute("likesId", s);
+        }
+
+        HashMap<Object, Object> map = resumeService.findMinMax(min, max);
+        List<Resume> resumes = resumeService.sortAndFilter(key_words, catString, citString,
+                (Integer) map.get("min"), (Integer) map.get("max"), sort, category, type);
+
+        model.addAttribute("categories", categoryService.updateTotalResumes(resumes));
+        model.addAttribute("total", resumes.size());
+        model.addAttribute("type", typeService.updateTotalResumes(resumes));
+        model.addAttribute("vacancies", resumes);
+        model.addAttribute("key_wordsVal", key_words);
+        model.addAttribute("catStringVal", catString);
+        model.addAttribute("citStringVal", citString);
+        model.addAttribute("category", categoryService.getAll());
+        model.addAttribute("city", cityService.getAll());
+        model.addAttribute("userType", "employer");
+        return "search-list";
+    }
+
+    @PreAuthorize("hasAuthority('SEEKER') or hasAuthority('ADMIN')")
     @GetMapping("/new")
-    public String addResume(Principal principal, Model model){
-        if(principal != null){
+    public String addResume(Principal principal, Model model) {
+        if (principal != null) {
             User user = userService.findUser(principal.getName());
             model.addAttribute("nameProfile", user.getName());
         }
@@ -73,14 +96,14 @@ public class ResumeController {
         return "resume-finder";
     }
 
-    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('SEEKER') or hasAuthority('ADMIN')")
     @PostMapping("/new")
     public String addResume(Principal principal,
-                             @RequestParam("category") String cat,
-                             @RequestParam("type") String t,
-                             @RequestParam("citString") String cityName,
-                             @RequestParam("description") String desc,
-                             @RequestParam("salary") int salary){
+                            @RequestParam("category") String cat,
+                            @RequestParam("type") String t,
+                            @RequestParam("citString") String cityName,
+                            @RequestParam("description") String desc,
+                            @RequestParam("salary") int salary) {
         Resume resume = new Resume();
         resume.setUser(userService.findUser(principal.getName()));
         resume.setCity(cityService.findByName(cityName));

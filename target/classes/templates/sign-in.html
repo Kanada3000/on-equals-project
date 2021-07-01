@@ -13,13 +13,11 @@
 </head>
 <body>
 <header>
-    <th:block th:if="${nameProfile == null}" th:include="/block/block-header.html :: header"></th:block>
-    <th:block th:if="${nameProfile != null}" th:include="/block/block-header-autho.html :: header"></th:block>
+    <th:block sec:authorize="!isAuthenticated()" th:include="/block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="/block/block-header-autho.html :: header"></th:block>
 </header>
 <div id="sign" class="upp">
     <form id="sign-up" class="up" method="POST" action="/register">
-        <p th:text="${message1}"></p>
-        <p th:text="${message2}"></p>
         <div class="column-1">
             <input type="text" placeholder="Ім'я" name="name">
             <input type="text" placeholder="Ел. пошта або телефон" name="username">
@@ -41,6 +39,8 @@
 
     </form>
 </div>
+<div th:text="${message1}" th:remove="tag"></div>
+<div th:text="${message2}" th:remove="tag"></div>
 <div id="sign-button">
     <div class="sign-in">
 <!--        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>-->

@@ -1,6 +1,8 @@
 package org.onequals.services;
 
 import org.onequals.domain.Resume;
+import org.onequals.domain.User;
+import org.onequals.domain.Vacancy;
 import org.onequals.repo.ResumeRepo;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -23,15 +25,33 @@ public class ResumeService {
     }
 
     @Transactional
-    public List<Resume> sortAndFilter(int min, int max, String sort, List<Long> category, List<Long> type) {
-        if (category == null) {
-            if (type == null)
-                return resumeRepo.findNeeded(min, max, Sort.by(sort));
-            return resumeRepo.findNeededType(min, max, type, Sort.by(sort));
+    public List<Resume> sortAndFilter(String key_words, String catString, String citString, int min,
+                                      int max, String sort, List<Long> category, List<Long> type) {
+        List<Resume> resumeList = resumeRepo.findAll();
+        if (key_words != null)
+            if (!key_words.isEmpty()) {
+                resumeList = resumeRepo.filterByKey(key_words, resumeList);
+            }
+
+        if (catString != null)
+            if (!catString.isEmpty()) {
+                resumeList = resumeRepo.filterByCategory(catString, resumeList);
+            }
+
+        if (citString != null)
+            if (!citString.isEmpty()) {
+                resumeList = resumeRepo.filterByCity(citString, resumeList);
+            }
+
+        if (category != null) {
+            resumeList = resumeRepo.filterByCategoryList(category, resumeList);
         }
-        if (type == null)
-            return resumeRepo.findNeededCategory(min, max, category, Sort.by(sort));
-        return resumeRepo.findNeededCategoryType(min, max, category, type, Sort.by(sort));
+
+        if (type != null) {
+            resumeList = resumeRepo.filterByTypeList(type, resumeList);
+        }
+        resumeList = resumeRepo.sort(min, max, resumeList, Sort.by(sort));
+        return resumeList;
     }
 
     @Transactional
@@ -40,8 +60,13 @@ public class ResumeService {
     }
 
     @Transactional
-    public void delete(Long id){
+    public void delete(Long id) {
         resumeRepo.deleteById(id);
+    }
+
+    @Transactional
+    public List<Resume> findByUser(User user) {
+        return resumeRepo.findByUser(user.getId());
     }
 
     @Transactional

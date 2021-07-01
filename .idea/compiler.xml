@@ -8,14 +8,18 @@
         <outputRelativeToContentRoot value="true" />
         <module name="beauty" />
         <module name="project" />
-        <module name="0_project" />
+        <module name="onequals" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="0_project" target="16" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="0_project" options="-parameters" />
       <module name="beauty" options="-parameters" />
+      <module name="onequals" options="-parameters" />
       <module name="project" options="-parameters" />
     </option>
   </component>

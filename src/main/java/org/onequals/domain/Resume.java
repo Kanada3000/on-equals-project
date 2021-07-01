@@ -1,6 +1,7 @@
 package org.onequals.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "resume")
@@ -24,6 +25,9 @@ public class Resume {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name="city_id")
     private City city;
+
+    @ManyToMany(mappedBy = "likedResume")
+    private Set<User> likes;
 
     private int salary = 20000;
     private String description;

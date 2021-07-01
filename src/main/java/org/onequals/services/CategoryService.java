@@ -1,6 +1,7 @@
 package org.onequals.services;
 
 import org.onequals.domain.Category;
+import org.onequals.domain.Resume;
 import org.onequals.domain.Vacancy;
 import org.onequals.repo.CategoryRepo;
 import org.onequals.repo.VacancyRepo;
@@ -29,6 +30,27 @@ public class CategoryService{
                 .collect(Collectors.toList());
 
         List<Category> test = categoryRepo.countByCategoryList(vacanciesId);
+
+        for (Category value : categories) {
+            value.setTotal(0);
+            for (Category category : test) {
+                if (value.getId().equals(category.getId())) {
+                    value.setTotal(category.getTotal());
+                }
+            }
+        }
+        return categories;
+    }
+
+    @Transactional
+    public List<Category> updateTotalResumes(List<Resume> resumes){
+        List<Category> categories = categoryRepo.findAll(Sort.by("id"));
+
+        List<Long> resumesId = resumes.stream()
+                .map(Resume::getId)
+                .collect(Collectors.toList());
+
+        List<Category> test = categoryRepo.countByCategoryList(resumesId);
 
         for (Category value : categories) {
             value.setTotal(0);

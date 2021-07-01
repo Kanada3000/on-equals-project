@@ -5,8 +5,26 @@ $(function () {
         $(window).scrollTop(scroll)
     }
 
+    if (likesId !== null){
+        let likesIdList = likesId.split("&")
+        let id
+        $("#vacancies .vacancy").each(function(){
+            id = $(this).find("#idLike").text()
+            if (likesIdList.includes(id)){
+                $(this).find(".heart").addClass("red")
+            }
+        })
+    }
 
     let step = 1000
+
+    if(max % step !== 0){
+        max = Math.floor(max/step)*step + step
+    }
+
+    if(min % step !== 0){
+        min = Math.floor(min/step)*step
+    }
     let min_val = min
     let max_val = max
     let min_start = min.toString()
@@ -53,7 +71,8 @@ $(function () {
     let width = slider_1.offsetWidth
     let pos
     slider_1.setAttribute("step", step)
-    output_1.setAttribute("style", "left: " + (((width - 40) * (min_start / (max - min))) - output_1.offsetWidth / 2) + "px")
+    pos = (min_start - min) / (max - min)
+    output_1.setAttribute("style", "left: " + ((width - 20) * pos) + "px")
 
     let slider_2 = document.getElementById("max");
     let output_2 = document.getElementById("max-output");
@@ -61,33 +80,32 @@ $(function () {
     slider_2.setAttribute("max", max)
     slider_2.setAttribute("value", max_start)
     output_2.innerHTML = numberFormat(slider_2.value);
-    output_2.setAttribute("style", "left: " + (((width - 40) * (max_start / (max - min))) - output_2.offsetWidth / 2) + "px")
+    pos = (max_start - min) / (max - min)
+    output_2.setAttribute("style", "left: " + ((width - 20) * pos) + "px")
 
 
     slider_1.oninput = function () {
         if (parseInt(this.value) >= parseInt(slider_2.value)) {
-            console.log("BEFORE ---- " + slider_2.value)
             slider_2.value = parseInt(this.value) + step
-            console.log("AFTER ---- " + slider_2.value)
             output_2.innerHTML = numberFormat(slider_2.value);
-            pos = slider_2.value / (max - min)
-            output_2.setAttribute("style", "left: " + (((width - 40) * pos) - output_2.offsetWidth / 2) + "px")
+            pos = (slider_2.value - min) / (max - min)
+            output_2.setAttribute("style", "left: " + ((width - 20) * pos) + "px")
         }
         output_1.innerHTML = numberFormat(this.value);
-        pos = this.value / (max - min)
-        output_1.setAttribute("style", "left: " + (((width - 40) * pos) - output_1.offsetWidth / 2) + "px")
+        pos = (this.value - min) / (max - min)
+        output_1.setAttribute("style", "left: " + (((width - 20) * pos)) + "px")
     }
 
     slider_2.oninput = function () {
         if (parseInt(this.value) <= parseInt(slider_1.value)) {
             slider_1.value = this.value - step
             output_1.innerHTML = numberFormat(slider_1.value);
-            pos = slider_1.value / (max - min)
-            output_1.setAttribute("style", "left: " + (((width - 40) * pos) - output_1.offsetWidth / 2) + "px")
+            pos = (slider_1.value - min) / (max - min)
+            output_1.setAttribute("style", "left: " + ((width - 20) * pos) + "px")
         }
         output_2.innerHTML = numberFormat(this.value);
-        pos = this.value / (max - min)
-        output_2.setAttribute("style", "left: " + (((width - 40) * pos) - output_2.offsetWidth / 2) + "px")
+        pos = (this.value - min) / (max - min)
+        output_2.setAttribute("style", "left: " + ((width - 20) * pos) + "px")
     }
 
 
@@ -130,12 +148,6 @@ $(function () {
             $("#sortForm").submit()
         }, 1500)
     });
-
-    $("#vacancies .vacancy .buttons .heart").click(function (){
-        $(this).css("background-color", "#FF5C55")
-        let value = $("input#likes-input").val() +
-        $("input#likes-input").val()
-    })
 })
 
 function numberFormat(x) {
