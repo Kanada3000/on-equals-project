@@ -222,7 +222,7 @@
 
 #vacancies .vacancy {
     border-right: none;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
 }
 
 #vacancies .vacancy .text {

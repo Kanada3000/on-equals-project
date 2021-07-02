@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="IU-211.7442.40">
-    <data-source name="PostgreSQL - onequals_db@localhost" uuid="abf9c1b1-29d0-49a3-835a-77de7bde53af">
+    <data-source name="onequals_db@localhost" uuid="d12acacc-3ce1-4ade-8237-676892300b5d">
       <database-info product="PostgreSQL" version="13.3" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.5" dbms="POSTGRES" exact-version="13.3" exact-driver-version="42.2">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
@@ -12,21 +12,6 @@
         <introspection-scope>
           <node kind="database" qname="@">
             <node kind="schema" qname="@" />
-          </node>
-        </introspection-scope>
-      </schema-mapping>
-    </data-source>
-    <data-source name="onequals@localhost" uuid="cb6a665a-da0f-4350-b1de-2d2be6f311cf">
-      <database-info product="PostgreSQL" version="13.3" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.5" dbms="POSTGRES" exact-version="13.3" exact-driver-version="42.2">
-        <identifier-quote-string>&quot;</identifier-quote-string>
-      </database-info>
-      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
-      <secret-storage>master_key</secret-storage>
-      <user-name>postgres</user-name>
-      <schema-mapping>
-        <introspection-scope>
-          <node kind="database" qname="onequals">
-            <node kind="schema" negative="1" />
           </node>
         </introspection-scope>
       </schema-mapping>

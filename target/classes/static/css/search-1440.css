@@ -4,7 +4,7 @@
     }
 
     #category{
-        width: calc(468px - 5.3vw);
+        width: calc(460px - 5.5vw);
         padding: 51px 60px 0 calc(87px - 4.3vw);
      }
 
@@ -25,6 +25,10 @@
         position: relative;
     }
 
+    #vacancies .vacancy .text{
+        width: 100%;
+    }
+
     #vacancies .vacancy .text li{
         border-bottom: 2px solid black;
         width: 100%;
@@ -40,6 +44,8 @@
         padding-left: 0;
         max-height: unset;
         padding-top: 35px;
+        width: 100%;
+        order: 3;
     }
 
     #vacancies .vacancy .buttons div{
@@ -54,6 +60,16 @@
 
     #vacancies .vacancy .buttons .eye img{
         width: 53px;
+    }
+
+    #vacancies .vacancy .hide {
+        width: calc(-546px + 103.6vw);
+    }
+}
+
+@media screen and (max-width: 1024px){
+    #vacancies .vacancy .hide {
+        width: 100%;
     }
 }
 
@@ -143,6 +159,10 @@
         padding: 51px 0 49px;
     }
 
+    #vacancies .vacancy .text{
+        width: auto;
+    }
+
     #vacancies .vacancy .text li{
         width: 66.8vw;
     }
@@ -150,8 +170,10 @@
     #vacancies .vacancy .buttons{
         flex-direction: column-reverse;
         flex-wrap: wrap;
-        padding: 0 0 56px 0;
+        padding: 0;
         max-height: unset;
+        order: 1;
+        width: auto;
     }
 
     #vacancies .vacancy .buttons div{
@@ -268,23 +290,30 @@
         flex-direction: row-reverse;
         padding: 41px 0 0;
         max-height: unset;
+        width: 100%;
+        order: 3;
     }
 
     #vacancies .vacancy .buttons div{
-        width: 26.25vw;
-        height: 26.25vw;
+        width: 126px;
+        height: 126px;
     }
 
     #vacancies .vacancy .buttons div img{
-        width: 9.74vw;
+        width: 47px;
     }
 
     #vacancies .vacancy .buttons .eye img{
-        width: 10.93vw;
+        width: 53px;
     }
 
-    #vacancies .vacancy .text .hide{
+    #vacancies .vacancy .hide{
         padding-top: 15px;
+        width: 100%;
+    }
+
+    #vacancies .vacancy .hide span.descript{
+        font-size: calc(16px + 2.1vw);
     }
 }
 
@@ -368,8 +397,13 @@
         width: calc(4px + 10vw)
     }
 
-    #vacancies .vacancy .text .hide{
+    #vacancies .vacancy .hide{
         font-size: calc(-2px + 5vw);
+        width: calc(30px + 81.3vw);
+    }
+
+    #vacancies .vacancy .hide span.descript{
+        font-size: calc(14px + 2.5vw);
     }
 
 }

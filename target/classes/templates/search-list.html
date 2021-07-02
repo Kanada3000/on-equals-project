@@ -151,9 +151,12 @@
                             th:text="${v.getCity().getCity()}"
                             th:remove="tag"></span></li>
                 </ul>
-                <div class="hide">
-                    <span>розгорнути ↓</span>
-                </div>
+            </div>
+            <div class="hide">
+                <span class="roll-down">розгорнути ↓</span>
+                <span class="descript" th:text="${v.getDescription()}">
+                </span>
+                <span class="roll-up">згорнути ↑</span>
             </div>
             <div class="buttons" sec:authorize="isAuthenticated()">
                 <div class="mail">

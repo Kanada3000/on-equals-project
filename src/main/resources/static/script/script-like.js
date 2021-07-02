@@ -26,6 +26,18 @@ $(function () {
 
     })
 
+    $(".roll-down").click(function (){
+        $(this).parent().find(".roll-up").css("display","block");
+        $(this).parent().find(".descript").slideDown();
+        $(this).css("display","none")
+    })
+
+    $(".roll-up").click(function (){
+        $(this).parent().find(".roll-down").css("display","block");
+        $(this).parent().find(".descript").slideUp(150);
+        $(this).css("display","none")
+    })
+
 });
 
 

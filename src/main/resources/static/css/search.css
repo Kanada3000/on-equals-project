@@ -3,7 +3,7 @@
 }
 
 #category{
-    width: calc(-346px + 51.3vw);
+    width: calc(-358px + 51.2vw);
     padding-left: calc(-140px + 11.3vw);
     padding-right: calc(-120px + 12.5vw);
     text-align: left;
@@ -122,7 +122,7 @@
     font-size: 32px;
     height: 200px;
     box-sizing: border-box;
-    width: calc(265px + 48.8vw);
+    width: calc(281px + 48.8vw);
     float: left;
     justify-content: space-between;
 }
@@ -179,7 +179,7 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    width: calc(325px + 48.8vw);
+    width: calc(341px + 48.8vw);
     float: left;
     padding-left: 60px;
 }
@@ -198,6 +198,11 @@
     border-right: 4px solid black;
     padding: 51px 0 55px;
     box-sizing: border-box;
+    flex-wrap: wrap;
+}
+
+#vacancies .vacancy .text {
+    width: calc(389px + 10vw);
 }
 
 #vacancies .vacancy .text ul{
@@ -224,18 +229,19 @@
 }
 
 
-#vacancies .vacancy .buttons{
+#vacancies .vacancy .buttons {
     display: flex;
     flex-direction: row-reverse;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: start;
-    padding-left: calc(-8px + 8.3vw);
-    align-content: space-between;
-    max-height: calc(179px + 5vw);
+    align-content: flex-start;
+    width: calc(-224px + 43.1vw);
+    margin-top: -27px;
+    margin-right: -30px;
 }
 
-#vacancies .vacancy .buttons div{
+#vacancies .vacancy .buttons div {
     width: calc(76px + 2.5vw);
     height: calc(76px + 2.5vw);
     border-radius: 50%;
@@ -243,8 +249,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 27px;
     margin-right: 30px;
-    cursor: pointer;
 }
 
 #vacancies .vacancy .buttons div img{
@@ -254,6 +260,7 @@
 
 #vacancies .vacancy .buttons .eye{
     border: 4px solid black;
+    background-color: white;
 }
 
 #vacancies .vacancy .buttons .eye img{
@@ -270,7 +277,32 @@
 
 #vacancies .vacancy .buttons .mail{
     background-color: #509FC8;
+}
 
+#vacancies .vacancy .hide {
+    padding-top: 29px;
+    font-size: 22px;
+    color: #999999;
+    width: calc(214px + 50.8vw);
+    order: 2;
+}
+
+#vacancies .vacancy .hide span.roll-down{
+    display: block;
+    cursor: pointer;
+}
+
+#vacancies .vacancy .hide span.roll-up{
+    padding-top: 20px;
+    display: none;
+    cursor: pointer;
+}
+
+#vacancies .vacancy .hide span.descript{
+    color: black;
+    display: none;
+    font-size: 32px;
+    padding-top: 9px;
 }
 
 #idLike{

@@ -109,9 +109,12 @@
                     <li><span th:text="${l.getCity().getCountry()}" th:remove="tag"></span> / <span
                             th:text="${l.getCity().getCity()}" th:remove="tag"></span></li>
                 </ul>
-                <div class="hide">
-                    <span>розгорнути ↓</span>
-                </div>
+            </div>
+            <div class="hide">
+                <span class="roll-down">розгорнути ↓</span>
+                <span class="descript" th:text="${l.getDescription()}">
+                </span>
+                <span class="roll-up">згорнути ↑</span>
             </div>
             <div class="buttons">
                 <div class="mail">
