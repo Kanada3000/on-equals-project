@@ -12,8 +12,8 @@
 </head>
 <body>
 <header>
-    <th:block sec:authorize="!isAuthenticated()" th:include="/block/block-header.html :: header"></th:block>
-    <th:block sec:authorize="isAuthenticated()" th:include="/block/block-header-autho.html :: header"></th:block>
+    <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
 
 <form id="form" action="/admin/category/add" method="post">

@@ -13,8 +13,8 @@
 </head>
 <body>
 <header>
-    <th:block sec:authorize="!isAuthenticated()" th:include="/block/block-header.html :: header"></th:block>
-    <th:block sec:authorize="isAuthenticated()" th:include="/block/block-header-autho.html :: header"></th:block>
+    <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
 <div id="sign" class="upp">
     <form id="sign-up" class="up" method="POST" action="/register">
