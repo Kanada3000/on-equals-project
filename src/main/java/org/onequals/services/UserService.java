@@ -122,6 +122,13 @@ public class UserService implements UserDetailsService {
         save(user);
     }
 
+    @Transactional
+    public void activatedAdmin(){
+        User user = userRepo.findByUsername("adminLog");
+        user.setActivated(true);
+        save(user);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepo.findByUsername(username);

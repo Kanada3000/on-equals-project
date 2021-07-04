@@ -58,6 +58,7 @@ public class ResumeController {
             userService.deleteResumeLikes(user, items);
         }
 
+        if(user.getLikedResume() != null)
         if (!user.getLikedResume().isEmpty()) {
             StringBuilder s = new StringBuilder();
             for (Resume r : user.getLikedResume()) {
@@ -70,10 +71,22 @@ public class ResumeController {
         List<Resume> resumes = resumeService.sortAndFilter(key_words, catString, citString,
                 (Integer) map.get("min"), (Integer) map.get("max"), sort, category, type);
 
-        model.addAttribute("categories", categoryService.updateTotalResumes(resumes));
-        model.addAttribute("total", resumes.size());
-        model.addAttribute("type", typeService.updateTotalResumes(resumes));
-        model.addAttribute("vacancies", resumes);
+        model.addAttribute("min", map.get("minSalary"));
+        model.addAttribute("max", map.get("maxSalary"));
+
+        if(resumes != null){
+            if(!resumes.isEmpty()){
+                model.addAttribute("categories", categoryService.updateTotalResumes(resumes));
+                model.addAttribute("type", typeService.updateTotalResumes(resumes));
+                model.addAttribute("total", resumes.size());
+                model.addAttribute("vacancies", resumes);
+            }} else{
+            model.addAttribute("categories", categoryService.getAll());
+            model.addAttribute("type", typeService.getAll());
+            model.addAttribute("total", "0");
+            model.addAttribute("vacancies", null);
+        }
+
         model.addAttribute("key_wordsVal", key_words);
         model.addAttribute("catStringVal", catString);
         model.addAttribute("citStringVal", citString);

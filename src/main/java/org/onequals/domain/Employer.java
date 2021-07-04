@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "employer")
 public class Employer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne

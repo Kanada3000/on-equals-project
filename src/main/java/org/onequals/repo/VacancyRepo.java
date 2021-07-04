@@ -1,9 +1,11 @@
 package org.onequals.repo;
 
 import org.onequals.domain.Resume;
+import org.onequals.domain.User;
 import org.onequals.domain.Vacancy;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -40,4 +42,7 @@ public interface VacancyRepo extends JpaRepository<Vacancy, Long> {
 
     @Query("SELECT v FROM Vacancy v WHERE CONCAT(v.id,'') IN ?1")
     Set<Vacancy> findByIdString (List<String> likes);
+
+    @Query("SELECT u FROM User u WHERE (SELECT v FROM Vacancy v WHERE v.id = ?1) MEMBER OF u.likedVacancy")
+    List<User> getUsersByLike (Long id);
 }

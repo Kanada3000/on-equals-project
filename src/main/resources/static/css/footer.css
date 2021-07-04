@@ -54,6 +54,7 @@ footer .scroll {
     border-radius: 500px;
     font-size: 32px;
     color: black;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 1440px) {

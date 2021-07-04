@@ -61,6 +61,7 @@ public class VacancyController {
             userService.deleteVacancyLikes(user, items);
         }
 
+        if(user.getLikedVacancy() != null)
         if (!user.getLikedVacancy().isEmpty()) {
             StringBuilder s = new StringBuilder();
             for (Vacancy v : user.getLikedVacancy()) {
@@ -75,10 +76,18 @@ public class VacancyController {
 
         model.addAttribute("min", map.get("minSalary"));
         model.addAttribute("max", map.get("maxSalary"));
-        model.addAttribute("categories", categoryService.updateTotal(vacancies));
-        model.addAttribute("total", vacancies.size());
-        model.addAttribute("type", typeService.updateTotal(vacancies));
-        model.addAttribute("vacancies", vacancies);
+        if(vacancies != null){
+        if(!vacancies.isEmpty()){
+            model.addAttribute("categories", categoryService.updateTotal(vacancies));
+            model.addAttribute("type", typeService.updateTotal(vacancies));
+            model.addAttribute("total", vacancies.size());
+            model.addAttribute("vacancies", vacancies);
+        }} else{
+            model.addAttribute("categories", categoryService.getAll());
+            model.addAttribute("type", typeService.getAll());
+            model.addAttribute("total", "0");
+            model.addAttribute("vacancies", null);
+        }
         model.addAttribute("key_wordsVal", key_words);
         model.addAttribute("catStringVal", catString);
         model.addAttribute("citStringVal", citString);

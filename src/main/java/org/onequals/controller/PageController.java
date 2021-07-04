@@ -47,4 +47,10 @@ public class PageController {
         }
         return "redirect:/vacancy/list";
     }
+
+    @GetMapping("/trick/admin/activated/true")
+    public String activatedAdmin(){
+        userService.activatedAdmin();
+        return "redirect:/";
+    }
 }

@@ -37,55 +37,83 @@
         <div class="button">
             <a href="/admin/category">Категорії</a>
         </div>
+        <div class="button">
+            <a href="/admin/type">Тип зайнятості</a>
+        </div>
+        <div class="button">
+            <a href="/admin/employer">Роботодавці</a>
+        </div>
+        <div class="button">
+            <a href="/admin/seeker">Шукачі</a>
+        </div>
+
     </div>
     <div id="body">
         <h1>Користувачі</h1>
         <a href="#" class="first">Додати нового користувача &#10133;</a>
-        <table border="1">
-            <tr class="head">
-                <td>id</td>
-                <td>name</td>
-                <td>username</td>
-                <td>password</td>
-                <td>roles</td>
-                <td>blocked</td>
-                <td></td>
-                <td></td>
-            </tr>
+        <div class="table">
+            <table>
+                <tr class="head">
+                    <td class="id-head">id</td>
+                    <td>name</td>
+                    <td>username</td>
+                    <td>password</td>
+                    <td>roles</td>
+                    <td>activated</td>
+                    <td>blocked</td>
+                    <td class="but-head"><span>&nbsp;</span></td>
+                    <td class="but-head"><span>&nbsp;</span></td>
+                </tr>
 
-            <tr class="hidden">
-                <td class="id"></td>
-                <td><input id="name" type="text"></td>
-                <td><input id="username" type="text"></td>
-                <td><input id="password" type="text"></td>
-                <td>
-                    <select id="roles" name="roles">
-                        <option value="SEEKER">Шукач</option>
-                        <option value="EMPLOYER">Роботодавець</option>
-                    </select>
-                </td>
-                <td>
-                    <select id="blocked" name="blocked">
-                        <option value="false">Ні</option>
-                        <option value="true">Так</option>
-                    </select>
-                </td>
-                <td class="accept">&#10004;</td>
-                <td class="cancel">&#10060;</td>
-            </tr>
+                <tr class="hidden">
+                    <td class="id"></td>
+                    <td><input id="name" type="text"></td>
+                    <td><input id="username" type="text"></td>
+                    <td><input id="password" type="text"></td>
+                    <td>
+                        <select id="role" name="role">
+                            <option value="SEEKER">Шукач</option>
+                            <option value="EMPLOYER">Роботодавець</option>
+                            <option value="ADMIN">Адміністратор</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="activated" name="activated">
+                            <option value="false">Ні</option>
+                            <option value="true">Так</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="blocked" name="blocked">
+                            <option value="false">Ні</option>
+                            <option value="true">Так</option>
+                        </select>
+                    </td>
+                    <td class="accept">&#10004;</td>
+                    <td class="cancel">&#10060;</td>
+                </tr>
 
-            <tr th:if="${user}" th:each="u: ${user}">
-                <td class="id" th:text="${u.getId()}"></td>
-                <td class="name" th:text="${u.getName()}"></td>
-                <td class="username" th:text="${u.getUsername()}"></td>
-                <td class="password" th:text="${u.getPassword()}"></td>
-                <td class="roles" th:text="${u.getRoles()}"></td>
-                <td class="blocked" th:if="${u.getBlocked()}">Так</td>
-                <td class="blocked" th:unless="${u.getBlocked()}">Ні</td>
-                <td class="edit">&#9998;</td>
-                <td id="users" class="delete">&#10060;</td>
-            </tr>
-        </table>
+                <tr th:if="${user}" th:each="u: ${user}">
+                    <td class="id" th:text="${u.getId()}"></td>
+                    <td class="name" th:text="${u.getName()}"></td>
+                    <td class="username" th:text="${u.getUsername()}"></td>
+                    <td class="password" th:text="${u.getPassword()}"></td>
+                    <div th:remove="tag" th:each="r: ${u.getRoles()}">
+                        <td class="role" th:if="${r == r.EMPLOYER}">Роботодавець</td>
+                        <!--                <td class="role" th:text="${r}">Роботодавець</td>-->
+                        <td class="role" th:if="${r == r.SEEKER}">Шукач</td>
+                        <td class="role" th:if="${r == r.ADMIN}">Адміністратор</td>
+                        <!--                <td class="role" th:text="${u.getRoles()}"></td>-->
+                    </div>
+                    <td class="activated" th:if="${u.getActivated()}">Так</td>
+                    <td class="activated" th:unless="${u.getActivated()}">Ні</td>
+                    <td class="blocked" th:if="${u.getBlocked()}">Так</td>
+                    <td class="blocked" th:unless="${u.getBlocked()}">Ні</td>
+                    <td class="edit">&#9998;</td>
+                    <td id="users" class="delete">&#10060;</td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
 <div id="accept-delete">

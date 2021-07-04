@@ -85,6 +85,10 @@ public class CategoryService{
 
     @Transactional
     public void delete(Long id){
+        categoryRepo.deleteFromVacancy(id);
+        categoryRepo.deleteFromResume(id);
+        categoryRepo.deleteFromEmployer(id);
+        categoryRepo.deleteFromSeeker(id);
         categoryRepo.deleteById(id);
     }
 }

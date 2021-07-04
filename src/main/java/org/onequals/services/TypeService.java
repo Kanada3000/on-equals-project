@@ -1,11 +1,10 @@
 package org.onequals.services;
 
-import org.onequals.domain.Category;
 import org.onequals.domain.Resume;
 import org.onequals.domain.Type;
 import org.onequals.domain.Vacancy;
+import org.onequals.repo.ResumeRepo;
 import org.onequals.repo.TypeRepo;
-import org.onequals.repo.VacancyRepo;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +29,18 @@ public class TypeService {
     @Transactional
     public List<Type> getAll(){
         return typeRepo.findAll(Sort.by("id"));
+    }
+
+    @Transactional
+    public void save(Type type){
+        typeRepo.save(type);
+    }
+
+    @Transactional
+    public void delete(Long id){
+        typeRepo.deleteFromResume(id);
+        typeRepo.deleteFromVacancy(id);
+        typeRepo.deleteById(id);
     }
 
     @Transactional

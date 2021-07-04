@@ -11,7 +11,7 @@ import java.util.Set;
 @Table(name = "vacancy")
 public class Vacancy{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)

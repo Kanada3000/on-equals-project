@@ -37,13 +37,23 @@
         <div class="button">
             <a href="/admin/category">Категорії</a>
         </div>
+        <div class="button">
+            <a href="/admin/type">Тип зайнятості</a>
+        </div>
+        <div class="button">
+            <a href="/admin/employer">Роботодавці</a>
+        </div>
+        <div class="button">
+            <a href="/admin/seeker">Шукачі</a>
+        </div>
     </div>
     <div id="body">
         <h1>Вакансії</h1>
         <a href="#" class="first">Додати нову вакансію &#10133;</a>
+        <div class="table">
         <table border="1">
             <tr class="head">
-                <td>id</td>
+                <td class="id-head">id</td>
                 <td>user</td>
                 <td>type</td>
                 <td>category</td>
@@ -51,8 +61,8 @@
                 <td>country</td>
                 <td>salary</td>
                 <td>description</td>
-                <td></td>
-                <td></td>
+                <td class="but-head"><span>&nbsp;</span></td>
+                <td class="but-head"><span>&nbsp;</span></td>
             </tr>
             <tr class="hidden">
                 <td class="id"></td>
@@ -124,6 +134,7 @@
             </tr>
 
         </table>
+        </div>
     </div>
 </div>
 

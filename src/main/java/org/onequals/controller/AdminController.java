@@ -7,7 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
+import java.util.Set;
+import java.util.TreeSet;
 
 @Controller
 @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('ROLE_ADMIN')")
@@ -19,14 +20,18 @@ public class AdminController {
     private final TypeService typeService;
     private final CityService cityService;
     private final ResumeService resumeService;
+    private final EmployerService employerService;
+    private final SeekerService seekerService;
 
-    public AdminController(CategoryService categoryService, VacancyService vacancyService, UserService userService, TypeService typeService, CityService cityService, ResumeService resumeService) {
+    public AdminController(CategoryService categoryService, VacancyService vacancyService, UserService userService, TypeService typeService, CityService cityService, ResumeService resumeService, EmployerService employerService, SeekerService seekerService) {
         this.categoryService = categoryService;
         this.vacancyService = vacancyService;
         this.userService = userService;
         this.typeService = typeService;
         this.cityService = cityService;
         this.resumeService = resumeService;
+        this.employerService = employerService;
+        this.seekerService = seekerService;
     }
 
     @GetMapping("/category")
@@ -45,6 +50,24 @@ public class AdminController {
     public String adminCategoryDelete(@PathVariable("id") long id) {
         categoryService.delete(id);
         return "redirect:/admin/category";
+    }
+
+    @GetMapping("/type")
+    public String adminTypePage(Model model) {
+        model.addAttribute("types", typeService.getAll());
+        return "admin/type";
+    }
+
+    @PostMapping("/type/add")
+    public String adminTypeAdd(@ModelAttribute() Type type) {
+        typeService.save(type);
+        return "redirect:/admin/type";
+    }
+
+    @GetMapping("/type/delete/{id}")
+    public String adminTypeDelete(@PathVariable("id") long id) {
+        typeService.delete(id);
+        return "redirect:/admin/type";
     }
 
     @GetMapping("/cities")
@@ -79,9 +102,16 @@ public class AdminController {
     }
 
     @PostMapping("/users/add")
-    public String adminUserAdd(@ModelAttribute() User user) {
+    public String adminUserAdd(@ModelAttribute() User user, @RequestParam("role")String role) {
         user.setPassword(userService.setPassword(user.getPassword()));
-        user.getRoles();
+        Set<Role> set = new TreeSet<Role>();
+        set.add(Role.USER);
+        switch (role) {
+            case "SEEKER" -> set.add(Role.SEEKER);
+            case "EMPLOYER" -> set.add(Role.EMPLOYER);
+            case "ADMIN" -> set.add(Role.ADMIN);
+        }
+        user.setRoles(set);
         userService.save(user);
         return "redirect:/admin/users";
     }
@@ -179,6 +209,31 @@ public class AdminController {
     public String adminResumeDelete(@PathVariable("id") long id) {
         resumeService.delete(id);
         return "redirect:/admin/resumes";
+    }
+
+    @GetMapping("/employer")
+    public String adminEmployerPage(Model model) {
+        model.addAttribute("employer", employerService.getAll());
+        return "admin/employer";
+    }
+
+    @PostMapping("/employer/add")
+    public String adminEmployerAdd(@RequestParam(required = false) Long id,
+                               @RequestParam String city,
+                               @RequestParam String country) {
+        City cityObj = new City();
+        if (id != null)
+            cityObj.setId(id);
+        cityObj.setCity(city);
+        cityObj.setCountry(country);
+        cityService.save(cityObj);
+        return "redirect:/admin/employer";
+    }
+
+    @GetMapping("/employer/delete/{id}")
+    public String adminEmployerDelete(@PathVariable("id") long id) {
+        employerService.delete(id);
+        return "redirect:/admin/employer";
     }
 
 }

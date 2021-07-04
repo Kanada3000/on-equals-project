@@ -34,6 +34,10 @@ public class CityService {
 
     @Transactional
     public void delete(Long id){
+        cityRepo.deleteFromVacancy(id);
+        cityRepo.deleteFromResume(id);
+        cityRepo.deleteFromEmployer(id);
+        cityRepo.deleteFromSeeker(id);
         cityRepo.deleteById(id);
     }
 

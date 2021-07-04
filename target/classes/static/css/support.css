@@ -28,6 +28,7 @@
     background-color: white;
     padding: 0 calc(-140px + 12.5vw);
     box-sizing: border-box;
+    cursor: pointer;
 }
 
 #support .buttons .support-button:last-child{

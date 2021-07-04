@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>OnEquals Admin Cities</title>
+    <title>OnEquals Admin Category</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/menu.css">
@@ -16,7 +16,7 @@
     <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
 
-<form th:object="${city}" id="form" action="/admin/cities/add" method="post">
+<form id="form" action="/admin/type/add" method="post">
 </form>
 <input id='id' type='hidden' name='id' form='form'>
 
@@ -31,14 +31,14 @@
         <div class="button">
             <a href="/admin/resumes">Резюме</a>
         </div>
-        <div class="button active">
-            <a>Країни та міста</a>
+        <div class="button">
+            <a href="/admin/cities">Країни та міста</a>
         </div>
         <div class="button">
             <a href="/admin/category">Категорії</a>
         </div>
-        <div class="button">
-            <a href="/admin/type">Тип зайнятості</a>
+        <div class="button active">
+            <a>Тип зайнятості</a>
         </div>
         <div class="button">
             <a href="/admin/employer">Роботодавці</a>
@@ -48,34 +48,27 @@
         </div>
     </div>
     <div id="body">
-        <h1>Країни та міста</h1>
-        <a href="#" class="first">Додати нове місто &#10133;</a>
+        <h1>Типи зайнятості</h1>
+        <a href="#" class="first">Додати новий тип &#10133;</a>
         <div class="table">
         <table border="1">
             <tr class="head">
                 <td class="id-head">id</td>
-                <td>city</td>
-                <td>country</td>
+                <td>name</td>
                 <td class="but-head"><span>&nbsp;</span></td>
                 <td class="but-head"><span>&nbsp;</span></td>
             </tr>
-
             <tr class="hidden">
                 <td class="id"></td>
-                <td><input id="city" type="text"></td>
-                <td><input id="country" type="text"></td>
+                <td><input id="name" type="text"></td>
                 <td class="accept">&#10004;</td>
                 <td class="cancel">&#10060;</td>
             </tr>
-<!--            <tr class="subhead">-->
-<!--                <td colspan="4">Country-1</td>-->
-<!--            </tr>-->
-            <tr th:each="c: ${city}">
-                <td class="id" th:text="${c.getId()}"></td>
-                <td class="city" th:text="${c.getCity()}"></td>
-                <td class="country" th:text="${c.getCountry()}"></td>
+            <tr th:each="t: ${types}">
+                <td class="id" th:text="${t.getId()}"></td>
+                <td class="name" th:text="${t.getName()}"></td>
                 <td class="edit">&#9998;</td>
-                <td class="delete" id="cities">&#10060;</td>
+                <td class="delete" id="type">&#10060;</td>
             </tr>
         </table>
         </div>
