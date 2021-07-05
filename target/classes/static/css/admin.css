@@ -1,0 +1,249 @@
+#admin {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    font-size: 22px;
+    padding: 0 30px;
+    box-sizing: border-box;
+}
+
+#admin #sidebar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#admin #sidebar .button {
+    width: 250px;
+    border: 1px solid black;
+    background-color: #c4de95;
+}
+
+#admin #sidebar .button.active {
+    background-color: #e7fdc6;
+}
+
+#admin #sidebar .button a {
+    display: block;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+
+#admin #body {
+    box-sizing: border-box;
+    width: 100%;
+    position: relative;
+}
+
+#admin #body h1 {
+    margin-bottom: 30px;
+}
+
+#admin #body a.first {
+    display: block;
+    margin-bottom: 30px;
+    width: auto;
+}
+
+#admin #body table {
+    width: 100%;
+    overflow-x:scroll;
+}
+
+#admin #body table tr.head, #admin #body table .id-head, #admin #body table .but-head {
+    background-color: #FDD749;
+}
+
+#admin #body table tr.hidden {
+    display: none;
+}
+
+#admin #body table tr.subhead {
+    text-align: center;
+    background-color: #ff6e6e;
+}
+
+#admin #body table a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#admin #body table td {
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
+#admin #body table tr {
+    box-sizing: border-box;
+}
+
+#admin #body table tr.temp {
+    display: none;
+}
+
+#admin #body table tr.edit {
+    background-color: #c6ff85;
+}
+
+#admin #body table input, #admin #body table select {
+    display: block;
+    border: none;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    font-size: inherit;
+    background-color: inherit;
+}
+
+#admin #body table td.cancel, #admin #body table td.accept {
+    cursor: pointer;
+}
+
+#admin #body table td:nth-last-of-type(1), #admin #body table td:nth-last-of-type(2) {
+    cursor: pointer;
+    width: 40px;
+}
+
+#admin #body table td:first-of-type{
+    position: absolute;
+    width: 50px;
+    left: 0;
+    top: auto;
+}
+
+#admin #body table td:last-of-type, #admin #body table td:nth-last-of-type(2){
+    position: absolute;
+    width: 40px;
+    right: 0;
+    top: auto;
+}
+#admin #body table td:nth-last-of-type(2){
+    right: 40px;
+}
+#admin #body .table{
+    width: calc(100vw - 210px);
+    margin-left: 55px;
+    margin-right: 95px;
+    box-sizing: border-box;
+    overflow-y:visible;
+}
+
+#admin #body .table td{
+    border: 1px solid black;
+}
+
+.select-label {
+    border-bottom: 1px solid black;
+    width: 100%;
+    font-size: inherit;
+    padding: 0;
+    background: right 10px url(../images/arrow-list.png) no-repeat;
+    background-size: 10px auto;
+}
+
+.select {
+    display: none;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.select ul {
+    border: 1px solid black;
+    width: 100%;
+    position: absolute;
+    z-index: 990;
+    top: 0;
+    left: 0;
+    display: block;
+    margin: 0;
+    background-color: white;
+    font-size: inherit;
+    padding: 0;
+    overflow: visible;
+}
+
+.select li {
+    width: auto;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.select .li {
+    width: auto;
+    display: inline;
+    padding: 5px 0 0;
+}
+
+.select .li-hover {
+    background-color: #fed849;
+}
+
+.select .li-green {
+    background-color: #c4de95;
+}
+
+.input[type=hidde] {
+    color: black;
+}
+
+#accept-delete {
+    z-index: 999;
+    width: 500px;
+    height: 200px;
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    border: 1px solid;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background-color: white;
+    display: none;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 50px;
+}
+
+#accept-delete .buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#accept-delete .button{
+    border: 1px solid black;
+    height: auto;
+    width: auto;
+    padding: 10px 30px;
+    font-size: larger;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.backdrop {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+html{
+    overflow-x:  hidden;
+}

@@ -1,0 +1,66 @@
+<th:block th:fragment="header">
+    <div class="header__logo big">
+        <a href="/">
+            <img src="/images/logo.png" alt="logo">
+        </a>
+    </div>
+
+    <div class="header__logo small">
+        <a href="/">
+            <img src="/images/logo2.png" alt="logo">
+        </a>
+    </div>
+
+    <div class="header__panel">
+        <div class="header__sign">
+            <a href="/profile"><div class="button" sec:authentication="name" sec:authorize="!hasRole('ADMIN')"></div></a>
+            <a href="/admin/users"><div class="button" sec:authorize="hasRole('ADMIN')">Admin Panel</div></a>
+            <a href="/logout"><div class="button last">Вийти</div></a>
+        </div>
+        <div class="header__nav">
+            <a href="#" id="menu"><img src="/images/nav.png" alt="menu"></a>
+        </div>
+    </div>
+
+
+    <div id="modalMenu">
+        <h1 id="x" class="unselectable"><b>&#10005;</b></h1>
+        <div class="menu">
+            <div class="modal__block">
+                <ul>
+                    <li>
+                        <a href="#">Про нас</a>
+                    </li>
+                    <li>
+                        <a href="#">Магазин</a>
+                    </li>
+                    <li>
+                        <a href="#">Відео</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal__block">
+                <ul>
+                    <li>
+                        Журнал
+                    </li>
+                    <li class="li2 first">
+                        <a href="#">Шукачам</a>
+                    </li>
+                    <li class="li2">
+                        <a href="#">Роботодавцям</a>
+                    </li>
+                    <li class="li2">
+                        <a href="#">Законодавство</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="lang">
+        <span>
+            <a href="#" class="en">en</a> / <a href="#" class="ua">ua</a>
+        </span>
+        </div>
+    </div>
+</th:block>

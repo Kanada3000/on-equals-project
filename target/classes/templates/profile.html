@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="ua">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>OnEquals Profile</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/search.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
+</header>
+<div id="profile-head">
+    <div class="avatar">
+        <div class="out avatarblock"><a href="/logout">Вийти</a></div>
+        <img src="/images/avatar.png">
+    </div>
+    <div class="info">
+        <h1 th:text="${user.getName()}">Максим<br/>Денисенко</h1>
+        <span class="underline"><a th:href="${user.getSite()}" th:text="${user.getSite()}">www.denysenkko.com</a></span>
+        <span>
+            <img src="/images/location.png"><span th:text="${user.getCity().getCountry()}" th:remove="tag"/>, <span
+                th:text="${user.getCity().getCity()}" th:remove="tag"/>
+        </span>
+        <div class="container">
+            <div class="social">
+                <div th:if="${user.getLinkFacebook() != ''}" th:remove="tag">
+                    <a th:href="${user.getLinkFacebook()}"><img src="/images/facebook-f.png"></a>
+                </div>
+                <div th:if="${user.getLinkInstagram() != ''}" th:remove="tag">
+                    <a th:href="${user.getLinkInstagram()}"><img src="/images/instagram.png"></a>
+                </div>
+                <div th:if="${user.getLinkTwitter() != ''}" th:remove="tag">
+                    <a th:href="${user.getLinkTwitter()}"><img src="/images/twitter.png"></a>
+                </div>
+                <div th:if="${user.getLinkLinkedIn() != ''}" th:remove="tag">
+                    <a th:href="${user.getLinkLinkedIn()}"><img src="/images/linkedin-in.png"></a>
+                </div>
+            </div>
+            <div class="out infoblock">
+                <a href="/logout">Вийти</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="profile-body">
+    <span th:text="${user.getDescription()}">
+    </span>
+    <div class="container">
+        <div class="block" th:each="b: ${block}">
+            <div class="text">
+                <span th:text="${b.getCategory().getLongName()}">копірайтинг</span>
+                <span th:text="${b.getType().getName()}">повна зайнятість</span>
+                <span th:text="${b.getSalary()}">22 000 грн</span>
+                <span><span th:text="${b.getCity().getCountry()}" th:remove="tag"/> / <span
+                        th:text="${user.getCity().getCity()}" th:remove="tag"/></span>
+                <div class="hide">
+                    <span class="roll-down">розгорнути ↓</span>
+                    <span class="descript" th:text="${b.getDescription()}">
+                </span>
+                    <span class="roll-up">згорнути ↑</span>
+                </div>
+            </div>
+            <div class="buttons">
+                <a href="#">
+                    <div class="edit">
+                        <img src="/images/edit-vacancy.png">
+                    </div>
+                </a>
+                <a th:href="${'/profile/delete/vacancy/'+ b.getId()}" sec:authorize="hasAnyAuthority('EMPLOYER')">
+                    <div class="delete">
+                        <img src="/images/trash-vacancy.png">
+                    </div>
+                </a>
+                <a th:href="${'/profile/delete/resume/'+ b.getId()}" sec:authorize="hasAnyAuthority('SEEKER','ROLE_ADMIN')">
+                    <div class="delete">
+                        <img src="/images/trash-vacancy.png">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="buttons-container">
+    <div class="buttons-block">
+        <a href="/resume/new" sec:authorize="hasAnyAuthority('SEEKER','ROLE_ADMIN')">
+            <div class="button">
+                Додати ще резюме&nbsp;+
+            </div>
+        </a>
+        <a href="/vacancy/new" sec:authorize="hasAnyAuthority('EMPLOYER')">
+            <div class="button">
+                Додати ще вакансію&nbsp;+
+            </div>
+        </a>
+        <a href="#">
+            <div class="button">
+                Редагувати інформацію
+            </div>
+        </a>
+    </div>
+    <div class="buttons-block">
+        <a href="#">
+            <div class="button green">
+                Приховати сторінку
+            </div>
+        </a>
+        <a href="/profile/delete">
+            <div class="button blue">
+                Видалити акаунт
+            </div>
+        </a>
+    </div>
+</div>
+<div id="likes">
+    <h2>збережені
+        <div th:remove="tag" sec:authorize="hasAnyAuthority('SEEKER','ROLE_ADMIN')">вакансії</div>
+        <div th:remove="tag" sec:authorize="hasAnyAuthority('EMPLOYER')">резюме</div>
+    </h2>
+    <span class="hint">натисніть на сердечко, щоб видалити
+        <div th:remove="tag" sec:authorize="hasAnyAuthority('SEEKER','ROLE_ADMIN')">вакансію</div>
+        <div th:remove="tag" sec:authorize="hasAnyAuthority('EMPLOYER')">резюме</div>
+        зі списку</span>
+    <div id="vacancies">
+        <div class="vacancy" th:each="l: ${likes}">
+            <input id="likesId" type="hidden" name="likeId" th:value="${l.getId()}"/>
+            <div class="text">
+                <h3 th:text="${l.getUser().getName()}">Торговельна мережа “Сільпо”</h3>
+                <ul>
+                    <li th:text="${l.getCategory().getLongName()}">адміністратор/-ка</li>
+                    <li th:text="${l.getType().getName()}">повна зайнятість</li>
+                    <li th:text="${#numbers.formatInteger(l.getSalary(), 3, 'WHITESPACE') + ' грн'}">20 000 грн</li>
+                    <li><span th:text="${l.getCity().getCountry()}" th:remove="tag"></span> / <span
+                            th:text="${l.getCity().getCity()}" th:remove="tag"></span></li>
+                </ul>
+            </div>
+            <div class="hide">
+                <span class="roll-down">розгорнути ↓</span>
+                <span class="descript" th:text="${l.getDescription()}">
+                </span>
+                <span class="roll-up">згорнути ↑</span>
+            </div>
+            <div class="buttons">
+                <div class="mail">
+                    <img src="/images/mail-vacancy.png" alt="mail">
+                </div>
+                <div class="like">
+                    <img src="/images/heart-vacancy.png" alt="like">
+                </div>
+                <div class="eye">
+                    <img src="/images/eye-vacancy.png" alt="eye">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="likeForm" action="/profile/deleteLike" method="POST"></form>
+
+<script src="/script/script.js"></script>
+<script src="/script/script-like.js"></script>
+</body>
+</html>
