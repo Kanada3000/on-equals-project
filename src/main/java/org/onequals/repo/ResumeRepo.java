@@ -17,7 +17,7 @@ public interface ResumeRepo extends JpaRepository<Resume, Long> {
     List<Resume> findByUser(Long id);
 
     @Query("SELECT r FROM Resume r WHERE (" +
-            "r.city.city LIKE %?1% OR " +
+            "(SELECT c.city FROM City c WHERE c MEMBER OF r.city) LIKE %?1% OR " +
             "r.category.longName LIKE %?1% OR " +
             "CONCAT(r.salary, '') LIKE %?1% OR " +
             "r.description LIKE %?1% OR " +
@@ -34,7 +34,7 @@ public interface ResumeRepo extends JpaRepository<Resume, Long> {
     @Query("SELECT r FROM Resume r WHERE r.type.id IN ?1 AND r IN ?2")
     List<Resume> filterByTypeList(List<Long> type, List<Resume> resumes);
 
-    @Query("SELECT r FROM Resume r WHERE r.city.city = ?1 AND r IN ?2")
+    @Query("SELECT r FROM Resume r WHERE ?1 IN (SELECT c.city FROM City c WHERE c MEMBER OF r.city) AND r IN ?2")
     List<Resume> filterByCity(String city, List<Resume> resumes);
 
     @Query("SELECT r FROM Resume r WHERE (r.salary BETWEEN ?1 and ?2) AND r IN ?3")

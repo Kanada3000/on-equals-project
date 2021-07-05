@@ -140,6 +140,20 @@
 #profile-body .container .block .text .hide span {
     border: none;
 }
+#profile-body .container .block .text .hide .descript {
+    color: black;
+    display: none;
+    font-size: 32px;
+    padding-top: 9px;
+}
+#profile-body .container .block .text .hide .roll-up {
+    display: none;
+    cursor: pointer;
+}
+#profile-body .container .block .text .hide .roll-down {
+    display: block;
+    cursor: pointer;
+}
 
 #profile-body .container .block .buttons {
     display: flex;
@@ -156,6 +170,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 100px;
+    cursor: pointer;
 }
 
 #profile-body .container .block .buttons .edit {
@@ -194,6 +209,7 @@
     box-sizing: border-box;
     text-align: center;
     padding: 0 30px;
+    cursor: pointer;
 }
 
 #buttons-container .buttons-block .green {
@@ -306,6 +322,7 @@
     #likes h2 {
         font-size: calc(38px + 2.9vw);
     }
+
 }
 
 @media screen and (max-width: 1400px) {
@@ -330,6 +347,10 @@
         margin-top: -25px;
         width: auto;
         height: auto;
+    }
+
+    .hide {
+        width: calc(-546px + 103.6vw);
     }
 }
 
@@ -373,6 +394,10 @@
         width: calc(31px + 9.1vw);
         height: calc(31px + 9.1vw);
         margin: calc(82px - 5.5vw) 0 0 calc(151px - 11.9vw);
+    }
+
+    .hide {
+        width: 100%;
     }
 }
 
@@ -566,6 +591,7 @@
 
     #vacancies .vacancy .text li {
         font-size: calc(16px + 2.1vw);
+        width: 100%;
     }
 
     #vacancies .vacancy .text .hide {
@@ -577,10 +603,10 @@
         flex-direction: row-reverse;
         flex-wrap: nowrap;
         justify-content: space-between;
-        /*align-items: start;*/
         width: 100%;
         max-width: unset;
         margin-top: 41px;
+        order: 5;
     }
 
     #vacancies .vacancy .buttons div {
@@ -595,6 +621,15 @@
 
     #vacancies .vacancy .buttons .eye img{
         width: 52px;
+    }
+
+    .hide{
+        padding-top: 15px;
+        width: 100%;
+    }
+
+    .hide span.descript{
+        font-size: calc(16px + 2.1vw);
     }
 
 }
@@ -723,7 +758,7 @@
         font-size: calc(14px + 2.5vw);
     }
 
-    #vacancies .vacancy .text .hide {
+    .hide {
         padding-top: 15px;
         font-size: calc(-2px + 5vw);
     }
@@ -743,6 +778,15 @@
 
     #vacancies .vacancy .buttons .eye img{
         width: calc(4px + 10vw);
+    }
+
+    .hide{
+        font-size: calc(-2px + 5vw);
+        width: calc(30px + 81.3vw);
+    }
+
+    .hide span.descript{
+        font-size: calc(14px + 2.5vw);
     }
 }
 

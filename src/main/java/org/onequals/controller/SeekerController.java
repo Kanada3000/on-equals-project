@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -33,34 +35,32 @@ public class SeekerController {
     }
 
     @GetMapping()
-    public String indexPage(Model model, @RequestParam("id") Long id) {
-        model.addAttribute("id", id);
+    public String indexPage(Model model) {
         model.addAttribute("categories", categoryService.getAll());
         model.addAttribute("city", cityService.getAll());
         model.addAttribute("country", cityService.getAllCountry());
         return "reg-finder";
     }
 
-    @PreAuthorize("hasAuthority('USER')")
     @PostMapping()
-    public String createSeeker(@RequestParam Long id,
-                                 @RequestParam String name,
-                                 @RequestParam String category,
-                                 @RequestParam String email,
-                                 @RequestParam String citString,
-                                 @RequestParam String site,
-                                 @RequestParam String linkFacebook,
-                                 @RequestParam String linkInstagram,
-                                 @RequestParam String linkTwitter,
-                                 @RequestParam String linkLinkedIn,
-                                 @RequestParam String description){
-        User user = userService.findById(id).get();
+    public String createSeeker(Principal principal,
+                               @RequestParam String name,
+                               @RequestParam String category,
+                               @RequestParam String email,
+                               @RequestParam List<String> citString,
+                               @RequestParam String site,
+                               @RequestParam String linkFacebook,
+                               @RequestParam String linkInstagram,
+                               @RequestParam String linkTwitter,
+                               @RequestParam String linkLinkedIn,
+                               @RequestParam String description){
+        User user = userService.findUser(principal.getName());
         Seeker seeker = new Seeker();
         seeker.setUser(user);
         seeker.setName(name);
         seeker.setCategory(categoryService.findByName(category));
         seeker.setEmail(email);
-        seeker.setCity(cityService.findByName(citString));
+        cityService.addCities(seeker, cityService.findByNames(citString));
         seeker.setSite(site);
         seeker.setLinkFacebook(linkFacebook);
         seeker.setLinkInstagram(linkInstagram);
@@ -74,7 +74,10 @@ public class SeekerController {
         user.setRoles(roles);
 
         user.setLink(null);
+        userService.updateRole(Role.SEEKER);
         userService.save(user);
+
+
 
         return "redirect:/resume/new";
     }

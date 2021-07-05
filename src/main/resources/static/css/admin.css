@@ -51,6 +51,7 @@
 
 #admin #body table {
     width: 100%;
+    overflow-x:scroll;
 }
 
 #admin #body table tr.head, #admin #body table .id-head, #admin #body table .but-head {
@@ -127,11 +128,10 @@
 }
 #admin #body .table{
     width: calc(100vw - 210px);
-    overflow-x: scroll;
     margin-left: 55px;
     margin-right: 95px;
-    overflow-y: auto;
     box-sizing: border-box;
+    overflow-y:visible;
 }
 
 #admin #body .table td{
@@ -166,6 +166,7 @@
     background-color: white;
     font-size: inherit;
     padding: 0;
+    overflow: visible;
 }
 
 .select li {

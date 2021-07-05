@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -102,7 +103,7 @@ public class AdminController {
     }
 
     @PostMapping("/users/add")
-    public String adminUserAdd(@ModelAttribute() User user, @RequestParam("role")String role) {
+    public String adminUserAdd(@ModelAttribute() User user, @RequestParam("role") String role) {
         user.setPassword(userService.setPassword(user.getPassword()));
         Set<Role> set = new TreeSet<Role>();
         set.add(Role.USER);
@@ -133,28 +134,27 @@ public class AdminController {
     }
 
     @PostMapping("/vacancies/add")
-    public String adminVacanciesAdd(@RequestParam(name="id", required = false) Long id,
-                                    @RequestParam(name="user", required = false) String user,
-                                    @RequestParam(name="type", required = false) String type,
-                                    @RequestParam(name="category", required = false) String category,
-                                    @RequestParam(name="city", required = false) String city,
-                                    @RequestParam(name="salary", required = false) int salary,
-                                    @RequestParam(name="description", required = false) String description) {
+    public String adminVacanciesAdd(@RequestParam(name = "id", required = false) Long id,
+                                    @RequestParam(name = "user", required = false) String user,
+                                    @RequestParam(name = "type", required = false) String type,
+                                    @RequestParam(name = "category", required = false) String category,
+                                    @RequestParam(name = "city", required = false) List<String> city,
+                                    @RequestParam(name = "salary", required = false) int salary,
+                                    @RequestParam(name = "description", required = false) String description) {
         Vacancy vacancy = new Vacancy();
-        if(id != null)
+        if (id != null)
             vacancy.setId(id);
         if (user != null)
             vacancy.setUser(userService.findUser(user));
-        if(type != null)
+        if (type != null)
             vacancy.setType(typeService.findByName(type));
-        if(category != null)
+        if (category != null)
             vacancy.setCategory(categoryService.findByName(category));
-        if(city != null)
-            vacancy.setCity(cityService.findByName(city));
-        System.out.println(salary);
-        if(salary != 0)
+        if (city != null)
+            cityService.addCities(vacancy, cityService.findByNames(city));
+        if (salary != 0)
             vacancy.setSalary(salary);
-        if(description != null)
+        if (description != null)
             vacancy.setDescription(description);
         vacancyService.save(vacancy);
 
@@ -178,27 +178,27 @@ public class AdminController {
     }
 
     @PostMapping("/resumes/add")
-    public String adminResumesAdd(@RequestParam(name="id", required = false) Long id,
-                                    @RequestParam(name="user", required = false) String user,
-                                    @RequestParam(name="type", required = false) String type,
-                                    @RequestParam(name="category", required = false) String category,
-                                    @RequestParam(name="city", required = false) String city,
-                                    @RequestParam(name="salary", required = false) int salary,
-                                    @RequestParam(name="description", required = false) String description) {
+    public String adminResumesAdd(@RequestParam(name = "id", required = false) Long id,
+                                  @RequestParam(name = "user", required = false) String user,
+                                  @RequestParam(name = "type", required = false) String type,
+                                  @RequestParam(name = "category", required = false) String category,
+                                  @RequestParam(name = "city", required = false) List<String> city,
+                                  @RequestParam(name = "salary", required = false) int salary,
+                                  @RequestParam(name = "description", required = false) String description) {
         Resume resume = new Resume();
-        if(id != null)
+        if (id != null)
             resume.setId(id);
         if (user != null)
             resume.setUser(userService.findUser(user));
-        if(type != null)
+        if (type != null)
             resume.setType(typeService.findByName(type));
-        if(category != null)
+        if (category != null)
             resume.setCategory(categoryService.findByName(category));
-        if(city != null)
-            resume.setCity(cityService.findByName(city));
-        if(salary != 0)
+        if (city != null)
+            cityService.addCities(resume, cityService.findByNames(city));
+        if (salary != 0)
             resume.setSalary(salary);
-        if(description != null)
+        if (description != null)
             resume.setDescription(description);
         resumeService.save(resume);
 
@@ -219,20 +219,15 @@ public class AdminController {
 
     @PostMapping("/employer/add")
     public String adminEmployerAdd(@RequestParam(required = false) Long id,
-                               @RequestParam String city,
-                               @RequestParam String country) {
-        City cityObj = new City();
-        if (id != null)
-            cityObj.setId(id);
-        cityObj.setCity(city);
-        cityObj.setCountry(country);
-        cityService.save(cityObj);
+                                   @RequestParam String city,
+                                   @RequestParam String country) {
+
         return "redirect:/admin/employer";
     }
 
     @GetMapping("/employer/delete/{id}")
     public String adminEmployerDelete(@PathVariable("id") long id) {
-        employerService.delete(id);
+
         return "redirect:/admin/employer";
     }
 

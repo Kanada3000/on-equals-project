@@ -28,6 +28,7 @@
     background-color: white;
     font-size: 1.8vw;
     padding: 1vw 0 0;
+    overflow: visible;
 }
 
 .select li {
@@ -55,4 +56,8 @@
 
 .input[type=hidde] {
     color: black;
+}
+
+.list .id{
+    display: none;
 }

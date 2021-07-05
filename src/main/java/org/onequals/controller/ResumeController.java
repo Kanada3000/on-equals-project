@@ -33,7 +33,6 @@ public class ResumeController {
         this.resumeService = resumeService;
     }
 
-    @PreAuthorize("hasAuthority('EMPLOYER') or hasAuthority('ADMIN')")
     @GetMapping("/list")
     public String vacancyList(Principal principal, Model model,
                               @RequestParam(name = "sort", defaultValue = "id") String sort,
@@ -96,7 +95,6 @@ public class ResumeController {
         return "search-list";
     }
 
-    @PreAuthorize("hasAuthority('SEEKER') or hasAuthority('ADMIN')")
     @GetMapping("/new")
     public String addResume(Principal principal, Model model) {
         if (principal != null) {
@@ -109,17 +107,16 @@ public class ResumeController {
         return "resume-finder";
     }
 
-    @PreAuthorize("hasAuthority('SEEKER') or hasAuthority('ADMIN')")
     @PostMapping("/new")
     public String addResume(Principal principal,
                             @RequestParam("category") String cat,
                             @RequestParam("type") String t,
-                            @RequestParam("citString") String cityName,
+                            @RequestParam("citString") List<String> citString,
                             @RequestParam("description") String desc,
                             @RequestParam("salary") int salary) {
         Resume resume = new Resume();
         resume.setUser(userService.findUser(principal.getName()));
-        resume.setCity(cityService.findByName(cityName));
+        cityService.addCities(resume, cityService.findByNames(citString));
         resume.setType(typeService.findByName(t));
         resume.setCategory(categoryService.findByName(cat));
         resume.setDescription(desc);

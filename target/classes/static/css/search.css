@@ -251,6 +251,7 @@
     align-items: center;
     margin-top: 27px;
     margin-right: 30px;
+    cursor: pointer;
 }
 
 #vacancies .vacancy .buttons div img{

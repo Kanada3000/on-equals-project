@@ -100,10 +100,8 @@
                     <td class="password" th:text="${u.getPassword()}"></td>
                     <div th:remove="tag" th:each="r: ${u.getRoles()}">
                         <td class="role" th:if="${r == r.EMPLOYER}">Роботодавець</td>
-                        <!--                <td class="role" th:text="${r}">Роботодавець</td>-->
                         <td class="role" th:if="${r == r.SEEKER}">Шукач</td>
                         <td class="role" th:if="${r == r.ADMIN}">Адміністратор</td>
-                        <!--                <td class="role" th:text="${u.getRoles()}"></td>-->
                     </div>
                     <td class="activated" th:if="${u.getActivated()}">Так</td>
                     <td class="activated" th:unless="${u.getActivated()}">Ні</td>

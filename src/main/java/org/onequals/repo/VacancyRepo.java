@@ -17,12 +17,13 @@ public interface VacancyRepo extends JpaRepository<Vacancy, Long> {
     List<Vacancy> findByUser(Long id);
 
     @Query("SELECT v FROM Vacancy v WHERE (" +
-            "v.city.city LIKE %?1% OR " +
+            "v IN ?2 AND " +
+            "(SELECT c.city FROM City c WHERE c MEMBER OF v.city) LIKE %?1% OR " +
             "v.category.longName LIKE %?1% OR " +
             "CONCAT(v.salary, '') LIKE %?1% OR " +
             "v.description LIKE %?1% OR " +
             "v.type.name LIKE %?1% OR " +
-            "v.user.name LIKE %?1%) AND v IN ?2")
+            "v.user.name LIKE %?1%)")
     List<Vacancy> filterByKey(String key, List<Vacancy> vacancies);
 
     @Query("SELECT v FROM Vacancy v WHERE v.category.longName = ?1 AND v IN ?2")
@@ -34,7 +35,7 @@ public interface VacancyRepo extends JpaRepository<Vacancy, Long> {
     @Query("SELECT v FROM Vacancy v WHERE v.type.id IN ?1 AND v IN ?2")
     List<Vacancy> filterByTypeList(List<Long> type, List<Vacancy> vacancy);
 
-    @Query("SELECT v FROM Vacancy v WHERE v.city.city = ?1 AND v IN ?2")
+    @Query("SELECT v FROM Vacancy v WHERE ?1 IN (SELECT c.city FROM City c WHERE c MEMBER OF v.city) AND v IN ?2")
     List<Vacancy> filterByCity(String city, List<Vacancy> vacancy);
 
     @Query("SELECT v FROM Vacancy v WHERE (v.salary BETWEEN ?1 and ?2) AND v IN ?3")

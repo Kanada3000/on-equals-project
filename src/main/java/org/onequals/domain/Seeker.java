@@ -1,6 +1,7 @@
 package org.onequals.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "seeker")
@@ -26,16 +27,16 @@ public class Seeker {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "city_id")
-    private City city;
+    @ManyToMany
+    @JoinTable(name = "city_seeker")
+    private Set<City> city;
 
     public Seeker() {
     }
 
     public Seeker(Long id, User user, String name, String email, String site, String linkFacebook,
-                  String linkInstagram, String linkTwitter, String linkLinkedIn,
-                  String description, Category category, City city) {
+                  String linkInstagram, String linkTwitter, String linkLinkedIn, String description,
+                  Category category, Set<City> city) {
         this.id = id;
         this.user = user;
         this.name = name;
@@ -130,11 +131,11 @@ public class Seeker {
         this.category = category;
     }
 
-    public City getCity() {
+    public Set<City> getCity() {
         return city;
     }
 
-    public void setCity(City city) {
+    public void setCity(Set<City> city) {
         this.city = city;
     }
 

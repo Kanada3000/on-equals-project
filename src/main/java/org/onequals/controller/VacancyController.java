@@ -98,7 +98,6 @@ public class VacancyController {
         return "search-list";
     }
 
-    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     @GetMapping("/new")
     public String addVacancy(Principal principal, Model model) {
         if (principal != null) {
@@ -111,17 +110,17 @@ public class VacancyController {
         return "vacancy";
     }
 
-    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN')")
     @PostMapping("/new")
     public String addVacancy(Principal principal,
                              @RequestParam("category") String cat,
                              @RequestParam("type") String t,
-                             @RequestParam("citString") String cityName,
+                             @RequestParam("citString") List<String> cities,
                              @RequestParam("description") String desc,
                              @RequestParam("salary") int salary) {
         Vacancy vacancy = new Vacancy();
         vacancy.setUser(userService.findUser(principal.getName()));
-        vacancy.setCity(cityService.findByName(cityName));
+        List<Long> cityId = cityService.findByNames(cities);
+        cityService.addCities(vacancy, cityId);
         vacancy.setType(typeService.findByName(t));
         vacancy.setCategory(categoryService.findByName(cat));
         vacancy.setDescription(desc);

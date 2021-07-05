@@ -22,9 +22,9 @@ public class Resume {
     @JoinColumn(name="user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name="city_id")
-    private City city;
+    @ManyToMany
+    @JoinTable(name = "city_resume")
+    private Set<City> city;
 
     @ManyToMany(mappedBy = "likedResume")
     private Set<User> likes;
@@ -35,12 +35,14 @@ public class Resume {
     public Resume(){
     }
 
-    public Resume(Long id, Category category, Type type, User user, City city, int salary, String description) {
+    public Resume(Long id, Category category, Type type, User user, Set<City> city, Set<User> likes,
+                  int salary, String description) {
         this.id = id;
         this.category = category;
         this.type = type;
         this.user = user;
         this.city = city;
+        this.likes = likes;
         this.salary = salary;
         this.description = description;
     }
@@ -77,12 +79,20 @@ public class Resume {
         this.user = user;
     }
 
-    public City getCity() {
+    public Set<City> getCity() {
         return city;
     }
 
-    public void setCity(City city) {
+    public void setCity(Set<City> city) {
         this.city = city;
+    }
+
+    public Set<User> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Set<User> likes) {
+        this.likes = likes;
     }
 
     public int getSalary() {

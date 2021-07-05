@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -33,21 +35,19 @@ public class EmployerController {
     }
 
     @GetMapping()
-    public String indexPage(Model model, @RequestParam("id") Long id) {
-        model.addAttribute("id", id);
+    public String indexPage(Model model) {
         model.addAttribute("categories", categoryService.getAll());
         model.addAttribute("city", cityService.getAll());
         model.addAttribute("country", cityService.getAllCountry());
         return "reg-employer";
     }
 
-    @PreAuthorize("hasAuthority('USER')")
     @PostMapping()
-    public String createEmployer(@RequestParam Long id,
+    public String createEmployer(Principal principal,
                                  @RequestParam String name,
                                  @RequestParam String category,
                                  @RequestParam String email,
-                                 @RequestParam String citString,
+                                 @RequestParam List<String> citString,
                                  @RequestParam String site,
                                  @RequestParam String linkFacebook,
                                  @RequestParam String linkInstagram,
@@ -57,13 +57,13 @@ public class EmployerController {
                                  @RequestParam int quantity,
                                  @RequestParam int size,
                                  @RequestParam String description){
-        User user = userService.findById(id).get();
+        User user = userService.findUser(principal.getName());
         Employer employer = new Employer();
         employer.setUser(user);
         employer.setName(name);
         employer.setCategory(categoryService.findByName(category));
         employer.setEmail(email);
-        employer.setCity(cityService.findByName(citString));
+        cityService.addCities(employer, cityService.findByNames(citString));
         employer.setSite(site);
         employer.setLinkFacebook(linkFacebook);
         employer.setLinkInstagram(linkInstagram);
@@ -80,6 +80,7 @@ public class EmployerController {
         user.setRoles(roles);
 
         user.setLink(null);
+        userService.updateRole(Role.EMPLOYER);
         userService.save(user);
 
         return "redirect:/vacancy/new";

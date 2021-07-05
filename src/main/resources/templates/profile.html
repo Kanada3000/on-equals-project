@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="ua">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -62,44 +64,75 @@
                 <span><span th:text="${b.getCity().getCountry()}" th:remove="tag"/> / <span
                         th:text="${user.getCity().getCity()}" th:remove="tag"/></span>
                 <div class="hide">
-                    <span>розгорнути ↓</span>
+                    <span class="roll-down">розгорнути ↓</span>
+                    <span class="descript" th:text="${b.getDescription()}">
+                </span>
+                    <span class="roll-up">згорнути ↑</span>
                 </div>
             </div>
             <div class="buttons">
-                <div class="edit">
-                    <img src="/images/edit-vacancy.png">
-                </div>
-                <div class="delete">
-                    <img src="/images/trash-vacancy.png">
-                </div>
+                <a href="#">
+                    <div class="edit">
+                        <img src="/images/edit-vacancy.png">
+                    </div>
+                </a>
+                <a th:href="${'/profile/delete/vacancy/'+ b.getId()}" sec:authorize="hasAnyAuthority('EMPLOYER')">
+                    <div class="delete">
+                        <img src="/images/trash-vacancy.png">
+                    </div>
+                </a>
+                <a th:href="${'/profile/delete/resume/'+ b.getId()}" sec:authorize="hasAnyAuthority('SEEKER','ROLE_ADMIN')">
+                    <div class="delete">
+                        <img src="/images/trash-vacancy.png">
+                    </div>
+                </a>
             </div>
         </div>
     </div>
 </div>
 <div id="buttons-container">
     <div class="buttons-block">
-        <div class="button">
-            Додати ще резюме&nbsp;+
-        </div>
-        <div class="button">
-            Редагувати інформацію
-        </div>
+        <a href="/resume/new" sec:authorize="hasAnyAuthority('SEEKER','ROLE_ADMIN')">
+            <div class="button">
+                Додати ще резюме&nbsp;+
+            </div>
+        </a>
+        <a href="/vacancy/new" sec:authorize="hasAnyAuthority('EMPLOYER')">
+            <div class="button">
+                Додати ще вакансію&nbsp;+
+            </div>
+        </a>
+        <a href="#">
+            <div class="button">
+                Редагувати інформацію
+            </div>
+        </a>
     </div>
     <div class="buttons-block">
-        <div class="button green">
-            Приховати сторінку
-        </div>
-        <div class="button blue">
-            Видалити акаунт
-        </div>
+        <a href="#">
+            <div class="button green">
+                Приховати сторінку
+            </div>
+        </a>
+        <a href="/profile/delete">
+            <div class="button blue">
+                Видалити акаунт
+            </div>
+        </a>
     </div>
 </div>
 <div id="likes">
-    <h2>збережені вакансії</h2>
-    <span class="hint">натисніть на сердечко, щоб видалити вакансію зі списку</span>
+    <h2>збережені
+        <div th:remove="tag" sec:authorize="hasAnyAuthority('SEEKER','ROLE_ADMIN')">вакансії</div>
+        <div th:remove="tag" sec:authorize="hasAnyAuthority('EMPLOYER')">резюме</div>
+    </h2>
+    <span class="hint">натисніть на сердечко, щоб видалити
+        <div th:remove="tag" sec:authorize="hasAnyAuthority('SEEKER','ROLE_ADMIN')">вакансію</div>
+        <div th:remove="tag" sec:authorize="hasAnyAuthority('EMPLOYER')">резюме</div>
+        зі списку</span>
     <div id="vacancies">
         <div class="vacancy" th:each="l: ${likes}">
-            <input id="likesId" type="hidden" name="likeId" th:value="${l.getId()}">
+            <input id="likesId" type="hidden" name="likeId" th:value="${l.getId()}"/>
             <div class="text">
                 <h3 th:text="${l.getUser().getName()}">Торговельна мережа “Сільпо”</h3>
                 <ul>
@@ -127,7 +160,7 @@
                     <img src="/images/eye-vacancy.png" alt="eye">
                 </div>
             </div>
-        </input>
+        </div>
     </div>
 </div>
 

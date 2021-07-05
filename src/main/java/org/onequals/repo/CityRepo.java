@@ -1,11 +1,12 @@
 package org.onequals.repo;
 
-import org.onequals.domain.City;
+import org.onequals.domain.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Set;
 
 public interface CityRepo extends JpaRepository<City, Long> {
 
@@ -18,19 +19,21 @@ public interface CityRepo extends JpaRepository<City, Long> {
     @Query("SELECT DISTINCT (c.country) FROM City c")
     List<String> findAllCountries();
 
-    @Modifying
-    @Query("UPDATE Vacancy v SET v.city = (SELECT c FROM City c WHERE c.id = 1) WHERE v.city.id = ?1")
-    void deleteFromVacancy(Long id);
+    @Query("SELECT c.id FROM City c WHERE c.city IN ?1")
+    List<Long> findByCities(List<String> names);
 
-    @Modifying
-    @Query("UPDATE Resume r SET r.city = (SELECT c FROM City c WHERE c.id = 1) WHERE r.city.id = ?1")
-    void deleteFromResume(Long id);
+    @Query("SELECT v FROM Vacancy v WHERE ?1 MEMBER OF v.city")
+    List<Vacancy> findInVacancy (City city);
 
-    @Modifying
-    @Query("UPDATE Employer e SET e.city = (SELECT c FROM City c WHERE c.id = 1) WHERE e.city.id = ?1")
-    void deleteFromEmployer(Long id);
+    @Query("SELECT r FROM Resume r WHERE ?1 MEMBER OF r.city")
+    List<Resume> findInResume (City city);
 
-    @Modifying
-    @Query("UPDATE Seeker s SET s.city = (SELECT c FROM City c WHERE c.id = 1) WHERE s.city.id = ?1")
-    void deleteFromSeeker(Long id);
+    @Query("SELECT s FROM Seeker s WHERE ?1 MEMBER OF s.city")
+    List<Seeker> findInSeeker (City city);
+
+    @Query("SELECT e FROM Employer e WHERE ?1 MEMBER OF e.city")
+    List<Employer> findInEmployer (City city);
+
+    @Query("SELECT c FROM City c WHERE c.city = 'Undefined'")
+    Set<City> findUndefined();
 }

@@ -1,20 +1,18 @@
 package org.onequals.config;
 
+import org.onequals.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.onequals.services.UserService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 
 @Configuration
@@ -28,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private PasswordEncoder passwordEncoder;
 
     @Bean
-    public PasswordEncoder getPasswordEncoder(){
+    public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder(8);
     }
 
@@ -36,6 +34,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/resume/list").hasAnyAuthority("EMPLOYER", "ROLE_ADMIN")
+                .antMatchers(HttpMethod.GET, "/seeker").hasAnyAuthority("USER")
+                .antMatchers(HttpMethod.POST, "/seeker").hasAnyAuthority("USER")
+                .antMatchers(HttpMethod.GET, "/employer").hasAnyAuthority("USER")
+                .antMatchers(HttpMethod.POST, "/employer").hasAnyAuthority("USER")
+                .antMatchers(HttpMethod.GET, "/resume/new").hasAnyAuthority("SEEKER", "ROLE_ADMIN")
+                .antMatchers(HttpMethod.POST, "/resume/new").hasAnyAuthority("SEEKER", "ROLE_ADMIN")
+                .antMatchers(HttpMethod.GET, "/vacancy/new").hasAnyAuthority("EMPLOYER", "ROLE_ADMIN")
+                .antMatchers(HttpMethod.POST, "/vacancy/new").hasAnyAuthority("EMPLOYER", "ROLE_ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()

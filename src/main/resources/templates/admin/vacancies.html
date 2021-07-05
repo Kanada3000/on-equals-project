@@ -58,7 +58,6 @@
                 <td>type</td>
                 <td>category</td>
                 <td>city</td>
-                <td>country</td>
                 <td>salary</td>
                 <td>description</td>
                 <td class="but-head"><span>&nbsp;</span></td>
@@ -114,7 +113,6 @@
                         </div>
                     </div>
                 </td>
-                <td></td>
                 <td><input autocomplete="off" id="salary" type="text"></td>
                 <td><input id="description" type="text"></td>
                 <td class="accept">&#10004;</td>
@@ -125,8 +123,11 @@
                 <td class="user" th:text="${v.getUser().getName()}"></td>
                 <td class="type" th:text="${v.getType().getName()}"></td>
                 <td class="category" th:text="${v.getCategory().getLongName()}"></td>
-                <td class="city" th:text="${v.getCity().getCity()}"></td>
-                <td class="country" th:text="${v.getCity().getCountry()}"></td>
+                <td class="city">
+                    <div th:each="c: ${r.getCity()}">
+                        <div th:remove="tag" th:text="${c.getCity()}"></div>
+                    </div>
+                </td>
                 <td class="salary" th:text="${v.getSalary()}"></td>
                 <td class="description" th:text="${v.getDescription()}">1000 знаків</td>
                 <td class="edit">&#9998;</td>

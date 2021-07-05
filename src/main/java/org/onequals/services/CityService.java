@@ -1,48 +1,136 @@
 package org.onequals.services;
 
-import org.onequals.domain.City;
+import org.onequals.domain.*;
 import org.onequals.repo.CityRepo;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 @Service
 public class CityService {
     private final CityRepo cityRepo;
+    private final VacancyService vacancyService;
+    private final ResumeService resumeService;
+    private final SeekerService seekerService;
+    private final EmployerService employerService;
 
-    public CityService(CityRepo cityRepo) {
+    public CityService(CityRepo cityRepo, VacancyService vacancyService, ResumeService resumeService, SeekerService seekerService, EmployerService employerService) {
         this.cityRepo = cityRepo;
+        this.vacancyService = vacancyService;
+        this.resumeService = resumeService;
+        this.seekerService = seekerService;
+        this.employerService = employerService;
     }
 
     @Transactional
-    public List<City> getAll(){
+    public List<City> getAll() {
         return cityRepo.findAll();
     }
 
     @Transactional
-    public City findByName(String name){
+    public City findByName(String name) {
         return cityRepo.findCity(name);
     }
 
     @Transactional
-    public void save(City city){
+    public void save(City city) {
         cityRepo.save(city);
     }
 
     @Transactional
-    public void delete(Long id){
-        cityRepo.deleteFromVacancy(id);
-        cityRepo.deleteFromResume(id);
-        cityRepo.deleteFromEmployer(id);
-        cityRepo.deleteFromSeeker(id);
+    public void delete(Long id) {
+        City city = cityRepo.findById(id).get();
+        List<Vacancy> vacancies = cityRepo.findInVacancy(city);
+        List<Resume> resumes = cityRepo.findInResume(city);
+        List<Employer> employers = cityRepo.findInEmployer(city);
+        List<Seeker> seekers = cityRepo.findInSeeker(city);
+
+        if (!vacancies.isEmpty())
+            for (Vacancy v : vacancies) {
+                v.getCity().remove(city);
+                if (v.getCity().isEmpty()) {
+                    v.setCity(cityRepo.findUndefined());
+                }
+            }
+        if (!resumes.isEmpty())
+            for (Resume r : resumes) {
+                r.getCity().remove(city);
+                if (r.getCity().isEmpty()) {
+                    r.setCity(cityRepo.findUndefined());
+                }
+            }
+        if (!employers.isEmpty())
+            for (Employer e : employers) {
+                e.getCity().remove(city);
+                if (e.getCity().isEmpty()) {
+                    e.setCity(cityRepo.findUndefined());
+                }
+            }
+        if (!seekers.isEmpty())
+            for (Seeker s : seekers) {
+                s.getCity().remove(city);
+                if (s.getCity().isEmpty()) {
+                    s.setCity(cityRepo.findUndefined());
+                }
+            }
         cityRepo.deleteById(id);
     }
 
     @Transactional
-    public List<String> getAllCountry(){
+    public List<Long> findByNames(List<String> names) {
+        return cityRepo.findByCities(names);
+    }
+
+    @Transactional
+    public void addCities(Object o, List<Long> id) {
+        if (o instanceof Vacancy) {
+            Set<City> cities = ((Vacancy) o).getCity();
+            Set<City> newCities = new HashSet<>(cityRepo.findAllById(id));
+            if (cities != null) {
+                cities.addAll(newCities);
+            } else {
+                cities = newCities;
+            }
+            ((Vacancy) o).setCity(cities);
+            vacancyService.save((Vacancy) o);
+        } else if (o instanceof Resume) {
+            Set<City> cities = ((Resume) o).getCity();
+            Set<City> newCities = new HashSet<>(cityRepo.findAllById(id));
+            if (cities != null) {
+                cities.addAll(newCities);
+            } else {
+                cities = newCities;
+            }
+            ((Resume) o).setCity(cities);
+            resumeService.save((Resume) o);
+        } else if (o instanceof Employer) {
+            Set<City> cities = ((Employer) o).getCity();
+            Set<City> newCities = new HashSet<>(cityRepo.findAllById(id));
+            if (cities != null) {
+                cities.addAll(newCities);
+            } else {
+                cities = newCities;
+            }
+            ((Employer) o).setCity(cities);
+            employerService.save((Employer) o);
+        } else if (o instanceof Seeker) {
+            Set<City> cities = ((Seeker) o).getCity();
+            Set<City> newCities = new HashSet<>(cityRepo.findAllById(id));
+            if (cities != null) {
+                cities.addAll(newCities);
+            } else {
+                cities = newCities;
+            }
+            ((Seeker) o).setCity(cities);
+            seekerService.save((Seeker) o);
+        }
+    }
+
+    @Transactional
+    public List<String> getAllCountry() {
         return cityRepo.findAllCountries();
     }
 }

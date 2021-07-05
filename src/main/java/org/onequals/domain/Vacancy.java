@@ -26,9 +26,9 @@ public class Vacancy{
     @JoinColumn(name="user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name="city_id")
-    private City city;
+    @ManyToMany
+    @JoinTable(name = "city_vacancy")
+    private Set<City> city;
 
     private int salary = 20000;
     private String description;
@@ -39,7 +39,7 @@ public class Vacancy{
     public Vacancy(){
     }
 
-    public Vacancy(Long id, Category category, Type type, User user, City city, int salary, String description, Set<User> likes) {
+    public Vacancy(Long id, Category category, Type type, User user, Set<City> city, int salary, String description, Set<User> likes) {
         this.id = id;
         this.category = category;
         this.type = type;
@@ -82,11 +82,11 @@ public class Vacancy{
         this.user = user;
     }
 
-    public City getCity() {
+    public Set<City> getCity() {
         return city;
     }
 
-    public void setCity(City city) {
+    public void setCity(Set<City> city) {
         this.city = city;
     }
 

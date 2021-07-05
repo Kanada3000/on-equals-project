@@ -1,7 +1,16 @@
 package org.onequals.services;
 
-import org.onequals.domain.*;
-import org.onequals.repo.*;
+import org.onequals.domain.Resume;
+import org.onequals.domain.Role;
+import org.onequals.domain.User;
+import org.onequals.domain.Vacancy;
+import org.onequals.repo.ResumeRepo;
+import org.onequals.repo.UserRepo;
+import org.onequals.repo.VacancyRepo;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,19 +23,23 @@ import java.util.*;
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepo userRepo;
-    private final SeekerRepo seekerRepo;
-    private final EmployerRepo employerRepo;
     private final VacancyRepo vacancyRepo;
     private final PasswordEncoder passwordEncoder;
     private final ResumeRepo resumeRepo;
+    private final VacancyService vacancyService;
+    private final ResumeService resumeService;
+    private final SeekerService seekerService;
+    private final EmployerService employerService;
 
-    public UserService(UserRepo userRepo, SeekerRepo seekerRepo, EmployerRepo employerRepo, VacancyRepo vacancyRepo, PasswordEncoder passwordEncoder, ResumeRepo resumeRepo) {
+    public UserService(UserRepo userRepo, VacancyRepo vacancyRepo, PasswordEncoder passwordEncoder, ResumeRepo resumeRepo, VacancyService vacancyService, ResumeService resumeService, SeekerService seekerService, EmployerService employerService) {
         this.userRepo = userRepo;
-        this.seekerRepo = seekerRepo;
-        this.employerRepo = employerRepo;
         this.vacancyRepo = vacancyRepo;
         this.passwordEncoder = passwordEncoder;
         this.resumeRepo = resumeRepo;
+        this.vacancyService = vacancyService;
+        this.resumeService = resumeService;
+        this.seekerService = seekerService;
+        this.employerService = employerService;
     }
 
     @Transactional
@@ -57,15 +70,19 @@ public class UserService implements UserDetailsService {
     @Transactional
     public void delete(Long id) {
         User user = userRepo.findById(id).get();
-//        if(user.getUserType() == UserType.SEEKER){
-//            Seeker seeker = seekerRepo.findByUser(user);
-//            seekerRepo.delete(seeker);
-//        }else if(user.getUserType() == UserType.EMPLOYER){
-//            Employer employer = employerRepo.findEmployerByUser(user);
-//            employerRepo.delete(employer);
-//        }
-        List<Vacancy> vacancy = vacancyRepo.findByUser(id);
-        vacancyRepo.deleteAll(vacancy);
+        if (user.getRoles().contains(Role.EMPLOYER)) {
+            List<Vacancy> vacancies = vacancyRepo.findByUser(id);
+            for (Vacancy v : vacancies) {
+                vacancyService.delete(v.getId());
+            }
+            employerService.delete(employerService.findByUser(user).getId());
+        } else if (user.getRoles().contains(Role.SEEKER)) {
+            List<Resume> resumes = resumeRepo.findByUser(id);
+            for (Resume r : resumes) {
+                resumeService.delete(r.getId());
+            }
+            seekerService.delete(seekerService.findByUser(user).getId());
+        }
         userRepo.deleteById(id);
     }
 
@@ -123,10 +140,35 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public void activatedAdmin(){
+    public void activatedAdmin() {
         User user = userRepo.findByUsername("adminLog");
         user.setActivated(true);
         save(user);
+    }
+
+    @Transactional
+    public void updateRole(Role role){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
+        updatedAuthorities.add(role);
+
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), updatedAuthorities);
+
+        SecurityContextHolder.getContext().setAuthentication(newAuth);
+    }
+
+    @Transactional
+    public void auth(User user){
+        Set<Role> privileges = user.getRoles();
+
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user, null, privileges);
+        SecurityContextHolder.getContext().setAuthentication(token);
+    }
+
+    @Transactional
+    public void clearSession(){
+        SecurityContextHolder.getContext().setAuthentication(null);
     }
 
     @Override

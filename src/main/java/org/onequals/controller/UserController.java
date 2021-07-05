@@ -6,10 +6,7 @@ import org.onequals.services.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -36,6 +33,9 @@ public class UserController {
     @GetMapping
     public String profilePage(Principal principal, Model model){
         User user = userService.findUser(principal.getName());
+        if(!user.getRoles().contains(Role.EMPLOYER) && !user.getRoles().contains(Role.SEEKER)){
+            return "redirect:/choose";
+        }
         if (user.getRoles().contains(Role.EMPLOYER)){
             model.addAttribute("user", employerService.findByUser(user));
             model.addAttribute("likes", user.getLikedResume());
@@ -46,6 +46,26 @@ public class UserController {
             model.addAttribute("block", resumeService.findByUser(user));
         }
         return "profile";
+    }
+
+    @GetMapping("/delete")
+    public String profileDelete (Principal principal){
+        User user = userService.findUser(principal.getName());
+        userService.delete(user.getId());
+        userService.clearSession();
+        return "redirect:/";
+    }
+
+    @GetMapping("/delete/vacancy/{id}")
+    public String deleteVacancy(@PathVariable Long id){
+        vacancyService.delete(id);
+        return "redirect:/profile";
+    }
+
+    @GetMapping("/delete/resume/{id}")
+    public String deleteResume(@PathVariable Long id){
+        resumeService.delete(id);
+        return "redirect:/profile";
     }
 
     @PostMapping("/deleteLike")

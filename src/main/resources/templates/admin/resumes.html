@@ -58,7 +58,6 @@
                 <td>type</td>
                 <td>category</td>
                 <td>city</td>
-                <td>country</td>
                 <td>salary</td>
                 <td>description</td>
                 <td class="but-head"><span>&nbsp;</span></td>
@@ -102,7 +101,7 @@
                         </div>
                     </div>
                 </td>
-                <td>
+                <td class="cityDiv">
                     <div class="list" id="cityList">
                         <input autocomplete="off" id="city" type="text" class="select-label">
                         <div class="select green" id="city-div">
@@ -114,7 +113,6 @@
                         </div>
                     </div>
                 </td>
-                <td></td>
                 <td><input autocomplete="off" id="salary" type="text"></td>
                 <td><input id="description" type="text"></td>
                 <td class="accept">&#10004;</td>
@@ -125,8 +123,11 @@
                 <td class="user" th:text="${r.getUser().getName()}"></td>
                 <td class="type" th:text="${r.getType().getName()}"></td>
                 <td class="category" th:text="${r.getCategory().getLongName()}"></td>
-                <td class="city" th:text="${r.getCity().getCity()}"></td>
-                <td class="country" th:text="${r.getCity().getCountry()}"></td>
+                <td class="city">
+                    <div th:each="c: ${r.getCity()}">
+                        <div th:remove="tag" th:text="${c.getCity()}"></div>
+                    </div>
+                </td>
                 <td class="salary" th:text="${r.getSalary()}"></td>
                 <td class="description" th:text="${r.getDescription()}">1000 знаків</td>
                 <td class="edit">&#9998;</td>
