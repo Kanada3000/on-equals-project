@@ -148,7 +148,7 @@
                     <li th:text="${v.getType().getName()}"></li>
                     <li th:text="${#numbers.formatInteger(v.getSalary(), 3, 'WHITESPACE') + ' грн'}"></li>
                     <li th:each="c, index: ${v.getCity()}">
-                        <span th:if="${index == 0}" th:text="${c.getCountry()}" th:remove="tag"></span>
+                        <span th:if="${index.index == 0}" th:text="${c.getCountry()}" th:remove="tag"></span>
                         <span th:text="${' / '+ c.getCity()}" th:remove="tag"></span>
                     </li>
                 </ul>
