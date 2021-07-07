@@ -27,8 +27,11 @@
         <h1 th:text="${user.getName()}">Максим<br/>Денисенко</h1>
         <span class="underline"><a th:href="${user.getSite()}" th:text="${user.getSite()}">www.denysenkko.com</a></span>
         <span>
-            <img src="/images/location.png"><span th:text="${user.getCity().getCountry()}" th:remove="tag"/>, <span
-                th:text="${user.getCity().getCity()}" th:remove="tag"/>
+            <img src="/images/location.png">
+            <span th:each="c, index: ${user.getCity()}" th:remove="tag">
+                        <span th:if="${index.index == 0}" th:text="${c.getCountry()}" th:remove="tag"></span>
+                        <span th:text="${' / '+ c.getCity()}" th:remove="tag"></span>
+                </span>
         </span>
         <div class="container">
             <div class="social">
@@ -61,8 +64,10 @@
                 <span th:text="${b.getCategory().getLongName()}">копірайтинг</span>
                 <span th:text="${b.getType().getName()}">повна зайнятість</span>
                 <span th:text="${b.getSalary()}">22 000 грн</span>
-                <span><span th:text="${b.getCity().getCountry()}" th:remove="tag"/> / <span
-                        th:text="${user.getCity().getCity()}" th:remove="tag"/></span>
+                <span th:each="c, index: ${b.getCity()}">
+                        <span th:if="${index.index == 0}" th:text="${c.getCountry()}" th:remove="tag"></span>
+                        <span th:text="${' / '+ c.getCity()}" th:remove="tag"></span>
+                </span>
                 <div class="hide">
                     <span class="roll-down">розгорнути ↓</span>
                     <span class="descript" th:text="${b.getDescription()}">
@@ -139,8 +144,10 @@
                     <li th:text="${l.getCategory().getLongName()}">адміністратор/-ка</li>
                     <li th:text="${l.getType().getName()}">повна зайнятість</li>
                     <li th:text="${#numbers.formatInteger(l.getSalary(), 3, 'WHITESPACE') + ' грн'}">20 000 грн</li>
-                    <li><span th:text="${l.getCity().getCountry()}" th:remove="tag"></span> / <span
-                            th:text="${l.getCity().getCity()}" th:remove="tag"></span></li>
+                    <li th:each="c, index: ${l.getCity()}">
+                        <span th:if="${index.index == 0}" th:text="${c.getCountry()}" th:remove="tag"></span>
+                        <span th:text="${' / '+ c.getCity()}" th:remove="tag"></span>
+                    </li>
                 </ul>
             </div>
             <div class="hide">
@@ -164,7 +171,7 @@
     </div>
 </div>
 
-<form id="likeForm" action="/profile/deleteLike" method="POST"></form>
+<form id="likeForm" th:action="@{/profile/deleteLike}" method="POST"></form>
 
 <script src="/script/script.js"></script>
 <script src="/script/script-like.js"></script>

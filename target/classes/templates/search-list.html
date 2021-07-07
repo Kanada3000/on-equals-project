@@ -147,9 +147,10 @@
                     <li th:text="${v.getCategory().getLongName()}"></li>
                     <li th:text="${v.getType().getName()}"></li>
                     <li th:text="${#numbers.formatInteger(v.getSalary(), 3, 'WHITESPACE') + ' грн'}"></li>
-                    <li><span th:text="${v.getCity().getCountry()}" th:remove="tag"></span> / <span
-                            th:text="${v.getCity().getCity()}"
-                            th:remove="tag"></span></li>
+                    <li th:each="c, index: ${v.getCity()}">
+                        <span th:if="${index == 0}" th:text="${c.getCountry()}" th:remove="tag"></span>
+                        <span th:text="${' / '+ c.getCity()}" th:remove="tag"></span>
+                    </li>
                 </ul>
             </div>
             <div class="hide">
@@ -159,9 +160,11 @@
                 <span class="roll-up">згорнути ↑</span>
             </div>
             <div class="buttons" sec:authorize="isAuthenticated()">
-                <div class="mail">
-                    <img src="/images/mail-vacancy.png" alt="mail">
-                </div>
+                <a th:href="${'mailto:'+v.getUser().getId()}">
+                    <div class="mail">
+                        <img src="/images/mail-vacancy.png" alt="mail">
+                    </div>
+                </a>
                 <div class="heart">
                     <img src="/images/heart-vacancy.png" alt="like">
                 </div>

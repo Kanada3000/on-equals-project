@@ -31,6 +31,11 @@ public class CityService {
     }
 
     @Transactional
+    public List<City> getAllAll() {
+        return cityRepo.findAllAll();
+    }
+
+    @Transactional
     public City findByName(String name) {
         return cityRepo.findCity(name);
     }

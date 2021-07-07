@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>OnEquals Admin Users</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
+</header>
+
+<form id="form" th:action="@{/admin/seeker/add}" method="post">
+</form>
+<input id='id' type='hidden' name='id' form='form'>
+
+<div id="admin">
+    <div id="sidebar">
+        <div class="button">
+            <a href="/admin/users">Користувачі</a>
+        </div>
+        <div class="button">
+            <a href="/admin/vacancies">Вакансії</a>
+        </div>
+        <div class="button">
+            <a href="/admin/resumes">Резюме</a>
+        </div>
+        <div class="button">
+            <a href="/admin/cities">Країни та міста</a>
+        </div>
+        <div class="button">
+            <a href="/admin/category">Категорії</a>
+        </div>
+        <div class="button">
+            <a href="/admin/type">Тип зайнятості</a>
+        </div>
+        <div class="button">
+            <a href="/admin/employer">Роботодавці</a>
+        </div>
+        <div class="button active">
+            <a>Шукачі</a>
+        </div>
+    </div>
+    <div id="body">
+        <h1>Шукачі</h1>
+        <a href="#" class="first">Додати нового шукача &#10133;</a>
+        <div class="table">
+            <table border="1">
+                <tr class="head">
+                    <td class="id-head">id</td>
+                    <td>username</td>
+                    <td>name</td>
+                    <td>email</td>
+                    <td>category</td>
+                    <td>city</td>
+                    <td>site</td>
+                    <td>description</td>
+                    <td>facebook</td>
+                    <td>instagram</td>
+                    <td>linkedIn</td>
+                    <td>twitter</td>
+                    <td class="but-head"><span>&nbsp;</span></td>
+                    <td class="but-head"><span>&nbsp;</span></td>
+                </tr>
+
+                <tr class="hidden">
+                    <td class="id"></td>
+                    <td>
+                        <div class="list" id="userList">
+                            <input autocomplete="off" id="user" type="text" class="select-label" required>
+                            <div class="select green" id="user-div">
+                                <ul>
+                                    <li th:each="u: ${user}">
+                                        <div class="li" th:text="${u.getUsername()}"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td><input id="name" type="text" required></td>
+                    <td><input id="email" type="text" required></td>
+                    <td>
+                        <div class="list" id="categoryList">
+                            <input autocomplete="off" id="category" type="text" class="select-label" required>
+                            <div class="select green" id="category-div">
+                                <ul>
+                                    <li th:each="c: ${category}">
+                                        <div class="li" th:text="${c.getLongName()}"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="list" id="cityList">
+                            <input autocomplete="off" id="city" type="text" class="select-label" required>
+                            <div class="select green" id="city-div">
+                                <ul>
+                                    <li th:each="c: ${city}">
+                                        <div class="li" th:text="${c.getCity()}"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                    <td><input id="site" type="text"></td>
+                    <td><input id="description" type="text" required></td>
+                    <td><input id="link_facebook" type="text"></td>
+                    <td><input id="link_instagram" type="text"></td>
+                    <td><input id="link_linked_in" type="text"></td>
+                    <td><input id="link_twitter" type="text"></td>
+
+                    <td class="accept">&#10004;</td>
+                    <td class="cancel">&#10060;</td>
+                </tr>
+
+                <tr th:if="${seeker}" th:each="s: ${seeker}">
+                    <td class="id" th:text="${s.getId()}"></td>
+                    <td class="user" th:text="${s.getUser().getUsername()}"></td>
+                    <td class="name" th:text="${s.getName()}"></td>
+                    <td class="email" th:text="${s.getEmail()}"></td>
+                    <td class="category" th:text="${s.getCategory().getLongName()}"></td>
+                    <td class="city">
+                        <div th:each="c: ${s.getCity()}">
+                            <div th:remove="tag" th:text="${c.getCity()}"></div>
+                        </div>
+                    </td>
+                    <td class="site" th:text="${s.getSite()}"></td>
+                    <td class="description" th:text="${s.getDescription()}"></td>
+                    <td class="link_facebook" th:text="${s.getLinkFacebook()}"></td>
+                    <td class="link_instagram" th:text="${s.getLinkInstagram()}"></td>
+                    <td class="link_linked_in" th:text="${s.getLinkLinkedIn()}"></td>
+                    <td class="link_twitter" th:text="${s.getLinkTwitter()}"></td>
+
+                    <td class="edit">&#9998;</td>
+                    <td id="seeker" class="delete">&#10060;</td>
+                </tr>
+                <tr class="clear">
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td class="but-head"><span>&nbsp;</span></td>
+                    <td class="but-head"><span>&nbsp;</span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="accept-delete">
+    <span>Ви впевнені, що хочете видалити цей запис назавжди?</span>
+    <div class="buttons">
+        <div class="button yes">Так</div>
+        <div class="button no">Ні</div>
+    </div>
+</div>
+
+<div class="backdrop"></div>
+
+
+<script src="/script/script.js"></script>
+<script src="/script/script-list.js"></script>
+<script src="/script/script-admin.js"></script>
+</body>
+</html>

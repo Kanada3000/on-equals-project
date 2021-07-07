@@ -1,6 +1,7 @@
 package org.onequals.repo;
 
 import org.onequals.domain.*;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -10,13 +11,22 @@ import java.util.Set;
 
 public interface CityRepo extends JpaRepository<City, Long> {
 
+    @Query("SELECT c FROM City c WHERE c.city <> 'Undefined'")
+    List<City> findAll();
+
+    @Query("SELECT c FROM City c WHERE c.city <> 'Undefined'")
+    List<City> findAll(Sort sort);
+
+    @Query("SELECT c FROM City c")
+    List<City> findAllAll();
+
     @Query("SELECT c FROM City c WHERE c.city = ?1")
     City findCity(String city);
 
     @Query("SELECT c FROM City c WHERE c.country = ?1")
     List<City> findByCountry(String country);
 
-    @Query("SELECT DISTINCT (c.country) FROM City c")
+    @Query("SELECT DISTINCT (c.country) FROM City c WHERE c.country <> 'Undefined'")
     List<String> findAllCountries();
 
     @Query("SELECT c.id FROM City c WHERE c.city IN ?1")

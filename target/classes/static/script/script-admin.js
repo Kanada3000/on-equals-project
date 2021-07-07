@@ -32,13 +32,13 @@ $(function () {
 
     $("#admin #body").on('click', 'td.accept', function () {
         let i = 1;
-        $("tr.edit :input").each(function () {
+        $("tr.edit :input[required]").each(function () {
             let input = $(this);
             if (input.val().length <= 0) {
                 i = 0;
             }
         });
-        $("tr.edit select").each(function () {
+        $("tr.edit select[required]").each(function () {
             let select = $(this);
             if (select.val().length <= 0) {
                 i = 0;

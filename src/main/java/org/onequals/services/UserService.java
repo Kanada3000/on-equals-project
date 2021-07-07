@@ -147,11 +147,18 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public void updateRole(Role role){
+    public void updateRole(Role role) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
         updatedAuthorities.add(role);
+
+        System.out.println(role);
+
+        if (role == Role.ADMIN) {
+            updatedAuthorities.remove(Role.USER);
+            System.out.println(updatedAuthorities);
+        }
 
         Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), updatedAuthorities);
 
@@ -159,7 +166,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public void auth(User user){
+    public void auth(User user) {
         Set<Role> privileges = user.getRoles();
 
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user, null, privileges);
@@ -167,12 +174,50 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public void clearSession(){
+    public String getEmail(User user) {
+        if (user.getRoles().contains(Role.EMPLOYER)) {
+            return userRepo.findEmailEmp(user);
+        } else return userRepo.findEmailSeek(user);
+
+    }
+
+    @Transactional
+    public List<User> getAllUser(String role) {
+        if (role.equals("user"))
+            return userRepo.findAllByRoleUser(Collections.singleton(Role.USER), 1);
+        else if (role.equals("employer"))
+            return userRepo.findAllByRoleUser(Collections.singleton(Role.EMPLOYER), 2);
+        else
+            return userRepo.findAllByRoleUser(Collections.singleton(Role.SEEKER), 2);
+    }
+
+    @Transactional
+    public void addRole(User user, Role role) {
+        Set<Role> roles = user.getRoles();
+        roles.add(role);
+        user.setRoles(roles);
+        save(user);
+    }
+
+    @Transactional
+    public void removeRole(User user, Role role) {
+        Set<Role> roles = user.getRoles();
+        roles.remove(role);
+        user.setRoles(roles);
+        save(user);
+    }
+
+    @Transactional
+    public void clearSession() {
         SecurityContextHolder.getContext().setAuthentication(null);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepo.findByUsername(username);
+        User user = userRepo.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        return user;
     }
 }

@@ -23,11 +23,11 @@
     <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
     <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
-<!--<noscript>-->
-<!--    Для повної функціональності цього сайту необхідно включити JavaScript.-->
-<!--    Ось <a href="https://www.enable-javascript.com/ru/" style="color: #2679ff">-->
-<!--    інструкції, як включити JavaScript у вашому браузері</a>.-->
-<!--</noscript>-->
+<noscript>
+    Для повної функціональності цього сайту необхідно включити JavaScript.
+    Ось <a href="https://www.enable-javascript.com/ru/" style="color: #2679ff">
+    інструкції, як включити JavaScript у вашому браузері</a>.
+</noscript>
 <main>
     <div class="main__block">
         <div class="search">
@@ -66,19 +66,11 @@
         <div class="main__button">
             <button form="search">Знайти!</button>
         </div>
-        <!--        <div class="lightnings">-->
-        <!--            <div class="lightning-2">-->
-        <!--                <img src="images/lightning-2.png" alt="lightning2">-->
-        <!--            </div>-->
-        <!--            <div class="lightning-1">-->
-        <!--                <img src="images/lightning-1.png" alt="lightning1">-->
-        <!--            </div>-->
-        <!--        </div>-->
     </div>
 
 
-    <div class="main__place">
-        <a href="/vacancy/new">
+    <div class="main__place" sec:authorize="hasAuthority('SEEKER') || hasAuthority('EMPLOYER') || hasAuthority('ADMIN') || hasRole('ADMIN')">
+        <a href="/vacancy/new" sec:authorize="!hasAuthority('SEEKER')">
             <div class="smile-button left">
                 <div class="smile-image left">
                     <img src="/images/smile-1.png" alt="smile1">
@@ -86,7 +78,26 @@
                 <span>Розмістити вакансію</span>
             </div>
         </a>
-        <a href="/resume/new">
+        <a href="/resume/new" sec:authorize="!hasAuthority('EMPLOYER')">
+            <div class="smile-button right">
+                <div class="smile-image right">
+                    <img src="/images/smile-2.png" alt="smile2">
+                </div>
+                <span>Розмістити резюме</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="main__place" sec:authorize="!hasAuthority('SEEKER') && !hasAuthority('EMPLOYER') && !hasAuthority('ADMIN') && !hasRole('ADMIN')">
+        <a href="/choose">
+            <div class="smile-button left">
+                <div class="smile-image left">
+                    <img src="/images/smile-1.png" alt="smile1">
+                </div>
+                <span>Розмістити вакансію</span>
+            </div>
+        </a>
+        <a href="/choose">
             <div class="smile-button right">
                 <div class="smile-image right">
                     <img src="/images/smile-2.png" alt="smile2">
@@ -122,17 +133,6 @@
 
 
 <div id="sticker-pack">
-
-    <!--    <div class="arrow-1">-->
-    <!--        <img src="images/arrow-1.png" alt="arrow1">-->
-    <!--    </div>-->
-    <!--    <div class="arrow-2">-->
-    <!--        <img src="images/arrow-2.png" alt="arrow2">-->
-    <!--    </div>-->
-    <!--    <div class="heart">-->
-    <!--        <img src="images/heart.png" alt="heart">-->
-    <!--    </div>-->
-
     <a href="https://t.me/addstickers/on_equals" target="_blank">
         <div class="button">
             <div>Завантажити стікерпак&nbsp;<span class="underline">↓</span></div>
@@ -271,7 +271,8 @@
     </p>
     <p>
         Якщо у вас виникли запитання або ви хочете долучитись до команди «На рівних», пишіть нам
-        на пошту <a href="mailto:on.equal.project@gmail.com" class="underline" target="_blank">on.equal.project@gmail.com</a> або у
+        на пошту <a href="mailto:on.equal.project@gmail.com" class="underline" target="_blank">on.equal.project@gmail.com</a>
+        або у
         соціальні мережі в
         <a href="https://www.facebook.com/onequals/" class="underline" target="_blank">фейсбук</a> та <a
             href="https://www.instagram.com/onequals_ua/" class="underline" target="_blank">інстаграм</a>.

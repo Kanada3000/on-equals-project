@@ -17,8 +17,8 @@
     <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
 <div id="sign">
-    <form id="sign-in" class="in" method="POST" action="/log-in">
-        <input type="text" placeholder="Ел. пошта або телефон" name="username">
+    <form id="sign-in" class="in" method="POST" th:action="@{/login}">
+        <input type="text" placeholder="Ел. пошта" name="username">
         <div class="pass">
             <input type="password" placeholder="Пароль" name="password">
             <div class="image">
@@ -27,6 +27,9 @@
         </div>
     </form>
     <a href="#">Забули пароль?</a>
+</div>
+<div id="invalid">
+    <label id="error" class="error" th:if="${loginError != null}">Невірний логін або пароль</label>
 </div>
 <div id="sign-button">
     <div class="sign-in">

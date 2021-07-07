@@ -4,16 +4,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>OnEquals Resume</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/list.css">
-    <link rel="stylesheet" href="/css/menu.css">
-    <link rel="stylesheet" href="/css/reg-1.css">
-    <link rel="stylesheet" href="/css/reg-1-1024.css">
-    <link rel="stylesheet" href="/css/reg-1-775.css">
-    <link rel="stylesheet" href="/css/reg-1-480.css">
-    <link rel="stylesheet" href="/css/reg-1-320.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/list.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/reg-1.css">
+    <link rel="stylesheet" href="css/reg-1-1024.css">
+    <link rel="stylesheet" href="css/reg-1-775.css">
+    <link rel="stylesheet" href="css/reg-1-480.css">
+    <link rel="stylesheet" href="css/reg-1-320.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 </head>
 <body>
 <header>
@@ -26,13 +27,13 @@
     </div>
     <span>поля з зірочкою обов’язкові для заповнення&nbsp<span class="text-red">*</span></span>
 
-    <form id="form-reg-employer" action="/resume/new" method="POST">
+    <form id="form-reg-employer" thaction="@{/resume/new}" method="POST">
         <label for="resume" class="first">
             1. Оберіть вакансію, яка вам потрібна&nbsp<span class="text-red">*</span>
         </label>
         <div class="list" id="categoryList">
             <input autocomplete="off" name="category" id="resume" type="text" class="select-label"
-                   placeholder="почніть вводити назву" required>
+                   placeholder="почніть вводити назву">
             <div class="select green" id="employer-div">
                 <ul>
                     <li th:each="c: ${categories}">
@@ -46,15 +47,15 @@
             2. Оберіть тип зайнятості&nbsp<span class="text-red">*</span>
         </label>
         <div class="green-choice">
-            <input id="type-0" type="radio" name="type" value="Повна" required="required">
+            <input id="type-0" type="radio" name="type" value="Повна">
             <label for="type-0">Повна</label>
-            <input id="type-1" type="radio" name="type" value="Неповна" required>
+            <input id="type-1" type="radio" name="type" value="Неповна">
             <label for="type-1">Неповна</label>
-            <input id="type-2" type="radio" name="type" value="Дистанційна" required>
+            <input id="type-2" type="radio" name="type" value="Дистанційна">
             <label for="type-2">Дистанційна</label>
-            <input id="type-3" type="radio" name="type" value="Часткова" required>
+            <input id="type-3" type="radio" name="type" value="Часткова">
             <label for="type-3">Часткова</label>
-            <input id="type-4" type="radio" name="type" value="Проектна" required>
+            <input id="type-4" type="radio" name="type" value="Проектна">
             <label for="type-4">Проектна</label>
         </div>
 
@@ -69,7 +70,7 @@
                 </label>
                 <div class="list" id="countryList">
                     <input autocomplete="off" name="countString" id="country" type="text" class="select-label"
-                           placeholder="почніть вводити назву" required>
+                           placeholder="почніть вводити назву">
                     <div class="select green" id="country-div">
                         <ul>
                             <li th:each="c: ${country}">
@@ -85,7 +86,7 @@
                 </label>
                 <div class="list" id="cityList">
                     <input autocomplete="off" name="citString" id="city" type="text" class="select-label"
-                           placeholder="почніть вводити назву" required>
+                           placeholder="почніть вводити назву">
                     <div class="select green" id="city-div">
                         <ul>
                             <li th:each="c: ${city}">
@@ -107,7 +108,7 @@
             4. Додаткова інформація про себе (досвід роботи у цій сфері, освіту, необхідні умови для праці
             тощо)&nbsp<span class="text-red">*</span>
         </label>
-        <input id="story" type="text" placeholder="до 1000 знаків" name="description" required>
+        <input id="story" type="text" placeholder="до 1000 знаків" name="description">
 
         <label for="salary">
             5. Вкажіть зарплату (у гривнях)&nbsp<span class="text-red">*</span>
@@ -141,7 +142,20 @@
     <p>Ви також можете завантажити своє готове резюме на свій профіль у форматі pdf</p>
 </div>
 
-<script src="/script/script-list.js"></script>
-<script src="/script/script.js"></script>
+<script th:inline="javascript">
+    var catList = []
+    $("#categoryList .li").each(function(){
+        catList.push($(this).text())
+    })
+
+    var cityList = []
+    $("#cityList .li").each(function(){
+        cityList.push($(this).text())
+    })
+</script>
+<script src="script/script-list.js"></script>
+<script src="script/script-valid.js"></script>
+<script src="script/script-add.js"></script>
+<script src="script/script.js"></script>
 </body>
 </html>

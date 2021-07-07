@@ -3,7 +3,7 @@
     width: 100%;
     flex-direction: column;
     font-size: 22px;
-    padding: 0 30px;
+    padding: 0 30px 200px;
     box-sizing: border-box;
 }
 
@@ -51,7 +51,8 @@
 
 #admin #body table {
     width: 100%;
-    overflow-x:scroll;
+    overflow-x: scroll;
+    table-layout: auto !important;
 }
 
 #admin #body table tr.head, #admin #body table .id-head, #admin #body table .but-head {
@@ -87,8 +88,21 @@
     display: none;
 }
 
+#admin #body table tr.clear {
+    height: 200px;
+    border: none;
+}
+
+#admin #body table tr.clear td {
+    border: none;
+}
+
 #admin #body table tr.edit {
     background-color: #c6ff85;
+}
+
+#admin #body table tr.edit td {
+    width: auto;
 }
 
 #admin #body table input, #admin #body table select {
@@ -107,7 +121,7 @@
 
 #admin #body table td:nth-last-of-type(1), #admin #body table td:nth-last-of-type(2) {
     cursor: pointer;
-    width: 40px;
+    width: 60px;
 }
 
 #admin #body table td:first-of-type{
@@ -119,19 +133,19 @@
 
 #admin #body table td:last-of-type, #admin #body table td:nth-last-of-type(2){
     position: absolute;
-    width: 40px;
+    width: 60px;
     right: 0;
     top: auto;
 }
 #admin #body table td:nth-last-of-type(2){
-    right: 40px;
+    right: 60px;
 }
 #admin #body .table{
-    width: calc(100vw - 210px);
+    width: calc(100vw - 270px);
     margin-left: 55px;
     margin-right: 95px;
     box-sizing: border-box;
-    overflow-y:visible;
+    overflow-x: scroll;
 }
 
 #admin #body .table td{
@@ -246,4 +260,16 @@
 
 html{
     overflow-x:  hidden;
+}
+
+#admin #body table tr.edit td.accept, #admin #body table tr.edit td.cancel{
+    width: 60px;
+}
+
+#admin #body table tr.edit td.id{
+    width: 50px;
+}
+#admin #body table td.description{
+    max-width: 700px;
+    word-wrap: break-word;
 }

@@ -43,15 +43,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/resume/new").hasAnyAuthority("SEEKER", "ROLE_ADMIN")
                 .antMatchers(HttpMethod.GET, "/vacancy/new").hasAnyAuthority("EMPLOYER", "ROLE_ADMIN")
                 .antMatchers(HttpMethod.POST, "/vacancy/new").hasAnyAuthority("EMPLOYER", "ROLE_ADMIN")
+                .antMatchers(HttpMethod.POST, "/admin").hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.GET, "/admin").hasAuthority("ROLE_ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/log-in")
+                .loginPage("/login")
+                .failureUrl("/login?error=true")
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll()
-                .and().csrf().disable();
+                .logoutSuccessUrl("/login")
+                .permitAll();
+//                .and().csrf().disable();
     }
 
     @Override

@@ -20,20 +20,19 @@ public class RegistrationController {
     }
 
     @GetMapping("/register")
-    public String registration(){
+    public String registration() {
         return "sign-in";
     }
 
     @PostMapping("/register")
     public String addUser(Model model,
-                          @RequestParam("password1") String pas1,
-                          @RequestParam("password2") String pas2,
+                          @RequestParam("password") String pas,
                           @RequestParam("name") String name,
-                          @RequestParam("username") String username){
+                          @RequestParam("username") String username) {
         User userFromDb = userService.findUser(username);
 
-        if (userFromDb != null){
-            model.addAttribute("message1", "Такий користувач вже існує!");
+        if (userFromDb != null) {
+            model.addAttribute("message", "Такий користувач вже існує!");
             return "sign-in";
         }
 
@@ -41,39 +40,32 @@ public class RegistrationController {
 
         user.setName(name);
         user.setUsername(username);
-
-        if (pas1.equals(pas2)){
-            user.setPassword(userService.setPassword(pas1));
-        } else{
-            model.addAttribute("message2", "Паролі не співпадають!");
-            return "sign-in";
-        }
+        user.setPassword(userService.setPassword(pas));
         user.setLink(userService.getRandomLink());
         userService.save(user);
 
-        model.addAttribute("link","/register/activate/" + user.getLink());
+        model.addAttribute("link", "/register/activate/" + user.getLink());
         return "sign-in-3";
     }
 
     @GetMapping("/choose")
-    public String choose(Principal principal, Model model){
+    public String choose(Principal principal, Model model) {
         User user = userService.findUser(principal.getName());
-        model.addAttribute("link","/register/activate/" + user.getLink());
+        model.addAttribute("link", "/register/activate/" + user.getLink());
         return "sign-in-3";
     }
 
     @GetMapping("/register/activate/{link}")
-    public String activate(@PathVariable("link") String link){
+    public String activate(@PathVariable("link") String link) {
         User user = userService.getByLink(link);
         user.setActivated(true);
         userService.save(user);
         userService.auth(user);
-//        return "redirect:/";
         return "redirect:/sign-in-2/";
     }
 
     @GetMapping("/sign-in-2")
-    public String registerContinue(Model model){
+    public String registerContinue(Model model) {
         return "sign-in-2";
     }
 }

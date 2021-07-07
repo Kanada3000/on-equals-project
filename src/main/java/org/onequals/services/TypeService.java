@@ -32,6 +32,11 @@ public class TypeService {
     }
 
     @Transactional
+    public List<Type> getAllAll(){
+        return typeRepo.findAllAll(Sort.by("id"));
+    }
+
+    @Transactional
     public void save(Type type){
         typeRepo.save(type);
     }

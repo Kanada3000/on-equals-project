@@ -76,6 +76,10 @@
     display: inline-block;
 }
 
+#reg2 .label-inner{
+    margin-top: 0;
+}
+
 #reg2 input {
     width: 100%;
     font-size: 22px;
@@ -353,6 +357,19 @@ input[type="checkbox"]:checked + label{
     width: 100%;
     margin: auto;
     cursor: pointer;
+}
+
+body{
+    overflow-x: hidden;
+}
+#reg2 hr.delimiter{
+    height: unset;
+    color: unset;
+    background-color: unset;
+    border: 2px dashed black;
+    width: 200vw;
+    margin-left: -300px;
+    margin-top: 50px;
 }
 
 #footer-reg {

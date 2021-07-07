@@ -1,5 +1,6 @@
 package org.onequals.services;
 
+import org.onequals.domain.Employer;
 import org.onequals.domain.Seeker;
 import org.onequals.domain.User;
 import org.onequals.repo.SeekerRepo;
@@ -34,5 +35,10 @@ public class SeekerService {
     @Transactional
     public void delete(Long id){
         seekerRepo.deleteById(id);
+    }
+
+    @Transactional
+    public Seeker findById(Long id){
+        return seekerRepo.findById(id).get();
     }
 }

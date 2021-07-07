@@ -16,7 +16,7 @@
     <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
 
-<form id="form" action="/admin/users/add" method="post">
+<form id="form" th:action="@{/admin/users/add}" method="post">
 </form>
 <input id='id' type='hidden' name='id' form='form'>
 
@@ -72,9 +72,8 @@
                     <td><input id="password" type="text"></td>
                     <td>
                         <select id="role" name="role">
-                            <option value="SEEKER">Шукач</option>
-                            <option value="EMPLOYER">Роботодавець</option>
                             <option value="ADMIN">Адміністратор</option>
+                            <option value="USER" selected>Юзер</option>
                         </select>
                     </td>
                     <td>
@@ -98,17 +97,30 @@
                     <td class="name" th:text="${u.getName()}"></td>
                     <td class="username" th:text="${u.getUsername()}"></td>
                     <td class="password" th:text="${u.getPassword()}"></td>
-                    <div th:remove="tag" th:each="r: ${u.getRoles()}">
-                        <td class="role" th:if="${r == r.EMPLOYER}">Роботодавець</td>
-                        <td class="role" th:if="${r == r.SEEKER}">Шукач</td>
-                        <td class="role" th:if="${r == r.ADMIN}">Адміністратор</td>
+                    <div th:remove="tag" th:if="${u.getRoles().size() == 2}">
+                        <div th:remove="tag" th:each="r: ${u.getRoles()}">
+                            <td class="role" th:if="${r == r.EMPLOYER}">Роботодавець</td>
+                            <td class="role" th:if="${r == r.SEEKER}">Шукач</td>
+                        </div>
+                    </div>
+                    <div th:remove="tag" th:if="${u.getRoles().size() == 1}">
+                        <div th:remove="tag" th:each="r: ${u.getRoles()}">
+                            <td class="role" th:if="${r == r.ADMIN}">Адміністратор</td>
+                            <td class="role" th:if="${r == r.USER}">Юзер</td>
+                        </div>
                     </div>
                     <td class="activated" th:if="${u.getActivated()}">Так</td>
                     <td class="activated" th:unless="${u.getActivated()}">Ні</td>
                     <td class="blocked" th:if="${u.getBlocked()}">Так</td>
                     <td class="blocked" th:unless="${u.getBlocked()}">Ні</td>
-                    <td class="edit">&#9998;</td>
-                    <td id="users" class="delete">&#10060;</td>
+                    <div th:if="${u.getUsername() == 'adminLog'}" th:remove="tag">
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </div>
+                    <div th:if="${u.getUsername() != 'adminLog'}" th:remove="tag">
+                        <td class="edit">&#9998;</td>
+                        <td id="users" class="delete">&#10060;</td>
+                    </div>
                 </tr>
             </table>
         </div>

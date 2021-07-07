@@ -30,8 +30,14 @@ public class PageController {
         return "index";
     }
 
-    @GetMapping("/log-in")
+    @GetMapping("/login")
     public String signInPage(Model model) {
+        return "log-in";
+    }
+
+    @GetMapping("/login-error")
+    public String signInErrorPage(Model model) {
+        model.addAttribute("loginError", true);
         return "log-in";
     }
 

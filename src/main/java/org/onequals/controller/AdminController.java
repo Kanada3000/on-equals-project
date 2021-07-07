@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -37,7 +38,7 @@ public class AdminController {
 
     @GetMapping("/category")
     public String adminCategoryPage(Model model) {
-        model.addAttribute("category", categoryService.getAll());
+        model.addAttribute("category", categoryService.getAllAll());
         return "admin/category";
     }
 
@@ -55,7 +56,7 @@ public class AdminController {
 
     @GetMapping("/type")
     public String adminTypePage(Model model) {
-        model.addAttribute("types", typeService.getAll());
+        model.addAttribute("types", typeService.getAllAll());
         return "admin/type";
     }
 
@@ -73,7 +74,7 @@ public class AdminController {
 
     @GetMapping("/cities")
     public String adminCityPage(Model model) {
-        model.addAttribute("city", cityService.getAll());
+        model.addAttribute("city", cityService.getAllAll());
         return "admin/cities";
     }
 
@@ -104,13 +105,22 @@ public class AdminController {
 
     @PostMapping("/users/add")
     public String adminUserAdd(@ModelAttribute() User user, @RequestParam("role") String role) {
-        user.setPassword(userService.setPassword(user.getPassword()));
+        User userDB = userService.findById(user.getId()).get();
+        if (!userDB.getPassword().equals(user.getPassword()))
+            user.setPassword(userService.setPassword(user.getPassword()));
         Set<Role> set = new TreeSet<Role>();
         set.add(Role.USER);
         switch (role) {
-            case "SEEKER" -> set.add(Role.SEEKER);
-            case "EMPLOYER" -> set.add(Role.EMPLOYER);
-            case "ADMIN" -> set.add(Role.ADMIN);
+            case "SEEKER" -> {
+                set.add(Role.SEEKER);
+            }
+            case "EMPLOYER" -> {
+                set.add(Role.EMPLOYER);
+            }
+            case "ADMIN" -> {
+                set.add(Role.ADMIN);
+                set.remove(Role.USER);
+            }
         }
         user.setRoles(set);
         userService.save(user);
@@ -124,12 +134,12 @@ public class AdminController {
     }
 
     @GetMapping("/vacancies")
-    public String adminVacanciesPage(Model model) {
+    public String adminVacanciesPage(Principal principal, Model model) {
         model.addAttribute("vacancy", vacancyService.getAll());
-        model.addAttribute("user", userService.getAll());
-        model.addAttribute("types", typeService.getAll());
-        model.addAttribute("category", categoryService.getAll());
-        model.addAttribute("city", cityService.getAll());
+        model.addAttribute("user", userService.getAllUser("employer"));
+        model.addAttribute("types", typeService.getAllAll());
+        model.addAttribute("category", categoryService.getAllAll());
+        model.addAttribute("city", cityService.getAllAll());
         return "admin/vacancies";
     }
 
@@ -170,10 +180,10 @@ public class AdminController {
     @GetMapping("/resumes")
     public String adminResumePage(Model model) {
         model.addAttribute("resume", resumeService.getAll());
-        model.addAttribute("user", userService.getAll());
-        model.addAttribute("types", typeService.getAll());
-        model.addAttribute("category", categoryService.getAll());
-        model.addAttribute("city", cityService.getAll());
+        model.addAttribute("user", userService.getAllUser("seeker"));
+        model.addAttribute("types", typeService.getAllAll());
+        model.addAttribute("category", categoryService.getAllAll());
+        model.addAttribute("city", cityService.getAllAll());
         return "admin/resumes";
     }
 
@@ -214,21 +224,129 @@ public class AdminController {
     @GetMapping("/employer")
     public String adminEmployerPage(Model model) {
         model.addAttribute("employer", employerService.getAll());
+        model.addAttribute("category", categoryService.getAllAll());
+        model.addAttribute("user", userService.getAllUser("user"));
+        model.addAttribute("city", cityService.getAllAll());
+
         return "admin/employer";
     }
 
     @PostMapping("/employer/add")
     public String adminEmployerAdd(@RequestParam(required = false) Long id,
-                                   @RequestParam String city,
-                                   @RequestParam String country) {
+                                   @RequestParam String user,
+                                   @RequestParam String name,
+                                   @RequestParam String email,
+                                   @RequestParam String category,
+                                   @RequestParam List<String> city,
+                                   @RequestParam(required = false) String site,
+                                   @RequestParam String description,
+                                   @RequestParam int age,
+                                   @RequestParam int emp_count,
+                                   @RequestParam int size,
+                                   @RequestParam(required = false) String link_facebook,
+                                   @RequestParam(required = false) String link_instagram,
+                                   @RequestParam(required = false) String link_linked_in,
+                                   @RequestParam(required = false) String link_twitter) {
+        Employer emp = new Employer();
+        if (id != null)
+            emp.setId(id);
+        if (site != null)
+            emp.setSite(site);
+        if (link_facebook != null)
+            emp.setLinkFacebook(link_facebook);
+        if (link_instagram != null)
+            emp.setLinkInstagram(link_instagram);
+        if (link_linked_in != null)
+            emp.setLinkLinkedIn(link_linked_in);
+        if (link_twitter != null)
+            emp.setLinkTwitter(link_twitter);
 
+        User userDB = userService.findUser(user);
+
+        emp.setUser(userDB);
+        emp.setName(name);
+        emp.setEmail(email);
+        emp.setCategory(categoryService.findByName(category));
+        cityService.addCities(emp, cityService.findByNames(city));
+        emp.setDescription(description);
+        emp.setAge(age);
+        emp.setEmpCount(emp_count);
+        emp.setSize(size);
+
+
+        userService.addRole(userDB, Role.EMPLOYER);
+        employerService.save(emp);
         return "redirect:/admin/employer";
     }
 
     @GetMapping("/employer/delete/{id}")
     public String adminEmployerDelete(@PathVariable("id") long id) {
-
+        Employer employer = employerService.findById(id);
+        User user = employer.getUser();
+        userService.removeRole(user, Role.EMPLOYER);
+        employerService.delete(id);
         return "redirect:/admin/employer";
+    }
+
+    @GetMapping("/seeker")
+    public String adminSeekerPage(Model model) {
+        model.addAttribute("seeker", seekerService.getAll());
+        model.addAttribute("category", categoryService.getAllAll());
+        model.addAttribute("user", userService.getAllUser("user"));
+        model.addAttribute("city", cityService.getAllAll());
+
+        return "admin/seeker";
+    }
+
+    @PostMapping("/seeker/add")
+    public String adminSeekerAdd(@RequestParam(required = false) Long id,
+                                   @RequestParam String user,
+                                   @RequestParam String name,
+                                   @RequestParam String email,
+                                   @RequestParam String category,
+                                   @RequestParam List<String> city,
+                                   @RequestParam(required = false) String site,
+                                   @RequestParam String description,
+                                   @RequestParam(required = false) String link_facebook,
+                                   @RequestParam(required = false) String link_instagram,
+                                   @RequestParam(required = false) String link_linked_in,
+                                   @RequestParam(required = false) String link_twitter) {
+        Seeker seek = new Seeker();
+        if (id != null)
+            seek.setId(id);
+        if (site != null)
+            seek.setSite(site);
+        if (link_facebook != null)
+            seek.setLinkFacebook(link_facebook);
+        if (link_instagram != null)
+            seek.setLinkInstagram(link_instagram);
+        if (link_linked_in != null)
+            seek.setLinkLinkedIn(link_linked_in);
+        if (link_twitter != null)
+            seek.setLinkTwitter(link_twitter);
+
+        User userDB = userService.findUser(user);
+
+        seek.setUser(userDB);
+        seek.setName(name);
+        seek.setEmail(email);
+        seek.setCategory(categoryService.findByName(category));
+        cityService.addCities(seek, cityService.findByNames(city));
+        seek.setDescription(description);
+
+
+        userService.addRole(userDB, Role.SEEKER);
+        seekerService.save(seek);
+        return "redirect:/admin/seeker";
+    }
+
+    @GetMapping("/seeker/delete/{id}")
+    public String adminSeekerDelete(@PathVariable("id") long id) {
+        Seeker seeker = seekerService.findById(id);
+        User user = seeker.getUser();
+        userService.removeRole(user, Role.SEEKER);
+        seekerService.delete(id);
+        return "redirect:/admin/seeker";
     }
 
 }

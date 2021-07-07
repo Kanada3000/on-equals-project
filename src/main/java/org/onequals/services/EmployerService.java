@@ -40,4 +40,9 @@ public class EmployerService {
     public void delete(Long id){
         employerRepo.deleteById(id);
     }
+
+    @Transactional
+    public Employer findById(Long id){
+        return employerRepo.findById(id).get();
+    }
 }

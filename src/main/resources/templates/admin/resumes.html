@@ -16,7 +16,7 @@
     <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
 
-<form id="form" action="/admin/resumes/add" method="post">
+<form id="form" th:action="@{/admin/resumes/add}" method="post">
 </form>
 <input id='id' type='hidden' name='id' form='form'>
 
@@ -67,7 +67,7 @@
                 <td class="id"></td>
                 <td>
                     <div class="list" id="userList">
-                        <input autocomplete="off" id="user" type="text" class="select-label">
+                        <input autocomplete="off" id="user" type="text" class="select-label" required>
                         <div class="select green" id="user-div">
                             <ul>
                                 <li th:each="u: ${user}">
@@ -79,7 +79,7 @@
                 </td>
                 <td>
                     <div class="list" id="typeList">
-                        <input autocomplete="off" id="type" type="text" class="select-label">
+                        <input autocomplete="off" id="type" type="text" class="select-label" required>
                         <div class="select green" id="type-div">
                             <ul>
                                 <li th:each="t: ${types}">
@@ -91,7 +91,7 @@
                 </td>
                 <td>
                     <div class="list" id="categoryList">
-                        <input autocomplete="off" id="category" type="text" class="select-label">
+                        <input autocomplete="off" id="category" type="text" class="select-label" required>
                         <div class="select green" id="category-div">
                             <ul>
                                 <li th:each="c: ${category}">
@@ -103,7 +103,7 @@
                 </td>
                 <td class="cityDiv">
                     <div class="list" id="cityList">
-                        <input autocomplete="off" id="city" type="text" class="select-label">
+                        <input autocomplete="off" id="city" type="text" class="select-label" required>
                         <div class="select green" id="city-div">
                             <ul>
                                 <li th:each="c: ${city}">
@@ -113,8 +113,8 @@
                         </div>
                     </div>
                 </td>
-                <td><input autocomplete="off" id="salary" type="text"></td>
-                <td><input id="description" type="text"></td>
+                <td><input autocomplete="off" id="salary" type="text" required></td>
+                <td><input id="description" type="text" required></td>
                 <td class="accept">&#10004;</td>
                 <td class="cancel">&#10060;</td>
             </tr>
@@ -132,6 +132,17 @@
                 <td class="description" th:text="${r.getDescription()}">1000 знаків</td>
                 <td class="edit">&#9998;</td>
                 <td id="resumes" class="delete">&#10060;</td>
+            </tr>
+            <tr class="clear">
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td class="but-head"><span>&nbsp;</span></td>
+                <td class="but-head"><span>&nbsp;</span></td>
             </tr>
 
         </table>

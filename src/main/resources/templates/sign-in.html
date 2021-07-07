@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="/css/sign.css">
     <link rel="stylesheet" href="/css/sign-1440.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+
 </head>
 <body>
 <header>
@@ -17,20 +19,20 @@
     <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
 <div id="sign" class="upp">
-    <form id="sign-up" class="up" method="POST" action="/register">
+    <form id="sign-up" class="up" method="POST" th:action="@{/register}">
         <div class="column-1">
             <input type="text" placeholder="Ім'я" name="name">
-            <input type="text" placeholder="Ел. пошта або телефон" name="username">
+            <input type="text" placeholder="Ел. пошта" name="username">
         </div>
         <div class="column-2">
             <div class="pass">
-                <input placeholder="Пароль" type="password" name="password1">
+                <input placeholder="Пароль" type="password" name="password">
                 <div class="image">
                     <img src="/images/eye-close.png">
                 </div>
             </div>
             <div class="pass">
-                <input placeholder="Підтвердити пароль" type="password" name="password2">
+                <input placeholder="Підтвердити пароль" type="password" name="passwordrep">
                 <div class="image">
                     <img src="/images/eye-close.png">
                 </div>
@@ -39,11 +41,12 @@
 
     </form>
 </div>
-<div th:text="${message1}" th:remove="tag"></div>
-<div th:text="${message2}" th:remove="tag"></div>
+<div id="invalid">
+    <label id="error" class="error" th:if="${message != null}" th:text="${message}"></label>
+</div>
+
 <div id="sign-button">
     <div class="sign-in">
-<!--        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>-->
         <button form="sign-up">Зареєстру&shy;ватися!</button>
     </div>
     <div class="account">
@@ -52,6 +55,7 @@
     </div>
 </div>
 
+<script src="/script/script-valid.js"></script>
 <script src="/script/script.js"></script>
 <script src="/script/script-sign.js"></script>
 </body>

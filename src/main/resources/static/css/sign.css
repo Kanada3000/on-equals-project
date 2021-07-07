@@ -23,6 +23,19 @@
     padding-left: 37px;
 }
 
+#sign form input.error{
+    border: 2px solid #cc0033;
+}
+#sign form input.validate-equalTo-blur.error{
+    border: 2px solid #cc0033;
+    border-right: none;
+}
+
+#invalid label.error{
+    display: block;
+    box-sizing: border-box;
+}
+
 #sign form .pass{
     display: flex;
     flex-direction: row;
@@ -48,6 +61,11 @@
     align-items: center;
     padding-right: 37px;
     cursor: pointer;
+}
+
+#sign form input.validate-equalTo-blur.error + .image {
+    border: 2px solid #cc0033;
+    border-left: none;
 }
 
 #sign .pass .image img {

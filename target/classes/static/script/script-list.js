@@ -3,26 +3,41 @@ $(function () {
     list("")
     //Добавление страны/города
     $(".accept.add").click(function (e) {
+        e.preventDefault()
         let added = $(this).closest(".accept.add");
         let i = 1;
-        $(".country:last input").each(function () {
+        $(".country:last input").each(function (index, value) {
             let input = $(this);
             if (input.val() === "") {
+                i = 0;
+            } else if (index === 1 && jQuery.inArray(input.val(), cityList) === -1) {
                 i = 0;
             }
         });
         if (i === 1) {
+            if ($("#labelErrorCountry") !== null) {
+                $("#labelErrorCountry").remove()
+            }
             let clone = $(".country:last").clone(false);
             let li = $(".country:last").find("input").last().val()
-            clone.find(".select li:contains('"+ li +"')").remove()
+            clone.find(".select li:contains('" + li + "')").remove()
             added.before(clone);
             $(".country:last .country-label").each(function () {
                 $(this).find("input").val("")
-                $(this).find("label").attr("for", $(this).find("label").attr("for")+"-")
-                $(this).find(".list").attr("id", $(this).find(".list").attr("id")+"-")
-                $(this).find(".list input").attr("id", $(this).find(".list input").attr("id")+"-")
-                $(this).find(".select").attr("id", $(this).find(".select").attr("id")+"-")
+                $(this).find("label").attr("for", $(this).find("label").attr("for") + "-")
+                $(this).find(".list").attr("id", $(this).find(".list").attr("id") + "-")
+                $(this).find(".list input").attr("id", $(this).find(".list input").attr("id") + "-")
+                $(this).find(".select").attr("id", $(this).find(".select").attr("id") + "-")
             })
+        } else if (i === 0) {
+            let label = document.getElementById("labelErrorCountry")
+            if (label === null) {
+                label = document.createElement('label')
+                label.classList.add('error')
+                label.id = "labelErrorCountry"
+                label.textContent += "Заповніть поля вище"
+                $(".country:last").after(label)
+            }
         }
         list(".country .country-label ")
         e.stopImmediatePropagation();

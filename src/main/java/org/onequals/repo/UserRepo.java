@@ -13,8 +13,8 @@ import java.util.Set;
 public interface UserRepo extends JpaRepository<User, Long> {
     User findByUsername(String username);
 
-    @Query("SELECT u FROM User u join u.roles ur WHERE ur =?1")
-    List<User> findAllByRoleUser(Set<Role> roles);
+    @Query("SELECT u FROM User u join u.roles ur WHERE ur = ?1 AND ur.size = ?2")
+    List<User> findAllByRoleUser(Set<Role> roles, int size);
 
     @Query("SELECT u FROM User u WHERE u.id = :id")
     User findByVacancy(@Param("id") Long id);
@@ -22,4 +22,9 @@ public interface UserRepo extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u WHERE u.link = ?1")
     User findUserByLink(String link);
 
+    @Query("SELECT e.email FROM Employer e WHERE e.user = ?1")
+    String findEmailEmp(User user);
+
+    @Query("SELECT s.email FROM Seeker s WHERE s.user = ?1")
+    String findEmailSeek(User user);
 }

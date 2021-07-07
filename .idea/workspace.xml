@@ -15,6 +15,7 @@
       <list>
         <option value="JavaScript File" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -43,16 +44,19 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="database.data.extractors.current.export.id" value="Comma-separated (CSV)_id" />
     <property name="database.data.extractors.current.id" value="Comma-separated (CSV)_id" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/db/migration" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/admin" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.29256967" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/main/resources/static/script/script.js" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Work\onequals\src\main\resources\templates\admin" />
+      <recent name="E:\Work\onequals\src\main\resources\db\migration" />
     </key>
   </component>
   <component name="RunManager">
@@ -95,7 +99,13 @@
       <workItem from="1625256923444" duration="1894000" />
       <workItem from="1625305236988" duration="16630000" />
       <workItem from="1625375812864" duration="9068000" />
-      <workItem from="1625467320439" duration="31766000" />
+      <workItem from="1625467320439" duration="31980000" />
+      <workItem from="1625515031082" duration="595000" />
+      <workItem from="1625552695192" duration="2836000" />
+      <workItem from="1625556959843" duration="3055000" />
+      <workItem from="1625580974286" duration="518000" />
+      <workItem from="1625581668522" duration="6972000" />
+      <workItem from="1625640373445" duration="24392000" />
     </task>
     <servers />
   </component>

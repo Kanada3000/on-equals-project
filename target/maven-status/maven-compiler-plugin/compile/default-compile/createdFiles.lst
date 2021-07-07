@@ -29,6 +29,7 @@ org\onequals\domain\Role.class
 org\onequals\domain\Employer.class
 org\onequals\controller\ResumeController.class
 org\onequals\services\EmployerService.class
+org\onequals\services\ShowUserDetails.class
 org\onequals\repo\VacancyRepo.class
 org\onequals\domain\Seeker.class
 org\onequals\controller\SeekerController.class

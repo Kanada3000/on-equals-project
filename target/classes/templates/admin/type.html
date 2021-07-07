@@ -16,7 +16,7 @@
     <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
 
-<form id="form" action="/admin/type/add" method="post">
+<form id="form" th:action="@{/admin/type/add}" method="post">
 </form>
 <input id='id' type='hidden' name='id' form='form'>
 
