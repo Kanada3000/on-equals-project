@@ -46,6 +46,29 @@
         <div class="button">
             <a href="/admin/seeker">Шукачі</a>
         </div>
+        <div class="button">
+            <a href="/admin/file">Файли резюме</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${empTotal.size() != 0}" th:text="${empTotal.size()}"></span>
+            <a href="/admin/approve/employer">Непідтверджені роботодавці</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${seekTotal.size() != 0}" th:text="${seekTotal.size()}"></span>
+            <a href="/admin/approve/seeker">Непідтверджені шукачі</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${vacTotal.size() != 0}" th:text="${vacTotal.size()}"></span>
+            <a href="/admin/approve/vacancy">Непідтверджені вакансії</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${resTotal.size() != 0}" th:text="${resTotal.size()}"></span>
+            <a href="/admin/approve/resume">Непідтверджені резюме</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${path != 0}" th:text="${path}"></span>
+            <a href="/admin/approve/file">Непідтверджені файли резюме</a>
+        </div>
 
     </div>
     <div id="body">
@@ -59,6 +82,7 @@
                     <td>username</td>
                     <td>password</td>
                     <td>roles</td>
+                    <td>hidden</td>
                     <td>activated</td>
                     <td>blocked</td>
                     <td class="but-head"><span>&nbsp;</span></td>
@@ -74,6 +98,12 @@
                         <select id="role" name="role">
                             <option value="ADMIN">Адміністратор</option>
                             <option value="USER" selected>Юзер</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="hidden" name="hidden">
+                            <option value="false">Ні</option>
+                            <option value="true">Так</option>
                         </select>
                     </td>
                     <td>
@@ -109,6 +139,8 @@
                             <td class="role" th:if="${r == r.USER}">Юзер</td>
                         </div>
                     </div>
+                    <td class="hiiden" th:if="${u.getHidden()}">Так</td>
+                    <td class="hidden" th:unless="${u.getHidden()}">Ні</td>
                     <td class="activated" th:if="${u.getActivated()}">Так</td>
                     <td class="activated" th:unless="${u.getActivated()}">Ні</td>
                     <td class="blocked" th:if="${u.getBlocked()}">Так</td>

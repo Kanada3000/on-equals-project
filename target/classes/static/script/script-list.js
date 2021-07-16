@@ -2,11 +2,12 @@ $(function () {
 
     list("")
     //Добавление страны/города
-    $(".accept.add").click(function (e) {
+    $("#form-reg-employer").on('click', ".accept.add",function (e) {
         e.preventDefault()
         let added = $(this).closest(".accept.add");
         let i = 1;
-        $(".country:last input").each(function (index, value) {
+        let country = added.prevAll(".country").first()
+        country.find("input").each(function (index, value) {
             let input = $(this);
             if (input.val() === "") {
                 i = 0;
@@ -18,11 +19,11 @@ $(function () {
             if ($("#labelErrorCountry") !== null) {
                 $("#labelErrorCountry").remove()
             }
-            let clone = $(".country:last").clone(false);
-            let li = $(".country:last").find("input").last().val()
+            let clone = country.clone(false);
+            let li = country.find("input").last().val()
             clone.find(".select li:contains('" + li + "')").remove()
             added.before(clone);
-            $(".country:last .country-label").each(function () {
+            country.nextAll(".country").first().find(".country-label").each(function () {
                 $(this).find("input").val("")
                 $(this).find("label").attr("for", $(this).find("label").attr("for") + "-")
                 $(this).find(".list").attr("id", $(this).find(".list").attr("id") + "-")
@@ -39,7 +40,7 @@ $(function () {
                 $(".country:last").after(label)
             }
         }
-        list(".country .country-label ")
+        list("")
         e.stopImmediatePropagation();
         return false;
     })
@@ -48,38 +49,39 @@ $(function () {
 
 function list(string) {
     $(string + ".select-label").click(function (e) {
+        let thisList = $(this).parent()
         let id = "#" + $(this).attr("id")
         let idDiv = "#" + $(this).next().attr("id")
         e.preventDefault()
-        let div = $(".select" + idDiv)
-        let li = $(".select" + idDiv + " li")
+        let div = thisList.find(".select" + idDiv)
+        let li = thisList.find(".select" + idDiv + " li")
         let list = "#" + $(this).parents(".list").first().attr("id")
         div.show();
 
         li.mouseover(function () {
-            if ($(".select" + idDiv).hasClass("green")) {
+            if (thisList.find(".select" + idDiv).hasClass("green")) {
                 $(this).find(".li").addClass("li-green")
             } else $(this).find(".li").addClass("li-hover")
         })
 
         li.mouseout(function () {
-            if ($(".select" + idDiv).hasClass("green")) {
+            if (thisList.find(".select" + idDiv).hasClass("green")) {
                 $(this).find(".li").removeClass("li-green")
             } else $(this).find(".li").removeClass("li-hover")
         })
 
-        if ($(".select" + idDiv).hasClass("green")) {
-            $(".li-hover").css("background-color", "#c4de95")
+        if (thisList.find(".select" + idDiv).hasClass("green")) {
+            thisList.find(".li-hover").css("background-color", "#c4de95")
         }
-        let text = $(".list" + list + " input:text")
+        let text = thisList.find(".list" + list + " input:text")
 
 
         $(window).click(function (e) {
-            if (!$(".select-label" + id).is(e.target) && !$(".select" + idDiv).is(e.target))
+            if (!thisList.find(".select-label" + id).is(e.target) && !thisList.find(".select" + idDiv).is(e.target))
                 div.hide()
         });
 
-        $('.select' + idDiv).find('li').click(function () {
+        thisList.find('.select' + idDiv).find('li').click(function () {
             let selectResult = $(this).find(".li").html();
             $(this).parent().parent().parent().parent().find('input.select-label' + id).val(selectResult);
         });

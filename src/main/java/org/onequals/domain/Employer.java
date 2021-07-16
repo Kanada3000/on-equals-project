@@ -25,6 +25,7 @@ public class Employer {
     private int empCount;
     private int size;
     private String description;
+    private Boolean approved = Boolean.FALSE;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id")
@@ -39,7 +40,7 @@ public class Employer {
 
     public Employer(Long id, User user, String name, String email, String site, String linkFacebook,
                     String linkInstagram, String linkTwitter, String linkLinkedIn, int age, int empCount,
-                    int size, String description, Category category, Set<City> city) {
+                    int size, String description, Boolean approved, Category category, Set<City> city) {
         this.id = id;
         this.user = user;
         this.name = name;
@@ -53,6 +54,7 @@ public class Employer {
         this.empCount = empCount;
         this.size = size;
         this.description = description;
+        this.approved = approved;
         this.category = category;
         this.city = city;
     }
@@ -175,5 +177,13 @@ public class Employer {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Boolean getApproved() {
+        return approved;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
     }
 }

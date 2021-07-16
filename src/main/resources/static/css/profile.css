@@ -111,8 +111,12 @@
     justify-content: space-between;
     padding: 0 0 55px;
     border-bottom: 4px solid black;
-    border-top: 4px solid black;
+    /*border-top: 4px solid black;*/
     font-size: inherit;
+}
+
+#profile-body .container .block:first-of-type {
+    border-top: 4px solid black;
 }
 
 #profile-body .container .block .text {
@@ -176,9 +180,20 @@
 #profile-body .container .block .buttons .edit {
     background-color: white;
     border: 4px solid black;
+    box-sizing: border-box;
 }
 
 #profile-body .container .block .buttons .delete {
+    background-color: #509FC8;
+}
+
+#profile-body .container .block .buttons .heart{
+    background-color: #F98DC0;
+}
+#profile-body .container .block .buttons .heart.red{
+    background-color: #FF5C55;
+}
+#profile-body .container .block .buttons .mail{
     background-color: #509FC8;
 }
 
@@ -477,7 +492,7 @@
         flex-direction: column;
     }
 
-    #profile-body .container .block .buttons .edit {
+    #profile-body .container .block .buttons .edit, #profile-body .container .block .buttons .mail{
         margin-bottom: 28px;
     }
 }
@@ -541,7 +556,7 @@
         width: calc(54px - 3vw);
     }
 
-    #profile-body .container .block .buttons .edit {
+    #profile-body .container .block .buttons .edit, #profile-body .container .block .buttons .mail{
         margin: 0;
     }
 
@@ -787,6 +802,10 @@
 
     .hide span.descript{
         font-size: calc(14px + 2.5vw);
+    }
+
+    #profile-body .container .block .text {
+        padding-top: calc(-3px + 6.9vw);
     }
 }
 

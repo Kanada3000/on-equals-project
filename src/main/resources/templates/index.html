@@ -69,42 +69,67 @@
     </div>
 
 
-    <div class="main__place" sec:authorize="hasAuthority('SEEKER') || hasAuthority('EMPLOYER') || hasAuthority('ADMIN') || hasRole('ADMIN')">
-        <a href="/vacancy/new" sec:authorize="!hasAuthority('SEEKER')">
-            <div class="smile-button left">
-                <div class="smile-image left">
-                    <img src="/images/smile-1.png" alt="smile1">
+    <div sec:authorize="isAuthenticated()">
+        <div class="main__place"
+             sec:authorize="hasAuthority('SEEKER') || hasAuthority('EMPLOYER') || hasAuthority('ADMIN') || hasRole('ADMIN')">
+            <a href="/vacancy/new" sec:authorize="!hasAuthority('SEEKER')">
+                <div class="smile-button left">
+                    <div class="smile-image left">
+                        <img src="/images/smile-1.png" alt="smile1">
+                    </div>
+                    <span>Розмістити вакансію</span>
                 </div>
-                <span>Розмістити вакансію</span>
-            </div>
-        </a>
-        <a href="/resume/new" sec:authorize="!hasAuthority('EMPLOYER')">
-            <div class="smile-button right">
-                <div class="smile-image right">
-                    <img src="/images/smile-2.png" alt="smile2">
+            </a>
+            <a href="/resume/new" sec:authorize="!hasAuthority('EMPLOYER')">
+                <div class="smile-button right">
+                    <div class="smile-image right">
+                        <img src="/images/smile-2.png" alt="smile2">
+                    </div>
+                    <span>Розмістити резюме</span>
                 </div>
-                <span>Розмістити резюме</span>
-            </div>
-        </a>
+            </a>
+        </div>
+
+        <div class="main__place"
+             sec:authorize="!hasAuthority('SEEKER') && !hasAuthority('EMPLOYER') && !hasAuthority('ADMIN') && !hasRole('ADMIN')">
+            <a href="/choose">
+                <div class="smile-button left">
+                    <div class="smile-image left">
+                        <img src="/images/smile-1.png" alt="smile1">
+                    </div>
+                    <span>Розмістити вакансію</span>
+                </div>
+            </a>
+            <a href="/choose">
+                <div class="smile-button right">
+                    <div class="smile-image right">
+                        <img src="/images/smile-2.png" alt="smile2">
+                    </div>
+                    <span>Розмістити резюме</span>
+                </div>
+            </a>
+        </div>
     </div>
 
-    <div class="main__place" sec:authorize="!hasAuthority('SEEKER') && !hasAuthority('EMPLOYER') && !hasAuthority('ADMIN') && !hasRole('ADMIN')">
-        <a href="/choose">
-            <div class="smile-button left">
-                <div class="smile-image left">
-                    <img src="/images/smile-1.png" alt="smile1">
+    <div sec:authorize="!isAuthenticated()">
+        <div class="main__place">
+            <a href="/register">
+                <div class="smile-button left">
+                    <div class="smile-image left">
+                        <img src="/images/smile-1.png" alt="smile1">
+                    </div>
+                    <span>Розмістити вакансію</span>
                 </div>
-                <span>Розмістити вакансію</span>
-            </div>
-        </a>
-        <a href="/choose">
-            <div class="smile-button right">
-                <div class="smile-image right">
-                    <img src="/images/smile-2.png" alt="smile2">
+            </a>
+            <a href="/register">
+                <div class="smile-button right">
+                    <div class="smile-image right">
+                        <img src="/images/smile-2.png" alt="smile2">
+                    </div>
+                    <span>Розмістити резюме</span>
                 </div>
-                <span>Розмістити резюме</span>
-            </div>
-        </a>
+            </a>
+        </div>
     </div>
 
 
@@ -252,18 +277,22 @@
         з інвалідністю.
     </span>
     <div class="buttons">
-        <div class="support-button">
-            <div class="image">
-                <img src="/images/support-heart-1.png" alt="heart">
+        <a href="https://www.patreon.com/onequals" target="_blank">
+            <div class="support-button">
+                <div class="image">
+                    <img src="/images/support-heart-1.png" alt="heart">
+                </div>
+                <span>Підключити щомісячний донат</span>
             </div>
-            <span>Підключити щомісячний донат</span>
-        </div>
-        <div class="support-button">
-            <div class="image">
-                <img src="/images/support-heart-2.png" alt="heart">
+        </a>
+        <a href="https://send.monobank.ua/jar/2tsi1dsLLE" target="_blank">
+            <div class="support-button">
+                <div class="image">
+                    <img src="/images/support-heart-2.png" alt="heart">
+                </div>
+                <span>Зробити одноразовий внесок</span>
             </div>
-            <span>Зробити одноразовий внесок</span>
-        </div>
+        </a>
     </div>
     <p>
         Також ви можете долучитись до команди, ставши волонтером за такими напрямками:

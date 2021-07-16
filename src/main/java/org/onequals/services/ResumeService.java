@@ -1,5 +1,6 @@
 package org.onequals.services;
 
+import org.onequals.domain.Employer;
 import org.onequals.domain.Resume;
 import org.onequals.domain.User;
 import org.onequals.repo.ResumeRepo;
@@ -25,6 +26,11 @@ public class ResumeService {
     @Transactional
     public List<Resume> getAll() {
         return resumeRepo.findAll(Sort.by("salary"));
+    }
+
+    @Transactional
+    public List<Resume> getAllAll() {
+        return resumeRepo.findAllAll(Sort.by("salary"));
     }
 
     @Transactional
@@ -77,8 +83,28 @@ public class ResumeService {
     }
 
     @Transactional
+    public void deleteAll(List<Resume> resumes) {
+        for (Resume r: resumes){
+            Long id = r.getId();
+            List<User> users = resumeRepo.getUsersByLike(id);
+            for(User u: users){
+                Set<Resume> set = u.getLikedResume();
+                set.remove(resumeRepo.getById(id));
+                u.setLikedResume(set);
+                userRepo.save(u);
+            }
+            resumeRepo.deleteById(id);
+        }
+    }
+
+    @Transactional
     public List<Resume> findByUser(User user) {
         return resumeRepo.findByUser(user.getId());
+    }
+
+    @Transactional
+    public List<Resume> getUnapproved(){
+        return resumeRepo.findUnapproved();
     }
 
     @Transactional

@@ -22,6 +22,7 @@ public class Seeker {
     private String linkTwitter;
     private String linkLinkedIn;
     private String description;
+    private Boolean approved = Boolean.FALSE;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id")
@@ -36,7 +37,7 @@ public class Seeker {
 
     public Seeker(Long id, User user, String name, String email, String site, String linkFacebook,
                   String linkInstagram, String linkTwitter, String linkLinkedIn, String description,
-                  Category category, Set<City> city) {
+                  Boolean approved, Category category, Set<City> city) {
         this.id = id;
         this.user = user;
         this.name = name;
@@ -47,6 +48,7 @@ public class Seeker {
         this.linkTwitter = linkTwitter;
         this.linkLinkedIn = linkLinkedIn;
         this.description = description;
+        this.approved = approved;
         this.category = category;
         this.city = city;
     }
@@ -145,5 +147,13 @@ public class Seeker {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Boolean getApproved() {
+        return approved;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
     }
 }

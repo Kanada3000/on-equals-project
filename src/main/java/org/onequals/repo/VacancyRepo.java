@@ -1,5 +1,6 @@
 package org.onequals.repo;
 
+import org.onequals.domain.Employer;
 import org.onequals.domain.Resume;
 import org.onequals.domain.User;
 import org.onequals.domain.Vacancy;
@@ -12,6 +13,18 @@ import java.util.List;
 import java.util.Set;
 
 public interface VacancyRepo extends JpaRepository<Vacancy, Long> {
+
+    @Query("SELECT v FROM Vacancy v WHERE v.approved = true AND v.user.hidden <> true ")
+    List<Vacancy> findAll();
+
+    @Query("SELECT v FROM Vacancy v WHERE v.approved = true AND v.user.hidden <> true ")
+    List<Vacancy> findAll(Sort sort);
+
+    @Query("SELECT v FROM Vacancy v WHERE v.approved = true")
+    List<Vacancy> findAllAll();
+
+    @Query("SELECT v FROM Vacancy v WHERE v.approved = true")
+    List<Vacancy> findAllAll(Sort sort);
 
     @Query("SELECT v FROM Vacancy v WHERE v.user.id = ?1")
     List<Vacancy> findByUser(Long id);
@@ -46,4 +59,7 @@ public interface VacancyRepo extends JpaRepository<Vacancy, Long> {
 
     @Query("SELECT u FROM User u WHERE (SELECT v FROM Vacancy v WHERE v.id = ?1) MEMBER OF u.likedVacancy")
     List<User> getUsersByLike (Long id);
+
+    @Query("SELECT v FROM Vacancy v WHERE v.approved = false")
+    List<Vacancy> findUnapproved();
 }

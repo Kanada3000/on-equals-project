@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>OnEquals Admin Resumes</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
+</header>
+
+<form id="form" th:action="@{/admin/approve/resume/add}" method="post">
+</form>
+<input id='id' type='hidden' name='id' form='form'>
+
+<div id="admin">
+    <div id="sidebar">
+        <div class="button">
+            <a href="/admin/users">Користувачі</a>
+        </div>
+        <div class="button">
+            <a href="/admin/vacancies">Вакансії</a>
+        </div>
+        <div class="button">
+            <a href="/admin/resumes">Резюме</a>
+        </div>
+        <div class="button">
+            <a href="/admin/cities">Країни та міста</a>
+        </div>
+        <div class="button">
+            <a href="/admin/category">Категорії</a>
+        </div>
+        <div class="button">
+            <a href="/admin/type">Тип зайнятості</a>
+        </div>
+        <div class="button">
+            <a href="/admin/employer">Роботодавці</a>
+        </div>
+        <div class="button">
+            <a href="/admin/seeker">Шукачі</a>
+        </div>
+        <div class="button">
+            <a href="/admin/file">Файли резюме</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${empTotal.size() != 0}" th:text="${empTotal.size()}"></span>
+            <a href="/admin/approve/employer">Непідтверджені роботодавці</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${seekTotal.size() != 0}" th:text="${seekTotal.size()}"></span>
+            <a href="/admin/approve/seeker">Непідтверджені шукачі</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${vacTotal.size() != 0}" th:text="${vacTotal.size()}"></span>
+            <a href="/admin/approve/vacancy">Непідтверджені вакансії</a>
+        </div>
+        <div class="button red-button active">
+            <span class="notification" th:if="${resTotal.size() != 0}" th:text="${resTotal.size()}"></span>
+            <a>Непідтверджені резюме</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${path != 0}" th:text="${path}"></span>
+            <a href="/admin/approve/file">Непідтверджені файли резюме</a>
+        </div>
+    </div>
+    <div id="body">
+        <h1>Непідтверджені резюме</h1>
+        <div class="table">
+        <table border="1">
+            <tr class="head">
+                <td class="id-head">id</td>
+                <td>user</td>
+                <td>type</td>
+                <td>category</td>
+                <td>city</td>
+                <td>salary</td>
+                <td>description</td>
+                <td>approved</td>
+                <td class="but-head"><span>&nbsp;</span></td>
+                <td class="but-head"><span>&nbsp;</span></td>
+            </tr>
+            <tr class="hidden">
+                <td class="id"></td>
+                <td>
+                    <div class="list" id="userList">
+                        <input autocomplete="off" id="user" type="text" class="select-label" required>
+                        <div class="select green" id="user-div">
+                            <ul>
+                                <li th:each="u: ${user}">
+                                    <div class="li" th:text="${u.getUsername()}"></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="list" id="typeList">
+                        <input autocomplete="off" id="type" type="text" class="select-label" required>
+                        <div class="select green" id="type-div">
+                            <ul>
+                                <li th:each="t: ${types}">
+                                    <div class="li" th:text="${t.getName()}"></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="list" id="categoryList">
+                        <input autocomplete="off" id="category" type="text" class="select-label" required>
+                        <div class="select green" id="category-div">
+                            <ul>
+                                <li th:each="c: ${category}">
+                                    <div class="li" th:text="${c.getLongName()}"></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+                <td class="cityDiv">
+                    <div class="list" id="cityList">
+                        <input autocomplete="off" id="city" type="text" class="select-label" required>
+                        <div class="select green" id="city-div">
+                            <ul>
+                                <li th:each="c: ${city}">
+                                    <div class="li" th:text="${c.getCity()}"></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+                <td><input autocomplete="off" id="salary" type="text" required></td>
+                <td><input id="description" type="text" required></td>
+                <td>
+                    <select id="approved" name="approved">
+                        <option value="false">Ні</option>
+                        <option value="true">Так</option>
+                    </select>
+                </td>
+                <td class="accept">&#10004;</td>
+                <td class="cancel">&#10060;</td>
+            </tr>
+            <tr th:each="r: ${resume}">
+                <td class="id" th:text="${r.getId()}"></td>
+                <td class="user" th:text="${r.getUser().getUsername()}"></td>
+                <td class="type" th:text="${r.getType().getName()}"></td>
+                <td class="category" th:text="${r.getCategory().getLongName()}"></td>
+                <td class="city">
+                    <div th:each="c: ${r.getCity()}">
+                        <div th:remove="tag" th:text="${c.getCity()}"></div>
+                    </div>
+                </td>
+                <td class="salary" th:text="${r.getSalary()}"></td>
+                <td class="description" th:text="${r.getDescription()}">1000 знаків</td>
+                <td class="approved" th:if="${r.getApproved()}">Так</td>
+                <td class="approved" th:unless="${r.getApproved()}">Ні</td>
+                <td class="edit">&#9998;</td>
+                <td id="approve/resume" class="delete">&#10060;</td>
+            </tr>
+            <tr class="clear">
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td class="but-head"><span>&nbsp;</span></td>
+                <td class="but-head"><span>&nbsp;</span></td>
+            </tr>
+
+        </table>
+        </div>
+    </div>
+</div>
+
+<div id="accept-delete">
+    <span>Ви впевнені, що хочете видалити цей запис назавжди?</span>
+    <div class="buttons">
+        <div class="button yes">Так</div>
+        <div class="button no">Ні</div>
+    </div>
+</div>
+
+<div class="backdrop"></div>
+<script src="/script/script.js"></script>
+<script src="/script/script-list.js"></script>
+<script src="/script/script-admin.js"></script>
+<script src="/script/script-admin-city.js"></script>
+
+</body>
+</html>

@@ -36,10 +36,13 @@ public class Vacancy{
     @ManyToMany(mappedBy = "likedVacancy")
     private Set<User> likes;
 
+    private Boolean approved = Boolean.FALSE;
+
     public Vacancy(){
     }
 
-    public Vacancy(Long id, Category category, Type type, User user, Set<City> city, int salary, String description, Set<User> likes) {
+    public Vacancy(Long id, Category category, Type type, User user, Set<City> city, int salary,
+                   String description, Set<User> likes, Boolean approved) {
         this.id = id;
         this.category = category;
         this.type = type;
@@ -48,6 +51,7 @@ public class Vacancy{
         this.salary = salary;
         this.description = description;
         this.likes = likes;
+        this.approved = approved;
     }
 
     public Long getId() {
@@ -112,5 +116,13 @@ public class Vacancy{
 
     public void setLikes(Set<User> likes) {
         this.likes = likes;
+    }
+
+    public Boolean getApproved() {
+        return approved;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
     }
 }

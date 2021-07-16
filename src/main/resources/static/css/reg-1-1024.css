@@ -119,6 +119,11 @@
         min-width: 708px;
     }
 
+    #footer-reg .file{
+        min-width: 708px;
+        width: 73%;
+    }
+
     #footer-reg p{
         margin: 35px auto 0;
         width: 73%;

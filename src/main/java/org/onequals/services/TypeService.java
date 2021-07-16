@@ -73,11 +73,11 @@ public class TypeService {
     public List<Type> updateTotalResumes(List<Resume> resumes){
         List<Type> types = typeRepo.findAll(Sort.by("id"));
 
-        List<Long> vacanciesId = resumes.stream()
+        List<Long> resumesId = resumes.stream()
                 .map(Resume::getId)
                 .collect(Collectors.toList());
 
-        List<Type> test = typeRepo.countByTypeList(vacanciesId);
+        List<Type> test = typeRepo.countByTypeListResume(resumesId);
 
         for (Type value : types) {
             value.setTotal(0);

@@ -1,5 +1,6 @@
 package org.onequals.services;
 
+import org.onequals.domain.Employer;
 import org.onequals.domain.User;
 import org.onequals.domain.Vacancy;
 import org.onequals.repo.UserRepo;
@@ -25,6 +26,11 @@ public class VacancyService {
     @Transactional
     public List<Vacancy> getAll() {
         return vacancyRepo.findAll();
+    }
+
+    @Transactional
+    public List<Vacancy> getAllAll() {
+        return vacancyRepo.findAllAll();
     }
 
     @Transactional
@@ -77,8 +83,28 @@ public class VacancyService {
     }
 
     @Transactional
+    public void deleteAll(List<Vacancy> vacancies) {
+        for(Vacancy v: vacancies){
+            Long id = v.getId();
+            List<User> users = vacancyRepo.getUsersByLike(id);
+            for (User u : users) {
+                Set<Vacancy> set = u.getLikedVacancy();
+                set.remove(vacancyRepo.getById(id));
+                u.setLikedVacancy(set);
+                userRepo.save(u);
+            }
+            vacancyRepo.deleteById(id);
+        }
+    }
+
+    @Transactional
     public List<Vacancy> findByUser(User user) {
         return vacancyRepo.findByUser(user.getId());
+    }
+
+    @Transactional
+    public List<Vacancy> getUnapproved(){
+        return vacancyRepo.findUnapproved();
     }
 
     @Transactional

@@ -46,6 +46,29 @@
         <div class="button active">
             <a>Шукачі</a>
         </div>
+        <div class="button">
+            <a href="/admin/file">Файли резюме</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${empTotal.size() != 0}" th:text="${empTotal.size()}"></span>
+            <a href="/admin/approve/employer">Непідтверджені роботодавці</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${seekTotal.size() != 0}" th:text="${seekTotal.size()}"></span>
+            <a href="/admin/approve/seeker">Непідтверджені шукачі</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${vacTotal.size() != 0}" th:text="${vacTotal.size()}"></span>
+            <a href="/admin/approve/vacancy">Непідтверджені вакансії</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${resTotal.size() != 0}" th:text="${resTotal.size()}"></span>
+            <a href="/admin/approve/resume">Непідтверджені резюме</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${path != 0}" th:text="${path}"></span>
+            <a href="/admin/approve/file">Непідтверджені файли резюме</a>
+        </div>
     </div>
     <div id="body">
         <h1>Шукачі</h1>
@@ -65,6 +88,7 @@
                     <td>instagram</td>
                     <td>linkedIn</td>
                     <td>twitter</td>
+                    <td>approved</td>
                     <td class="but-head"><span>&nbsp;</span></td>
                     <td class="but-head"><span>&nbsp;</span></td>
                 </tr>
@@ -97,7 +121,7 @@
                             </div>
                         </div>
                     </td>
-                    <td>
+                    <td class="cityDiv">
                         <div class="list" id="cityList">
                             <input autocomplete="off" id="city" type="text" class="select-label" required>
                             <div class="select green" id="city-div">
@@ -108,6 +132,7 @@
                                 </ul>
                             </div>
                         </div>
+                        <a href="#" class="addCity">&#10133;</a>
                     </td>
                     <td><input id="site" type="text"></td>
                     <td><input id="description" type="text" required></td>
@@ -115,7 +140,12 @@
                     <td><input id="link_instagram" type="text"></td>
                     <td><input id="link_linked_in" type="text"></td>
                     <td><input id="link_twitter" type="text"></td>
-
+                    <td>
+                        <select id="approved" name="approved">
+                            <option value="false">Ні</option>
+                            <option value="true">Так</option>
+                        </select>
+                    </td>
                     <td class="accept">&#10004;</td>
                     <td class="cancel">&#10060;</td>
                 </tr>
@@ -137,11 +167,13 @@
                     <td class="link_instagram" th:text="${s.getLinkInstagram()}"></td>
                     <td class="link_linked_in" th:text="${s.getLinkLinkedIn()}"></td>
                     <td class="link_twitter" th:text="${s.getLinkTwitter()}"></td>
-
+                    <td class="approved" th:if="${s.getApproved()}">Так</td>
+                    <td class="approved" th:unless="${s.getApproved()}">Ні</td>
                     <td class="edit">&#9998;</td>
                     <td id="seeker" class="delete">&#10060;</td>
                 </tr>
                 <tr class="clear">
+                    <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
@@ -175,5 +207,7 @@
 <script src="/script/script.js"></script>
 <script src="/script/script-list.js"></script>
 <script src="/script/script-admin.js"></script>
+<script src="/script/script-admin-city.js"></script>
+
 </body>
 </html>

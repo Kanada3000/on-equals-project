@@ -31,12 +31,13 @@ public class Resume {
 
     private int salary = 20000;
     private String description;
+    private Boolean approved = Boolean.FALSE;
 
     public Resume(){
     }
 
-    public Resume(Long id, Category category, Type type, User user, Set<City> city, Set<User> likes,
-                  int salary, String description) {
+    public Resume(Long id, Category category, Type type, User user, Set<City> city, Set<User> likes, int salary,
+                  String description, Boolean approved) {
         this.id = id;
         this.category = category;
         this.type = type;
@@ -45,6 +46,7 @@ public class Resume {
         this.likes = likes;
         this.salary = salary;
         this.description = description;
+        this.approved = approved;
     }
 
     public Long getId() {
@@ -109,5 +111,13 @@ public class Resume {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Boolean getApproved() {
+        return approved;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
     }
 }

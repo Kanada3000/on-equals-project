@@ -15,6 +15,7 @@
       <list>
         <option value="JavaScript File" />
         <option value="Interface" />
+        <option value="CSS File" />
         <option value="Class" />
       </list>
     </option>
@@ -45,8 +46,9 @@
     <property name="database.data.extractors.current.export.id" value="Comma-separated (CSV)_id" />
     <property name="database.data.extractors.current.id" value="Comma-separated (CSV)_id" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/admin" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.29256967" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -56,23 +58,17 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Work\onequals\src\main\resources\templates\admin" />
+      <recent name="E:\Work\onequals\src\main\resources\static\script" />
+      <recent name="E:\Work\onequals\src\main\resources\templates\admin\approve" />
+      <recent name="E:\Work\onequals\src\main\resources\templates" />
       <recent name="E:\Work\onequals\src\main\resources\db\migration" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.onequals.services" />
+      <recent name="org.onequals.controller" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="OnequalsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="onequals" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.onequals.OnequalsApplication" />
@@ -105,7 +101,12 @@
       <workItem from="1625556959843" duration="3055000" />
       <workItem from="1625580974286" duration="518000" />
       <workItem from="1625581668522" duration="6972000" />
-      <workItem from="1625640373445" duration="24770000" />
+      <workItem from="1625640373445" duration="25797000" />
+      <workItem from="1625725583613" duration="43627000" />
+      <workItem from="1626075039461" duration="22328000" />
+      <workItem from="1626160434543" duration="42253000" />
+      <workItem from="1626277439103" duration="3050000" />
+      <workItem from="1626435037275" duration="2452000" />
     </task>
     <servers />
   </component>

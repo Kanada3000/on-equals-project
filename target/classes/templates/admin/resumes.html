@@ -46,6 +46,29 @@
         <div class="button">
             <a href="/admin/seeker">Шукачі</a>
         </div>
+        <div class="button">
+            <a href="/admin/file">Файли резюме</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${empTotal.size() != 0}" th:text="${empTotal.size()}"></span>
+            <a href="/admin/approve/employer">Непідтверджені роботодавці</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${seekTotal.size() != 0}" th:text="${seekTotal.size()}"></span>
+            <a href="/admin/approve/seeker">Непідтверджені шукачі</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${vacTotal.size() != 0}" th:text="${vacTotal.size()}"></span>
+            <a href="/admin/approve/vacancy">Непідтверджені вакансії</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${resTotal.size() != 0}" th:text="${resTotal.size()}"></span>
+            <a href="/admin/approve/resume">Непідтверджені резюме</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${path != 0}" th:text="${path}"></span>
+            <a href="/admin/approve/file">Непідтверджені файли резюме</a>
+        </div>
     </div>
     <div id="body">
         <h1>Резюме</h1>
@@ -60,6 +83,7 @@
                 <td>city</td>
                 <td>salary</td>
                 <td>description</td>
+                <td>approved</td>
                 <td class="but-head"><span>&nbsp;</span></td>
                 <td class="but-head"><span>&nbsp;</span></td>
             </tr>
@@ -112,15 +136,22 @@
                             </ul>
                         </div>
                     </div>
+                    <a href="#" class="addCity">&#10133;</a>
                 </td>
                 <td><input autocomplete="off" id="salary" type="text" required></td>
                 <td><input id="description" type="text" required></td>
+                <td>
+                    <select id="approved" name="approved">
+                        <option value="false">Ні</option>
+                        <option value="true">Так</option>
+                    </select>
+                </td>
                 <td class="accept">&#10004;</td>
                 <td class="cancel">&#10060;</td>
             </tr>
             <tr th:each="r: ${resume}">
                 <td class="id" th:text="${r.getId()}"></td>
-                <td class="user" th:text="${r.getUser().getName()}"></td>
+                <td class="user" th:text="${r.getUser().getUsername()}"></td>
                 <td class="type" th:text="${r.getType().getName()}"></td>
                 <td class="category" th:text="${r.getCategory().getLongName()}"></td>
                 <td class="city">
@@ -130,10 +161,13 @@
                 </td>
                 <td class="salary" th:text="${r.getSalary()}"></td>
                 <td class="description" th:text="${r.getDescription()}">1000 знаків</td>
+                <td class="approved" th:if="${r.getApproved()}">Так</td>
+                <td class="approved" th:unless="${r.getApproved()}">Ні</td>
                 <td class="edit">&#9998;</td>
                 <td id="resumes" class="delete">&#10060;</td>
             </tr>
             <tr class="clear">
+                <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
@@ -159,8 +193,15 @@
 </div>
 
 <div class="backdrop"></div>
+<script th:inline="javascript">
+    var cityList = []
+    $("#cityList .li").each(function () {
+        cityList.push($(this).text())
+    })
+</script>
 <script src="/script/script.js"></script>
 <script src="/script/script-list.js"></script>
 <script src="/script/script-admin.js"></script>
+<script src="/script/script-admin-city.js"></script>
 </body>
 </html>

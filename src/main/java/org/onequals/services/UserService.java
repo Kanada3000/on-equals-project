@@ -30,8 +30,9 @@ public class UserService implements UserDetailsService {
     private final ResumeService resumeService;
     private final SeekerService seekerService;
     private final EmployerService employerService;
+    private final MailSender mailSender;
 
-    public UserService(UserRepo userRepo, VacancyRepo vacancyRepo, PasswordEncoder passwordEncoder, ResumeRepo resumeRepo, VacancyService vacancyService, ResumeService resumeService, SeekerService seekerService, EmployerService employerService) {
+    public UserService(UserRepo userRepo, VacancyRepo vacancyRepo, PasswordEncoder passwordEncoder, ResumeRepo resumeRepo, VacancyService vacancyService, ResumeService resumeService, SeekerService seekerService, EmployerService employerService, MailSender mailSender) {
         this.userRepo = userRepo;
         this.vacancyRepo = vacancyRepo;
         this.passwordEncoder = passwordEncoder;
@@ -40,6 +41,12 @@ public class UserService implements UserDetailsService {
         this.resumeService = resumeService;
         this.seekerService = seekerService;
         this.employerService = employerService;
+        this.mailSender = mailSender;
+    }
+
+    @Transactional
+    public void sendEmail(User user, String title, String msg){
+        mailSender.send(user.getUsername(), title, msg);
     }
 
     @Transactional

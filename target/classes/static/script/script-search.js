@@ -5,12 +5,12 @@ $(function () {
         $(window).scrollTop(scroll)
     }
 
-    if (likesId !== null){
+    if (likesId !== null) {
         let likesIdList = likesId.split("&")
         let id
-        $("#vacancies .vacancy").each(function(){
+        $("#vacancies .vacancy").each(function () {
             id = $(this).find("#idLike").text()
-            if (likesIdList.includes(id)){
+            if (likesIdList.includes(id)) {
                 $(this).find(".heart").addClass("red")
             }
         })
@@ -18,12 +18,12 @@ $(function () {
 
     let step = 1000
 
-    if(max % step !== 0){
-        max = Math.floor(max/step)*step + step
+    if (max % step !== 0) {
+        max = Math.floor(max / step) * step + step
     }
 
-    if(min % step !== 0){
-        min = Math.floor(min/step)*step
+    if (min % step !== 0) {
+        min = Math.floor(min / step) * step
     }
     let min_val = min
     let max_val = max
@@ -46,18 +46,18 @@ $(function () {
         max_start = searchParams.get('max')
     }
 
-    if(searchParams.has('category')){
-        for(let check of searchParams.entries()) {
-            if(check[0] === 'category'){
-                $("#category .cat-list input#cat-"+ check[1]).prop("checked", "true")
+    if (searchParams.has('category')) {
+        for (let check of searchParams.entries()) {
+            if (check[0] === 'category') {
+                $("#category .cat-list input#cat-" + check[1]).prop("checked", "true")
             }
         }
     }
 
-    if(searchParams.has('type')){
-        for(let check of searchParams.entries()) {
-            if(check[0] === 'type'){
-                $("#category .type-list input#type-"+ check[1]).prop("checked", "true")
+    if (searchParams.has('type')) {
+        for (let check of searchParams.entries()) {
+            if (check[0] === 'type') {
+                $("#category .type-list input#type-" + check[1]).prop("checked", "true")
             }
         }
     }
@@ -119,34 +119,25 @@ $(function () {
         }
     })
 
-    let timer;
-
-    $('#category .salary .input input').click(function () {
-        if (timer)
-            clearTimeout(timer);
-        timer = setTimeout(function () {
-            localStorage.setItem("scrollPos", $(window).scrollTop())
-            $("#sortForm").submit()
-        }, 1500)
+    $('#category .salary .input input:not(:disabled)').click(function () {
+        localStorage.setItem("scrollPos", $(window).scrollTop())
+        $("#sortForm").submit()
     });
 
     $('#category .cat-list label').click(function () {
-        if (timer)
-            clearTimeout(timer);
-        timer = setTimeout(function () {
+        if ($(this).prev("input:not(:disabled)").length) {
+            $(this).prev("input").prop("checked", !$(this).prev("input").prop("checked"))
             localStorage.setItem("scrollPos", $(window).scrollTop())
             $("#sortForm").submit()
-        }, 1500)
+        }
     });
 
-
     $('#category .type-list label').click(function () {
-        if (timer)
-            clearTimeout(timer);
-        timer = setTimeout(function () {
+        if ($(this).prev("input:not(:disabled)").length) {
+            $(this).prev("input").prop("checked", !$(this).prev("input").prop("checked"))
             localStorage.setItem("scrollPos", $(window).scrollTop())
             $("#sortForm").submit()
-        }, 1500)
+        }
     });
 })
 

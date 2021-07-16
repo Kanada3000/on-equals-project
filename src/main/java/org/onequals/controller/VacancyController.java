@@ -1,5 +1,6 @@
 package org.onequals.controller;
 
+import org.onequals.domain.Resume;
 import org.onequals.domain.User;
 import org.onequals.domain.Vacancy;
 import org.onequals.services.*;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -51,24 +53,26 @@ public class VacancyController {
             user = userService.findUser(principal.getName());
         }
 
-        if (likes != null) {
-            List<String> items = Arrays.asList(likes.split("&"));
-            userService.addVacancyLikes(user, items);
-        }
-
-        if (dislikes != null) {
-            List<String> items = Arrays.asList(dislikes.split("&"));
-            userService.deleteVacancyLikes(user, items);
-        }
-
-        if(user.getLikedVacancy() != null)
-        if (!user.getLikedVacancy().isEmpty()) {
-            StringBuilder s = new StringBuilder();
-            for (Vacancy v : user.getLikedVacancy()) {
-                s.append(v.getId()).append("&");
+        if (likes != null)
+            if (!likes.isEmpty()) {
+                List<String> items = Arrays.asList(likes.split("&"));
+                userService.addVacancyLikes(user, items);
             }
-            model.addAttribute("likesId", s);
-        }
+
+        if (dislikes != null)
+            if (!dislikes.isEmpty()) {
+                List<String> items = Arrays.asList(dislikes.split("&"));
+                userService.deleteVacancyLikes(user, items);
+            }
+
+        if (user.getLikedVacancy() != null)
+            if (!user.getLikedVacancy().isEmpty()) {
+                StringBuilder s = new StringBuilder();
+                for (Vacancy v : user.getLikedVacancy()) {
+                    s.append(v.getId()).append("&");
+                }
+                model.addAttribute("likesId", s);
+            }
 
         HashMap<Object, Object> map = vacancyService.findMinMax(min, max);
         List<Vacancy> vacancies = vacancyService.sortAndFilter(key_words, catString, citString,
@@ -76,13 +80,14 @@ public class VacancyController {
 
         model.addAttribute("min", map.get("minSalary"));
         model.addAttribute("max", map.get("maxSalary"));
-        if(vacancies != null){
-        if(!vacancies.isEmpty()){
-            model.addAttribute("categories", categoryService.updateTotal(vacancies));
-            model.addAttribute("type", typeService.updateTotal(vacancies));
-            model.addAttribute("total", vacancies.size());
-            model.addAttribute("vacancies", vacancies);
-        }} else{
+        if (vacancies != null) {
+            if (!vacancies.isEmpty()) {
+                model.addAttribute("categories", categoryService.updateTotal(vacancies));
+                model.addAttribute("type", typeService.updateTotal(vacancies));
+                model.addAttribute("total", vacancies.size());
+                model.addAttribute("vacancies", vacancies);
+            }
+        } else {
             model.addAttribute("categories", categoryService.getAll());
             model.addAttribute("type", typeService.getAll());
             model.addAttribute("total", "0");
@@ -112,20 +117,34 @@ public class VacancyController {
 
     @PostMapping("/new")
     public String addVacancy(Principal principal,
-                             @RequestParam("category") String cat,
-                             @RequestParam("type") String t,
-                             @RequestParam("citString") List<String> cities,
-                             @RequestParam("description") String desc,
-                             @RequestParam("salary") int salary) {
-        Vacancy vacancy = new Vacancy();
-        vacancy.setUser(userService.findUser(principal.getName()));
-        List<Long> cityId = cityService.findByNames(cities);
-        cityService.addCities(vacancy, cityId);
-        vacancy.setType(typeService.findByName(t));
-        vacancy.setCategory(categoryService.findByName(cat));
-        vacancy.setDescription(desc);
-        vacancy.setSalary(salary);
-        vacancyService.save(vacancy);
+                             @RequestParam("category") List<String> cat,
+                             @RequestParam("typeList") List<String> typeList,
+                             @RequestParam("citString") List<String> citString,
+                             @RequestParam("description") List<String> desc,
+                             @RequestParam("salary") List<Integer> salary) {
+        User user = userService.findUser(principal.getName());
+
+        for (int i = 0; i < cat.size(); i++) {
+            List<String> cities = new ArrayList<>();
+            int j = 0;
+            for (String c : citString) {
+                if (j != 0 && c.equals(".")) {
+                    break;
+                } else if (!c.equals(".")) {
+                    cities.add(c);
+                }
+                j++;
+            }
+            citString.subList(0, j).clear();
+            Vacancy vacancy = new Vacancy();
+
+            vacancy.setUser(user);
+            vacancy.setType(typeService.findByName(typeList.get(i)));
+            vacancy.setCategory(categoryService.findByName(cat.get(i)));
+            vacancy.setDescription(desc.get(i));
+            vacancy.setSalary(salary.get(i));
+            cityService.addCities(vacancy, cityService.findByNames(cities));
+        }
         return "redirect:/";
     }
 

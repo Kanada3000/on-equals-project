@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="ua">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>OnEquals Profile</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/file.css">
+    <link rel="stylesheet" href="/css/search.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
+</header>
+<div id="profile-head">
+    <div class="avatar">
+        <div class="out avatarblock"><a href="/logout">Вийти</a></div>
+        <img src="/images/avatar.png">
+    </div>
+    <div class="info">
+        <h1 th:text="${user.getName()}"></h1>
+        <input id="userId" type="hidden" name="userId" th:value="${user.getUser().getId()}">
+        <span class="underline"><a th:href="${user.getSite()}" th:text="${user.getSite()}"></a></span>
+        <span>
+            <img src="/images/location.png">
+            <span th:each="c, index: ${user.getCity()}" th:remove="tag">
+                        <span th:if="${index.index == 0}" th:text="${c.getCountry()}" th:remove="tag"></span>
+                        <span th:text="${' / '+ c.getCity()}" th:remove="tag"></span>
+                </span>
+        </span>
+        <div class="container">
+            <div class="social">
+                <div th:if="${user.getLinkFacebook() != ''}" th:remove="tag">
+                    <a th:href="${user.getLinkFacebook()}"><img src="/images/facebook-f.png"></a>
+                </div>
+                <div th:if="${user.getLinkInstagram() != ''}" th:remove="tag">
+                    <a th:href="${user.getLinkInstagram()}"><img src="/images/instagram.png"></a>
+                </div>
+                <div th:if="${user.getLinkTwitter() != ''}" th:remove="tag">
+                    <a th:href="${user.getLinkTwitter()}"><img src="/images/twitter.png"></a>
+                </div>
+                <div th:if="${user.getLinkLinkedIn() != ''}" th:remove="tag">
+                    <a th:href="${user.getLinkLinkedIn()}"><img src="/images/linkedin-in.png"></a>
+                </div>
+            </div>
+            <div class="out infoblock">
+                <a href="/logout">Вийти</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="profile-body">
+    <span th:text="${user.getDescription()}">
+    </span>
+    <div class="container">
+        <div class="block" th:each="b: ${block}">
+            <div class="text">
+                <span th:text="${b.getCategory().getLongName()}">копірайтинг</span>
+                <span th:text="${b.getType().getName()}">повна зайнятість</span>
+                <span th:if="${b.getSalary() > 999}"
+                      th:text="${#numbers.formatInteger(b.getSalary(), 3, 'WHITESPACE') + ' грн'}">
+                </span>
+                <span th:if="${b.getSalary() <= 999}" th:text="${b.getSalary() + ' грн'}">
+                </span>
+                <span>
+                    <div th:remove="tag" th:each="c, index: ${b.getCity()}">
+                        <span th:if="${index.index == 0}" th:text="${c.getCountry()}" th:remove="tag"></span>
+                        <span th:text="${' / '+ c.getCity()}" th:remove="tag"></span>
+                    </div>
+                </span>
+                <div class="hide">
+                    <span class="roll-down">розгорнути ↓</span>
+                    <span class="descript" th:text="${b.getDescription()}">
+                </span>
+                    <span class="roll-up">згорнути ↑</span>
+                </div>
+            </div>
+            <div class="buttons">
+                <a href="#">
+                    <a th:href="${'mailto:'+ b.getUser().getUsername()}">
+                        <div class="mail">
+                            <img src="/images/mail-vacancy.png" alt="mail">
+                        </div>
+                    </a>
+                </a>
+                <div class="heart">
+                    <input id="likeId" type="hidden" name="likeId" th:value="${b.getId()}">
+                    <img src="/images/heart-vacancy.png" alt="like">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${map != null}" style="height: 60px">
+    </div>
+
+    <div th:each="l: ${map}" th:remove="tag" th:if="${map != null}">
+        <div class="file" style="display: flex; width: 100%">
+            <div class="block">
+                <img src="/images/pdf.png" alt="pdf">
+                <div class="text">
+                    <div th:remove="tag" th:each="f: ${l}">
+                        <input type="hidden" th:if="${f.key == 'path'}" name="path" th:value="${f.value}">
+                        <span class="file-name" th:if="${f.key == 'name'}"  th:text="${#strings.replace(f.value,'approved_cv','resume')}"></span>
+                        <span class="file-size" th:if="${f.key == 'size'}" th:text="${f.value + 'КБ'}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="cancel download">
+                <img src="/images/download.png" alt="download">
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="likeForm" th:action="@{/profile/addLike}" method="POST"></form>
+<form id="dislikeForm" th:action="@{/profile/deleteLike}" method="POST"></form>
+<form id="formDownload" th:action="@{/download}" method="post"></form>
+
+<script th:inline="javascript">
+    var likesId = [[${likesId}]];
+</script>
+<script src="/script/script.js"></script>
+<script src="/script/script-file.js"></script>
+<script src="/script/script-like.js"></script>
+<script src="/script/script-profile-guest.js"></script>
+</body>
+</html>

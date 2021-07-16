@@ -11,8 +11,40 @@ $(function () {
             return (jQuery.inArray(value, cityList) !== -1);
         });
 
+    $.validator.addMethod(
+        "correctNumber",
+        function (value, element) {
+            return /^[1-9][0-9]*$/.test(value)
+        }
+    );
+
+    // $.validator.addMethod(
+    //     'filesize',
+    //     function (value, element, param) {
+    //         return this.optional(element) || (element.files[0].size <= param * 1048576)
+    //     }, 'Файл не повинен перевищувати {0}Mb');
+
+
+    // $.validator.addMethod(
+    //     "specSymbols",
+    //     function (value) {
+    //         var i = value.length,
+    //             aRet = [];
+    //
+    //         while (i--) {
+    //             var iC = value[i].charCodeAt();
+    //             if (iC < 65 || iC > 127 || (iC>90 && iC<97)) {
+    //                 aRet[i] = '&#'+iC+';';
+    //             } else {
+    //                 aRet[i] = value[i];
+    //             }
+    //         }
+    //         return aRet.join('');
+    //     });
+
+
     $("#form-reg-employer").submit(function (e) {
-        e.preventDefault()
+        // e.preventDefault()
     }).validate({
         rules: {
             category: {
@@ -20,6 +52,15 @@ $(function () {
                 inTheListCat: true,
             },
             'type': {
+                required: true
+            },
+            'type+': {
+                required: true
+            },
+            'type++': {
+                required: true
+            },
+            'type+++': {
                 required: true
             },
             citString: {
@@ -33,6 +74,7 @@ $(function () {
             salary: {
                 required: true,
                 number: true,
+                correctNumber: true,
             },
             name: {
                 required: true,
@@ -80,6 +122,15 @@ $(function () {
             'type': {
                 required: "Це поле обов'язкове для заповнення"
             },
+            'type+': {
+                required: "Це поле обов'язкове для заповнення"
+            },
+            'type++': {
+                required: "Це поле обов'язкове для заповнення"
+            },
+            'type+++': {
+                required: "Це поле обов'язкове для заповнення"
+            },
             citString: {
                 required: "Це поле обов'язкове для заповнення",
                 inTheListCity: "Оберіть значення зі списку",
@@ -91,6 +142,7 @@ $(function () {
             salary: {
                 required: "Це поле обов'язкове для заповнення",
                 number: "Необхідно вказати число",
+                correctNumber: "Число не повинне починатися з 0",
             },
             name: {
                 required: "Це поле обов'язкове для заповнення",

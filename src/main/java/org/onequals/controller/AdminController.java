@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -24,8 +23,9 @@ public class AdminController {
     private final ResumeService resumeService;
     private final EmployerService employerService;
     private final SeekerService seekerService;
+    private final StorageService storageService;
 
-    public AdminController(CategoryService categoryService, VacancyService vacancyService, UserService userService, TypeService typeService, CityService cityService, ResumeService resumeService, EmployerService employerService, SeekerService seekerService) {
+    public AdminController(CategoryService categoryService, VacancyService vacancyService, UserService userService, TypeService typeService, CityService cityService, ResumeService resumeService, EmployerService employerService, SeekerService seekerService, StorageService storageService) {
         this.categoryService = categoryService;
         this.vacancyService = vacancyService;
         this.userService = userService;
@@ -34,11 +34,17 @@ public class AdminController {
         this.resumeService = resumeService;
         this.employerService = employerService;
         this.seekerService = seekerService;
+        this.storageService = storageService;
     }
 
     @GetMapping("/category")
     public String adminCategoryPage(Model model) {
         model.addAttribute("category", categoryService.getAllAll());
+        model.addAttribute("empTotal", employerService.getUnapproved());
+        model.addAttribute("seekTotal", seekerService.getUnapproved());
+        model.addAttribute("vacTotal", vacancyService.getUnapproved());
+        model.addAttribute("resTotal", resumeService.getUnapproved());
+        model.addAttribute("path", storageService.countFiles());
         return "admin/category";
     }
 
@@ -57,6 +63,11 @@ public class AdminController {
     @GetMapping("/type")
     public String adminTypePage(Model model) {
         model.addAttribute("types", typeService.getAllAll());
+        model.addAttribute("empTotal", employerService.getUnapproved());
+        model.addAttribute("seekTotal", seekerService.getUnapproved());
+        model.addAttribute("vacTotal", vacancyService.getUnapproved());
+        model.addAttribute("resTotal", resumeService.getUnapproved());
+        model.addAttribute("path", storageService.countFiles());
         return "admin/type";
     }
 
@@ -75,6 +86,11 @@ public class AdminController {
     @GetMapping("/cities")
     public String adminCityPage(Model model) {
         model.addAttribute("city", cityService.getAllAll());
+        model.addAttribute("empTotal", employerService.getUnapproved());
+        model.addAttribute("seekTotal", seekerService.getUnapproved());
+        model.addAttribute("vacTotal", vacancyService.getUnapproved());
+        model.addAttribute("resTotal", resumeService.getUnapproved());
+        model.addAttribute("path", storageService.countFiles());
         return "admin/cities";
     }
 
@@ -100,29 +116,35 @@ public class AdminController {
     @GetMapping("/users")
     public String adminUsersPage(Model model) {
         model.addAttribute("user", userService.getAll());
+        model.addAttribute("empTotal", employerService.getUnapproved());
+        model.addAttribute("seekTotal", seekerService.getUnapproved());
+        model.addAttribute("vacTotal", vacancyService.getUnapproved());
+        model.addAttribute("resTotal", resumeService.getUnapproved());
+        model.addAttribute("path", storageService.countFiles());
+
         return "admin/users";
     }
 
     @PostMapping("/users/add")
     public String adminUserAdd(@ModelAttribute() User user, @RequestParam("role") String role) {
-        User userDB = userService.findById(user.getId()).get();
-        if (!userDB.getPassword().equals(user.getPassword()))
+        if (user.getId() != null) {
+            User userDB = userService.findById(user.getId()).get();
+
+            if (!userDB.getPassword().equals(user.getPassword()))
+                user.setPassword(userService.setPassword(user.getPassword()));
+
+            user.setRoles(userDB.getRoles());
+        } else {
             user.setPassword(userService.setPassword(user.getPassword()));
-        Set<Role> set = new TreeSet<Role>();
-        set.add(Role.USER);
-        switch (role) {
-            case "SEEKER" -> {
-                set.add(Role.SEEKER);
-            }
-            case "EMPLOYER" -> {
-                set.add(Role.EMPLOYER);
-            }
-            case "ADMIN" -> {
+            Set<Role> set = new TreeSet<Role>();
+
+            if ("ADMIN".equals(role)) {
                 set.add(Role.ADMIN);
-                set.remove(Role.USER);
+            } else {
+                set.add(Role.USER);
             }
+            user.setRoles(set);
         }
-        user.setRoles(set);
         userService.save(user);
         return "redirect:/admin/users";
     }
@@ -134,12 +156,20 @@ public class AdminController {
     }
 
     @GetMapping("/vacancies")
-    public String adminVacanciesPage(Principal principal, Model model) {
-        model.addAttribute("vacancy", vacancyService.getAll());
+    public String adminVacanciesPage(Model model) {
+        List<Vacancy> unapproved = vacancyService.getUnapproved();
+        List<Vacancy> vacancies = vacancyService.getAllAll();
+        vacancies.removeAll(unapproved);
+        model.addAttribute("vacancy", vacancies);
         model.addAttribute("user", userService.getAllUser("employer"));
         model.addAttribute("types", typeService.getAllAll());
         model.addAttribute("category", categoryService.getAllAll());
         model.addAttribute("city", cityService.getAllAll());
+        model.addAttribute("empTotal", employerService.getUnapproved());
+        model.addAttribute("seekTotal", seekerService.getUnapproved());
+        model.addAttribute("vacTotal", unapproved);
+        model.addAttribute("resTotal", resumeService.getUnapproved());
+        model.addAttribute("path", storageService.countFiles());
         return "admin/vacancies";
     }
 
@@ -150,7 +180,8 @@ public class AdminController {
                                     @RequestParam(name = "category", required = false) String category,
                                     @RequestParam(name = "city", required = false) List<String> city,
                                     @RequestParam(name = "salary", required = false) int salary,
-                                    @RequestParam(name = "description", required = false) String description) {
+                                    @RequestParam(name = "description", required = false) String description,
+                                    @RequestParam(name = "approved", required = false) Boolean approved) {
         Vacancy vacancy = new Vacancy();
         if (id != null)
             vacancy.setId(id);
@@ -166,6 +197,8 @@ public class AdminController {
             vacancy.setSalary(salary);
         if (description != null)
             vacancy.setDescription(description);
+        if (approved != null)
+            vacancy.setApproved(approved);
         vacancyService.save(vacancy);
 
         return "redirect:/admin/vacancies";
@@ -179,11 +212,19 @@ public class AdminController {
 
     @GetMapping("/resumes")
     public String adminResumePage(Model model) {
-        model.addAttribute("resume", resumeService.getAll());
+        List<Resume> unapproved = resumeService.getUnapproved();
+        List<Resume> resumes = resumeService.getAllAll();
+        resumes.removeAll(unapproved);
+        model.addAttribute("resume", resumes);
         model.addAttribute("user", userService.getAllUser("seeker"));
         model.addAttribute("types", typeService.getAllAll());
         model.addAttribute("category", categoryService.getAllAll());
         model.addAttribute("city", cityService.getAllAll());
+        model.addAttribute("empTotal", employerService.getUnapproved());
+        model.addAttribute("seekTotal", seekerService.getUnapproved());
+        model.addAttribute("vacTotal", vacancyService.getUnapproved());
+        model.addAttribute("resTotal", unapproved);
+        model.addAttribute("path", storageService.countFiles());
         return "admin/resumes";
     }
 
@@ -194,7 +235,8 @@ public class AdminController {
                                   @RequestParam(name = "category", required = false) String category,
                                   @RequestParam(name = "city", required = false) List<String> city,
                                   @RequestParam(name = "salary", required = false) int salary,
-                                  @RequestParam(name = "description", required = false) String description) {
+                                  @RequestParam(name = "description", required = false) String description,
+                                  @RequestParam(name = "approved", required = false) Boolean approved) {
         Resume resume = new Resume();
         if (id != null)
             resume.setId(id);
@@ -210,6 +252,8 @@ public class AdminController {
             resume.setSalary(salary);
         if (description != null)
             resume.setDescription(description);
+        if (approved != null)
+            resume.setApproved(approved);
         resumeService.save(resume);
 
         return "redirect:/admin/resumes";
@@ -223,10 +267,18 @@ public class AdminController {
 
     @GetMapping("/employer")
     public String adminEmployerPage(Model model) {
-        model.addAttribute("employer", employerService.getAll());
+        List<Employer> unapproved = employerService.getUnapproved();
+        List<Employer> employers = employerService.getAll();
+        employers.removeAll(unapproved);
+        model.addAttribute("employer", employers);
         model.addAttribute("category", categoryService.getAllAll());
         model.addAttribute("user", userService.getAllUser("user"));
         model.addAttribute("city", cityService.getAllAll());
+        model.addAttribute("empTotal", unapproved);
+        model.addAttribute("seekTotal", seekerService.getUnapproved());
+        model.addAttribute("vacTotal", vacancyService.getUnapproved());
+        model.addAttribute("resTotal", resumeService.getUnapproved());
+        model.addAttribute("path", storageService.countFiles());
 
         return "admin/employer";
     }
@@ -246,7 +298,8 @@ public class AdminController {
                                    @RequestParam(required = false) String link_facebook,
                                    @RequestParam(required = false) String link_instagram,
                                    @RequestParam(required = false) String link_linked_in,
-                                   @RequestParam(required = false) String link_twitter) {
+                                   @RequestParam(required = false) String link_twitter,
+                                   @RequestParam Boolean approved) {
         Employer emp = new Employer();
         if (id != null)
             emp.setId(id);
@@ -272,6 +325,7 @@ public class AdminController {
         emp.setAge(age);
         emp.setEmpCount(emp_count);
         emp.setSize(size);
+        emp.setApproved(approved);
 
 
         userService.addRole(userDB, Role.EMPLOYER);
@@ -290,27 +344,36 @@ public class AdminController {
 
     @GetMapping("/seeker")
     public String adminSeekerPage(Model model) {
-        model.addAttribute("seeker", seekerService.getAll());
+        List<Seeker> unapproved = seekerService.getUnapproved();
+        List<Seeker> seekers = seekerService.getAll();
+        seekers.removeAll(unapproved);
+        model.addAttribute("seeker", seekers);
         model.addAttribute("category", categoryService.getAllAll());
         model.addAttribute("user", userService.getAllUser("user"));
         model.addAttribute("city", cityService.getAllAll());
+        model.addAttribute("empTotal", employerService.getUnapproved());
+        model.addAttribute("seekTotal", unapproved);
+        model.addAttribute("vacTotal", vacancyService.getUnapproved());
+        model.addAttribute("resTotal", resumeService.getUnapproved());
+        model.addAttribute("path", storageService.countFiles());
 
         return "admin/seeker";
     }
 
     @PostMapping("/seeker/add")
     public String adminSeekerAdd(@RequestParam(required = false) Long id,
-                                   @RequestParam String user,
-                                   @RequestParam String name,
-                                   @RequestParam String email,
-                                   @RequestParam String category,
-                                   @RequestParam List<String> city,
-                                   @RequestParam(required = false) String site,
-                                   @RequestParam String description,
-                                   @RequestParam(required = false) String link_facebook,
-                                   @RequestParam(required = false) String link_instagram,
-                                   @RequestParam(required = false) String link_linked_in,
-                                   @RequestParam(required = false) String link_twitter) {
+                                 @RequestParam String user,
+                                 @RequestParam String name,
+                                 @RequestParam String email,
+                                 @RequestParam String category,
+                                 @RequestParam List<String> city,
+                                 @RequestParam(required = false) String site,
+                                 @RequestParam String description,
+                                 @RequestParam(required = false) String link_facebook,
+                                 @RequestParam(required = false) String link_instagram,
+                                 @RequestParam(required = false) String link_linked_in,
+                                 @RequestParam(required = false) String link_twitter,
+                                 @RequestParam Boolean approved) {
         Seeker seek = new Seeker();
         if (id != null)
             seek.setId(id);
@@ -331,6 +394,7 @@ public class AdminController {
         seek.setName(name);
         seek.setEmail(email);
         seek.setCategory(categoryService.findByName(category));
+        seek.setApproved(approved);
         cityService.addCities(seek, cityService.findByNames(city));
         seek.setDescription(description);
 
@@ -349,4 +413,26 @@ public class AdminController {
         return "redirect:/admin/seeker";
     }
 
+    @GetMapping("/file")
+    public String filePage(Model model){
+        model.addAttribute("paths", storageService.getAllPaths(true));
+        model.addAttribute("path", storageService.countFiles());
+        model.addAttribute("empTotal", employerService.getUnapproved());
+        model.addAttribute("seekTotal", seekerService.getUnapproved());
+        model.addAttribute("vacTotal", vacancyService.getUnapproved());
+        model.addAttribute("resTotal", resumeService.getUnapproved());
+        return "admin/file";
+    }
+
+    @PostMapping("/file/unapprove")
+    public String unapproveFile(@RequestParam String path){
+        storageService.renameFile("/uploads/resumes/" + path, false);
+        return "redirect:/admin/file";
+    }
+
+    @PostMapping("/file/delete")
+    public String removeFile(@RequestParam String path){
+        storageService.removeFile("/uploads/resumes/" + path);
+        return "redirect:/admin/file";
+    }
 }

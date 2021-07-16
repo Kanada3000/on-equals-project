@@ -44,7 +44,15 @@ public class RegistrationController {
         user.setLink(userService.getRandomLink());
         userService.save(user);
 
-        model.addAttribute("link", "/register/activate/" + user.getLink());
+        String message = String.format(
+                "Привіт, %s! \n" +
+                        "Ласкаво просимо до нашої спільноти OnEquals. \n" +
+                        "Будь ласка, перейдіть за посиланням для підтвердження електронної пошти: " +
+                        "https://onequals.com.ua/register/activate/%s",
+                user.getName(),
+                user.getLink());
+        userService.sendEmail(user, "Activation code", message);
+        System.out.println(message);
         return "sign-in-3";
     }
 

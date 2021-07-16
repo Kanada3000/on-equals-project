@@ -29,6 +29,9 @@ public interface CategoryRepo extends JpaRepository<Category, Long> {
     @Query("SELECT new Category(v.category.id, COUNT(v.category)) FROM Vacancy v WHERE v.id IN (?1) GROUP BY v.category")
     List<Category> countByCategoryList(List<Long> id);
 
+    @Query("SELECT new Category(r.category.id, COUNT(r.category)) FROM Resume r WHERE r.id IN (?1) GROUP BY r.category")
+    List<Category> countByCategoryListResume(List<Long> id);
+
     @Modifying
     @Query("UPDATE Vacancy v SET v.category = (SELECT c FROM Category c WHERE c.longName = 'Undefined') WHERE v.category.id = ?1")
     void deleteFromVacancy(Long id);

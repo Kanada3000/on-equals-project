@@ -46,6 +46,29 @@
         <div class="button">
             <a href="/admin/seeker">Шукачі</a>
         </div>
+        <div class="button">
+            <a href="/admin/file">Файли резюме</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${empTotal.size() != 0}" th:text="${empTotal.size()}"></span>
+            <a href="/admin/approve/employer">Непідтверджені роботодавці</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${seekTotal.size() != 0}" th:text="${seekTotal.size()}"></span>
+            <a href="/admin/approve/seeker">Непідтверджені шукачі</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${vacTotal.size() != 0}" th:text="${vacTotal.size()}"></span>
+            <a href="/admin/approve/vacancy">Непідтверджені вакансії</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${resTotal.size() != 0}" th:text="${resTotal.size()}"></span>
+            <a href="/admin/approve/resume">Непідтверджені резюме</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${path != 0}" th:text="${path}"></span>
+            <a href="/admin/approve/file">Непідтверджені файли резюме</a>
+        </div>
     </div>
     <div id="body">
         <h1>Типи зайнятості</h1>

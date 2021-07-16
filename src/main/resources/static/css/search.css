@@ -310,4 +310,8 @@
     display: none;
 }
 
+input:disabled +  label{
+    color: #999999;
+    cursor: default !important;
+}
 

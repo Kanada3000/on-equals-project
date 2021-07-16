@@ -12,4 +12,7 @@ public interface EmployerRepo extends JpaRepository<Employer, Long> {
 
     @Query("SELECT e FROM Employer e WHERE e.user = ?1")
     Employer findEmployerByUser(User user);
+
+    @Query("SELECT e FROM Employer e WHERE e.approved = false")
+    List<Employer> findUnapproved();
 }

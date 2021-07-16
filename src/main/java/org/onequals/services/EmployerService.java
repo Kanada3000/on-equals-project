@@ -1,24 +1,20 @@
 package org.onequals.services;
 
-import org.onequals.domain.Category;
-import org.onequals.domain.Employer;
-import org.onequals.domain.User;
-import org.onequals.domain.Vacancy;
-import org.onequals.repo.CategoryRepo;
+import org.onequals.domain.*;
 import org.onequals.repo.EmployerRepo;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployerService {
     private final EmployerRepo employerRepo;
+    private final VacancyService vacancyService;
 
-    public EmployerService(EmployerRepo employerRepo) {
+    public EmployerService(EmployerRepo employerRepo, VacancyService vacancyService) {
         this.employerRepo = employerRepo;
+        this.vacancyService = vacancyService;
     }
 
     @Transactional
@@ -38,11 +34,19 @@ public class EmployerService {
 
     @Transactional
     public void delete(Long id){
+        Employer employer = employerRepo.findById(id).get();
+        List<Vacancy> vacancies = vacancyService.findByUser(employer.getUser());
+        vacancyService.deleteAll(vacancies);
         employerRepo.deleteById(id);
     }
 
     @Transactional
     public Employer findById(Long id){
         return employerRepo.findById(id).get();
+    }
+
+    @Transactional
+    public List<Employer> getUnapproved(){
+        return employerRepo.findUnapproved();
     }
 }

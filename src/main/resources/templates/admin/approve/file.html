@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>OnEquals Admin Resumes</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
+</header>
+
+<form id="form" th:action="@{/admin/approve/file/approve}" method="post">
+</form>
+
+<form id="formDelete" th:action="@{/admin/file/delete}" method="post">
+</form>
+
+<form id="formDownload" th:action="@{/download}" method="post">
+</form>
+
+<div id="admin">
+    <div id="sidebar">
+        <div class="button">
+            <a href="/admin/users">Користувачі</a>
+        </div>
+        <div class="button">
+            <a href="/admin/vacancies">Вакансії</a>
+        </div>
+        <div class="button">
+            <a href="/admin/resumes">Резюме</a>
+        </div>
+        <div class="button">
+            <a href="/admin/cities">Країни та міста</a>
+        </div>
+        <div class="button">
+            <a href="/admin/category">Категорії</a>
+        </div>
+        <div class="button">
+            <a href="/admin/type">Тип зайнятості</a>
+        </div>
+        <div class="button">
+            <a href="/admin/employer">Роботодавці</a>
+        </div>
+        <div class="button">
+            <a href="/admin/seeker">Шукачі</a>
+        </div>
+        <div class="button">
+            <a href="/admin/file">Файли резюме</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${empTotal.size() != 0}" th:text="${empTotal.size()}"></span>
+            <a href="/admin/approve/employer">Непідтверджені роботодавці</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${seekTotal.size() != 0}" th:text="${seekTotal.size()}"></span>
+            <a href="/admin/approve/seeker">Непідтверджені шукачі</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${vacTotal.size() != 0}" th:text="${vacTotal.size()}"></span>
+            <a href="/admin/approve/vacancy">Непідтверджені вакансії</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${resTotal.size() != 0}" th:text="${resTotal.size()}"></span>
+            <a href="/admin/approve/resume">Непідтверджені резюме</a>
+        </div>
+        <div class="button red-button active">
+            <span class="notification" th:if="${path.size() != 0}" th:text="${path.size()}"></span>
+            <a>Непідтверджені файли резюме</a>
+        </div>
+    </div>
+    <div id="body">
+        <h1>Непідтверджені файли резюме</h1>
+        <div class="table">
+            <table border="1">
+                <tr class="head">
+                    <td>&nbsp;</td>
+                    <td>user</td>
+                    <td>file</td>
+                    <td class="but-head"><span>&nbsp;</span></td>
+                    <td class="but-head"><span>&nbsp;</span></td>
+                </tr>
+                <tr th:each="p: ${path}">
+                    <td>&nbsp;</td>
+                    <td class="user" th:text="${#strings.substringBefore(p,'\')}"></td>
+                    <td class="file" th:text="${#strings.substringAfter(p,'\')}"></td>
+                    <input type="hidden" th:value="${p}">
+                    <td class="accept">&#10004;</td>
+                    <td id="approve/file" class="delete">&#128465;</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="accept-delete">
+    <span>Ви впевнені, що хочете видалити цей запис назавжди?</span>
+    <div class="buttons">
+        <div class="button yes">Так</div>
+        <div class="button no">Ні</div>
+    </div>
+</div>
+
+<div class="backdrop"></div>
+<script src="/script/script.js"></script>
+<script src="/script/script-list.js"></script>
+<!--<script src="/script/script-admin.js"></script>-->
+<script src="/script/script-admin-file.js"></script>
+
+</body>
+</html>

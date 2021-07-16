@@ -28,6 +28,9 @@ public interface TypeRepo extends JpaRepository<Type, Long> {
     @Query("SELECT new Type(v.type.id, COUNT(v.type)) FROM Vacancy v WHERE v.id IN (?1) GROUP BY v.type")
     List<Type> countByTypeList(List<Long> id);
 
+    @Query("SELECT new Type(r.type.id, COUNT(r.type)) FROM Resume r WHERE r.id IN (?1) GROUP BY r.type")
+    List<Type> countByTypeListResume(List<Long> id);
+
     @Modifying
     @Query("UPDATE Resume r SET r.type = (SELECT t FROM Type t WHERE t.name = 'Undefined') WHERE r.type.id = ?1")
     void deleteFromResume(Long id);

@@ -19,6 +19,7 @@ public class User implements UserDetails {
     private String password;
     private Boolean blocked = Boolean.FALSE;
     private Boolean activated = Boolean.FALSE;
+    private Boolean hidden = Boolean.FALSE;
 
     @Column(unique = true)
     private String link;
@@ -42,19 +43,22 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "resume_id"))
     private Set<Resume> likedResume;
 
+    public User() {
+    }
+
     public User(Long id, String name, String username, String password, Boolean blocked, Boolean activated,
-                String link, Set<Role> roles) {
+                Boolean hidden, String link, Set<Role> roles, Set<Vacancy> likedVacancy, Set<Resume> likedResume) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
         this.blocked = blocked;
         this.activated = activated;
+        this.hidden = hidden;
         this.link = link;
         this.roles = roles;
-    }
-
-    public User() {
+        this.likedVacancy = likedVacancy;
+        this.likedResume = likedResume;
     }
 
     public Long getId() {
@@ -155,6 +159,14 @@ public class User implements UserDetails {
 
     public void setLikedResume(Set<Resume> likedResume) {
         this.likedResume = likedResume;
+    }
+
+    public Boolean getHidden() {
+        return hidden;
+    }
+
+    public void setHidden(Boolean hidden) {
+        this.hidden = hidden;
     }
 
     @Override
