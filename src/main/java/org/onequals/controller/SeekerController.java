@@ -75,6 +75,7 @@ public class SeekerController {
 
         user.setLink(null);
         userService.updateRole(Role.SEEKER);
+        user.setName(name);
         userService.save(user);
 
 

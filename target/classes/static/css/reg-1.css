@@ -456,58 +456,6 @@ body{
     box-sizing: border-box;
 }
 
-/*#footer-reg .file{*/
-/*    display: none;*/
-/*    justify-content: space-between;*/
-/*    align-items: center;*/
-/*    border: 4px dashed black;*/
-/*    border-radius: 30px;*/
-/*    height: auto;*/
-/*    width: 891px;*/
-/*    padding: 30px;*/
-/*    box-sizing: border-box;*/
-/*    font-size: 36px;*/
-/*    margin: auto auto 50px;*/
-/*}*/
-
-/*#footer-reg .file span{*/
-/*    text-align: left;*/
-/*    white-space: normal;*/
-/*}*/
-
-/*#footer-reg .file span.file-name{*/
-/*    word-break: break-all;*/
-/*    margin-bottom: 10px;*/
-/*}*/
-
-/*#footer-reg .file img{*/
-/*    height: 100px;*/
-/*    width: auto;*/
-/*}*/
-
-/*#footer-reg .file .block{*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-
-/*}*/
-
-/*#footer-reg .file .text{*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    margin-left: 30px;*/
-/*    font-size: inherit;*/
-/*}*/
-
-/*#footer-reg .file .text .file-size{*/
-/*    font-size: smaller;*/
-/*}*/
-
-/*#footer-reg .file .cancel img{*/
-/*    height: 70px;*/
-/*    width: auto;*/
-/*    cursor: pointer;*/
-/*}*/
-
 #footer-reg .download.file-resume{
     display: none;
 }

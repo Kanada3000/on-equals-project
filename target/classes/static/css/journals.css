@@ -1,0 +1,465 @@
+#top {
+    height: 505px;
+    width: 100%;
+    position: relative;
+    padding-left: calc(-403px + 32.1vw);
+    padding-top: calc(136px + 5vw);
+    box-sizing: border-box;
+}
+
+#top.green {
+    background-color: #C4DE95;
+}
+
+#top.yellow {
+    background-color: #FDD749;
+}
+
+#top.pink {
+    background-color: #F98DC0;
+}
+
+
+h2 {
+    font-size: 80px;
+
+}
+
+#top span {
+    display: block;
+    font-size: 46px;
+    padding-top: 18px;
+}
+
+#stories {
+    padding: calc(-48px + 12.9vw) calc(-399px + 31.9vw) 140px;
+}
+
+#stories .slideshow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 85px;
+}
+
+#stories .slideshow .switch-l {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 4px solid black;
+    border-radius: 120px;
+    height: 210px;
+    width: calc(388px + 6.9vw);
+    font-size: 46px;
+    order: 2;
+}
+
+#stories .slideshow .switch-l .hide {
+    display: none;
+}
+
+#stories .slideshow .switch-r {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #FDD749;
+    border-radius: 105px;
+    height: 210px;
+    width: calc(369px + 26.9vw);
+    font-size: 46px;
+    padding: 0 49px;
+    order: 3;
+}
+
+#stories .slideshow .post {
+    display: none;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#stories .slideshow .post.active {
+    display: flex;
+}
+
+#stories .slideshow .posts {
+    width: 100%;
+    margin-bottom: calc(35px + 3.1vw);
+}
+
+#stories .slideshow .post .post-img {
+    margin-right: calc(18px + 3.8vw);
+}
+
+#stories .slideshow .post .post-img img {
+    height: calc(388px + 6.9vw);
+    width: calc(388px + 6.9vw);
+    border-radius: 290px;
+    object-fit: cover;
+}
+
+#stories .slideshow .post .post-text {
+    flex-grow: 1;
+}
+
+#stories .slideshow .post .post-text .title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#stories .slideshow .post .post-text h3 {
+    font-size: 32px;
+}
+
+#stories .slideshow .post .post-text img {
+    display: none;
+}
+
+#stories .slideshow .post .post-text p {
+    font-size: 22px;
+}
+
+#questions {
+    padding: calc(-25px + 9vw) calc(-378px + 30.4vw) calc(142px + 3.5vw);
+    background-color: #E5E5E5;
+}
+
+#questions .container {
+    margin-top: 80px;
+}
+
+#questions .box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between;
+    min-height: 177px;
+
+}
+
+#questions .box .text {
+    width: 1190px;
+}
+
+#questions .box .text h3 {
+    font-size: 46px;
+    margin: 60px 0 0;
+    padding-bottom: 23px;
+}
+
+#questions .box .text span {
+    display: block;
+    font-size: 32px;
+    margin: 58px 0 115px;
+}
+
+#questions .box hr {
+    width: 100%;
+    height: 2px;
+}
+
+#questions .box .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(79px + 2.3vw);
+    height: calc(79px + 2.3vw);
+    background-color: #509FC8;
+    font-size: 46px;
+    border-radius: 100px;
+    margin-top: calc(51px - 1.3vw);
+}
+
+@media screen and (max-width: 1440px) {
+    #top {
+        height: calc(765px - 18vw);
+        padding-left: 60px;
+        padding-top: calc(402px - 13.5vw);
+    }
+
+    h2 {
+        font-size: calc(39px + 2.9vw);
+    }
+
+    #top span {
+        padding-top: calc(-20px + 2.6vw);
+    }
+
+    #stories {
+        padding: calc(24px + 7.9vw) 60px calc(40px + 7vw);
+    }
+
+    #stories .slideshow {
+        margin-top: calc(13px + 4.8vw);
+    }
+
+    #stories .slideshow .switch-l {
+        width: calc(-226px + 49.5vw);
+    }
+
+    #stories .slideshow .switch-r {
+        width: calc(195px + 38.9vw);
+    }
+
+    #stories .slideshow .posts {
+        margin-bottom: calc(48px + 2.2vw);
+    }
+
+    #stories .slideshow .post .post-img img {
+        height: calc(-493px + 68vw);
+        width: calc(-493px + 68vw);
+    }
+
+    #questions {
+        padding: calc(11px + 6.5vw) 60px calc(-84px + 19.2vw);
+    }
+
+    #questions .container {
+        margin-top: calc(104px - 1.7vw);
+    }
+
+    #questions .box .text {
+        width: calc(-340px + 106.3vw);
+    }
+
+    #questions .box .text span {
+        margin: calc(-80px + 9.6vw) 0 calc(-127px + 16.8vw);
+    }
+
+    #questions .box .button {
+        width: 112px;
+        height: 112px;
+        margin-top: 33px;
+    }
+
+
+}
+
+@media screen and (max-width: 1024px) {
+    #top {
+        height: calc(50px + 51.8vw);
+        padding-left: calc(177px - 11.5vw);
+        padding-top: calc(-52px + 30.8vw);
+    }
+
+    h2 {
+        font-size: 68px;
+    }
+
+    #top span {
+        font-size: calc(30px + 1.6vw);
+        padding-top: 7px;
+    }
+
+    #stories {
+        padding: calc(-37px + 13.8vw) calc(-61px + 11.9vw) 110px;
+    }
+
+    #stories .slideshow {
+        margin-top: 60px;
+    }
+
+    #stories .slideshow .switch-l {
+        width: calc(-6px + 28.1vw);
+    }
+
+    #stories .slideshow .switch-r {
+        width: calc(-74px + 65.2vw);
+    }
+
+    #stories .slideshow .posts {
+        margin-bottom: calc(48px + 2.2vw);
+    }
+
+    #stories .slideshow .post .post-img {
+        display: none;
+    }
+
+    #stories .slideshow .post .post-text img {
+        display: block;
+        width: calc(281px - 7.5vw);
+        height: calc(281px - 7.5vw);
+        border-radius: 290px;
+        object-fit: cover;
+        margin-right: 57px;
+        margin-left: calc(-143px + 18.6vw);
+        margin-bottom: 50px;
+    }
+
+    #stories .slideshow .post .post-text h3 {
+        margin-bottom: 50px;
+    }
+
+    #questions {
+        padding: 77px calc(-61px + 11.9vw) calc(170px - 5.5vw);
+    }
+
+    #questions .container {
+        margin-top: calc(6px + 7.9vw);
+    }
+
+    #questions .box .text {
+        width: calc(96px + 63.6vw);
+    }
+
+    #questions .box .text h3 {
+        font-size: calc(30px + 1.6vw);
+    }
+
+    #questions .box .button {
+        font-size: calc(30px + 1.6vw);
+    }
+
+    #questions .box .text span {
+        margin: 18px 0 45px;
+    }
+}
+
+@media screen and (max-width: 771px) {
+    #top {
+        height: calc(-52px + 64.9vw);
+        padding-left: calc(-67px + 20.3vw);
+        padding-top: calc(-68px + 33vw);
+    }
+
+    h2 {
+        font-size: calc(31px + 4.8vw);
+    }
+
+    #top span {
+        font-size: calc(16px + 3.4vw);
+    }
+
+    #stories {
+        padding: calc(57px + 1.7vw) 30px calc(53px + 6.9vw);
+    }
+
+    #stories .slideshow {
+        margin-top: calc(10px + 6.2vw);
+    }
+
+    #stories .slideshow .switch-l {
+        width: 100%;
+        margin-top: 54px;
+        padding: 0 30px;
+        order: 5;
+    }
+
+    #stories .slideshow .switch-r {
+        width: 100%;
+    }
+
+    #stories .slideshow .posts {
+        margin-bottom: 70px;
+    }
+
+    #stories .slideshow .post .post-text p {
+        font-size: calc(11px + 1.4vw);
+    }
+
+    #stories .slideshow .post .post-text img {
+        width: calc(93px + 16.8vw);
+        height: calc(93px + 16.8vw);
+        margin-right: calc(28px + 3.8vw);
+        margin-left: 0;
+        margin-bottom: calc(13px + 4.8vw);
+    }
+
+    #stories .slideshow .post .post-text h3 {
+        margin-bottom: calc(13px + 4.8vw);
+    }
+
+    #stories .slideshow .switch-l .hide {
+        display: inline;
+        text-align: center;
+    }
+
+    #stories .slideshow .switch-l .visible {
+        display: none;
+    }
+
+    #questions {
+        padding: calc(52px + 3.4vw) 30px calc(90px + 4.8vw);
+    }
+
+    #questions .container {
+        margin-top: calc(6px + 7.9vw);
+    }
+
+    #questions .box .text {
+        width: calc(96px + 63.6vw);
+    }
+
+    #questions .box .text h3 {
+        font-size: calc(30px + 1.6vw);
+    }
+
+    #questions .box .button {
+        font-size: calc(30px + 1.6vw);
+    }
+
+    #questions .box .text span {
+        margin: 18px 0 45px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #top {
+        height: calc(-25px + 59.4vw);
+        padding-left: calc(-15px + 9.4vw);
+        padding-top: calc(-48px + 28.8vw);
+    }
+
+    h2 {
+        font-size: calc(-12px + 13.8vw);
+    }
+
+    #top span {
+        font-size: calc(2px + 6.3vw);
+        padding-top: calc(-8px + 3.1vw);
+    }
+
+    #stories {
+        padding: calc(5px + 12.5vw) calc(-15px + 9.4vw) calc(38px + 10vw);
+    }
+
+    #stories .slideshow {
+        margin-top: calc(16px + 5vw);
+    }
+
+    #stories .slideshow .switch-l {
+        height: calc(30px + 37.5vw);
+        margin-top: calc(12px + 8.8vw);
+        font-size: calc(12px + 6.3vw);
+    }
+
+    #stories .slideshow .switch-r {
+        height: calc(30px + 37.5vw);
+        font-size: calc(12px + 6.3vw);
+    }
+
+    #stories .slideshow .posts {
+        margin-bottom: calc(25px + 9.4vw);
+    }
+
+    #stories .slideshow .post .post-text p {
+        font-size: calc(6px + 2.5vw);
+    }
+
+    #stories .slideshow .post .post-text img {
+        width: calc(-9px + 38.1vw);
+        height: calc(-9px + 38.1vw);
+        margin-right: calc(25px + 4.4vw);
+        margin-bottom: 35px;
+    }
+
+    #stories .slideshow .post .post-text h3 {
+        margin-bottom: 35px;
+        font-size: calc(2px + 6.3vw);
+    }
+}

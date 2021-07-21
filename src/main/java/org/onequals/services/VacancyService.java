@@ -29,6 +29,11 @@ public class VacancyService {
     }
 
     @Transactional
+    public Vacancy getById(Long id){
+        return vacancyRepo.findById(id).get();
+    }
+
+    @Transactional
     public List<Vacancy> getAllAll() {
         return vacancyRepo.findAllAll();
     }

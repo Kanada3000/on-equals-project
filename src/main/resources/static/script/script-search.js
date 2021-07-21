@@ -5,7 +5,12 @@ $(function () {
         $(window).scrollTop(scroll)
     }
 
-    if (likesId !== null) {
+    setTimeout(function () {
+        localStorage.setItem("scrollPos", "0")
+    }, 200);
+
+
+        if (likesId !== null) {
         let likesIdList = likesId.split("&")
         let id
         $("#vacancies .vacancy").each(function () {

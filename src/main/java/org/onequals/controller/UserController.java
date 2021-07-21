@@ -1,9 +1,6 @@
 package org.onequals.controller;
 
-import org.onequals.domain.Resume;
-import org.onequals.domain.Role;
-import org.onequals.domain.User;
-import org.onequals.domain.Vacancy;
+import org.onequals.domain.*;
 import org.onequals.services.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -11,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 
 @RequestMapping("/profile")
@@ -24,14 +21,20 @@ public class UserController {
     private final VacancyService vacancyService;
     private final ResumeService resumeService;
     private final StorageService storageService;
+    private final CityService cityService;
+    private final CategoryService categoryService;
+    private final TypeService typeService;
 
-    public UserController(UserService userService, EmployerService employerService, SeekerService seekerService, VacancyService vacancyService, ResumeService resumeService, StorageService storageService) {
+    public UserController(UserService userService, EmployerService employerService, SeekerService seekerService, VacancyService vacancyService, ResumeService resumeService, StorageService storageService, CityService cityService, CategoryService categoryService, TypeService typeService) {
         this.userService = userService;
         this.employerService = employerService;
         this.seekerService = seekerService;
         this.vacancyService = vacancyService;
         this.resumeService = resumeService;
         this.storageService = storageService;
+        this.cityService = cityService;
+        this.categoryService = categoryService;
+        this.typeService = typeService;
     }
 
 
@@ -51,6 +54,10 @@ public class UserController {
             model.addAttribute("block", resumeService.findByUser(user));
             model.addAttribute("map", storageService.findFiles(user, true));
         }
+        model.addAttribute("city", cityService.getAll());
+        model.addAttribute("country", cityService.getAllCountry());
+        model.addAttribute("categories", categoryService.getAll());
+        model.addAttribute("types", typeService.getAll());
         return "profile";
     }
 
@@ -152,5 +159,166 @@ public class UserController {
                 }
         }
         return "profile-guest";
+    }
+
+    @PostMapping("/editProfile")
+    public String editProfile(Principal principal,
+                              @RequestParam String name,
+                              @RequestParam(required = false) String site,
+                              @RequestParam(required = false) String cities,
+                              @RequestParam(required = false) String fb,
+                              @RequestParam(required = false) String inst,
+                              @RequestParam(required = false) String tw,
+                              @RequestParam(required = false) String li,
+                              @RequestParam(required = false) String description) {
+        User userDB = userService.findUser(principal.getName());
+        if (userDB.getRoles().contains(Role.EMPLOYER)) {
+            Employer user = employerService.findByUser(userDB);
+            int i = 0;
+            if (!user.getName().equals(name)) {
+                i = 1;
+                user.setName(name);
+                userDB.setName(name);
+                userService.save(userDB);
+            }
+            if (!user.getSite().equals(site)) {
+                i = 1;
+                user.setSite(site);
+            }
+            if (fb != null)
+                if (user.getLinkFacebook() != fb) {
+                    i = 1;
+                    user.setLinkFacebook(fb);
+                }
+            if (inst != null)
+                if (user.getLinkInstagram() != inst) {
+                    i = 1;
+                    user.setLinkInstagram(inst);
+                }
+            if (tw != null)
+                if (user.getLinkTwitter() != tw) {
+                    i = 1;
+                    user.setLinkTwitter(tw);
+                }
+            if (li != null)
+                if (user.getLinkLinkedIn() != li) {
+                    i = 1;
+                    user.setLinkLinkedIn(li);
+                }
+            if (description != null)
+                if (user.getDescription() != description) {
+                    i = 1;
+                    user.setDescription(description);
+                }
+            if (!cities.equals("")) {
+                i = 1;
+                List<String> city = Arrays.asList(cities.split("\\$"));
+                user.setCity(null);
+                cityService.addCities(user, cityService.findByNames(city));
+            }
+            if (i == 1) {
+                employerService.save(user);
+                userService.auth(userDB);
+            }
+        } else if (userDB.getRoles().contains(Role.SEEKER)) {
+            Seeker user = seekerService.findByUser(userDB);
+            int i = 0;
+            if (!user.getName().equals(name)) {
+                i = 1;
+                user.setName(name);
+                userDB.setName(name);
+                userService.save(userDB);
+            }
+            if (!user.getSite().equals(site)) {
+                i = 1;
+                user.setSite(site);
+            }
+            if (fb != null)
+                if (user.getLinkFacebook() != fb) {
+                    i = 1;
+                    user.setLinkFacebook(fb);
+                }
+            if (inst != null)
+                if (user.getLinkInstagram() != inst) {
+                    i = 1;
+                    user.setLinkInstagram(inst);
+                }
+            if (tw != null)
+                if (user.getLinkTwitter() != tw) {
+                    i = 1;
+                    user.setLinkTwitter(tw);
+                }
+            if (li != null)
+                if (user.getLinkLinkedIn() != li) {
+                    i = 1;
+                    user.setLinkLinkedIn(li);
+                }
+            if (description != null)
+                if (user.getDescription() != description) {
+                    i = 1;
+                    user.setDescription(description);
+                }
+            if (!cities.equals("")) {
+                i = 1;
+                List<String> city = Arrays.asList(cities.split("\\$"));
+                user.setCity(null);
+                cityService.addCities(user, cityService.findByNames(city));
+            }
+            if (i == 1) {
+                seekerService.save(user);
+                userService.auth(userDB);
+            }
+        }
+
+        return "redirect:/profile";
+    }
+
+    @PostMapping("/editVacancy")
+    public String editVacancy(Principal principal,
+                              @RequestParam Long id,
+                              @RequestParam String category,
+                              @RequestParam String type,
+                              @RequestParam(required = false) String city,
+                              @RequestParam String descript,
+                              @RequestParam int salary) {
+        User user = userService.findUser(principal.getName());
+        if (user.getRoles().contains(Role.EMPLOYER)){
+            Vacancy vacancy = vacancyService.getById(id);
+            Category categoryDB = categoryService.findByName(category);
+            Type typeDB = typeService.findByName(type);
+            if (vacancy.getCategory() != categoryDB)
+                vacancy.setCategory(categoryDB);
+            if(vacancy.getType() != typeDB)
+                vacancy.setType(typeDB);
+            if (!city.equals("")) {
+                List<String> cities = Arrays.asList(city.split("\\$"));
+                vacancy.setCity(null);
+                cityService.addCities(vacancy, cityService.findByNames(cities));
+            }
+            if(!vacancy.getDescription().equals(descript))
+                vacancy.setDescription(descript);
+            if(vacancy.getSalary() != salary)
+                vacancy.setSalary(salary);
+            vacancyService.save(vacancy);
+        } else if (user.getRoles().contains(Role.SEEKER)){
+            Resume resume = resumeService.getById(id);
+            Category categoryDB = categoryService.findByName(category);
+            Type typeDB = typeService.findByName(type);
+            if (resume.getCategory() != categoryDB)
+                resume.setCategory(categoryDB);
+            if(resume.getType() != typeDB)
+                resume.setType(typeDB);
+            if (!city.equals("")) {
+                List<String> cities = Arrays.asList(city.split("\\$"));
+                resume.setCity(null);
+                cityService.addCities(resume, cityService.findByNames(cities));
+            }
+            if(!resume.getDescription().equals(descript))
+                resume.setDescription(descript);
+            if(resume.getSalary() != salary)
+                resume.setSalary(salary);
+            resumeService.save(resume);
+        }
+        return "redirect:/profile";
     }
 }

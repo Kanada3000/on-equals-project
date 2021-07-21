@@ -1,5 +1,7 @@
 package org.onequals.config;
 
+import org.onequals.domain.User;
+import org.onequals.repo.UserRepo;
 import org.onequals.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -47,9 +49,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/admin").hasAuthority("ROLE_ADMIN")
                 .anyRequest().permitAll()
                 .and()
+                .exceptionHandling().accessDeniedPage("/403")
+                .and()
                 .formLogin()
                 .loginPage("/login")
                 .failureUrl("/login?error=true")
+                .permitAll()
+                .and()
+                .oauth2Login()
+                .loginPage("/login/oauth2")
+                .defaultSuccessUrl("/loginSuccess")
                 .permitAll()
                 .and()
                 .logout()

@@ -81,6 +81,7 @@ public class EmployerController {
 
         user.setLink(null);
         userService.updateRole(Role.EMPLOYER);
+        user.setName(name);
         userService.save(user);
 
         return "redirect:/vacancy/new";

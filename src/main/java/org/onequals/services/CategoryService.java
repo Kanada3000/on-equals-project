@@ -45,7 +45,6 @@ public class CategoryService{
     @Transactional
     public List<Category> updateTotalResumes(List<Resume> resumes){
         List<Category> categories = categoryRepo.findAll(Sort.by("id"));
-        System.out.println(categories);
 
         List<Long> resumesId = resumes.stream()
                 .map(Resume::getId)

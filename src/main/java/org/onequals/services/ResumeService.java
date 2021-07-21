@@ -3,6 +3,7 @@ package org.onequals.services;
 import org.onequals.domain.Employer;
 import org.onequals.domain.Resume;
 import org.onequals.domain.User;
+import org.onequals.domain.Vacancy;
 import org.onequals.repo.ResumeRepo;
 import org.onequals.repo.UserRepo;
 import org.springframework.data.domain.Sort;
@@ -31,6 +32,11 @@ public class ResumeService {
     @Transactional
     public List<Resume> getAllAll() {
         return resumeRepo.findAllAll(Sort.by("salary"));
+    }
+
+    @Transactional
+    public Resume getById(Long id){
+        return resumeRepo.findById(id).get();
     }
 
     @Transactional

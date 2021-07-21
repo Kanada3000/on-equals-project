@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/css/file.css">
     <link rel="stylesheet" href="/css/search.css">
     <link rel="stylesheet" href="/css/profile.css">
+    <link rel="shortcut icon" type="image/ico" th:href="@{/img/favicon.ico}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
@@ -25,7 +26,7 @@
         <img src="/images/avatar.png">
     </div>
     <div class="info">
-        <h1 th:text="${user.getName()}"></h1>
+        <h1 th:text="${user.getUser().getName()}"></h1>
         <input id="userId" type="hidden" name="userId" th:value="${user.getUser().getId()}">
         <span class="underline"><a th:href="${user.getSite()}" th:text="${user.getSite()}"></a></span>
         <span>
@@ -124,6 +125,8 @@
 <form id="likeForm" th:action="@{/profile/addLike}" method="POST"></form>
 <form id="dislikeForm" th:action="@{/profile/deleteLike}" method="POST"></form>
 <form id="formDownload" th:action="@{/download}" method="post"></form>
+<form id="logout" th:action="@{/logout}" method="POST"></form>
+
 
 <script th:inline="javascript">
     var likesId = [[${likesId}]];

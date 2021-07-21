@@ -39,6 +39,11 @@ $(function () {
         $('#logoutForm').submit();
         return false;
     })
+
+    $("a[href='/logout']").click(function (e){
+        e.preventDefault();
+        $("#logout").submit();
+    })
 }, 5000);
 
 

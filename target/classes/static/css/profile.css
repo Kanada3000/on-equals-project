@@ -260,12 +260,21 @@
     width: calc(509px + 3.8vw);
 }
 
+#vacancies .vacancy .text li {
+    width: 100%;
+}
+
 #vacancies .vacancy .buttons {
     justify-content: flex-end;
     padding-left: 0;
     margin-top: -25px;
     width: auto;
     height: auto;
+    margin-left: calc(-170px + 32.3vw);
+}
+
+#vacancies .vacancy .buttons a{
+    box-sizing: border-box;
 }
 
 #vacancies .vacancy .buttons div {
@@ -362,6 +371,8 @@
         margin-top: -25px;
         width: auto;
         height: auto;
+        /*margin-left: 0;*/
+        margin-left: calc(-1145px + 100vw);
     }
 
     .hide {
@@ -372,6 +383,7 @@
 @media screen and (max-width: 1140px) {
     #vacancies .vacancy .buttons {
         max-width: 311px;
+        margin-left: 0;
     }
 }
 
@@ -403,6 +415,7 @@
     #vacancies .vacancy .buttons {
         margin-top: calc(-82px + 5.5vw);
         width: 165px;
+        margin-left: 0;
     }
 
     #vacancies .vacancy .buttons div {
@@ -771,11 +784,6 @@
 
     #vacancies .vacancy .text li {
         font-size: calc(14px + 2.5vw);
-    }
-
-    .hide {
-        padding-top: 15px;
-        font-size: calc(-2px + 5vw);
     }
 
     #vacancies .vacancy .buttons {

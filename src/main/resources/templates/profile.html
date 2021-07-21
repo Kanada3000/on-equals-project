@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="/css/file.css">
     <link rel="stylesheet" href="/css/search.css">
     <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="/css/profile-edit.css">
+    <link rel="stylesheet" href="/css/list.css">
+    <link rel="shortcut icon" type="image/ico" th:href="@{/img/favicon.ico}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
@@ -56,49 +59,159 @@
 
     </div>
 </div>
+<div id="head-edit">
+    <div id="profile-head">
+        <div class="avatar">
+            <div class="out avatarblock"><a href="/logout">Вийти</a></div>
+            <img src="/images/avatar.png">
+        </div>
+        <div class="info">
+            <input class="name" type="text" th:value="${user.getName()}" form="formEdit" name="name"/>
+            <input class="site" type="text" th:value="${user.getSite()}" form="formEdit" name="site"/>
+            <span class="city">
+                <img src="/images/location.png">
+                <span th:each="c, index: ${user.getCity()}" th:remove="tag">
+                    <span th:if="${index.index == 0}" th:text="${c.getCountry()}" th:remove="tag"></span>
+                    <span th:text="${' / '+ c.getCity()}" th:remove="tag"></span>
+                </span>
+                <input id="city-input" type="hidden" form="formEdit" name="cities">
+            </span>
+            <div class="container">
+                <div class="social">
+                    <div class="fb-but">
+                        <a th:href="${user.getLinkFacebook()}"><img src="/images/facebook-f.png"></a>
+                        <input type="hidden" form="formEdit" name="fb">
+                    </div>
+                    <div class="inst-but">
+                        <a th:href="${user.getLinkInstagram()}"><img src="/images/instagram.png"></a>
+                        <input type="hidden" form="formEdit" name="inst">
+                    </div>
+                    <div class="tw-but">
+                        <a th:href="${user.getLinkTwitter()}"><img src="/images/twitter.png"></a>
+                        <input type="hidden" form="formEdit" name="tw">
+                    </div>
+                    <div class="li-but">
+                        <a th:href="${user.getLinkLinkedIn()}"><img src="/images/linkedin-in.png"></a>
+                        <input type="hidden" form="formEdit" name="li">
+                    </div>
+                </div>
+                <div class="out infoblock">
+                    <a href="/logout">Вийти</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <textarea id="descr" form="formEdit" th:text="${user.getDescription()}" name="description" maxlength="1000">Some desc</textarea>
+    <button type="submit" form="formEdit">Зберегти</button>
+</div>
 <div id="profile-body">
     <span th:text="${user.getDescription()}">
     </span>
     <div class="container">
-        <div class="block" th:each="b: ${block}">
-            <div class="text">
-                <span th:text="${b.getCategory().getLongName()}">копірайтинг</span>
-                <span th:text="${b.getType().getName()}">повна зайнятість</span>
-                <span th:if="${b.getSalary() > 999}"
-                      th:text="${#numbers.formatInteger(b.getSalary(), 3, 'WHITESPACE') + ' грн'}">
+        <div th:each="b: ${block}" th:remove="tag">
+            <div class="block">
+                <div class="text">
+                    <span th:text="${b.getCategory().getLongName()}"></span>
+                    <span th:text="${b.getType().getName()}"></span>
+                    <span th:if="${b.getSalary() > 999}"
+                          th:text="${#numbers.formatInteger(b.getSalary(), 3, 'WHITESPACE') + ' грн'}">
                 </span>
-                <span th:if="${b.getSalary() <= 999}" th:text="${b.getSalary() + ' грн'}">
-                </span>
-                <span>
+                    <span th:if="${b.getSalary() <= 999}" th:text="${b.getSalary() + ' грн'}">
+                                </span>
+                    <span>
                     <div th:remove="tag" th:each="c, index: ${b.getCity()}">
-                        <span th:if="${index.index == 0}" th:text="${c.getCountry()}" th:remove="tag"></span>
-                        <span th:text="${' / '+ c.getCity()}" th:remove="tag"></span>
+                                            <span th:if="${index.index == 0}" th:text="${c.getCountry()}"
+                                                  th:remove="tag"></span>
+                                            <span th:text="${' / '+ c.getCity()}" th:remove="tag"></span>
+                                        </div>
+                </span>
+                    <div class="hide">
+                        <span class="roll-down">розгорнути ↓</span>
+                        <span class="descript" th:text="${b.getDescription()}">
+                </span>
+                        <span class="roll-up">згорнути ↑</span>
                     </div>
-                </span>
-                <div class="hide">
-                    <span class="roll-down">розгорнути ↓</span>
-                    <span class="descript" th:text="${b.getDescription()}">
-                </span>
-                    <span class="roll-up">згорнути ↑</span>
+                </div>
+                <div class="buttons">
+                    <a href="edit">
+                        <div class="edit">
+                            <img src="/images/edit-vacancy.png">
+                        </div>
+                    </a>
+                    <a th:href="${'/profile/delete/vacancy/'+ b.getId()}" sec:authorize="hasAnyAuthority('EMPLOYER')">
+                        <div class="delete">
+                            <img src="/images/trash-vacancy.png">
+                        </div>
+                    </a>
+                    <a th:href="${'/profile/delete/resume/'+ b.getId()}"
+                       sec:authorize="hasAnyAuthority('SEEKER','ROLE_ADMIN')">
+                        <div class="delete">
+                            <img src="/images/trash-vacancy.png">
+                        </div>
+                    </a>
                 </div>
             </div>
-            <div class="buttons">
-                <a href="#">
-                    <div class="edit">
-                        <img src="/images/edit-vacancy.png">
+
+            <div class="block edit" th:each="b: ${block}">
+                <div class="text">
+                <span>
+                    <div class="list" id="categoryList">
+                        <input autocomplete="off" name="category" id="vacancy" type="text" class="select-label"
+                               placeholder="почніть вводити назву" th:value="${b.getCategory().getLongName()}">
+                        <div class="select green" id="vacancy-div">
+                            <ul>
+                                <li th:each="c: ${categories}">
+                                    <div class="li" th:text="${c.getLongName()}"></div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </a>
-                <a th:href="${'/profile/delete/vacancy/'+ b.getId()}" sec:authorize="hasAnyAuthority('EMPLOYER')">
-                    <div class="delete">
-                        <img src="/images/trash-vacancy.png">
+                </span>
+                    <span>
+                    <div class="list" id="typeList">
+                        <input autocomplete="off" name="type" id="type" type="text" class="select-label"
+                               placeholder="почніть вводити назву" th:value="${b.getType().getName()}">
+                        <div class="select green" id="type-div">
+                            <ul>
+                                <li th:each="c: ${types}">
+                                    <div class="li" th:text="${c.getName()}"></div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </a>
-                <a th:href="${'/profile/delete/resume/'+ b.getId()}"
-                   sec:authorize="hasAnyAuthority('SEEKER','ROLE_ADMIN')">
-                    <div class="delete">
-                        <img src="/images/trash-vacancy.png">
+                </span>
+                    <span>
+                    <input id="salary" type="text" name="salary"  th:value="${b.getSalary()}"/> грн
+                </span>
+                    <span id="city-span">
+                        <div th:remove="tag" th:each="c, index: ${b.getCity()}">
+                                            <span th:if="${index.index == 0}" th:text="${c.getCountry()}"
+                                                  th:remove="tag"></span>
+                                            <span th:text="${' / '+ c.getCity()}" th:remove="tag"></span>
+                                        </div>
+                    <input type="hidden" name="city" value=""/>
+                </span>
+                    <div class="hide">
+                    <span class="descript">
+                        <textarea id="salar" name="descript" th:text="${b.getDescription()}">
+                        </textarea>
+                </span>
                     </div>
-                </a>
+                </div>
+                <div class="buttons">
+                    <a href="accept">
+                        <div class="edit">
+                            <img src="/images/accept-vacancy.png">
+                        </div>
+                    </a>
+                    <a href="delete">
+                        <div class="delete">
+                            <input name="id" type="hidden" th:value="${b.getId()}"/>
+                            <img src="/images/delete.png">
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -137,7 +250,7 @@
                 Додати ще вакансію&nbsp;+
             </div>
         </a>
-        <a href="#">
+        <a href="#" id="edit-button">
             <div class="button">
                 Редагувати інформацію
             </div>
@@ -214,10 +327,72 @@
     </div>
 </div>
 
+<div id="modal">
+    <span id="modal-span">Змінити посилання на фейсбук</span>
+    <input id="link" type="text"/>
+    <div id="cityModal">
+        <div class="country">
+            <div class="country-label">
+                <label for="country" class="label-inner">
+                    <span>Країна</span>
+                </label>
+                <div class="list" id="countryList">
+                    <input autocomplete="off" name="countString" id="country" type="text" class="select-label"
+                           placeholder="почніть вводити назву">
+                    <div class="select green" id="country-div">
+                        <ul>
+                            <li th:each="c: ${country}">
+                                <div class="li" th:text="${c}"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="country-label">
+                <label for="city" class="label-inner">
+                    <span>Міста</span>
+                </label>
+                <div class="list" id="cityList">
+                    <input autocomplete="off" name="citString" id="city" type="text" class="select-label"
+                           placeholder="почніть вводити назву">
+                    <div class="select green" id="city-div">
+                        <ul>
+                            <li th:each="c: ${city}">
+                                <div class="li" th:text="${c.getCity()}"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="accept add green-button">
+            <label>
+                <input type="button" name="accept0">
+                <span>додати країну і місто</span>
+            </label>
+        </div>
+    </div>
+    <button id="save">Зберегти</button>
+</div>
+
+<div class="backdrop"></div>
+
 <form id="likeForm" th:action="@{/profile/deleteLike}" method="POST"></form>
 <form id="formFile" th:action="@{/profile/deleteFile}" method="POST"></form>
+<form id="formEdit" th:action="@{/profile/editProfile}" method="POST"></form>
+<form id="vacancyEdit" th:action="@{/profile/editVacancy}" method="POST"></form>
+<form id="logout" th:action="@{/logout}" method="POST"></form>
 
+<script th:inline="javascript">
+    var cityList = []
+    $("#cityList .li").each(function () {
+        cityList.push($(this).text())
+    })
+</script>
 <script src="/script/script.js"></script>
+<script src="/script/script-profile-edit.js"></script>
+<script src="/script/script-list.js"></script>
 <script src="/script/script-file.js"></script>
 <script src="/script/script-like.js"></script>
 </body>

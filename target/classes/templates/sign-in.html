@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/menu.css">
     <link rel="stylesheet" href="/css/sign.css">
     <link rel="stylesheet" href="/css/sign-1440.css">
+    <link rel="shortcut icon" type="image/ico" th:href="@{/img/favicon.ico}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 
@@ -50,11 +51,13 @@
         <button form="sign-up">Зареєстру&shy;ватися!</button>
     </div>
     <div class="account">
-        <button class="google">Продовжити з&nbspGoogle</button>
-        <button class="fb">Продовжити з&nbspFB</button>
+        <button class="google" type="submit" form="googleForm">Продовжити з&nbspGoogle</button>
+        <button class="fb" type="submit" form="fbForm">Продовжити з&nbspFB</button>
     </div>
 </div>
 
+<form id="googleForm" method="get" action="/oauth2/authorization/google"></form>
+<form id="fbForm" method="get" action="/oauth2/authorization/facebook"></form>
 <script src="/script/script-valid.js"></script>
 <script src="/script/script.js"></script>
 <script src="/script/script-sign.js"></script>

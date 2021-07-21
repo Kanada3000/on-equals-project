@@ -97,9 +97,7 @@ public class StorageService {
         path = path.replace(source.getName(), "");
         if (approve && !source.getName().startsWith("approved")) {
             if (source.renameTo(new File(path + "approved_" + source.getName()))) {
-                System.out.println("complete");
-            } else
-                System.out.println("fail");
+            }
         }
 
         if (!approve && source.getName().startsWith("approved")) {

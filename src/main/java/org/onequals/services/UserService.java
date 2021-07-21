@@ -160,11 +160,8 @@ public class UserService implements UserDetailsService {
         List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
         updatedAuthorities.add(role);
 
-        System.out.println(role);
-
         if (role == Role.ADMIN) {
             updatedAuthorities.remove(Role.USER);
-            System.out.println(updatedAuthorities);
         }
 
         Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), updatedAuthorities);
@@ -217,6 +214,19 @@ public class UserService implements UserDetailsService {
     @Transactional
     public void clearSession() {
         SecurityContextHolder.getContext().setAuthentication(null);
+    }
+
+    @Transactional
+    public String randomPassword() {
+        int len = 40;
+        String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        Random rnd = new Random();
+
+        StringBuilder sb = new StringBuilder(len);
+        for (int i = 0; i < len; i++) {
+            sb.append(AB.charAt(rnd.nextInt(AB.length())));
+        }
+        return sb.toString();
     }
 
     @Override

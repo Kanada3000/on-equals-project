@@ -3,6 +3,8 @@ $(function () {
     let scroll = localStorage.getItem("scrollPos")
     if (scroll !== null) {
         $(window).scrollTop(scroll)
+        // localStorage.setItem("scrollPos", "0")
+
     }
 
     $("#vacancies .vacancy .buttons .heart").click(function (){

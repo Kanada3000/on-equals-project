@@ -1,0 +1,217 @@
+#head-edit{
+    display: none;
+}
+#head-edit .info input {
+    width: 90%;
+    background-color: #C4DE95;
+    border: 2px solid black;
+    border-radius: 7px;
+    padding-left: 10px;
+}
+
+#head-edit .info input.name {
+    font-size: 80px;
+}
+
+#head-edit .info input.site {
+    margin-top: 3px;
+    font-size: inherit;
+}
+
+#head-edit .info span.city {
+    background-color: #C4DE95;
+    border: 2px solid black;
+    border-radius: 7px;
+    padding-left: 10px;
+    width: 90%;
+    cursor: pointer;
+}
+
+#head-edit .container {
+    max-width: 90%;
+}
+
+#head-edit .container .social div {
+    background-color: #C4DE95;
+    border: 2px solid black;
+    border-radius: 7px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#head-edit button {
+    width: 100%;
+    height: 110px;
+    text-align: center;
+    background-color: #C4DE95;
+    font-size: 48px;
+    border: 2px solid black;
+    border-radius: 7px;
+}
+
+#modal{
+    z-index: 999;
+    width: 70%;
+    height: auto;
+    max-height: 70vh;
+    overflow-y: scroll;
+    margin: 0 auto;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 50%;
+    border: 1px solid;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background-color: white;
+    display: none;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 50px;
+}
+
+#modal input{
+    margin-top: 30px;
+    padding: 10px;
+}
+
+#modal button{
+    margin-top: 50px;
+    padding: 20px 0;
+}
+
+#modal #cityModal{
+    display: none;
+}
+
+.backdrop {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+html{
+    overflow-x:  hidden;
+}
+
+#descr{
+    font-size: 46px;
+    width: 100%;
+    resize: vertical;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+
+#profile-body .container .block.edit{
+    display: none;
+}
+
+#profile-body .container .block.edit:nth-of-type(2){
+    border-top: 4px solid black;
+}
+
+#profile-body .container .block.edit .list input{
+    border: none;
+}
+
+#profile-body .container .block.edit input#salary{
+    font-size: inherit;
+    border: none;
+    width: auto;
+}
+
+#profile-body .container .block.edit .hide .descript{
+    display: inline;
+}
+
+#salar{
+    /*display: inline;*/
+    font-size: inherit;
+    width: calc(541px + 32.7vw);
+    resize: vertical;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+
+#city-span{
+    cursor: pointer;
+}
+
+.buttons a[href=accept] img{
+    width: 55px;
+    height: auto;
+}
+
+.buttons a[href=delete] img{
+    width: 55px;
+    height: auto;
+}
+
+@media screen and (max-width: 1440px) {
+    #head-edit .info h1 {
+        font-size: calc(38px + 2.9vw);
+    }
+
+    #head-edit button {
+        font-size: 44px;
+        height: 100px;
+    }
+
+    #salar{
+        width: calc(-431px + 100.2vw);
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #head-edit .info h1 {
+        font-size: 68px;
+    }
+    #head-edit button {
+        font-size: 36px;
+        height: 80px;
+    }
+
+    #descr{
+        font-size: calc(30px + 1.6vw);
+    }
+
+    #salar{
+        width: 571px;
+    }
+}
+
+@media screen and (max-width: 771px) {
+    #descr{
+        font-size: calc(16px + 3.4vw);
+    }
+
+    #salar{
+        width: calc(128px + 57.4vw);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #head-edit .info h1 {
+        font-size: calc(-12px + 13.8vw);
+    }
+    #head-edit button {
+        font-size: 24px;
+        height: 70px;
+    }
+
+    #descr{
+        font-size: calc(14px + 2.5vw);
+    }
+
+    #salar{
+        width: calc(53px + 73.1vw);
+    }
+}
