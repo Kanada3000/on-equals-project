@@ -42,8 +42,8 @@
     </div>
 </div>
 
-<form id="googleForm" method="get" action="/oauth2/authorization/google"></form>
-<form id="fbForm" method="get" action="/oauth2/authorization/facebook"></form>
+<form id="googleForm" method="get" th:action="@{/oauth2/authorization/google}"></form>
+<form id="fbForm" method="get" th:action="@{/oauth2/authorization/facebook}"></form>
 
 <script src="/script/script.js"></script>
 <script src="/script/script-sign.js"></script>

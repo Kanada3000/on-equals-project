@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>OnEquals Register</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/journals.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
+</header>
+
+<div id="top" class="yellow">
+    <h2>Журнал</h2>
+    <span>Роботодавцям</span>
+<!--    <img src="/images/for-employer.png" id="yellow">-->
+</div>
+
+<div id="tile">
+    <h2>Доступність</h2>
+    <div class="container">
+        <a href='#'>
+            <div class="block" id="grey">
+                Топ професійних курсів
+            </div>
+        </a>
+    </div>
+</div>
+
+<script src="/script/script.js"></script>
+<script src="/script/script-journals.js"></script>
+</body>
+</html>

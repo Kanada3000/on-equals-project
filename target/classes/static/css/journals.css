@@ -7,6 +7,15 @@
     box-sizing: border-box;
 }
 
+#top img#yellow {
+    position: absolute;
+    display: block;
+    top: 82px;
+    right: calc(-344px + 30.6vw);
+    height: 573px;
+    width: auto;
+}
+
 #top.green {
     background-color: #C4DE95;
 }
@@ -144,18 +153,19 @@ h2 {
 
 #questions .box .text {
     width: 1190px;
+    align-self: center;
+    height: 100%;
 }
 
 #questions .box .text h3 {
     font-size: 46px;
-    margin: 60px 0 0;
-    padding-bottom: 23px;
+    padding: 47px 0;
 }
 
 #questions .box .text span {
-    display: block;
+    display: none;
     font-size: 32px;
-    margin: 58px 0 115px;
+    margin: 34px 0 115px;
 }
 
 #questions .box hr {
@@ -172,7 +182,54 @@ h2 {
     background-color: #509FC8;
     font-size: 46px;
     border-radius: 100px;
-    margin-top: calc(51px - 1.3vw);
+    margin: calc(51px - 1.3vw) 0;
+    cursor: pointer;
+}
+
+
+#tile{
+    padding: calc(66px + 5vw) 30px calc(15px + 10.2vw) 60px;
+}
+
+#tile h2{
+    margin-left: calc(-438px + 30.4vw);
+}
+
+#tile .container{
+    margin-top: calc(114px - 1.7vw);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#tile .container .block{
+    width: calc(395px + 1.7vw);
+    height: calc(395px + 1.7vw);
+    font-size: 46px;
+    padding: 40px;
+    box-sizing: border-box;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+#tile .container .block:nth-child(5n+1){
+    background-color: #C4DE95;
+}
+#tile .container .block:nth-child(5n+2){
+    background-color: #FDD749;
+}
+#tile .container .block:nth-child(5n+3){
+    background-color: #509FC8;
+}
+#tile .container .block:nth-child(5n+4){
+    background-color: #F98DC0;
+}
+#tile .container .block:nth-child(5n+5){
+    background-color: #F98DC0;
+}
+
+#tile .container .block#grey{
+    background-color: #E5E5E5;
 }
 
 @media screen and (max-width: 1440px) {
@@ -180,6 +237,13 @@ h2 {
         height: calc(765px - 18vw);
         padding-left: 60px;
         padding-top: calc(402px - 13.5vw);
+    }
+
+    #top img#yellow {
+        top: calc(300px - 15.1vw);
+        right: calc(-31px + 8.9vw);
+        height: calc(251px + 22.4vw);
+        transform: rotate(18.11deg);
     }
 
     h2 {
@@ -227,17 +291,36 @@ h2 {
         width: calc(-340px + 106.3vw);
     }
 
+    #questions .box .text h3 {
+        padding: calc(-36px + 5.8vw) 0;
+    }
+
     #questions .box .text span {
-        margin: calc(-80px + 9.6vw) 0 calc(-127px + 16.8vw);
+        margin: calc(-25px + 4.1vw) 0 calc(-127px + 16.8vw);
     }
 
     #questions .box .button {
         width: 112px;
         height: 112px;
-        margin-top: 33px;
+        margin: 30px 0;
     }
 
+    #tile{
+        padding: calc(-38px + 12.3vw) 30px 162px 60px;
+    }
 
+    #tile h2{
+        margin-left: 0;
+    }
+
+    #tile .container{
+        margin-top: 122px;
+    }
+
+    #tile .container .block{
+        width: calc(478px - 4.1vw);
+        height: calc(478px - 4.1vw);
+    }
 }
 
 @media screen and (max-width: 1024px) {
@@ -245,6 +328,10 @@ h2 {
         height: calc(50px + 51.8vw);
         padding-left: calc(177px - 11.5vw);
         padding-top: calc(-52px + 30.8vw);
+    }
+
+    #top img#yellow {
+        display: none;
     }
 
     h2 {
@@ -309,6 +396,7 @@ h2 {
 
     #questions .box .text h3 {
         font-size: calc(30px + 1.6vw);
+        padding: 23px 0;
     }
 
     #questions .box .button {
@@ -316,7 +404,24 @@ h2 {
     }
 
     #questions .box .text span {
-        margin: 18px 0 45px;
+        margin: calc(-7px + 2.4vw) 0 45px;
+    }
+
+    #tile{
+        padding: calc(184px - 9.5vw) calc(-51px + 7.9vw) calc(393px - 22.5vw) calc(-61px + 11.9vw);
+    }
+
+    #tile .container{
+        margin-top: calc(-22px + 14.2vw);
+    }
+
+    #tile .container .block{
+        width: calc(59px + 36.8vw);
+        height: calc(59px + 36.8vw);
+        margin-right: calc(-11px + 4vw);
+        margin-bottom: calc(-11px + 4vw);
+        font-size: calc(30px + 1.6vw);
+        padding: calc(-61px + 9.9vw);
     }
 }
 
@@ -388,23 +493,50 @@ h2 {
     }
 
     #questions .container {
-        margin-top: calc(6px + 7.9vw);
+        margin-top: calc(43px + 2.1vw);
+    }
+
+    #questions .box {
+        min-height: calc(79px + 12.7vw);
     }
 
     #questions .box .text {
-        width: calc(96px + 63.6vw);
+        width: calc(-59px + 78.4vw);
     }
 
     #questions .box .text h3 {
-        font-size: calc(30px + 1.6vw);
-    }
-
-    #questions .box .button {
-        font-size: calc(30px + 1.6vw);
+        font-size: calc(15px + 3.4vw);
+        padding: calc(-3px + 3.4vw) 0;
     }
 
     #questions .box .text span {
-        margin: 18px 0 45px;
+        margin: calc(27px - 2.1vw) 0 calc(-8px + 7.6vw);
+        font-size: calc(-5px + 4.8vw);
+    }
+
+    #questions .box .button {
+        width: calc(9px + 13.4vw);
+        height: calc(9px + 13.4vw);
+        font-size: 42px;
+    }
+
+    #tile{
+        padding: calc(95px + 2.1vw) 30px calc(-83px + 39.2vw);
+    }
+
+    #tile .container{
+        margin-top: calc(67px + 2.7vw);
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+
+    #tile .container .block{
+        width: 100%;
+        height: calc(-90px + 56.4vw);
+        margin-right: 0;
+        margin-bottom: 20px;
+        font-size: calc(15px + 3.4vw);
+        padding: calc(23px - 1vw) calc(44px - 3.8vw);
     }
 }
 
@@ -461,5 +593,52 @@ h2 {
     #stories .slideshow .post .post-text h3 {
         margin-bottom: 35px;
         font-size: calc(2px + 6.3vw);
+    }
+
+    #questions {
+        padding: calc(9px + 12.5vw) calc(-15px + 9.4vw) calc(17px + 20vw);
+    }
+
+    #questions .container {
+        margin-top: calc(11px + 8.8vw);
+    }
+
+    #questions .box {
+        min-height: calc(50px + 18.8vw);
+    }
+
+    #questions .box .text {
+        width: calc(85px + 48.1vw);
+    }
+
+    #questions .box .text h3 {
+        font-size: calc(2px + 6.3vw);
+        padding: calc(31px - 3.8vw) 0;
+    }
+
+    #questions .box .button {
+        font-size: calc(12px + 6.3vw);
+        width: calc(4px + 14.4vw);
+        height: calc(4px + 14.4vw);
+        margin: calc(-3px + 6.9vw) 0;
+    }
+
+    #questions .box .text span {
+        margin: calc(-34px + 10.6vw) 0 calc(-8px + 10.6vw);
+        font-size: calc(6px + 2.5vw);
+    }
+
+    #tile{
+        padding: calc(-69px + 36.3vw) calc(-15px + 9.4vw) calc(-6px + 23.1vw);
+    }
+
+    #tile .container{
+        margin-top: calc(-55px + 28.1vw);
+    }
+
+    #tile .container .block{
+        height: calc(57px + 25.6vw);
+        font-size: calc(2px + 6.3vw);
+        padding: calc(-6px + 5vw) calc(-22px + 10vw);
     }
 }

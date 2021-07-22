@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>OnEquals Admin Users</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="shortcut icon" type="image/ico" th:href="@{/img/favicon.ico}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
+</header>
+
+<!--<form id="form" th:action="@{/admin/users/add}" method="post">-->
+<!--</form>-->
+<!--<input id='id' type='hidden' name='id' form='form'>-->
+
+<div id="admin">
+    <div id="sidebar">
+        <div class="button">
+            <a href="/admin/users">Користувачі</a>
+        </div>
+        <div class="button">
+            <a href="/admin/vacancies">Вакансії</a>
+        </div>
+        <div class="button">
+            <a href="/admin/resumes">Резюме</a>
+        </div>
+        <div class="button">
+            <a href="/admin/cities">Країни та міста</a>
+        </div>
+        <div class="button">
+            <a href="/admin/category">Категорії</a>
+        </div>
+        <div class="button">
+            <a href="/admin/type">Тип зайнятості</a>
+        </div>
+        <div class="button">
+            <a href="/admin/employer">Роботодавці</a>
+        </div>
+        <div class="button">
+            <a href="/admin/seeker">Шукачі</a>
+        </div>
+        <div class="button">
+            <a href="/admin/file">Файли резюме</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${empTotal.size() != 0}" th:text="${empTotal.size()}"></span>
+            <a href="/admin/approve/employer">Непідтверджені роботодавці</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${seekTotal.size() != 0}" th:text="${seekTotal.size()}"></span>
+            <a href="/admin/approve/seeker">Непідтверджені шукачі</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${vacTotal.size() != 0}" th:text="${vacTotal.size()}"></span>
+            <a href="/admin/approve/vacancy">Непідтверджені вакансії</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${resTotal.size() != 0}" th:text="${resTotal.size()}"></span>
+            <a href="/admin/approve/resume">Непідтверджені резюме</a>
+        </div>
+        <div class="button red-button">
+            <span class="notification" th:if="${path != 0}" th:text="${path}"></span>
+            <a href="/admin/approve/file">Непідтверджені файли резюме</a>
+        </div>
+        <div class="button yellow-button active">
+            <a href="/admin/journals/for-seeker">Журнали для шукачів</a>
+        </div>
+
+    </div>
+    <div id="body">
+        <h1>Користувачі</h1>
+        <a href="#" class="first">Додати нового користувача &#10133;</a>
+        <div class="table">
+            <table>
+                <tr class="head">
+                    <td class="id-head">id</td>
+                    <td>name</td>
+                    <td>username</td>
+                    <td>password</td>
+                    <td>roles</td>
+                    <td>hidden</td>
+                    <td>activated</td>
+                    <td>blocked</td>
+                    <td class="but-head"><span>&nbsp;</span></td>
+                    <td class="but-head"><span>&nbsp;</span></td>
+                </tr>
+
+                <tr class="hidden">
+                    <td class="id"></td>
+                    <td><input id="name" type="text"></td>
+                    <td><input id="username" type="text"></td>
+                    <td><input id="password" type="text"></td>
+                    <td>
+                        <select id="role" name="role">
+                            <option value="ADMIN">Адміністратор</option>
+                            <option value="USER" selected>Юзер</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="hidden" name="hidden">
+                            <option value="false">Ні</option>
+                            <option value="true">Так</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="activated" name="activated">
+                            <option value="false">Ні</option>
+                            <option value="true">Так</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="blocked" name="blocked">
+                            <option value="false">Ні</option>
+                            <option value="true">Так</option>
+                        </select>
+                    </td>
+                    <td class="accept">&#10004;</td>
+                    <td class="cancel">&#10060;</td>
+                </tr>
+
+                <tr th:if="${user}" th:each="u: ${user}">
+                    <td class="id" th:text="${u.getId()}"></td>
+                    <td class="name" th:text="${u.getName()}"></td>
+                    <td class="username" th:text="${u.getUsername()}"></td>
+                    <td class="password" th:text="${u.getPassword()}"></td>
+                    <div th:remove="tag" th:if="${u.getRoles().size() == 2}">
+                        <div th:remove="tag" th:each="r: ${u.getRoles()}">
+                            <td class="role" th:if="${r == r.EMPLOYER}">Роботодавець</td>
+                            <td class="role" th:if="${r == r.SEEKER}">Шукач</td>
+                        </div>
+                    </div>
+                    <div th:remove="tag" th:if="${u.getRoles().size() == 1}">
+                        <div th:remove="tag" th:each="r: ${u.getRoles()}">
+                            <td class="role" th:if="${r == r.ADMIN}">Адміністратор</td>
+                            <td class="role" th:if="${r == r.USER}">Юзер</td>
+                        </div>
+                    </div>
+                    <td class="hiiden" th:if="${u.getHidden()}">Так</td>
+                    <td class="hidden" th:unless="${u.getHidden()}">Ні</td>
+                    <td class="activated" th:if="${u.getActivated()}">Так</td>
+                    <td class="activated" th:unless="${u.getActivated()}">Ні</td>
+                    <td class="blocked" th:if="${u.getBlocked()}">Так</td>
+                    <td class="blocked" th:unless="${u.getBlocked()}">Ні</td>
+                    <div th:if="${u.getUsername() == 'adminLog'}" th:remove="tag">
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </div>
+                    <div th:if="${u.getUsername() != 'adminLog'}" th:remove="tag">
+                        <td class="edit">&#9998;</td>
+                        <td id="users" class="delete">&#10060;</td>
+                    </div>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="accept-delete">
+    <span>Ви впевнені, що хочете видалити цей запис назавжди?</span>
+    <div class="buttons">
+        <div class="button yes">Так</div>
+        <div class="button no">Ні</div>
+    </div>
+</div>
+
+<div class="backdrop"></div>
+
+
+<script src="/script/script.js"></script>
+<script src="/script/script-admin.js"></script>
+</body>
+</html>

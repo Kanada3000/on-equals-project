@@ -103,4 +103,13 @@ public class PageController {
     public String accessDenied() {
         return "errors/403";
     }
+
+    @GetMapping("/privacy-policy")
+    public String privacyPolicy(){
+        return "privacy-policy";
+    }
+    @GetMapping("/tou")
+    public String tou(){
+        return "tou";
+    }
 }

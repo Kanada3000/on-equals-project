@@ -33,6 +33,15 @@
     background-color: #ffd6d6;
 }
 
+#admin #sidebar .button.yellow-button{
+    background-color: #edf5a7;
+    position: relative;
+}
+
+#admin #sidebar .button.yellow-button.active{
+    background-color: #fffdd6;
+}
+
 #admin #sidebar .button a {
     display: block;
     padding: 10px 20px;
