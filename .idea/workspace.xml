@@ -10,13 +10,16 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="Interface" />
         <option value="CSS File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
         <option value="Class" />
       </list>
     </option>
@@ -47,27 +50,30 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="database.data.extractors.current.export.id" value="Comma-separated (CSV)_id" />
     <property name="database.data.extractors.current.id" value="Comma-separated (CSV)_id" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/script" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.29256967" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/main/resources/static/script/script.js" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Work\onequals\src\main\resources\static\script" />
       <recent name="E:\Work\onequals\src\main\resources\templates" />
       <recent name="E:\Work\onequals\src\main\resources\templates\admin\journals" />
       <recent name="E:\Work\onequals\src\main\resources\templates\admin\generate" />
       <recent name="E:\Work\onequals\src\main\resources\templates\errors" />
-      <recent name="E:\Work\onequals\src\main\resources\templates\admin" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Work\onequals\src\main\resources" />
+      <recent name="E:\Work\onequals\src\main\resources\static" />
+      <recent name="E:\Work\onequals\src\main\resources\static\css\lib" />
+      <recent name="E:\Work\onequals\src\main\resources\static\css" />
       <recent name="E:\Work\onequals\src\main\resources\templates" />
-      <recent name="E:\Work\onequals\src\main\resources\templates\errors" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.onequals.controller" />
@@ -131,7 +137,9 @@
       <workItem from="1626864478552" duration="9816000" />
       <workItem from="1626944952820" duration="2630000" />
       <workItem from="1626952383188" duration="635000" />
-      <workItem from="1626954339032" duration="5868000" />
+      <workItem from="1626954339032" duration="11353000" />
+      <workItem from="1627024301549" duration="15002000" />
+      <workItem from="1627047652041" duration="8211000" />
     </task>
     <servers />
   </component>

@@ -1,6 +1,5 @@
 package org.onequals.services;
 
-import org.apache.coyote.http11.filters.IdentityOutputFilter;
 import org.onequals.domain.User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,15 +8,10 @@ import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class StorageService {
@@ -52,6 +46,29 @@ public class StorageService {
             throw new StorageException(msg, e);
         }
     }
+//
+//    public void uploadFileCKEditor(MultipartFile file) {
+//
+//        if (file.isEmpty()) {
+//            throw new StorageException("Failed to store empty file");
+//        }
+//
+//
+//        try {
+//            var is = file.getInputStream();
+//
+//            File directory = new File("/uploads/ckeditor");
+//            directory.mkdirs();
+//
+//            Files.copy(is, Paths.get("/uploads/ckeditor/" + randomName() + file.getContentType()),
+//                    StandardCopyOption.REPLACE_EXISTING);
+//        } catch (IOException e) {
+//
+//            var msg = String.format("Failed to store file %f", file.getName());
+//
+//            throw new StorageException(msg, e);
+//        }
+//    }
 
     @Transactional
     public List<Object> findFiles(User user, Boolean approved) {
@@ -141,5 +158,17 @@ public class StorageService {
     public void removeFile(String path){
         File source = new File(path);
         source.delete();
+    }
+
+    public String randomName() {
+        int len = 40;
+        String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        Random rnd = new Random();
+
+        StringBuilder sb = new StringBuilder(len);
+        for (int i = 0; i < len; i++) {
+            sb.append(AB.charAt(rnd.nextInt(AB.length())));
+        }
+        return sb.toString();
     }
 }

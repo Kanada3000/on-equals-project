@@ -76,7 +76,8 @@
         <div class="summary">
             <h4>Всього:</h4>
             <span>
-                <span th:text="${total}" th:remove="tag"></span>
+                <span th:if="${total != null}" th:text="${total}" th:remove="tag"></span>
+                <span th:if="${total == null}" th:text="${'0'}" th:remove="tag"></span>
                 <span th:if="${userType == 'seeker'}" th:remove="tag">вакансій</span>
                 <span th:if="${userType == 'employer'}" th:remove="tag">резюме</span>
             </span>

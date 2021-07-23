@@ -4,14 +4,14 @@ import org.onequals.domain.Role;
 import org.onequals.domain.User;
 import org.onequals.services.CategoryService;
 import org.onequals.services.CityService;
+import org.onequals.services.StorageService;
 import org.onequals.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -22,11 +22,13 @@ public class PageController {
     private final UserService userService;
     private final CategoryService categoryService;
     private final CityService cityService;
+    private final StorageService storageService;
 
-    public PageController(UserService userService, CategoryService categoryService, CityService cityService) {
+    public PageController(UserService userService, CategoryService categoryService, CityService cityService, StorageService storageService) {
         this.userService = userService;
         this.categoryService = categoryService;
         this.cityService = cityService;
+        this.storageService = storageService;
     }
 
     @GetMapping("/")
@@ -99,6 +101,21 @@ public class PageController {
         }
     }
 
+//    @PostMapping("/image/upload")
+//    public String upload(@RequestPart MultipartFile upload, @RequestParam(value = "CKEditorFuncNum") String callback, HttpServletRequest request) throws IOException {
+//        System.out.println(upload.getOriginalFilename());
+//        storageService.uploadFileCKEditor(upload);
+//        String imgUrl = request.getScheme().concat("://").concat(request.getServerName()).concat(":").concat(String.valueOf(request.getServerPort())).concat(uploadUri).concat(destFileName);
+//        StringBuffer sb = new StringBuffer();
+//        sb.append("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction(");
+//        sb.append(callback);
+//        sb.append(",'");
+//        sb.append(imgUrl);
+//        sb.append("','image uploaded successfully!!')</script>");
+//        return sb.toString();
+//        return sb.toString();
+//    }
+
     @RequestMapping("/403")
     public String accessDenied() {
         return "errors/403";
@@ -111,5 +128,10 @@ public class PageController {
     @GetMapping("/tou")
     public String tou(){
         return "tou";
+    }
+
+    @GetMapping("/result")
+    public String ckeditor(){
+        return "empty";
     }
 }

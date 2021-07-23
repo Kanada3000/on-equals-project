@@ -63,8 +63,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutSuccessUrl("/login")
-                .permitAll();
-//                .and().csrf().disable();
+                .permitAll()
+                .and().csrf().ignoringAntMatchers("/admin/journals/**");
     }
 
     @Override
@@ -74,7 +74,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/images/**",
                 "/fonts/**",
                 "/script/**",
-                "/templates/**"
+                "/templates/**",
+                "/ckeditor/**",
+                "/ckfinder/**"
         );
     }
 

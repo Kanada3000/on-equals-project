@@ -5,7 +5,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <meta name="google-site-verification" content="0fSBtiU-hv1QN01GBf3CGDPCITj1LSSd0vjqBajPjU0" />
+    <meta name="google-site-verification" content="0fSBtiU-hv1QN01GBf3CGDPCITj1LSSd0vjqBajPjU0"/>
     <title>OnEquals</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/style.css">
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/css/about.css">
     <link rel="stylesheet" href="/css/support.css">
     <link rel="stylesheet" href="/css/menu.css">
-    <link rel="shortcut icon" type="image/ico" th:href="@{/img/favicon.ico}"/>
+    <!--    <link rel="shortcut icon" type="image/ico" th:href="@{/img/favicon.ico}"/>-->
 </head>
 <body>
 
@@ -33,13 +33,18 @@
 <main>
     <div class="main__block">
         <div class="search">
-            <form id="search" action="/list" method="GET">
+            <form sec:authorize="!hasAuthority('EMPLOYER') && !hasRole('EMPLOYER')" id="search" method="get" th:action="@{/vacancy/list}">
+            </form>
+
+            <form sec:authorize="hasAuthority('EMPLOYER') && hasRole('EMPLOYER')" id="search" method="get" th:action="@{/resume/list}">
+            </form>
+            <form>
                 <label>
-                    <input type="text" name="key_words" class="search_input" placeholder="Ключові слова">
+                    <input form="search" type="text" name="key_words" class="search_input" placeholder="Ключові слова">
                 </label>
-                <label>
+                <label id="catList">
                     <div class="list" id="categoryList">
-                        <input autocomplete="off" id="category" type="text" class="select-label"
+                        <input form="search" autocomplete="off" id="category" type="text" class="select-label"
                                placeholder="Спеціалізація" name="catString">
                         <div class="select green" id="category-div">
                             <ul>
@@ -50,9 +55,10 @@
                         </div>
                     </div>
                 </label>
-                <label>
+                <label id="citList">
                     <div class="list" id="cityList">
-                        <input autocomplete="off" name="citString" id="city" type="text" class="select-label"
+                        <input form="search" autocomplete="off" name="citString" id="city" type="text"
+                               class="select-label"
                                placeholder="Пошук за містом">
                         <div class="select" id="city-div">
                             <ul>
@@ -332,13 +338,16 @@
             <a href="/tou">Умови користування</a>
         </div>
     </div>
+    </div>
     <div class="scroll">
         на початок ↑
     </div>
 </footer>
 
+
 <script src="/script/script.js"></script>
 <script src="/script/script-list.js"></script>
+<script src="/script/script-index.js"></script>
 <script src="/script/script-up.js"></script>
 <script src="/script/script-sticker.js"></script>
 <script src="/script/script-slideshow.js"></script>

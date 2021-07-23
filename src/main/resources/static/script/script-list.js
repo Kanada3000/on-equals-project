@@ -84,6 +84,7 @@ function list(string) {
         thisList.find('.select' + idDiv).find('li').click(function () {
             let selectResult = $(this).find(".li").html();
             $(this).parent().parent().parent().parent().find('input.select-label' + id).val(selectResult);
+            div.hide()
         });
 
 
