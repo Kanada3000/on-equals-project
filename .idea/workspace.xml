@@ -81,17 +81,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="OnequalsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="onequals" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.onequals.OnequalsApplication" />
@@ -139,7 +128,7 @@
       <workItem from="1626952383188" duration="635000" />
       <workItem from="1626954339032" duration="11353000" />
       <workItem from="1627024301549" duration="15002000" />
-      <workItem from="1627047652041" duration="8211000" />
+      <workItem from="1627047652041" duration="8438000" />
     </task>
     <servers />
   </component>

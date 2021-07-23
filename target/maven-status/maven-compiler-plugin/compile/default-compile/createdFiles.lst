@@ -2,7 +2,6 @@ org\onequals\domain\Resume.class
 org\onequals\controller\RegistrationController.class
 org\onequals\services\MailSender$1.class
 org\onequals\repo\UserRepo.class
-org\onequals\config\ConnectorConfig$1.class
 org\onequals\repo\ResumeRepo.class
 org\onequals\domain\Type.class
 org\onequals\services\VacancyService.class
@@ -26,7 +25,6 @@ org\onequals\services\StorageException.class
 org\onequals\domain\Vacancy.class
 org\onequals\services\StorageService.class
 org\onequals\controller\VacancyController.class
-org\onequals\config\ConnectorConfig.class
 org\onequals\controller\UserController.class
 org\onequals\repo\CityRepo.class
 org\onequals\config\MvcConfig.class
