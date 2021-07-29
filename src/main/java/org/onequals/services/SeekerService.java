@@ -1,13 +1,15 @@
 package org.onequals.services;
 
-import org.onequals.domain.Employer;
-import org.onequals.domain.Resume;
-import org.onequals.domain.Seeker;
-import org.onequals.domain.User;
+import org.onequals.domain.*;
 import org.onequals.repo.SeekerRepo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -51,5 +53,21 @@ public class SeekerService {
     @Transactional
     public List<Seeker> getUnapproved(){
         return seekerRepo.findUnapproved();
+    }
+
+    @Transactional
+    public Page<Seeker> findPaginated(Pageable pageable, List<Seeker> pageList) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Seeker> list;
+
+        if (pageList.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, pageList.size());
+            list = pageList.subList(startItem, toIndex);
+        }
+        return new PageImpl<Seeker>(list, PageRequest.of(currentPage, pageSize), pageList.size());
     }
 }

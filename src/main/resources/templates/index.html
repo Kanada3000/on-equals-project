@@ -33,10 +33,10 @@
 <main>
     <div class="main__block">
         <div class="search">
-            <form sec:authorize="!hasAuthority('EMPLOYER') && !hasRole('EMPLOYER')" id="search" method="get" th:action="@{/vacancy/list}">
+            <form style="display: none" sec:authorize="!hasAuthority('EMPLOYER') && !hasRole('EMPLOYER')" id="search" method="get" th:action="@{/vacancy/list}">
             </form>
 
-            <form sec:authorize="hasAuthority('EMPLOYER') && hasRole('EMPLOYER')" id="search" method="get" th:action="@{/resume/list}">
+            <form style="display: none" sec:authorize="hasAuthority('EMPLOYER') || hasRole('EMPLOYER')" id="search" method="get" th:action="@{/resume/list}">
             </form>
             <form>
                 <label>

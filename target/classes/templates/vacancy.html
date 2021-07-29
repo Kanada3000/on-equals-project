@@ -15,19 +15,20 @@
     <link rel="stylesheet" href="/css/reg-1-320.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 </head>
 <body>
 <header>
     <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
     <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
-<div id="reg2">
-    <div class="reg-head">
-        <h1>крок 2 / мої вакансії</h1>
-    </div>
-    <span>поля з зірочкою обов’язкові для заповнення&nbsp<span class="text-red">*</span></span>
+<form id="form-reg-employer" th:action="@{/vacancy/new}" method="post">
+    <div id="reg2">
+        <div class="reg-head">
+            <h1>крок 2 / мої вакансії</h1>
+        </div>
+        <span>поля з зірочкою обов’язкові для заповнення&nbsp<span class="text-red">*</span></span>
 
-    <form id="form-reg-employer" th:action="@{/vacancy/new}" method="post">
         <div id="catList">
             <label for="vacancy" class="first">
                 1. Оберіть вакансію, яка вам потрібна&nbsp<span class="text-red">*</span>
@@ -117,23 +118,26 @@
             5. Вкажіть зарплату (у гривнях)&nbsp<span class="text-red">*</span>
         </label>
         <input id="salary" type="text" name="salary">
-    </form>
-    <span class="errorMessage"></span>
-</div>
-<div id="reg2_sub">
-    <div class="submit">
-        <div class="add-vacancy">
-            <input id="add-button" type="button" name="add" form="form-reg-employer">
-            <label for="add-button">Додати&nbspще вакансію&nbsp+</label>
-        </div>
-        <div class="add-vacancy-btn">
-            <button type="submit" form="form-reg-employer">Зберегти і далі!</button>
-            <button form="skip">Пропустити</button>
+
+        <span class="errorMessage"></span>
+    </div>
+    <div id="reg2_sub">
+        <div class="submit">
+            <div class="add-vacancy">
+                <input id="add-button" type="button" name="add" form="form-reg-employer">
+                <label for="add-button">Додати&nbspще вакансію&nbsp;+</label>
+            </div>
+            <div class="add-vacancy-btn">
+                <button class="unselectable g-recaptcha"
+                        th:attr="data-sitekey=${@reCaptchaKeys.getSite()}"
+                        data-callback='onSubmit'
+                        data-action='submit'>Зберегти і далі!</button>
+                <button form="skip">Пропустити</button>
+            </div>
         </div>
     </div>
-    <form id="skip" action="index.html"></form>
-</div>
-
+</form>
+<form id="skip" th:action="@{/}"></form>
 <script th:inline="javascript">
     var catList = []
     $("#categoryList .li").each(function () {

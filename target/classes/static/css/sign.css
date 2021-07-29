@@ -4,17 +4,17 @@
     margin: auto;
 }
 
-#sign form {
+#sign .form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-#sign form.in {
+#sign .form.in {
     height: calc(170px + 5.4vw);
 }
 
-#sign form input {
+#sign .form input {
     font-size: 22px;
     box-sizing: border-box;
     width: 100%;
@@ -23,10 +23,10 @@
     padding-left: 37px;
 }
 
-#sign form input.error{
+#sign .form input.error{
     border: 2px solid #cc0033;
 }
-#sign form input.validate-equalTo-blur.error{
+#sign .form input.validate-equalTo-blur.error{
     border: 2px solid #cc0033;
     border-right: none;
 }
@@ -36,14 +36,14 @@
     box-sizing: border-box;
 }
 
-#sign form .pass{
+#sign .form .pass{
     display: flex;
     flex-direction: row;
     align-items: center; /*vertical align*/
     justify-content: center; /*horizontal align*/
 }
 
-#sign form .pass input {
+#sign .form .pass input {
     width: calc(100% - 80px);
     height: 98px;
     border: 2px solid #000000;
@@ -63,7 +63,7 @@
     cursor: pointer;
 }
 
-#sign form input.validate-equalTo-blur.error + .image {
+#sign .form input.validate-equalTo-blur.error + .image {
     border: 2px solid #cc0033;
     border-left: none;
 }
@@ -136,12 +136,12 @@
     width: calc(-116px + 84.2vw);
 }
 
-#sign form.up {
+#sign .form.up {
     display: flex;
     flex-direction: row;
 }
 
-#sign form.up .column-1, #sign form.up .column-2{
+#sign .form.up .column-1, #sign .form.up .column-2{
     display: flex;
     flex-direction: column;
     justify-content: space-between;

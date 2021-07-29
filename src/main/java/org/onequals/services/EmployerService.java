@@ -2,9 +2,14 @@ package org.onequals.services;
 
 import org.onequals.domain.*;
 import org.onequals.repo.EmployerRepo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -48,5 +53,21 @@ public class EmployerService {
     @Transactional
     public List<Employer> getUnapproved(){
         return employerRepo.findUnapproved();
+    }
+
+    @Transactional
+    public Page<Employer> findPaginated(Pageable pageable, List<Employer> pageList) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Employer> list;
+
+        if (pageList.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, pageList.size());
+            list = pageList.subList(startItem, toIndex);
+        }
+        return new PageImpl<Employer>(list, PageRequest.of(currentPage, pageSize), pageList.size());
     }
 }

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="ua">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -11,7 +13,6 @@
     <link rel="stylesheet" href="/css/main-adapt.css">
     <link rel="stylesheet" href="/css/menu.css">
     <link rel="stylesheet" href="/css/search.css">
-    <link rel="shortcut icon" type="image/ico" th:href="@{/img/favicon.ico}"/>
     <link rel="stylesheet" href="/css/search-1440.css">
 </head>
 <body>
@@ -23,18 +24,25 @@
 <main>
     <div class="main__block">
         <div class="search">
-            <form id="search" action="/vacancy/list" method="get">
+            <form style="display: none" sec:authorize="!hasAuthority('EMPLOYER') && !hasRole('EMPLOYER')" id="search"
+                  method="get" th:action="@{/vacancy/list}">
+            </form>
+
+            <form style="display: none" sec:authorize="hasAuthority('EMPLOYER') || hasRole('EMPLOYER')" id="search"
+                  method="get" th:action="@{/resume/list}">
+            </form>
+            <form>
                 <label>
                     <input type="text" name="key_words" class="search_input" placeholder="Ключові слова"
-                           th:value="${key_wordsVal}">
+                           th:value="${key_wordsVal}" form="search">
                 </label>
                 <label>
                     <div class="list" id="categoryList">
                         <input autocomplete="off" id="categorySearch" type="text" class="select-label"
-                               placeholder="Спеціалізація" name="catString" th:value="${catStringVal}">
+                               placeholder="Спеціалізація" name="catString" th:value="${catStringVal}" form="search">
                         <div class="select green" id="category-div">
                             <ul>
-                                <li th:each="c: ${category}">
+                                <li th:each="c: ${categories}">
                                     <div class="li" th:text="${c.getLongName()}"></div>
                                 </li>
                             </ul>
@@ -44,7 +52,7 @@
                 <label>
                     <div class="list" id="cityList">
                         <input autocomplete="off" name="citString" id="city" type="text" class="select-label"
-                               placeholder="Пошук за містом" th:value="${citStringVal}">
+                               placeholder="Пошук за містом" th:value="${citStringVal}" form="search">
                         <div class="select" id="city-div">
                             <ul>
                                 <li th:each="c: ${city}">
@@ -104,9 +112,7 @@
 
             <div th:each="c: ${categories}" th:remove="tag">
                 <input th:id="'cat-' + ${c.getId()}" type="checkbox" form="sortForm" name="category"
-                       th:value="${c.getId()}" th:if="${c.getTotal() != 0}">
-                <input th:id="'cat-' + ${c.getId()}" type="checkbox" form="sortForm" name="category" disabled
-                       th:value="${c.getId()}" th:if="${c.getTotal() == 0}">
+                       th:value="${c.getId()}">
                 <label class="checkbox" th:for="'cat-' + ${c.getId()}">
                     <span th:text="${c.getLongName()}" th:remove="tag"></span>
                     &nbsp
@@ -121,9 +127,7 @@
 
             <div th:each="t: ${type}" th:remove="tag">
                 <input th:id="'type-' + ${t.getId()}" type="checkbox" name="type" form="sortForm"
-                       th:value="${t.getId()}" th:if="${t.getTotal() != 0}">
-                <input th:id="'type-' + ${t.getId()}" type="checkbox" name="type" form="sortForm" disabled
-                       th:value="${t.getId()}" th:if="${t.getTotal() == 0}">
+                       th:value="${t.getId()}">
                 <label class="checkbox" th:for="'type-' + ${t.getId()}">
                     <span th:text="${t.getName()}" th:remove="tag"></span> <span th:text="${t.getTotal()}"></span>
                 </label>
@@ -148,7 +152,7 @@
     </div>
 
     <div id="vacancies">
-        <div class="vacancy" th:each="v: ${vacancies}">
+        <div class="vacancy" th:each="v, iStat: ${vacancies.content}">
             <div id="idLike" th:text="${v.getId()}"></div>
             <div class="text">
                 <h3 th:text="${v.getUser().getName()}"></h3>
@@ -189,6 +193,42 @@
                     </div>
                 </a>
 
+            </div>
+        </div>
+        <div id="paginations">
+            <div th:if="${vacancies.totalPages > 0 && userType == 'employer'}" class="pagination"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{/resume/list(size=${vacancies.size},
+                page=${pageNumber},
+                sort=${sort},
+                catString=${catStringVal},
+                citString=${citStringVal},
+                likes=${likesId},
+                category=${category},
+                type=${typeVal},
+                min=${minVal},
+                max=${maxVal},
+                key_words=${key_wordsVal})
+                }"
+                   th:text="${pageNumber}"
+                   th:class="${pageNumber==vacancies.number + 1} ? active"></a>
+            </div>
+            <div th:if="${vacancies.totalPages > 0 && userType == 'seeker'}" class="pagination"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{/vacancy/list(size=${vacancies.size},
+                page=${pageNumber},
+                sort=${sort},
+                catString=${catStringVal},
+                citString=${citStringVal},
+                likes=${likesId},
+                category=${category},
+                type=${typeVal},
+                min=${minVal},
+                max=${maxVal},
+                key_words=${key_wordsVal})
+                }"
+                   th:text="${pageNumber}"
+                   th:class="${pageNumber==vacancies.number + 1} ? active"></a>
             </div>
         </div>
     </div>

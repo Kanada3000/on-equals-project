@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="/css/reg-1-775.css">
     <link rel="stylesheet" href="/css/reg-1-480.css">
     <link rel="stylesheet" href="/css/reg-1-320.css">
-    <link rel="shortcut icon" type="image/ico" th:href="@{/img/favicon.ico}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
@@ -21,13 +20,9 @@
     <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
 <div id="reg-last">
-    <div class="image">
-        <img src="/images/lightnings.png" alt="lightnings">
-    </div>
     <div class="text">
         <span>
-            Схоже, цієї сторінки не існує :(
-            <br/>(Код помилки - 404)
+            Схоже, щось пішло не так :(
         </span>
     </div>
 </div>

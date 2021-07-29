@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.Principal;
@@ -80,7 +81,8 @@ public class PageController {
         response.setHeader(headerKey, headerValue);
         FileInputStream inputStream;
         try {
-            inputStream = new FileInputStream("/uploads/resumes/" + path);
+            File file = new File("/uploads/resumes/" + path);
+            inputStream = new FileInputStream(file);
             try {
                 int c;
                 while ((c = inputStream.read()) != -1) {
@@ -101,21 +103,6 @@ public class PageController {
         }
     }
 
-//    @PostMapping("/image/upload")
-//    public String upload(@RequestPart MultipartFile upload, @RequestParam(value = "CKEditorFuncNum") String callback, HttpServletRequest request) throws IOException {
-//        System.out.println(upload.getOriginalFilename());
-//        storageService.uploadFileCKEditor(upload);
-//        String imgUrl = request.getScheme().concat("://").concat(request.getServerName()).concat(":").concat(String.valueOf(request.getServerPort())).concat(uploadUri).concat(destFileName);
-//        StringBuffer sb = new StringBuffer();
-//        sb.append("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction(");
-//        sb.append(callback);
-//        sb.append(",'");
-//        sb.append(imgUrl);
-//        sb.append("','image uploaded successfully!!')</script>");
-//        return sb.toString();
-//        return sb.toString();
-//    }
-
     @RequestMapping("/403")
     public String accessDenied() {
         return "errors/403";
@@ -130,8 +117,32 @@ public class PageController {
         return "tou";
     }
 
+    @GetMapping("/about")
+    public String aboutUs()
+    {
+        return "about-us";
+    }
+
+    @GetMapping("/journal/seeker")
+    public String journalSeeker()
+    {
+        return "for-seeker";
+    }
+
+    @GetMapping("/journal/employer")
+    public String journalEmployer()
+    {
+        return "for-employer";
+    }
+
+    @GetMapping("/journal/legislation")
+    public String journalLegislation()
+    {
+        return "legislation";
+    }
+
     @GetMapping("/result")
     public String ckeditor(){
-        return "empty";
+        return "admin/journals/generate";
     }
 }

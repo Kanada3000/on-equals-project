@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/menu.css">
     <link rel="stylesheet" href="/css/admin.css">
-    <link rel="shortcut icon" type="image/ico" th:href="@{/img/favicon.ico}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
@@ -82,9 +81,8 @@
             <table>
                 <tr class="head">
                     <td class="id-head">id</td>
-                    <td>name</td>
-                    <td>username</td>
-                    <td>password</td>
+                    <td>name<span class="text-red">*</span></td>
+                    <td>username<span class="text-red">*</span></td>
                     <td>roles</td>
                     <td>hidden</td>
                     <td>activated</td>
@@ -95,9 +93,8 @@
 
                 <tr class="hidden">
                     <td class="id"></td>
-                    <td><input id="name" type="text"></td>
-                    <td><input id="username" type="text"></td>
-                    <td><input id="password" type="text"></td>
+                    <td><input id="name" type="text" required></td>
+                    <td><input id="username" type="text" required></td>
                     <td>
                         <select id="role" name="role">
                             <option value="ADMIN">Адміністратор</option>
@@ -126,11 +123,10 @@
                     <td class="cancel">&#10060;</td>
                 </tr>
 
-                <tr th:if="${user}" th:each="u: ${user}">
+                <tr th:if="${user}" th:each="u, iStat: ${user.content}">
                     <td class="id" th:text="${u.getId()}"></td>
                     <td class="name" th:text="${u.getName()}"></td>
                     <td class="username" th:text="${u.getUsername()}"></td>
-                    <td class="password" th:text="${u.getPassword()}"></td>
                     <div th:remove="tag" th:if="${u.getRoles().size() == 2}">
                         <div th:remove="tag" th:each="r: ${u.getRoles()}">
                             <td class="role" th:if="${r == r.EMPLOYER}">Роботодавець</td>
@@ -159,6 +155,14 @@
                     </div>
                 </tr>
             </table>
+        </div>
+        <div id="paginations">
+            <div th:if="${user.totalPages > 0}" class="pagination"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{/admin/users(size=${user.size}, page=${pageNumber})}"
+                   th:text="${pageNumber}"
+                   th:class="${pageNumber==user.number + 1} ? active"></a>
+            </div>
         </div>
     </div>
 </div>

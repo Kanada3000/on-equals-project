@@ -1,12 +1,13 @@
 package org.onequals.services;
 
-import org.onequals.domain.Resume;
-import org.onequals.domain.Role;
-import org.onequals.domain.User;
-import org.onequals.domain.Vacancy;
+import org.onequals.domain.*;
 import org.onequals.repo.ResumeRepo;
 import org.onequals.repo.UserRepo;
 import org.onequals.repo.VacancyRepo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -66,7 +67,7 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public List<User> getAll() {
-        return userRepo.findAll();
+        return userRepo.findAllUsers(Collections.singleton(Role.ADMIN));
     }
 
     @Transactional
@@ -227,6 +228,22 @@ public class UserService implements UserDetailsService {
             sb.append(AB.charAt(rnd.nextInt(AB.length())));
         }
         return sb.toString();
+    }
+
+    @Transactional
+    public Page<User> findPaginated(Pageable pageable, List<User> pageList) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<User> list;
+
+        if (pageList.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, pageList.size());
+            list = pageList.subList(startItem, toIndex);
+        }
+        return new PageImpl<User>(list, PageRequest.of(currentPage, pageSize), pageList.size());
     }
 
     @Override

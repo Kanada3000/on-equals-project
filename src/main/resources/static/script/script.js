@@ -46,5 +46,13 @@ $(function () {
     })
 }, 5000);
 
+function replaceSpecSymbols(val){
+    val = val.replace(/\(/g, "&#40;");
+    val = val.replace(/\)+/g, '&#41;');
+    val = val.replace(/\.+/g, '&#46;');
+    val = val.replace(/:+/g, '&#58;');
+    return val
+}
+
 
 

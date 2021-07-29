@@ -120,12 +120,15 @@ $(function () {
         } else {
             $(this).prev().prop("checked", "true")
             localStorage.setItem("scrollPos", $(window).scrollTop())
+            $("input[form=search]").attr("form", "sortForm")
             $("#sortForm").submit()
         }
     })
 
     $('#category .salary .input input:not(:disabled)').click(function () {
         localStorage.setItem("scrollPos", $(window).scrollTop())
+        $("input[form=search]").attr("form", "sortForm")
+
         $("#sortForm").submit()
     });
 
@@ -133,6 +136,8 @@ $(function () {
         if ($(this).prev("input:not(:disabled)").length) {
             $(this).prev("input").prop("checked", !$(this).prev("input").prop("checked"))
             localStorage.setItem("scrollPos", $(window).scrollTop())
+            $("input[form=search]").attr("form", "sortForm")
+
             $("#sortForm").submit()
         }
     });
@@ -141,6 +146,8 @@ $(function () {
         if ($(this).prev("input:not(:disabled)").length) {
             $(this).prev("input").prop("checked", !$(this).prev("input").prop("checked"))
             localStorage.setItem("scrollPos", $(window).scrollTop())
+            $("input[form=search]").attr("form", "sortForm")
+
             $("#sortForm").submit()
         }
     });

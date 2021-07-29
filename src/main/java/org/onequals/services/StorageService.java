@@ -1,6 +1,11 @@
 package org.onequals.services;
 
+import org.onequals.domain.City;
 import org.onequals.domain.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,7 +39,7 @@ public class StorageService {
                 number = 0;
             } else {
                 List<String> list = Arrays.asList(directory.list());
-                number = list.stream().mapToInt(v -> Integer.parseInt(v.substring(v.lastIndexOf("_"), v.length() - 4))).max().getAsInt();
+                number = list.stream().mapToInt(v -> Integer.parseInt(v.substring(v.lastIndexOf("_") + 1, v.length() - 4))).max().getAsInt();
             }
 
             Files.copy(is, Paths.get("/uploads/resumes/" + username + "/cv_" + (number + 1) + ".pdf"),
@@ -46,29 +51,6 @@ public class StorageService {
             throw new StorageException(msg, e);
         }
     }
-//
-//    public void uploadFileCKEditor(MultipartFile file) {
-//
-//        if (file.isEmpty()) {
-//            throw new StorageException("Failed to store empty file");
-//        }
-//
-//
-//        try {
-//            var is = file.getInputStream();
-//
-//            File directory = new File("/uploads/ckeditor");
-//            directory.mkdirs();
-//
-//            Files.copy(is, Paths.get("/uploads/ckeditor/" + randomName() + file.getContentType()),
-//                    StandardCopyOption.REPLACE_EXISTING);
-//        } catch (IOException e) {
-//
-//            var msg = String.format("Failed to store file %f", file.getName());
-//
-//            throw new StorageException(msg, e);
-//        }
-//    }
 
     @Transactional
     public List<Object> findFiles(User user, Boolean approved) {
@@ -170,5 +152,21 @@ public class StorageService {
             sb.append(AB.charAt(rnd.nextInt(AB.length())));
         }
         return sb.toString();
+    }
+
+    @Transactional
+    public Page<String> findPaginated(Pageable pageable, List<String> pageList) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<String> list;
+
+        if (pageList.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, pageList.size());
+            list = pageList.subList(startItem, toIndex);
+        }
+        return new PageImpl<String>(list, PageRequest.of(currentPage, pageSize), pageList.size());
     }
 }

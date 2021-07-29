@@ -2,6 +2,8 @@ package org.onequals.controller;
 
 import org.onequals.domain.Role;
 import org.onequals.domain.User;
+import org.onequals.recaptcha.ReCaptchaResponse;
+import org.onequals.services.ReCaptchaRegisterService;
 import org.onequals.services.UserService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -26,10 +28,12 @@ import java.util.Map;
 public class RegistrationController {
     private final UserService userService;
     private final OAuth2AuthorizedClientService authorizedClientService;
+    private final ReCaptchaRegisterService reCaptchaRegisterService;
 
-    public RegistrationController(UserService userService, OAuth2AuthorizedClientService authorizedClientService) {
+    public RegistrationController(UserService userService, OAuth2AuthorizedClientService authorizedClientService, ReCaptchaRegisterService reCaptchaRegisterService) {
         this.userService = userService;
         this.authorizedClientService = authorizedClientService;
+        this.reCaptchaRegisterService = reCaptchaRegisterService;
     }
 
     @GetMapping("/register")
@@ -41,7 +45,14 @@ public class RegistrationController {
     public String addUser(Model model,
                           @RequestParam("password") String pas,
                           @RequestParam("name") String name,
-                          @RequestParam("username") String username) {
+                          @RequestParam("username") String username,
+                          @RequestParam("g-recaptcha-response") String response) {
+        ReCaptchaResponse reCaptchaResponse = reCaptchaRegisterService.verify(response);
+
+        if(!reCaptchaResponse.isSuccess()){
+            return "error";
+        }
+
         User userFromDb = userService.findUser(username);
 
         if (userFromDb != null) {
@@ -57,14 +68,14 @@ public class RegistrationController {
         user.setLink(userService.getRandomLink());
         userService.save(user);
 
-        String message = String.format(
-                "Привіт, %s! \n" +
-                        "Ласкаво просимо до нашої спільноти OnEquals. \n" +
-                        "Будь ласка, перейдіть за посиланням для підтвердження електронної пошти: " +
-                        "https://onequals.com.ua/register/activate/%s",
-                user.getName(),
-                user.getLink());
-        userService.sendEmail(user, "Код для активації акаунта", message);
+//        String message = String.format(
+//                "Привіт, %s! \n" +
+//                        "Ласкаво просимо до нашої спільноти OnEquals. \n" +
+//                        "Будь ласка, перейдіть за посиланням для підтвердження електронної пошти: " +
+//                        "https://onequals.com.ua/register/activate/%s",
+//                user.getName(),
+//                user.getLink());
+//        userService.sendEmail(user, "Код для активації акаунта", message);
         return "sign-in-3";
     }
 
@@ -82,11 +93,6 @@ public class RegistrationController {
         userService.save(user);
         userService.auth(user);
         return "redirect:/sign-in-2/";
-    }
-
-    @GetMapping("/sign-in-2")
-    public String registerContinue(Model model) {
-        return "sign-in-2";
     }
 
     @GetMapping("/loginSuccess")

@@ -2,13 +2,15 @@ package org.onequals.services;
 
 import org.onequals.domain.Resume;
 import org.onequals.domain.Type;
+import org.onequals.domain.User;
 import org.onequals.domain.Vacancy;
 import org.onequals.repo.ResumeRepo;
 import org.onequals.repo.TypeRepo;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -88,5 +90,21 @@ public class TypeService {
             }
         }
         return types;
+    }
+
+    @Transactional
+    public Page<Type> findPaginated(Pageable pageable, List<Type> pageList) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Type> list;
+
+        if (pageList.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, pageList.size());
+            list = pageList.subList(startItem, toIndex);
+        }
+        return new PageImpl<Type>(list, PageRequest.of(currentPage, pageSize), pageList.size());
     }
 }

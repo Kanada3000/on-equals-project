@@ -72,13 +72,15 @@ main .search_input, main .list {
     width: 100%;
     position: absolute;
     z-index: 990;
-    top: -2px;
+    top: 0;
     left: 0;
     display: block;
     margin: 0;
     background-color: white;
     font-size: inherit;
     padding: 1vw 0 0;
+    max-height: 420px;
+    overflow-y: auto;
 }
 
 .select li {
@@ -90,7 +92,7 @@ main .search_input, main .list {
 .select .li {
     width: auto;
     display: inline;
-    padding: 0.4vw 0.94vw;
+    padding: 5px 10px;
 
 }
 

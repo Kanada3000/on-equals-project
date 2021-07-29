@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="/css/menu.css">
     <link rel="stylesheet" href="/css/sign.css">
     <link rel="stylesheet" href="/css/sign-1440.css">
-    <link rel="shortcut icon" type="image/ico" th:href="@{/img/favicon.ico}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 
 </head>
 <body>
@@ -19,45 +19,57 @@
     <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
     <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
-<div id="sign" class="upp">
-    <form id="sign-up" class="up" method="POST" th:action="@{/register}">
-        <div class="column-1">
-            <input type="text" placeholder="Ім'я" name="name">
-            <input type="text" placeholder="Ел. пошта" name="username">
-        </div>
-        <div class="column-2">
-            <div class="pass">
-                <input placeholder="Пароль" type="password" name="password">
-                <div class="image">
-                    <img src="/images/eye-close.png">
+<form id="sign-up" method="POST" th:action="@{/register}">
+    <div id="sign" class="upp">
+        <div class="form up">
+            <div class="column-1">
+                <input type="text" placeholder="Ім'я" name="name">
+                <input type="text" placeholder="Ел. пошта" name="username">
+            </div>
+            <div class="column-2">
+                <div class="pass">
+                    <input placeholder="Пароль" type="password" name="password">
+                    <div class="image">
+                        <img src="/images/eye-close.png">
+                    </div>
+                </div>
+                <div class="pass">
+                    <input placeholder="Підтвердити пароль" type="password" name="passwordrep">
+                    <div class="image">
+                        <img src="/images/eye-close.png">
+                    </div>
                 </div>
             </div>
-            <div class="pass">
-                <input placeholder="Підтвердити пароль" type="password" name="passwordrep">
-                <div class="image">
-                    <img src="/images/eye-close.png">
-                </div>
-            </div>
         </div>
-
-    </form>
-</div>
-<div id="invalid">
-    <label id="error" class="error" th:if="${message != null}" th:text="${message}"></label>
-</div>
-
-<div id="sign-button">
-    <div class="sign-in">
-        <button form="sign-up">Зареєстру&shy;ватися!</button>
     </div>
-    <div class="account">
-        <button class="google" type="submit" form="googleForm">Продовжити з&nbspGoogle</button>
-        <button class="fb" type="submit" form="fbForm">Продовжити з&nbspFB</button>
+    <div id="invalid">
+        <label id="error" class="error" th:if="${message != null}" th:text="${message}"></label>
     </div>
-</div>
+
+    <div id="sign-button">
+        <div class="sign-in">
+            <button
+                    class="g-recaptcha"
+                    th:attr="data-sitekey=${@reCaptchaKeys.getSite()}"
+                    data-callback='onSubmit'
+                    data-action='submit'>Зареєстру&shy;ватися!
+            </button>
+        </div>
+        <div class="account">
+            <button class="google" type="submit" form="googleForm">Продовжити з&nbspGoogle</button>
+            <button class="fb" type="submit" form="fbForm">Продовжити з&nbspFB</button>
+        </div>
+    </div>
+</form>
 
 <form id="googleForm" method="get" action="/oauth2/authorization/google"></form>
 <form id="fbForm" method="get" action="/oauth2/authorization/facebook"></form>
+
+<script th:inline="javascript">
+    function onSubmit(token) {
+        document.getElementById("sign-up").submit();
+    }
+</script>
 <script src="/script/script-valid.js"></script>
 <script src="/script/script.js"></script>
 <script src="/script/script-sign.js"></script>

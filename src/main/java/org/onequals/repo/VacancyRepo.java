@@ -29,14 +29,12 @@ public interface VacancyRepo extends JpaRepository<Vacancy, Long> {
     @Query("SELECT v FROM Vacancy v WHERE v.user.id = ?1")
     List<Vacancy> findByUser(Long id);
 
-    @Query("SELECT v FROM Vacancy v WHERE (" +
-            "v IN ?2 AND " +
-            "(SELECT c.city FROM City c WHERE c MEMBER OF v.city) LIKE %?1% OR " +
-            "v.category.longName LIKE %?1% OR " +
-            "CONCAT(v.salary, '') LIKE %?1% OR " +
-            "v.description LIKE %?1% OR " +
-            "v.type.name LIKE %?1% OR " +
-            "v.user.name LIKE %?1%)")
+    @Query("SELECT v FROM Vacancy v WHERE lower(CONCAT(" +
+            "' ', v.category.longName, " +
+            "' ', v.salary, " +
+            "' ', v.description, " +
+            "' ', v.type.name, " +
+            "' ', v.user.name)) LIKE CONCAT('% ', ?1, ' %' )  AND v IN ?2")
     List<Vacancy> filterByKey(String key, List<Vacancy> vacancies);
 
     @Query("SELECT v FROM Vacancy v WHERE v.category.longName = ?1 AND v IN ?2")

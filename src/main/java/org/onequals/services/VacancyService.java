@@ -1,17 +1,16 @@
 package org.onequals.services;
 
 import org.onequals.domain.Employer;
+import org.onequals.domain.Resume;
 import org.onequals.domain.User;
 import org.onequals.domain.Vacancy;
 import org.onequals.repo.UserRepo;
 import org.onequals.repo.VacancyRepo;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class VacancyService {
@@ -29,7 +28,7 @@ public class VacancyService {
     }
 
     @Transactional
-    public Vacancy getById(Long id){
+    public Vacancy getById(Long id) {
         return vacancyRepo.findById(id).get();
     }
 
@@ -45,6 +44,7 @@ public class VacancyService {
         if (!vacancyList.isEmpty()) {
             if (key_words != null)
                 if (!key_words.isEmpty()) {
+                    key_words = key_words.toLowerCase();
                     vacancyList = vacancyRepo.filterByKey(key_words, vacancyList);
                 }
 
@@ -59,15 +59,34 @@ public class VacancyService {
                 }
 
             if (category != null) {
-                vacancyList = vacancyRepo.filterByCategoryList(category, vacancyList);
+                if (!category.isEmpty())
+                    vacancyList = vacancyRepo.filterByCategoryList(category, vacancyList);
             }
 
             if (type != null) {
-                vacancyList = vacancyRepo.filterByTypeList(type, vacancyList);
+                if (!type.isEmpty())
+                    vacancyList = vacancyRepo.filterByTypeList(type, vacancyList);
             }
             vacancyList = vacancyRepo.sort(min, max, vacancyList, Sort.by(sort));
             return vacancyList;
         } else return null;
+    }
+
+    @Transactional
+    public Page<Vacancy> findPaginated(Pageable pageable, List<Vacancy> vacancies) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Vacancy> list;
+
+        if (vacancies.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, vacancies.size());
+            list = vacancies.subList(startItem, toIndex);
+        }
+
+        return new PageImpl<Vacancy>(list, PageRequest.of(currentPage, pageSize), vacancies.size());
     }
 
     @Transactional
@@ -89,7 +108,7 @@ public class VacancyService {
 
     @Transactional
     public void deleteAll(List<Vacancy> vacancies) {
-        for(Vacancy v: vacancies){
+        for (Vacancy v : vacancies) {
             Long id = v.getId();
             List<User> users = vacancyRepo.getUsersByLike(id);
             for (User u : users) {
@@ -108,7 +127,7 @@ public class VacancyService {
     }
 
     @Transactional
-    public List<Vacancy> getUnapproved(){
+    public List<Vacancy> getUnapproved() {
         return vacancyRepo.findUnapproved();
     }
 

@@ -29,9 +29,9 @@ $(function () {
     })
 
     $(".roll-down").click(function (){
-        $(this).parent().find(".roll-up").css("display","block");
-        $(this).parent().find(".descript").slideDown();
         $(this).css("display","none")
+        $(this).parent().find(".descript").slideDown();
+        $(this).parent().find(".roll-up").css("display","block");
     })
 
     $(".roll-up").click(function (){

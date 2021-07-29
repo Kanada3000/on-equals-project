@@ -201,7 +201,7 @@
         height: 43.75vw;
     }
 
-    #reg2_sub .add-vacancy-btn button[type=submit]{
+    #reg2_sub .add-vacancy-btn button[data-action=submit]{
         margin-top: 37px;
         padding: 0 40px;
     }
@@ -228,7 +228,7 @@
         height: calc(30px + 37.5vw);
     }
 
-    #footer-reg .download label{
+    #footer-reg .download label , #footer-reg .download button{
         font-size: 8.75vw;
     }
 

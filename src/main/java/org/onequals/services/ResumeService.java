@@ -6,10 +6,11 @@ import org.onequals.domain.User;
 import org.onequals.domain.Vacancy;
 import org.onequals.repo.ResumeRepo;
 import org.onequals.repo.UserRepo;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -35,7 +36,7 @@ public class ResumeService {
     }
 
     @Transactional
-    public Resume getById(Long id){
+    public Resume getById(Long id) {
         return resumeRepo.findById(id).get();
     }
 
@@ -43,7 +44,7 @@ public class ResumeService {
     public List<Resume> sortAndFilter(String key_words, String catString, String citString, int min,
                                       int max, String sort, List<Long> category, List<Long> type) {
         List<Resume> resumeList = resumeRepo.findAll();
-        if(!resumeList.isEmpty()) {
+        if (!resumeList.isEmpty()) {
             if (key_words != null)
                 if (!key_words.isEmpty()) {
                     resumeList = resumeRepo.filterByKey(key_words, resumeList);
@@ -60,15 +61,34 @@ public class ResumeService {
                 }
 
             if (category != null) {
-                resumeList = resumeRepo.filterByCategoryList(category, resumeList);
+                if (!category.isEmpty())
+                    resumeList = resumeRepo.filterByCategoryList(category, resumeList);
             }
 
             if (type != null) {
-                resumeList = resumeRepo.filterByTypeList(type, resumeList);
+                if (!type.isEmpty())
+                    resumeList = resumeRepo.filterByTypeList(type, resumeList);
             }
             resumeList = resumeRepo.sort(min, max, resumeList, Sort.by(sort));
             return resumeList;
         } else return null;
+    }
+
+    @Transactional
+    public Page<Resume> findPaginated(Pageable pageable, List<Resume> resumes) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Resume> list;
+
+        if (resumes.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, resumes.size());
+            list = resumes.subList(startItem, toIndex);
+        }
+
+        return new PageImpl<Resume>(list, PageRequest.of(currentPage, pageSize), resumes.size());
     }
 
     @Transactional
@@ -79,7 +99,7 @@ public class ResumeService {
     @Transactional
     public void delete(Long id) {
         List<User> users = resumeRepo.getUsersByLike(id);
-        for(User u: users){
+        for (User u : users) {
             Set<Resume> set = u.getLikedResume();
             set.remove(resumeRepo.getById(id));
             u.setLikedResume(set);
@@ -90,10 +110,10 @@ public class ResumeService {
 
     @Transactional
     public void deleteAll(List<Resume> resumes) {
-        for (Resume r: resumes){
+        for (Resume r : resumes) {
             Long id = r.getId();
             List<User> users = resumeRepo.getUsersByLike(id);
-            for(User u: users){
+            for (User u : users) {
                 Set<Resume> set = u.getLikedResume();
                 set.remove(resumeRepo.getById(id));
                 u.setLikedResume(set);
@@ -109,7 +129,7 @@ public class ResumeService {
     }
 
     @Transactional
-    public List<Resume> getUnapproved(){
+    public List<Resume> getUnapproved() {
         return resumeRepo.findUnapproved();
     }
 
@@ -132,7 +152,7 @@ public class ResumeService {
             minMax.put("max", max);
             minMax.put("minSalary", minSalary);
             minMax.put("maxSalary", maxSalary);
-        } else{
+        } else {
             minMax.put("min", 0);
             minMax.put("max", 0);
             minMax.put("minSalary", 0);

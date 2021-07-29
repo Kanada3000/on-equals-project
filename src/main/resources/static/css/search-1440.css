@@ -37,6 +37,10 @@
         padding: 0 0 10px;
     }
 
+    #vacancies #paginations a{
+        font-size: 32px;
+    }
+
     #vacancies .vacancy .buttons{
         flex-wrap: nowrap;
         justify-content: space-between;
@@ -286,6 +290,10 @@
         font-size: calc(16px + 2.1vw);
     }
 
+    #vacancies #paginations a{
+        font-size: calc(16px + 2.1vw);
+    }
+
     #vacancies .vacancy .buttons{
         flex-direction: row-reverse;
         padding: 41px 0 0;
@@ -377,6 +385,10 @@
 
     #vacancies .vacancy .text li{
         width: 100%;
+        font-size: calc(14px + 2.5vw);
+    }
+
+    #vacancies #paginations a{
         font-size: calc(14px + 2.5vw);
     }
 

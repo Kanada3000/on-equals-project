@@ -44,7 +44,22 @@ $(function () {
 
 
     $("#form-reg-employer").submit(function (e) {
-        // e.preventDefault()
+        if($("#description").length){
+            let val  = $("#description").val()
+            val = val.replace(/\(/g, "&#40;");
+            val = val.replace(/\)+/g, '&#41;');
+            val = val.replace(/\.+/g, '&#46;');
+            val = val.replace(/:+/g, '&#58;');
+            $("#description").val(val)
+        }
+        if($("#story").length){
+            let val  = $("#story").val()
+            val = val.replace(/\(/g, "&#40;");
+            val = val.replace(/\)+/g, '&#41;');
+            val = val.replace(/\.+/g, '&#46;');
+            val = val.replace(/:+/g, '&#58;');
+            $("#story").val(val)
+        }
     }).validate({
         rules: {
             category: {
@@ -68,6 +83,10 @@ $(function () {
                 inTheListCity: true,
             },
             description: {
+                required: true,
+                maxlength: 1000,
+            },
+            story: {
                 required: true,
                 maxlength: 1000,
             },
@@ -136,6 +155,10 @@ $(function () {
                 inTheListCity: "Оберіть значення зі списку",
             },
             description: {
+                required: "Це поле обов'язкове для заповнення",
+                maxlength: "Це поле має містит до 1000 знаків",
+            },
+            story: {
                 required: "Це поле обов'язкове для заповнення",
                 maxlength: "Це поле має містит до 1000 знаків",
             },

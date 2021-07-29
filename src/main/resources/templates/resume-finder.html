@@ -14,22 +14,23 @@
     <link rel="stylesheet" href="/css/reg-1-775.css">
     <link rel="stylesheet" href="/css/reg-1-480.css">
     <link rel="stylesheet" href="/css/reg-1-320.css">
-    <link rel="shortcut icon" type="image/ico" th:href="@{/img/favicon.ico}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 </head>
 <body>
 <header>
     <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
     <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
-<div id="reg2">
-    <div class="reg-head">
-        <h1>крок 2 / моє резюме</h1>
-    </div>
-    <span>поля з зірочкою обов’язкові для заповнення&nbsp;<span class="text-red">*</span></span>
+<form id="form-reg-employer" th:action="@{/resume/new}" method="POST">
+    <div id="reg2">
+        <div class="reg-head">
+            <h1>крок 2 / моє резюме</h1>
+        </div>
+        <span>поля з зірочкою обов’язкові для заповнення&nbsp;<span class="text-red">*</span></span>
 
-    <form id="form-reg-employer" th:action="@{/resume/new}" method="POST">
+
         <div id="catList">
             <label for="resume" class="first">
                 1. Оберіть вакансію, яка вам потрібна&nbsp;<span class="text-red">*</span>
@@ -118,22 +119,25 @@
             5. Вкажіть зарплату (у гривнях)&nbsp;<span class="text-red">*</span>
         </label>
         <input id="salary" type="text" name="salary">
-    </form>
-    <span class="errorMessage"></span>
-</div>
-<div id="reg2_sub">
-    <div class="submit">
-        <div class="add-vacancy">
-            <input id="add-button" type="button" form="form-reg-employer">
-            <label for="add-button" class="unselectable">Додати&nbsp;ще резюме&nbsp;+</label>
-        </div>
-        <div class="add-vacancy-btn">
-            <button type="submit" form="form-reg-employer" class="unselectable">Зберегти і далі!</button>
-            <button form="skip" class="unselectable">Пропустити</button>
+        <span class="errorMessage"></span>
+    </div>
+    <div id="reg2_sub">
+        <div class="submit">
+            <div class="add-vacancy">
+                <input id="add-button" type="button" form="form-reg-employer">
+                <label for="add-button" class="unselectable">Додати&nbsp;ще резюме&nbsp;+</label>
+            </div>
+            <div class="add-vacancy-btn">
+                <button class="unselectable g-recaptcha"
+                        th:attr="data-sitekey=${@reCaptchaKeys.getSite()}"
+                        data-callback='onSubmit'
+                        data-action='submit'>Зберегти і далі!
+                </button>
+                <button form="skip" class="unselectable">Пропустити</button>
+            </div>
         </div>
     </div>
-    <form id="skip" action="index.html"></form>
-</div>
+</form>
 <div id="footer-reg">
     <div class="file">
         <div class="block">
@@ -148,26 +152,37 @@
         </div>
     </div>
     <div id="invalid"></div>
-    <div class="download">
-        <input id="download" type="file" accept="application/pdf" name="file" form="formResume">
-        <label for="download" class="unselectable">
-            Завантажити готове&nbsp<span>↓</span>
-        </label>
-    </div>
-    <div class="download file-resume">
-        <label class="unselectable">
+    <form id="formResume" th:action="@{/resume/file}" method="post" enctype="multipart/form-data">
+        <input type="hidden" id="form-type">
+        <input type="hidden" id="size">
+        <div class="download">
+            <input id="download" type="file" accept="application/pdf" name="file" form="formResume">
+            <label for="download" class="unselectable">
+                Завантажити готове&nbsp<span>↓</span>
+            </label>
+        </div>
+        <button class="download file-resume g-recaptcha"
+                th:attr="data-sitekey=${@reCaptchaKeys.getSite()}"
+                data-callback="onSubmit"
+                data-action='submit'>
             Відправити резюме
-        </label>
-    </div>
+        </button>
+    </form>
     <div class="star">
         <img src="/images/star-1.png" alt="star">
     </div>
     <p>Ви також можете завантажити своє готове резюме на свій профіль у форматі pdf до 10МБ</p>
 </div>
 
-<form id="formResume" th:action="@{/resume/file}" method="post" enctype="multipart/form-data"></form>
+
+<form id="skip" th:action="@{/}"></form>
+
+<script type="text/javascript">
+</script>
 
 <script th:inline="javascript">
+
+
     var catList = []
     $("#categoryList .li").each(function () {
         catList.push($(this).text())
@@ -180,8 +195,8 @@
 </script>
 <script src="/script/script-list.js"></script>
 <script src="/script/script-valid.js"></script>
-<script src="/script/script-add.js"></script>
 <script src="/script/script-file.js"></script>
+<script src="/script/script-add.js"></script>
 <script src="/script/script.js"></script>
 </body>
 </html>

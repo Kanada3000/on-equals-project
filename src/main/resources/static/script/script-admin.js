@@ -34,8 +34,39 @@ $(function () {
         let i = 1;
         $("tr.edit :input[required]").each(function () {
             let input = $(this);
+            let id = $(this).attr("id")
             if (input.val().length <= 0) {
+                alert("Поля із * не мають бути порожніми!")
                 i = 0;
+            } else if(id.indexOf("category") > -1 &&
+                jQuery.inArray(input.val(), catList) === -1){
+                alert("Поле category обране не зі списку!")
+                i = 0;
+            } else if(id.indexOf("city") > -1 &&
+                jQuery.inArray(input.val(), cityList) === -1){
+                alert("Поле city обране не зі списку!")
+                i = 0;
+            } else if(id.indexOf("type") > -1 &&
+                jQuery.inArray(input.val(), typeList) === -1){
+                alert("Поле type обране не зі списку!")
+                i = 0;
+            } else if(id.indexOf("user") > -1 &&
+                jQuery.inArray(input.val(), userList) === -1){
+                alert("Поле user обране не зі списку!")
+                i = 0;
+            } else if(id.indexOf("salary") > -1 &&
+                !$.isNumeric(input.val())){
+                alert("Поле salary має містити лише цифри!")
+                i = 0;
+            } else if(id.indexOf("description") > -1){
+                if(input.val().length > 1000){
+                    alert("Поле description має містити не більше 1000 символів!")
+                    i = 0;
+                }else {
+                    let val = input.val()
+                    val = replaceSpecSymbols(val)
+                    input.val(val)
+                }
             }
         });
         $("tr.edit select[required]").each(function () {

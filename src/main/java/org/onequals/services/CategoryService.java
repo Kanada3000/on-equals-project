@@ -1,14 +1,16 @@
 package org.onequals.services;
 
 import org.onequals.domain.Category;
+import org.onequals.domain.Employer;
 import org.onequals.domain.Resume;
 import org.onequals.domain.Vacancy;
 import org.onequals.repo.CategoryRepo;
 import org.onequals.repo.VacancyRepo;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -96,5 +98,21 @@ public class CategoryService{
         categoryRepo.deleteFromEmployer(id);
         categoryRepo.deleteFromSeeker(id);
         categoryRepo.deleteById(id);
+    }
+
+    @Transactional
+    public Page<Category> findPaginated(Pageable pageable, List<Category> pageList) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<Category> list;
+
+        if (pageList.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, pageList.size());
+            list = pageList.subList(startItem, toIndex);
+        }
+        return new PageImpl<Category>(list, PageRequest.of(currentPage, pageSize), pageList.size());
     }
 }

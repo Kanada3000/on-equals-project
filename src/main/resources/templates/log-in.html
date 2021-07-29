@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/menu.css">
     <link rel="stylesheet" href="/css/sign.css">
     <link rel="stylesheet" href="/css/sign-1440.css">
-<!--    <link rel="shortcut icon" type="image/ico" th:href="@{/img/favicon.ico}"/>-->
+    <!--    <link rel="shortcut icon" type="image/ico" th:href="@{/img/favicon.ico}"/>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
@@ -17,18 +17,21 @@
     <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
     <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
-<div id="sign">
-    <form id="sign-in" class="in" method="POST" th:action="@{/login}">
-        <input type="text" placeholder="Ел. пошта" name="username">
-        <div class="pass">
-            <input type="password" placeholder="Пароль" name="password">
-            <div class="image">
-                <img src="/images/eye-close.png">
+<form id="sign-in" class="in" method="POST" th:action="@{/login}">
+    <div id="sign">
+        <div class="form in">
+            <input type="text" placeholder="Ел. пошта" name="username">
+            <div class="pass">
+                <input type="password" placeholder="Пароль" name="password">
+                <div class="image">
+                    <img src="/images/eye-close.png">
+                </div>
             </div>
         </div>
-    </form>
-    <a href="/register/password">Забули пароль?</a>
-</div>
+        <a href="/register/password">Забули пароль?</a>
+    </div>
+
+</form>
 <div id="invalid">
     <label id="error" class="error" th:if="${loginError != null}">Невірний логін або пароль</label>
 </div>

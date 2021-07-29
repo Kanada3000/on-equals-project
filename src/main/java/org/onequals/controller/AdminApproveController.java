@@ -2,6 +2,8 @@ package org.onequals.controller;
 
 import org.onequals.domain.*;
 import org.onequals.services.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('ROLE_ADMIN')")
@@ -39,9 +44,23 @@ public class AdminApproveController {
     }
 
     @GetMapping("/vacancy")
-    public String adminVacanciesPage(Model model) {
+    public String adminVacanciesPage(Model model,
+                                     @RequestParam("page") Optional<Integer> page,
+                                     @RequestParam("size") Optional<Integer> size) {
         List<Vacancy> unapproved = vacancyService.getUnapproved();
-        model.addAttribute("vacancy", unapproved);
+
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(15);
+        Page<Vacancy> pageObj = vacancyService.findPaginated(PageRequest.of(currentPage - 1, pageSize), unapproved);
+        int totalPages = pageObj.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
+        model.addAttribute("vacancy", pageObj);
         model.addAttribute("user", userService.getAllUser("employer"));
         model.addAttribute("types", typeService.getAllAll());
         model.addAttribute("category", categoryService.getAllAll());
@@ -92,9 +111,23 @@ public class AdminApproveController {
     }
 
     @GetMapping("/resume")
-    public String adminResumePage(Model model) {
+    public String adminResumePage(Model model,
+                                  @RequestParam("page") Optional<Integer> page,
+                                  @RequestParam("size") Optional<Integer> size) {
         List<Resume> unapproved = resumeService.getUnapproved();
-        model.addAttribute("resume", unapproved);
+
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(15);
+        Page<Resume> pageObj = resumeService.findPaginated(PageRequest.of(currentPage - 1, pageSize), unapproved);
+        int totalPages = pageObj.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
+        model.addAttribute("resume", pageObj);
         model.addAttribute("user", userService.getAllUser("seeker"));
         model.addAttribute("types", typeService.getAllAll());
         model.addAttribute("category", categoryService.getAllAll());
@@ -145,9 +178,23 @@ public class AdminApproveController {
     }
 
     @GetMapping("/employer")
-    public String adminEmployerPage(Model model) {
+    public String adminEmployerPage(Model model,
+                                    @RequestParam("page") Optional<Integer> page,
+                                    @RequestParam("size") Optional<Integer> size) {
         List<Employer> unapproved = employerService.getUnapproved();
-        model.addAttribute("employer", unapproved);
+
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(15);
+        Page<Employer> pageObj = employerService.findPaginated(PageRequest.of(currentPage - 1, pageSize), unapproved);
+        int totalPages = pageObj.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
+        model.addAttribute("employer", pageObj);
         model.addAttribute("category", categoryService.getAllAll());
         model.addAttribute("user", userService.getAllUser("user"));
         model.addAttribute("city", cityService.getAllAll());
@@ -220,9 +267,23 @@ public class AdminApproveController {
     }
 
     @GetMapping("/seeker")
-    public String adminSeekerPage(Model model) {
+    public String adminSeekerPage(Model model,
+                                  @RequestParam("page") Optional<Integer> page,
+                                  @RequestParam("size") Optional<Integer> size) {
         List<Seeker> unapproved = seekerService.getUnapproved();
-        model.addAttribute("seeker", unapproved);
+
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(15);
+        Page<Seeker> pageObj = seekerService.findPaginated(PageRequest.of(currentPage - 1, pageSize), unapproved);
+        int totalPages = pageObj.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
+        model.addAttribute("seeker", pageObj);
         model.addAttribute("category", categoryService.getAllAll());
         model.addAttribute("user", userService.getAllUser("user"));
         model.addAttribute("city", cityService.getAllAll());
@@ -288,8 +349,21 @@ public class AdminApproveController {
     }
 
     @GetMapping("/file")
-    public String filePage(Model model) {
-        model.addAttribute("path", storageService.getAllPaths(false));
+    public String filePage(Model model,
+                           @RequestParam("page") Optional<Integer> page,
+                           @RequestParam("size") Optional<Integer> size) {
+
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(15);
+        Page<String> pageObj = storageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), storageService.getAllPaths(false));
+        int totalPages = pageObj.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+        model.addAttribute("path", pageObj);
         model.addAttribute("empTotal", employerService.getUnapproved());
         model.addAttribute("seekTotal", seekerService.getUnapproved());
         model.addAttribute("vacTotal", vacancyService.getUnapproved());

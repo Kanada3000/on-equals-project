@@ -1,10 +1,11 @@
 package org.onequals.controller;
 
-import org.onequals.domain.Resume;
 import org.onequals.domain.User;
 import org.onequals.domain.Vacancy;
+import org.onequals.recaptcha.ReCaptchaResponse;
 import org.onequals.services.*;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/vacancy")
@@ -26,13 +26,15 @@ public class VacancyController {
     private final UserService userService;
     private final TypeService typeService;
     private final CityService cityService;
+    private final ReCaptchaRegisterService reCaptchaRegisterService;
 
-    public VacancyController(CategoryService categoryService, VacancyService vacancyService, UserService userService, TypeService typeService, CityService cityService) {
+    public VacancyController(CategoryService categoryService, VacancyService vacancyService, UserService userService, TypeService typeService, CityService cityService, ReCaptchaRegisterService reCaptchaRegisterService) {
         this.categoryService = categoryService;
         this.vacancyService = vacancyService;
         this.userService = userService;
         this.typeService = typeService;
         this.cityService = cityService;
+        this.reCaptchaRegisterService = reCaptchaRegisterService;
     }
 
     @GetMapping("/list")
@@ -46,7 +48,14 @@ public class VacancyController {
                               @RequestParam(required = false) String catString,
                               @RequestParam(required = false) String citString,
                               @RequestParam(required = false) String likes,
-                              @RequestParam(required = false) String dislikes) {
+                              @RequestParam(required = false) String dislikes,
+                              @RequestParam("page") Optional<Integer> page,
+                              @RequestParam("size") Optional<Integer> size) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(15);
+        model.addAttribute("minVal", min);
+        model.addAttribute("maxVal", max);
+
         User user = new User();
 
         if (principal != null) {
@@ -85,7 +94,15 @@ public class VacancyController {
                 model.addAttribute("categories", categoryService.updateTotal(vacancies));
                 model.addAttribute("type", typeService.updateTotal(vacancies));
                 model.addAttribute("total", vacancies.size());
-                model.addAttribute("vacancies", vacancies);
+                Page<Vacancy> vacancyPage = vacancyService.findPaginated(PageRequest.of(currentPage - 1, pageSize), vacancies);
+                model.addAttribute("vacancies", vacancyPage);
+                int totalPages = vacancyPage.getTotalPages();
+                if (totalPages > 0) {
+                    List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                            .boxed()
+                            .collect(Collectors.toList());
+                    model.addAttribute("pageNumbers", pageNumbers);
+                }
             }
         } else {
             model.addAttribute("categories", categoryService.getAll());
@@ -96,7 +113,9 @@ public class VacancyController {
         model.addAttribute("key_wordsVal", key_words);
         model.addAttribute("catStringVal", catString);
         model.addAttribute("citStringVal", citString);
-        model.addAttribute("category", categoryService.getAll());
+        model.addAttribute("sort", sort);
+        model.addAttribute("category", category);
+        model.addAttribute("typeVal", type);
         model.addAttribute("city", cityService.getAll());
         model.addAttribute("userType", "seeker");
 
@@ -121,7 +140,14 @@ public class VacancyController {
                              @RequestParam("typeList") List<String> typeList,
                              @RequestParam("citString") List<String> citString,
                              @RequestParam("description") List<String> desc,
-                             @RequestParam("salary") List<Integer> salary) {
+                             @RequestParam("salary") List<Integer> salary,
+                             @RequestParam("g-recaptcha-response") String response) {
+        ReCaptchaResponse reCaptchaResponse = reCaptchaRegisterService.verify(response);
+
+        if(!reCaptchaResponse.isSuccess()){
+            return "error";
+        }
+
         User user = userService.findUser(principal.getName());
 
         for (int i = 0; i < cat.size(); i++) {

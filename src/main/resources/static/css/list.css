@@ -27,8 +27,10 @@
     margin: 0;
     background-color: white;
     font-size: inherit;
-    padding: 1vw 0 0;
+    padding: 10px 0 0;
     overflow: visible;
+    max-height: 420px;
+    overflow-y: auto;
 }
 
 .select li {
@@ -40,7 +42,7 @@
 .select .li {
     width: auto;
     display: inline;
-    padding: 0.4vw 0.94vw;
+    padding: 5px 10px;
 
 }
 

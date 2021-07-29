@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>OnEquals</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/about-us.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
+</header>
+
+<div id="title">
+    <div class="text">
+        <h1>Команда</h1>
+        <span>Ми команда кроссекторального соціального проєкту “На рівних”.<br/>Познайомимось? </span>
+    </div>
+    <div class="image">
+        <img src="/images/smile-1.png">
+    </div>
+</div>
+<div id="container">
+    <div class="block">
+        <div class="image yellow">
+            <span>Тут буде красиве фото</span>
+        </div>
+        <h2>Злата Єфіменко</h2>
+        <span>керівниця проєкту, продюсерка</span>
+    </div>
+    <div class="block">
+        <div class="image blue">
+            <span>Тут буде красиве фото</span>
+        </div>
+        <h2>Софія Лавренюк</h2>
+        <span>керівниця проєкту, соціологиня</span>
+    </div>
+    <div class="block">
+        <div class="image green">
+            <span>Тут буде красиве фото</span>
+        </div>
+        <h2>Анастасія Левицька</h2>
+        <span>дизайнерка</span>
+    </div>
+    <div class="block">
+        <div class="image pink">
+            <span>Тут буде красиве фото</span>
+        </div>
+        <h2>Віктор Коломієць</h2>
+        <span>дизайнер</span>
+    </div>
+    <div class="block">
+        <div class="image green">
+            <span>Тут буде красиве фото</span>
+        </div>
+        <h2>Євгенія Кужненкова</h2>
+        <span>смм-ниця</span>
+    </div>
+    <div class="block">
+        <div class="image pink">
+            <span>Тут буде красиве фото</span>
+        </div>
+        <h2>Вікторія Одусанво</h2>
+        <span>соціологиня</span>
+    </div>
+    <div class="block">
+        <div class="image">
+            <img src="/images/photos/about-us-1.png">
+        </div>
+        <h2>Марія Деркачова</h2>
+        <span>режисерка</span>
+    </div>
+    <div class="block">
+        <div class="image blue">
+            <span>Тут буде красиве фото</span>
+        </div>
+        <h2>Антон Коломієць</h2>
+        <span>оператор</span>
+    </div>
+    <div class="block">
+        <div class="image pink">
+            <span>Тут буде красиве фото</span>
+        </div>
+        <h2>Віталій Семотюк</h2>
+        <span>розробник сайту</span>
+    </div>
+    <div class="block">
+        <div class="image green">
+            <span>Тут буде красиве фото</span>
+        </div>
+        <h2>Роман Єфіменко</h2>
+        <span>тестувальник</span>
+    </div>
+</div>
+
+<div id="steps">
+    <div id="steps-title">
+        <h1>Наші кроки</h1>
+        <span>
+            Слоган проєкту: “Тільки твій талант робить тебе особливим”. Нашою метою є руйнування стереотипів щодо
+            працевлаштування людей з інвалідністю та надання інструменту для досягнення ними своїх професійнихамбіцій.
+        </span>
+    </div>
+    <div id="steps-container">
+        <div class="block">
+            <div class="image">
+                <img src="/images/about-us-1.png">
+            </div>
+            <span>
+                Соціологічне дослідження, що слугувало розвідкою щодо ролі корпоративної культури у створенні
+                сприятливих умов для працевлаштування людей з інвалідністю. Скоро ви зможете побачити результати у
+                відкритому доступі.
+            </span>
+        </div>
+        <div class="block">
+            <div class="image">
+                <img src="/images/about-us-2.png">
+            </div>
+            <span>
+                Платформа з пошуку вакансій. Ми намагалися створити сайт, який був би зрозумілим та простим у
+                використанні, доступним для кожного та кожної.
+                Він буде постійно оновлюватися корисною інформацією для шукачів_ок та роботодавців_чинь, а також
+                вакансіями, які передбачають надання робочих місць для людей з інвалідністю. Сподіваємося на підтримку
+                зі сторони компаній та розширення кола професійних можливостей для шукачів_ок.
+            </span>
+        </div>
+        <div class="block">
+            <div class="image">
+                <img src="/images/about-us-3.png">
+            </div>
+            <span>
+                Серія соціальних відеороликів. Ролики висвітлюватимуть круті кейси працевлаштування людей з різним
+                типом інвалідності у різних сферах ринку праці. Вони виступатимуть мотивацією для тих, хто зневірився
+                у можливості знайти місце роботи за своїми професійними якостями або ж зіштовхнувся_лася з негативним
+                досвідом працевлаштування.
+            </span>
+        </div>
+        <div class="block">
+            <div class="image">
+                <img src="/images/about-us-4.png">
+            </div>
+            <span>
+                Документальний короткометражний фільм про буденність та історії працевлаштування людей з
+                інвалідністю. Цим фільмом ми хочемо показати захопливі історії 5 різних героїв та героїнь: їх
+                незвичайні хобі, цікаву роботу, друзів, родину.
+            </span>
+        </div>
+    </div>
+</div>
+
+<script src="/script/script.js"></script>
+</body>
+</html>

@@ -2,9 +2,14 @@ package org.onequals.services;
 
 import org.onequals.domain.*;
 import org.onequals.repo.CityRepo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -137,5 +142,21 @@ public class CityService {
     @Transactional
     public List<String> getAllCountry() {
         return cityRepo.findAllCountries();
+    }
+
+    @Transactional
+    public Page<City> findPaginated(Pageable pageable, List<City> pageList) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<City> list;
+
+        if (pageList.size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, pageList.size());
+            list = pageList.subList(startItem, toIndex);
+        }
+        return new PageImpl<City>(list, PageRequest.of(currentPage, pageSize), pageList.size());
     }
 }

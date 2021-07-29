@@ -9,12 +9,12 @@
         width: calc(-646px + 120.9vw);
     }
 
-    #sign form.up .column-1, #sign form.up .column-2{
+    #sign .form.up .column-1, #sign .form.up .column-2{
         width: calc(737px - 14.2vw);
         height: 240px;
     }
 
-    #sign form.in {
+    #sign .form.in {
         height: calc(296px - 3.4vw);
     }
 
@@ -36,12 +36,12 @@
 }
 
 @media screen and (max-width: 1420px) {
-    #sign form.up {
+    #sign .form.up {
         flex-direction: column;
         align-items: center;
     }
 
-    #sign form.up .column-2{
+    #sign .form.up .column-2{
         margin-top: 44px;
     }
 }
@@ -59,7 +59,7 @@
 
 @media screen and (max-width: 1024px) {
 
-    #sign form.up .column-1, #sign form.up .column-2{
+    #sign .form.up .column-1, #sign .form.up .column-2{
         width: 100%;
         height: calc(116px + 12vw);
     }
@@ -74,7 +74,7 @@
         font-size: 42px;
     }
 
-    #sign form.in {
+    #sign .form.in {
         height: calc(82px + 17.6vw);
     }
 
@@ -86,7 +86,7 @@
         padding-right: 28px;
     }
 
-    #sign form .pass input, #sign form input {
+    #sign .form .pass input, #sign .form input {
         height: calc(34px + 6.3vw);
     }
 
@@ -101,11 +101,11 @@
 
 @media screen and (max-width: 768px) {
 
-    #sign form.up .column-1, #sign form.up .column-2{
+    #sign .form.up .column-1, #sign .form.up .column-2{
         height: calc(184px + 3.4vw);
     }
 
-    #sign form.up .column-2{
+    #sign .form.up .column-2{
         margin-top: calc(28px + 2vw);
     }
 
@@ -114,11 +114,11 @@
         padding: calc(5px + 13.5vw) 0 0;
     }
 
-    #sign form.in {
+    #sign .form.in {
         height: calc(177px + 5.2vw);
     }
 
-    #sign form .pass input, #sign form input {
+    #sign .form .pass input, #sign .form input {
         height: 82px;
     }
 
@@ -152,7 +152,7 @@
         width: calc(30px + 2.4vw);
     }
 
-    #sign form input {
+    #sign .form input {
         padding-left: calc(-22px + 7.6vw);
     }
 
@@ -163,15 +163,15 @@
 
 @media screen and (max-width: 480px) {
 
-    #sign form.up .column-1, #sign form.up .column-2{
+    #sign .form.up .column-1, #sign .form.up .column-2{
         height: calc(50px + 31.3vw);
     }
 
-    #sign form.up .column-2{
+    #sign .form.up .column-2{
         margin-top: calc(14px + 5vw);
     }
 
-    #sign form input {
+    #sign .form input {
         padding-left: 15px;
         font-size: calc(-2px + 5vw);
     }
@@ -181,11 +181,11 @@
         padding: calc(10px + 12.5vw) 0 0;
     }
 
-    #sign form .pass input, #sign form input {
+    #sign .form .pass input, #sign .form input {
         height: calc(16px + 13.8vw);
     }
 
-    #sign form.in {
+    #sign .form.in {
         height: calc(46px + 32.5vw);
     }
 

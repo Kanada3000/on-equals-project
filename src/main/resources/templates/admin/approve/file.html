@@ -96,6 +96,14 @@
                 </tr>
             </table>
         </div>
+        <div id="paginations">
+            <div th:if="${path.totalPages > 0}" class="pagination"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{/admin/approve/file(size=${path.size}, page=${pageNumber})}"
+                   th:text="${pageNumber}"
+                   th:class="${pageNumber==path.number + 1} ? active"></a>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -110,7 +118,6 @@
 <div class="backdrop"></div>
 <script src="/script/script.js"></script>
 <script src="/script/script-list.js"></script>
-<!--<script src="/script/script-admin.js"></script>-->
 <script src="/script/script-admin-file.js"></script>
 
 </body>
