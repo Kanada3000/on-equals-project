@@ -196,7 +196,7 @@ public class AdminApproveController {
 
         model.addAttribute("employer", pageObj);
         model.addAttribute("category", categoryService.getAllAll());
-        model.addAttribute("user", userService.getAllUser("user"));
+        model.addAttribute("user", userService.getAllUser("employer"));
         model.addAttribute("city", cityService.getAllAll());
         model.addAttribute("empTotal", unapproved);
         model.addAttribute("seekTotal", seekerService.getUnapproved());
@@ -285,7 +285,7 @@ public class AdminApproveController {
 
         model.addAttribute("seeker", pageObj);
         model.addAttribute("category", categoryService.getAllAll());
-        model.addAttribute("user", userService.getAllUser("user"));
+        model.addAttribute("user", userService.getAllUser("seeker"));
         model.addAttribute("city", cityService.getAllAll());
         model.addAttribute("empTotal", employerService.getUnapproved());
         model.addAttribute("seekTotal", unapproved);

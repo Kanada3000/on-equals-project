@@ -52,6 +52,27 @@ public class StorageService {
         }
     }
 
+    public void uploadImage(MultipartFile file) {
+        if (file.isEmpty()) {
+            throw new StorageException("Failed to store empty file");
+        }
+
+        try {
+            var is = file.getInputStream();
+
+            File directory = new File("/uploads/images");
+            boolean bool = directory.mkdirs();
+
+            Files.copy(is, Paths.get("/uploads/images/" + file.getName()),
+                    StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+
+            var msg = String.format("Failed to store file %f", file.getName());
+
+            throw new StorageException(msg, e);
+        }
+    }
+
     @Transactional
     public List<Object> findFiles(User user, Boolean approved) {
         List<Object> list = new ArrayList<Object>();

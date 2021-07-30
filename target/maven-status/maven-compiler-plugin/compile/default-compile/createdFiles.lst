@@ -13,6 +13,7 @@ org\onequals\repo\CityRepo.class
 org\onequals\config\MvcConfig.class
 org\onequals\controller\EmployerController.class
 org\onequals\domain\Category.class
+org\onequals\controller\CKEditorController.class
 org\onequals\services\CategoryService.class
 org\onequals\controller\ResumeController.class
 org\onequals\controller\SeekerController.class

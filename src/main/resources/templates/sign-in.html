@@ -67,7 +67,8 @@
 
 <script th:inline="javascript">
     function onSubmit(token) {
-        document.getElementById("sign-up").submit();
+        if($("#sign-up").valid())
+            $("#sign-up").submit();
     }
 </script>
 <script src="/script/script-valid.js"></script>

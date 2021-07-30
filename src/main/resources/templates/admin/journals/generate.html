@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ua">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" th:content="${_csrf.token}">
     <meta charset="UTF-8">
     <title>OnEquals Admin Users</title>
     <link rel="stylesheet" href="/css/style.css">
@@ -20,15 +21,10 @@
 <div id="admin">
     <div id="body">
         <div id="editor"></div>
-        <button>Створити нову сторінку</button>
+        <button id="publish">Створити нову сторінку</button>
     </div>
 </div>
-<script>
-    CKEDITOR.replace( 'editor', {
-        filebrowserBrowseUrl: '/browser/browse.php',
-        filebrowserUploadUrl: '/uploader/upload'
-    });
-</script>
+
 <script src="/script/script.js"></script>
 <script src="/script/script-newpage.js"></script>
 <script src="/script/script-admin.js"></script>

@@ -66,7 +66,10 @@ public class RegistrationController {
         user.setUsername(username);
         user.setPassword(userService.setPassword(pas));
         user.setLink(userService.getRandomLink());
+        user.setActivated(true);
         userService.save(user);
+        userService.auth(user);
+
 
 //        String message = String.format(
 //                "Привіт, %s! \n" +
@@ -76,7 +79,7 @@ public class RegistrationController {
 //                user.getName(),
 //                user.getLink());
 //        userService.sendEmail(user, "Код для активації акаунта", message);
-        return "sign-in-3";
+        return "sign-in-2";
     }
 
     @GetMapping("/choose")

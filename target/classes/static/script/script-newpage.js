@@ -1,11 +1,23 @@
 $(function (){
-    // $("button").click(function (){
-    //     alert ("save")
-    //     let data = CKEDITOR.instances.editor1.getData();
-    //     console.log(data)
-    // })
+    CKEDITOR.replace( 'editor', {
+        filebrowserImageUploadUrl: '/image/upload?_csrf=' + $('meta[name=csrf-token]').attr("content"),
+        height: 400,
+    });
 
-    // CKEDITOR.replace( 'editor1', {
-    //     filebrowserUploadUrl: "/upload/upload.php"
-    // } );
+    CKEDITOR.on("dialogDefinition", function(e){
+        let dialogName = e.data.name
+        let dialogDefinition = e.data.definition
+
+        switch (dialogName){
+            case 'image':
+                dialogDefinition.removeContents('info')
+                dialogDefinition.removeContents('Link')
+                dialogDefinition.removeContents('advanced')
+                break;
+        }
+    })
+
+    $("#publish").click(function(){
+        alert(CKEDITOR.instances.editor.getData())
+    })
 })
