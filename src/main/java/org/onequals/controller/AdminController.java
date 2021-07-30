@@ -371,7 +371,7 @@ public class AdminController {
 
         model.addAttribute("employer", pageObj);
         model.addAttribute("category", categoryService.getAllAll());
-        model.addAttribute("user", userService.getAllUser("user"));
+        model.addAttribute("user", userService.getAllUser("useremployer"));
         model.addAttribute("city", cityService.getAllAll());
         model.addAttribute("empTotal", unapproved);
         model.addAttribute("seekTotal", seekerService.getUnapproved());
@@ -462,7 +462,7 @@ public class AdminController {
 
         model.addAttribute("seeker", pageObj);
         model.addAttribute("category", categoryService.getAllAll());
-        model.addAttribute("user", userService.getAllUser("user"));
+        model.addAttribute("user", userService.getAllUser("userseeker"));
         model.addAttribute("city", cityService.getAllAll());
         model.addAttribute("empTotal", employerService.getUnapproved());
         model.addAttribute("seekTotal", unapproved);

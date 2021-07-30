@@ -38,31 +38,31 @@ $(function () {
             if (input.val().length <= 0) {
                 alert("Поля із * не мають бути порожніми!")
                 i = 0;
-            } else if(id.indexOf("category") > -1 &&
-                jQuery.inArray(input.val(), catList) === -1){
+            } else if (id.indexOf("category") > -1 &&
+                jQuery.inArray(input.val(), catList) === -1) {
                 alert("Поле category обране не зі списку!")
                 i = 0;
-            } else if(id.indexOf("city") > -1 &&
-                jQuery.inArray(input.val(), cityList) === -1){
+            } else if (id.indexOf("city") > -1 &&
+                jQuery.inArray(input.val(), cityList) === -1) {
                 alert("Поле city обране не зі списку!")
                 i = 0;
-            } else if(id.indexOf("type") > -1 &&
-                jQuery.inArray(input.val(), typeList) === -1){
+            } else if (id.indexOf("type") > -1 &&
+                jQuery.inArray(input.val(), typeList) === -1) {
                 alert("Поле type обране не зі списку!")
                 i = 0;
-            } else if(id.indexOf("user") > -1 &&
-                jQuery.inArray(input.val(), userList) === -1){
+            } else if (id.indexOf("user") > -1 &&
+                jQuery.inArray(input.val(), userList) === -1) {
                 alert("Поле user обране не зі списку!")
                 i = 0;
-            } else if(id.indexOf("salary") > -1 &&
-                !$.isNumeric(input.val())){
+            } else if (id.indexOf("salary") > -1 &&
+                !$.isNumeric(input.val())) {
                 alert("Поле salary має містити лише цифри!")
                 i = 0;
-            } else if(id.indexOf("description") > -1){
-                if(input.val().length > 1000){
+            } else if (id.indexOf("description") > -1) {
+                if (input.val().length > 1000) {
                     alert("Поле description має містити не більше 1000 символів!")
                     i = 0;
-                }else {
+                } else {
                     let val = input.val()
                     val = replaceSpecSymbols(val)
                     input.val(val)
@@ -85,7 +85,7 @@ $(function () {
         if (!$("#admin #body tr.edit").length) {
             let id = $(this).parent().find("td.id").text()
             let hidden = $("#admin #body tr.hidden")
-            let block = hidden.clone().removeClass("hidden").addClass("edit")
+            var block = hidden.clone().removeClass("hidden").addClass("edit")
             $(this).parent().addClass("temp")
             $("input#id").val(id)
             $(this).parent().before(block)
@@ -99,6 +99,19 @@ $(function () {
                 input.attr("form", "form")
                 block.find("input#" + inputId).val(val)
             });
+
+            let i = 0
+            $("#admin #body tr.temp td.city div").each(function () {
+                let val = $(this).text()
+                val = $.trim(val);
+                if (i === 0) {
+                    block.find("input#city").val(val)
+                } else {
+                    addCityfunc($("#admin #body tr.edit a.addCity"), val)
+                }
+
+                i++
+            })
 
             $("tr.edit select").each(function () {
                 let input = $(this);

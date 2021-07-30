@@ -192,8 +192,20 @@ public class UserService implements UserDetailsService {
             return userRepo.findAllByRoleUser(Collections.singleton(Role.USER), 1);
         else if (role.equals("employer"))
             return userRepo.findAllByRoleUser(Collections.singleton(Role.EMPLOYER), 2);
-        else
+        else if (role.equals("seeker"))
             return userRepo.findAllByRoleUser(Collections.singleton(Role.SEEKER), 2);
+        else if (role.equals("userseeker")){
+            List<User> list1 = userRepo.findAllByRoleUser(Collections.singleton(Role.SEEKER), 2);
+            List<User> list2 = userRepo.findAllByRoleUser(Collections.singleton(Role.USER), 1);
+            list1.addAll(list2);
+            return list1;
+        } else {
+            List<User> list1 = userRepo.findAllByRoleUser(Collections.singleton(Role.EMPLOYER), 2);
+            List<User> list2 = userRepo.findAllByRoleUser(Collections.singleton(Role.USER), 1);
+            list1.addAll(list2);
+            return list1;
+        }
+
     }
 
     @Transactional
