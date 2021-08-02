@@ -41,6 +41,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .headers()
+                    .frameOptions()
+                        .sameOrigin()
+                .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/resume/list").hasAnyAuthority("EMPLOYER", "ROLE_ADMIN")
                 .antMatchers(HttpMethod.GET, "/seeker").hasAnyAuthority("USER")

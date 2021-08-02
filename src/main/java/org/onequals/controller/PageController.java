@@ -1,17 +1,17 @@
 package org.onequals.controller;
 
+import org.apache.commons.io.FileUtils;
+import org.onequals.domain.Page;
 import org.onequals.domain.Role;
 import org.onequals.domain.User;
-import org.onequals.services.CategoryService;
-import org.onequals.services.CityService;
-import org.onequals.services.StorageService;
-import org.onequals.services.UserService;
+import org.onequals.services.*;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,19 +23,28 @@ public class PageController {
     private final UserService userService;
     private final CategoryService categoryService;
     private final CityService cityService;
+    private final PageService pageService;
     private final StorageService storageService;
+    private final ServletContext servletContext;
+    private final StoryService storyService;
+    private final StickerService stickerService;
 
-    public PageController(UserService userService, CategoryService categoryService, CityService cityService, StorageService storageService) {
+    public PageController(UserService userService, CategoryService categoryService, CityService cityService, PageService pageService, StorageService storageService, ServletContext servletContext, StoryService storyService, StickerService stickerService) {
         this.userService = userService;
         this.categoryService = categoryService;
         this.cityService = cityService;
+        this.pageService = pageService;
         this.storageService = storageService;
+        this.servletContext = servletContext;
+        this.storyService = storyService;
+        this.stickerService = stickerService;
     }
 
     @GetMapping("/")
     public String indexPage(Model model) {
         model.addAttribute("category", categoryService.getAll());
         model.addAttribute("city", cityService.getAll());
+        model.addAttribute("sticker", stickerService.getAll());
         return "index";
     }
 
@@ -103,6 +112,47 @@ public class PageController {
         }
     }
 
+    @GetMapping("/uploads/images/{filename}")
+    public ResponseEntity<byte[]> getImage(@PathVariable("filename") String filename) {
+        byte[] image = new byte[0];
+        try {
+            image = FileUtils.readFileToByteArray(new File("/uploads/images/" + filename));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
+    }
+
+    @GetMapping("/uploads/images/stories/{filename}")
+    public ResponseEntity<byte[]> getImageStory(@PathVariable("filename") String filename) {
+        byte[] image = new byte[0];
+        try {
+            image = FileUtils.readFileToByteArray(new File("/uploads/images/stories/" + filename));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
+    }
+
+    @GetMapping("/uploads/images/stickers/{filename}")
+    public ResponseEntity<byte[]> getImageSticker(@PathVariable("filename") String filename) {
+        byte[] image = new byte[0];
+        try {
+            image = FileUtils.readFileToByteArray(new File("/uploads/images/stickers/" + filename));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
+    }
+
+    @GetMapping("/pages/{id}")
+    public String loadPage(@PathVariable Long id, Model model){
+        Page page = pageService.getById(id);
+        model.addAttribute("name", page.getName());
+        model.addAttribute("body", page.getFullBody());
+        return "template";
+    }
+
     @RequestMapping("/403")
     public String accessDenied() {
         return "errors/403";
@@ -124,25 +174,24 @@ public class PageController {
     }
 
     @GetMapping("/journal/seeker")
-    public String journalSeeker()
+    public String journalSeeker(Model model)
     {
+        model.addAttribute("page", pageService.getByLabel("Шукачам"));
+        model.addAttribute("story", storyService.getAll());
         return "for-seeker";
     }
 
     @GetMapping("/journal/employer")
-    public String journalEmployer()
+    public String journalEmployer(Model model)
     {
+        model.addAttribute("page", pageService.getByLabel("Роботодавцям"));
         return "for-employer";
     }
 
     @GetMapping("/journal/legislation")
-    public String journalLegislation()
+    public String journalLegislation(Model model)
     {
+        model.addAttribute("page", pageService.getByLabel("Законодавство"));
         return "legislation";
-    }
-
-    @GetMapping("/result")
-    public String ckeditor(){
-        return "admin/journals/generate";
     }
 }

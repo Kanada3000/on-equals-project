@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -30,7 +32,10 @@ public class AdminController {
     private final SeekerService seekerService;
     private final StorageService storageService;
 
-    public AdminController(CategoryService categoryService, VacancyService vacancyService, UserService userService, TypeService typeService, CityService cityService, ResumeService resumeService, EmployerService employerService, SeekerService seekerService, StorageService storageService) {
+    public AdminController(CategoryService categoryService, VacancyService vacancyService, UserService userService,
+                           TypeService typeService, CityService cityService, ResumeService resumeService,
+                           EmployerService employerService, SeekerService seekerService,
+                           StorageService storageService) {
         this.categoryService = categoryService;
         this.vacancyService = vacancyService;
         this.userService = userService;
@@ -529,7 +534,7 @@ public class AdminController {
     @GetMapping("/file")
     public String filePage(Model model,
                            @RequestParam("page") Optional<Integer> page,
-                           @RequestParam("size") Optional<Integer> size){
+                           @RequestParam("size") Optional<Integer> size) {
 
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
@@ -552,13 +557,13 @@ public class AdminController {
     }
 
     @PostMapping("/file/unapprove")
-    public String unapproveFile(@RequestParam String path){
+    public String unapproveFile(@RequestParam String path) {
         storageService.renameFile("/uploads/resumes/" + path, false);
         return "redirect:/admin/file";
     }
 
     @PostMapping("/file/delete")
-    public String removeFile(@RequestParam String path){
+    public String removeFile(@RequestParam String path) {
         storageService.removeFile("/uploads/resumes/" + path);
         return "redirect:/admin/file";
     }

@@ -11,3 +11,16 @@ $(function () {
         $(".post").last().addClass("active").prependTo($(".posts"));
     });
 });
+
+$(function () {
+    $("#stories .switch-r").click(function(){
+        let first = $(".posts :first")
+        first.removeClass("active").next().addClass("active");
+        $(".posts").append(first)
+    });
+
+    $("#stories .switch-l").click(function(){
+        $(".posts :first").removeClass("active");
+        $(".post").last().addClass("active").prependTo($(".posts"));
+    });
+});

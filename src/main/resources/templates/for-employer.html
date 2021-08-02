@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>OnEquals Register</title>
+    <title>OnEquals - Журнали роботодавцям</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/menu.css">
@@ -19,17 +19,18 @@
 <div id="top" class="yellow">
     <h2>Журнал</h2>
     <span>Роботодавцям</span>
-<!--    <img src="/images/for-employer.png" id="yellow">-->
+    <!--    <img src="/images/for-employer.png" id="yellow">-->
 </div>
 
 <div id="tile">
     <h2>Доступність</h2>
     <div class="container">
-        <a href='#'>
-            <div class="block" id="grey">
-                Топ професійних курсів
-            </div>
-        </a>
+        <div th:each="p: ${page}" th:remove="tag">
+            <a th:href="@{'/pages/' + ${p.id}}">
+                <div class="block" id="grey" th:text="${p.name}">
+                </div>
+            </a>
+        </div>
     </div>
 </div>
 

@@ -1,0 +1,83 @@
+#static{
+    margin: 0 calc(-396px + 31.7vw) 0 60px;
+}
+
+#static p, h1, h2, h3, h4, h5, h6{
+    margin-bottom: 35px;
+    margin-left: calc(-22px + 25vw);
+}
+
+#static h2{
+    margin-top: 75px;
+    font-size: 46px;
+}
+
+#static p{
+    font-size: 32px;
+}
+
+#static .image{
+    display: inline;
+}
+
+#static img{
+    max-width: 90vw;
+    height: auto !important;
+    margin: 0 30px;
+}
+
+@media screen and (max-width: 1440px){
+    #static{
+        margin: 0 60px 0;
+    }
+
+    #static p, h1, h2, h3, h4, h5, h6{
+        margin-left: calc(-832px + 81.3vw);
+    }
+
+}
+
+@media screen and (max-width: 1024px){
+    #static{
+        margin: 0 calc(-61px + 11.9vw) 0;
+    }
+
+    #static p, h1, h2, h3, h4, h5, h6{
+        margin-left: 0;
+    }
+
+    #static h2{
+        font-size: calc(30px + 1.6vw);
+    }
+
+    #static img{
+        display: block;
+        float: unset !important;
+    }
+    #static .image{
+        display: block;
+    }
+
+}
+
+@media screen and (max-width: 771px){
+
+    #static h2{
+        font-size: calc(15px + 3.4vw);
+    }
+    #static p{
+        font-size: calc(16px + 2.1vw);
+    }
+}
+
+@media screen and (max-width: 480px){
+    #static{
+        margin: 0 calc(-15px + 9.4vw) 0;
+    }
+    #static h2{
+        font-size: calc(2px + 6.3vw);
+    }
+    #static p{
+        font-size: calc(2px + 5vw);
+    }
+}

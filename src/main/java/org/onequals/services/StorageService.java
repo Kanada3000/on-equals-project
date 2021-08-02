@@ -1,5 +1,7 @@
 package org.onequals.services;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.onequals.domain.City;
 import org.onequals.domain.User;
 import org.springframework.data.domain.Page;
@@ -52,25 +54,22 @@ public class StorageService {
         }
     }
 
-    public void uploadImage(MultipartFile file) {
-        if (file.isEmpty()) {
-            throw new StorageException("Failed to store empty file");
-        }
+    public String uploadImage(MultipartFile file, String folder) throws IOException {
+        String sourceName = file.getOriginalFilename();
+        String sourceExt = FilenameUtils.getExtension(sourceName).toLowerCase();
 
-        try {
-            var is = file.getInputStream();
+        String destFileName;
 
-            File directory = new File("/uploads/images");
-            boolean bool = directory.mkdirs();
-
-            Files.copy(is, Paths.get("/uploads/images/" + file.getName()),
-                    StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-
-            var msg = String.format("Failed to store file %f", file.getName());
-
-            throw new StorageException(msg, e);
-        }
+        File directory = new File("/uploads/images/" + folder);
+        directory.mkdirs();
+        List<String> list = Arrays.asList(directory.list());
+        do {
+            destFileName = RandomStringUtils.randomAlphabetic(12).concat(".").concat(sourceExt);
+        } while (list.contains(destFileName));
+        var is = file.getInputStream();
+        Files.copy(is, Paths.get("/uploads/images/" + folder + "/" + destFileName),
+                StandardCopyOption.REPLACE_EXISTING);
+        return ("/uploads/images/" + folder + "/" + destFileName);
     }
 
     @Transactional

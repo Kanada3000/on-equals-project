@@ -17,14 +17,30 @@
     <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
     <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
-
-<div id="admin">
-    <div id="body">
-        <div id="editor"></div>
-        <button id="publish">Створити нову сторінку</button>
+<h2>Створення нової сторінки</h2>
+<form id="pageForm" th:action="@{/admin/page/create}" method="POST">
+    <input type="hidden" name="data" id="data">
+    <input type="hidden" name="shortData" id="shortData">
+    <div id="admin">
+        <div id="body">
+            <h3>Повний текст</h3>
+            <textarea id="editor"></textarea>
+            <br/>
+            <h3>Короткий опис (до 500 символів)</h3>
+            <textarea id="editor2"></textarea>
+            <br/>
+            <input id="name-input" type="text" placeholder="Назва сторінки" name="name" required/>
+            <br/>
+            <select name="label" required>
+                <option>Шукачам</option>
+                <option>Роботодавцям</option>
+                <option>Законодавство</option>
+            </select>
+            <br/>
+            <button id="publish">Створити нову сторінку</button>
+        </div>
     </div>
-</div>
-
+</form>
 <script src="/script/script.js"></script>
 <script src="/script/script-newpage.js"></script>
 <script src="/script/script-admin.js"></script>

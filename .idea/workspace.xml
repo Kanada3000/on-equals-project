@@ -17,8 +17,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
         <option value="CSS File" />
         <option value="Class" />
       </list>
@@ -50,10 +50,10 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="database.data.extractors.current.export.id" value="Comma-separated (CSV)_id" />
     <property name="database.data.extractors.current.id" value="Comma-separated (CSV)_id" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/admin/journals" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.29256967" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -62,11 +62,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Work\onequals\src\main\resources\templates" />
-      <recent name="E:\Work\onequals\src\main\resources\templates\errors" />
-      <recent name="E:\Work\onequals\src\main\resources\static\script" />
       <recent name="E:\Work\onequals\src\main\resources\templates\admin\journals" />
-      <recent name="E:\Work\onequals\src\main\resources\templates\admin\generate" />
+      <recent name="E:\Work\onequals\src\main\resources\static\script" />
+      <recent name="E:\Work\onequals\src\main\resources\db\migration" />
+      <recent name="E:\Work\onequals\src\main\resources\templates\block" />
+      <recent name="E:\Work\onequals\src\main\resources\templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Work\onequals" />
@@ -76,11 +76,24 @@
       <recent name="E:\Work\onequals\src\main\resources\static\css" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="org.onequals.controller" />
+      <recent name="org.onequals.repo" />
       <recent name="org.onequals.services" />
+      <recent name="org.onequals.domain" />
+      <recent name="org.onequals.controller" />
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="OnequalsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="onequals" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.onequals.OnequalsApplication" />
@@ -136,7 +149,9 @@
       <workItem from="1627464817033" duration="30223000" />
       <workItem from="1627578424082" duration="1418000" />
       <workItem from="1627579882066" duration="539000" />
-      <workItem from="1627627511242" duration="13001000" />
+      <workItem from="1627627511242" duration="33859000" />
+      <workItem from="1627745644149" duration="2769000" />
+      <workItem from="1627762656341" duration="34217000" />
     </task>
     <servers />
   </component>

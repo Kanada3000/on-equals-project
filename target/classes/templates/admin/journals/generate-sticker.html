@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" th:content="${_csrf.token}">
+    <meta charset="UTF-8">
+    <title>OnEquals Admin Users</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
+</header>
+<h2>Створення нового стікеру</h2>
+<form id="pageForm" th:action="@{/admin/sticker/create}" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="data" id="data">
+    <div id="admin">
+        <div id="body">
+            <h3>Картинка</h3>
+            <input type="file" name="image">
+            <br/>
+            <h3>Текст стікеру (будь ласка, не вставляйте картинки)</h3>
+            <textarea id="editor"></textarea>
+            <br/>
+            <input id="name-input" type="text" placeholder="Заголовок стукеру" name="name" required/>
+            <br/>
+            <button id="publish">Створити новий стікер</button>
+        </div>
+    </div>
+</form>
+<script src="/script/script.js"></script>
+<script src="/script/script-newpage.js"></script>
+<script src="/script/script-admin.js"></script>
+</body>
+</html>

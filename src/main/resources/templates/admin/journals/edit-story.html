@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" th:content="${_csrf.token}">
+    <meta charset="UTF-8">
+    <title>OnEquals Admin Users</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
+</header>
+<h2>Редагування історії</h2>
+<form id="pageForm" th:action="@{'/admin/story/edit/' + ${id}}" method="POST">
+    <input type="hidden" name="data" id="data">
+    <div id="admin">
+        <div id="body">
+            <h3>Картинка</h3>
+            <input type="file" name="image">
+            <h3>Текст історії (будь ласка, не вставляйте картинки)</h3>
+            <textarea id="editor"></textarea>
+            <input id="name-input" type="text" placeholder="Назва сторінки" name="name" th:value="${title}" required/>
+            <button id="publish">Підтвердити зміни</button>
+        </div>
+    </div>
+</form>
+<script th:inline="javascript">
+    var longData = [[${data}]]
+</script>
+<script src="/script/script.js"></script>
+<script src="/script/script-newpage.js"></script>
+<script src="/script/script-editpage.js"></script>
+<script src="/script/script-admin.js"></script>
+</body>
+</html>

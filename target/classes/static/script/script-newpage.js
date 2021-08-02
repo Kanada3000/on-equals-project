@@ -4,13 +4,17 @@ $(function (){
         height: 400,
     });
 
+    CKEDITOR.replace( 'editor2', {
+        filebrowserImageUploadUrl: '/image/upload?_csrf=' + $('meta[name=csrf-token]').attr("content"),
+        height: 200,
+    });
+
     CKEDITOR.on("dialogDefinition", function(e){
-        let dialogName = e.data.name
-        let dialogDefinition = e.data.definition
+        var dialogName = e.data.name
+        var dialogDefinition = e.data.definition
 
         switch (dialogName){
             case 'image':
-                dialogDefinition.removeContents('info')
                 dialogDefinition.removeContents('Link')
                 dialogDefinition.removeContents('advanced')
                 break;
@@ -18,6 +22,8 @@ $(function (){
     })
 
     $("#publish").click(function(){
-        alert(CKEDITOR.instances.editor.getData())
+        $("#data").val(CKEDITOR.instances.editor.getData())
+        $("#shortData").val(CKEDITOR.instances.editor2.getData())
+        $("#pageForm").submit();
     })
 })

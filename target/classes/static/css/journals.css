@@ -64,6 +64,7 @@ h2 {
     width: calc(388px + 6.9vw);
     font-size: 46px;
     order: 2;
+    cursor: pointer;
 }
 
 #stories .slideshow .switch-l .hide {
@@ -83,6 +84,7 @@ h2 {
     font-size: 46px;
     padding: 0 49px;
     order: 3;
+    cursor: pointer;
 }
 
 #stories .slideshow .post {
@@ -212,19 +214,19 @@ h2 {
     cursor: pointer;
 }
 
-#tile .container .block:nth-child(5n+1){
+#tile .container .block.first{
     background-color: #C4DE95;
 }
-#tile .container .block:nth-child(5n+2){
+#tile .container .block.second{
     background-color: #FDD749;
 }
-#tile .container .block:nth-child(5n+3){
+#tile .container .block.third{
     background-color: #509FC8;
 }
-#tile .container .block:nth-child(5n+4){
+#tile .container .block.forth{
     background-color: #F98DC0;
 }
-#tile .container .block:nth-child(5n+5){
+#tile .container .block.fifth{
     background-color: #F98DC0;
 }
 
