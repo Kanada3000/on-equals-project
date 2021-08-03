@@ -67,7 +67,8 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public List<User> getAll() {
-        return userRepo.findAllUsers(Collections.singleton(Role.ADMIN));
+        return new ArrayList<>(
+                new LinkedHashSet<>(userRepo.findAllUsers(Collections.singleton(Role.ADMIN))));
     }
 
     @Transactional

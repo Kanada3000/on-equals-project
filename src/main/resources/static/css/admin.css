@@ -237,7 +237,7 @@
     color: black;
 }
 
-#accept-delete {
+#accept-delete, #change-password {
     z-index: 999;
     width: 500px;
     height: 200px;
@@ -259,13 +259,13 @@
     padding: 50px;
 }
 
-#accept-delete .buttons{
+#accept-delete .buttons, #change-password .buttons{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-#accept-delete .button{
+#accept-delete .button, #change-password .button{
     border: 1px solid black;
     height: auto;
     width: auto;

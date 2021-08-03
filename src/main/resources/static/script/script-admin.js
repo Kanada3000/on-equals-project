@@ -1,5 +1,8 @@
 $(function () {
+    var k = 0;
+    let y = 0;
     $("#admin #body a.first").click(function (e) {
+        y = 0
         e.preventDefault();
         if (!$("#admin #body tr.edit").length) {
             let hidden = $("#admin #body tr.hidden")
@@ -50,10 +53,12 @@ $(function () {
                 jQuery.inArray(input.val(), typeList) === -1) {
                 alert("Поле type обране не зі списку!")
                 i = 0;
-            } else if (id.indexOf("user") > -1 &&
+            } else if (id.indexOf("user") > -1 && id !== "username" &&
                 jQuery.inArray(input.val(), userList) === -1) {
                 alert("Поле user обране не зі списку!")
                 i = 0;
+            } else if(id !== "username"){
+                k = 1
             } else if (id.indexOf("salary") > -1 &&
                 !$.isNumeric(input.val())) {
                 alert("Поле salary має містити лише цифри!")
@@ -76,14 +81,44 @@ $(function () {
             }
         })
         if (i !== 0) {
-            $("#form").submit();
+            alert("y = "+ y)
+            alert("k = "+ k)
+            if (k === 0) {
+                alert("submit!")
+                $("#form").submit();
+            } else if (k === 1 && y === 0) {
+                $("#change-password").css("display", "flex")
+                $(".backdrop").css({
+                    "left": "0",
+                    "opacity": "1"
+                })
+
+                $("#change-password").on('click', '.button.yes', function (e) {
+                    e.preventDefault()
+                    $("#password").val($("#change-password input").val())
+                    $("#form").submit();
+                    e.stopImmediatePropagation()
+                })
+
+                $("#change-password").on('click', '.button.no', function (e) {
+                    e.preventDefault()
+                    $("#change-password").css("display", "none")
+                    $(".backdrop").css({
+                        "left": "-100%",
+                        "opacity": "0"
+                    })
+                    e.stopImmediatePropagation()
+                })
+            }
         }
 
     })
 
     $("#admin #body").on('click', 'td.edit', function () {
         if (!$("#admin #body tr.edit").length) {
+            y = 1;
             let id = $(this).parent().find("td.id").text()
+            $("#password").val($(this).parent().find("input#pas").val())
             let hidden = $("#admin #body tr.hidden")
             var block = hidden.clone().removeClass("hidden").addClass("edit")
             $(this).parent().addClass("temp")
@@ -153,6 +188,33 @@ $(function () {
         $("#accept-delete").css("display", "none")
         $("#admin #body td.del").addClass("delete")
         $("#admin #body td.del").removeClass("del")
+        $(".backdrop").css({
+            "left": "-100%",
+            "opacity": "0"
+        })
+    })
+
+    $("#admin #body").on("click", "td#change-pass", function (e) {
+        e.preventDefault()
+        $("#change-password").css("display", "flex")
+        $(".backdrop").css({
+            "left": "0",
+            "opacity": "1"
+        })
+        e.stopImmediatePropagation()
+    })
+
+    $("#change-password").on('click', '.button.yes', function () {
+        $("#password").val($("#change-password input").val())
+        $("#change-password").css("display", "none")
+        $(".backdrop").css({
+            "left": "-100%",
+            "opacity": "0"
+        })
+    })
+
+    $("#change-password").on('click', '.button.no', function () {
+        $("#change-password").css("display", "none")
         $(".backdrop").css({
             "left": "-100%",
             "opacity": "0"

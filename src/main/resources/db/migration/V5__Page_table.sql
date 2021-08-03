@@ -1,31 +1,3 @@
--- create table city_employer
--- (
---     employer_id int8 not null,
---     city_id     int8 not null,
---     primary key (employer_id, city_id)
--- );
---
--- create table city_resume
--- (
---     resume_id int8 not null,
---     city_id   int8 not null,
---     primary key (resume_id, city_id)
--- );
---
--- create table city_seeker
--- (
---     seeker_id int8 not null,
---     city_id   int8 not null,
---     primary key (seeker_id, city_id)
--- );
---
--- create table city_vacancy
--- (
---     vacancy_id int8 not null,
---     city_id    int8 not null,
---     primary key (vacancy_id, city_id)
--- );
-
 create table page
 (
     id           bigserial not null,
@@ -55,4 +27,4 @@ create table sticker
     text         text,
     title        varchar(200),
     primary key (id)
-)
+);

@@ -83,10 +83,8 @@ public class RegistrationController {
     }
 
     @GetMapping("/choose")
-    public String choose(Principal principal, Model model) {
-        User user = userService.findUser(principal.getName());
-        model.addAttribute("link", "/register/activate/" + user.getLink());
-        return "sign-in-3";
+    public String choose() {
+        return "sign-in-2";
     }
 
     @GetMapping("/register/activate/{link}")

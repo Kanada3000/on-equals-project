@@ -5,6 +5,7 @@ create table category
     total     int4      not null,
     primary key (id)
 );
+
 create table city
 (
     id      bigserial not null,
@@ -12,6 +13,7 @@ create table city
     country varchar(255),
     primary key (id)
 );
+
 create table city_employer
 (
     employer_id int8 not null,

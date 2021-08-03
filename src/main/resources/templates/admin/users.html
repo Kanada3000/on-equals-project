@@ -19,6 +19,7 @@
 <form id="form" th:action="@{/admin/users/add}" method="post">
 </form>
 <input id='id' type='hidden' name='id' form='form'>
+<input id='password' type='hidden' name='password' form='form'>
 
 <div id="admin">
     <div id="sidebar">
@@ -131,11 +132,12 @@
                             <option value="true">Так</option>
                         </select>
                     </td>
+                    <td id="change-pass">&#128273;</td>
                     <td class="accept">&#10004;</td>
                     <td class="cancel">&#10060;</td>
                 </tr>
-
-                <tr th:if="${user}" th:each="u, iStat: ${user.content}">
+                <tr th:each="u, iStat: ${user.content}">
+                    <input type="hidden" id="pas" th:value="${u.getPassword()}"/>
                     <td class="id" th:text="${u.getId()}"></td>
                     <td class="name" th:text="${u.getName()}"></td>
                     <td class="username" th:text="${u.getUsername()}"></td>
@@ -186,9 +188,16 @@
     </div>
 </div>
 
+<div id="change-password">
+    <span>Введіть новий пароль</span>
+    <input type="text" id="pass">
+    <div class="buttons">
+        <div class="button yes">Зберегти</div>
+        <div class="button no">Назад</div>
+    </div>
+</div>
+
 <div class="backdrop"></div>
-
-
 <script src="/script/script.js"></script>
 <script src="/script/script-admin.js"></script>
 </body>

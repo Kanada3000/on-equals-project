@@ -173,4 +173,21 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", blocked=" + blocked +
+                ", activated=" + activated +
+                ", hidden=" + hidden +
+                ", link='" + link + '\'' +
+                ", roles=" + roles +
+                ", likedVacancy=" + likedVacancy +
+                ", likedResume=" + likedResume +
+                '}';
+    }
 }

@@ -173,7 +173,7 @@
                     </div>
                 </td>
                 <td class="salary" th:text="${r.getSalary()}"></td>
-                <td class="description" th:text="${r.getDescription()}">1000 знаків</td>
+                <td class="description" th:utext="${r.getDescription()}">1000 знаків</td>
                 <td class="approved" th:if="${r.getApproved()}">Так</td>
                 <td class="approved" th:unless="${r.getApproved()}">Ні</td>
                 <td class="edit">&#9998;</td>
