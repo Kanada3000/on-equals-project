@@ -4,7 +4,8 @@
     }
 
     #category{
-        width: calc(460px - 5.5vw);
+        /*width: calc(460px - 5.5vw);*/
+        width: calc(460px - 6.5vw);
         padding: 51px 60px 0 calc(87px - 4.3vw);
      }
 
@@ -16,7 +17,8 @@
     }
 
     #vacancies{
-        width: calc(-477px + 105.5vw);
+        /*width: calc(-477px + 105.5vw);*/
+        width: calc(-477px + 101vw);
     }
 
     #vacancies .vacancy{

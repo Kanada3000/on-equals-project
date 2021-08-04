@@ -103,6 +103,10 @@ public class VacancyController {
                             .collect(Collectors.toList());
                     model.addAttribute("pageNumbers", pageNumbers);
                 }
+            } else {
+                model.addAttribute("categories", categoryService.getAll());
+                model.addAttribute("type", typeService.getAll());
+                model.addAttribute("total", "0");
             }
         } else {
             model.addAttribute("categories", categoryService.getAll());
@@ -113,6 +117,7 @@ public class VacancyController {
         model.addAttribute("key_wordsVal", key_words);
         model.addAttribute("catStringVal", catString);
         model.addAttribute("citStringVal", citString);
+        System.out.println(key_words);
         model.addAttribute("sort", sort);
         model.addAttribute("category", category);
         model.addAttribute("typeVal", type);

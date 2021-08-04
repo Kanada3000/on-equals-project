@@ -177,21 +177,29 @@ public class AdminJournalsController {
         model.addAttribute("id", id);
         model.addAttribute("data", story.getText());
         model.addAttribute("title", story.getTitle());
+        model.addAttribute("imageURL", story.getImage());
         return "admin/journals/edit-story";
     }
 
     @PostMapping("/story/edit/{id}")
     public String storyEdit(@PathVariable Long id,
-                            @RequestParam(required = false) MultipartFile file,
+                            @RequestParam(required = false) MultipartFile image,
                             @RequestParam String title,
                             @RequestParam String data) throws IOException {
         Story story = storyService.getById(id);
         story.setTitle(title);
         story.setText(data);
-        if (file != null){
-            story.setImage(storageService.uploadImage(file, "stories"));
+        if (image != null) {
+            if (!image.isEmpty())
+                story.setImage(storageService.uploadImage(image, "stories"));
         }
         storyService.save(story);
+        return "redirect:/admin/journals/history";
+    }
+
+    @GetMapping("/story/delete/{id}")
+    public String storyDelete(@PathVariable Long id) {
+        storyService.delete(id);
         return "redirect:/admin/journals/history";
     }
 
@@ -213,8 +221,8 @@ public class AdminJournalsController {
 
     @PostMapping("/sticker/create")
     public String addSticker(@RequestParam MultipartFile image,
-                           @RequestParam String data,
-                           @RequestParam String name) throws IOException {
+                             @RequestParam String data,
+                             @RequestParam String name) throws IOException {
         Sticker sticker = new Sticker();
         sticker.setTitle(name);
         sticker.setText(data);
@@ -231,21 +239,29 @@ public class AdminJournalsController {
         model.addAttribute("id", id);
         model.addAttribute("data", sticker.getText());
         model.addAttribute("title", sticker.getTitle());
+        model.addAttribute("imageURL", sticker.getImage());
         return "admin/journals/edit-sticker";
     }
 
     @PostMapping("/sticker/edit/{id}")
     public String stickerEdit(@PathVariable Long id,
-                            @RequestParam(required = false) MultipartFile image,
-                            @RequestParam String title,
-                            @RequestParam String data) throws IOException {
+                              @RequestParam(required = false) MultipartFile image,
+                              @RequestParam String title,
+                              @RequestParam String data) throws IOException {
         Sticker sticker = stickerService.getById(id);
         sticker.setTitle(title);
         sticker.setText(data);
-        if (image != null){
-            sticker.setImage(storageService.uploadImage(image, "stickers"));
+        if (image != null) {
+            if (!image.isEmpty())
+                sticker.setImage(storageService.uploadImage(image, "stickers"));
         }
         stickerService.save(sticker);
+        return "redirect:/admin/journals/slider";
+    }
+
+    @GetMapping("/sticker/delete/{id}")
+    public String stickerDelete(@PathVariable Long id) {
+        stickerService.delete(id);
         return "redirect:/admin/journals/slider";
     }
 }

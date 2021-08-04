@@ -22,6 +22,10 @@ $(function () {
     })
 
     $("#likes #vacancies .vacancy .buttons .like").click(function (){
+        let searchParams = new URLSearchParams(window.location.search)
+        if (searchParams.has('key_words')) {
+            $("#sort input#" + searchParams.get('sort')).prop("checked", "true")
+        }
         $(this).parent().parent().find("#likesId").attr("form","likeForm");
         localStorage.setItem("scrollPos", $(window).scrollTop())
         $("#likeForm").submit();

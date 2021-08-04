@@ -150,6 +150,8 @@ public class PageController {
         Page page = pageService.getById(id);
         model.addAttribute("name", page.getName());
         model.addAttribute("body", page.getFullBody());
+        model.addAttribute("shortBody", page.getShortBody());
+        model.addAttribute("label", page.getLabel());
         return "template";
     }
 
@@ -193,5 +195,10 @@ public class PageController {
     {
         model.addAttribute("page", pageService.getByLabel("Законодавство"));
         return "legislation";
+    }
+
+    @GetMapping("/test/for-admin")
+    public String testForAdmin(){
+        return "test";
     }
 }

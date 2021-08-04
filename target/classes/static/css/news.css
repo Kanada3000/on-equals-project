@@ -35,7 +35,7 @@
     width: auto;
     box-sizing: border-box;
     height: auto;
-    align-self: flex-start;
+    align-self: center;
     flex-grow: 1;
     text-align: left;
     margin-right: 18px;
@@ -48,6 +48,7 @@
     max-height: calc(140px + 22.9vw);
     display: block;
     object-fit: contain;
+    margin: auto;
 }
 
 .post-text {

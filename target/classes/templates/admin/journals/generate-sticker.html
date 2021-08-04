@@ -19,7 +19,7 @@
 </header>
 <h2>Створення нового стікеру</h2>
 <form id="pageForm" th:action="@{/admin/sticker/create}" method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="data" id="data">
+    <input type="hidden" name="data" id="data" required>
     <div id="admin">
         <div id="body">
             <h3>Картинка</h3>

@@ -1,5 +1,5 @@
 $(function () {
-    var k = 0;
+    let k = 0;
     let y = 0;
     $("#admin #body a.first").click(function (e) {
         y = 0
@@ -35,6 +35,7 @@ $(function () {
 
     $("#admin #body").on('click', 'td.accept', function () {
         let i = 1;
+        let h = 0;
         $("tr.edit :input[required]").each(function () {
             let input = $(this);
             let id = $(this).attr("id")
@@ -57,8 +58,9 @@ $(function () {
                 jQuery.inArray(input.val(), userList) === -1) {
                 alert("Поле user обране не зі списку!")
                 i = 0;
-            } else if(id !== "username"){
+            } else if(id === "username" && h === 0){
                 k = 1
+                h = 1
             } else if (id.indexOf("salary") > -1 &&
                 !$.isNumeric(input.val())) {
                 alert("Поле salary має містити лише цифри!")
@@ -81,10 +83,7 @@ $(function () {
             }
         })
         if (i !== 0) {
-            alert("y = "+ y)
-            alert("k = "+ k)
-            if (k === 0) {
-                alert("submit!")
+            if (k === 0 || y === 1) {
                 $("#form").submit();
             } else if (k === 1 && y === 0) {
                 $("#change-password").css("display", "flex")

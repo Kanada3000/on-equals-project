@@ -50,7 +50,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="database.data.extractors.current.export.id" value="Comma-separated (CSV)_id" />
     <property name="database.data.extractors.current.id" value="Comma-separated (CSV)_id" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/admin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -62,11 +62,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Work\onequals\src\main\resources\templates" />
       <recent name="E:\Work\onequals\src\main\resources\templates\admin" />
       <recent name="E:\Work\onequals\src\main\resources\templates\admin\journals" />
       <recent name="E:\Work\onequals\src\main\resources\static\script" />
       <recent name="E:\Work\onequals\src\main\resources\db\migration" />
-      <recent name="E:\Work\onequals\src\main\resources\templates\block" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Work\onequals" />
@@ -166,6 +166,10 @@
       <workItem from="1627745644149" duration="2769000" />
       <workItem from="1627762656341" duration="34410000" />
       <workItem from="1627971310584" duration="7747000" />
+      <workItem from="1627992008855" duration="3283000" />
+      <workItem from="1628054247709" duration="115000" />
+      <workItem from="1628054476221" duration="333000" />
+      <workItem from="1628054937430" duration="20867000" />
     </task>
     <servers />
   </component>

@@ -1,7 +1,5 @@
 package org.onequals.config;
 
-import org.onequals.domain.User;
-import org.onequals.repo.UserRepo;
 import org.onequals.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -42,8 +40,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .headers()
-                    .frameOptions()
-                        .sameOrigin()
+                .frameOptions()
+                .sameOrigin()
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/resume/list").hasAnyAuthority("EMPLOYER", "ROLE_ADMIN")
@@ -74,7 +72,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("/login")
                 .permitAll()
-                .and().csrf().ignoringAntMatchers("/admin/journals/**");
+                .and()
+                .csrf().ignoringAntMatchers("/admin/journals/**")
+//                .and()
+//                .requiresChannel()
+//                .anyRequest().requiresSecure()
+        ;
     }
 
     @Override

@@ -106,6 +106,10 @@ public class ResumeController {
                             .collect(Collectors.toList());
                     model.addAttribute("pageNumbers", pageNumbers);
                 }
+            } else {
+                model.addAttribute("categories", categoryService.getAll());
+                model.addAttribute("type", typeService.getAll());
+                model.addAttribute("total", "0");
             }
         } else {
             model.addAttribute("categories", categoryService.getAll());

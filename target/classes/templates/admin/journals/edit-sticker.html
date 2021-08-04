@@ -17,16 +17,24 @@
     <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
     <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
-<h1>Редагування стікеру</h1>
-<form id="pageForm" th:action="@{'/admin/sticker/edit/' + ${id}}" method="POST">
+<form id="pageForm" th:action="@{'/admin/sticker/edit/' + ${id}}" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="data" id="data" required>
     <div id="admin">
         <div id="body">
-            <h2>Картинка</h2>
+            <h1>Редагування стікеру</h1>
+            <br/>
+            <h2>Минула картинка</h2>
+            <img th:src="${imageURL}">
+            <br/>
+            <h2>Нова картинка</h2>
             <input type="file" name="image">
+            <br/>
             <h2>Текст стікера (будь ласка, не вставляйте картинки)</h2>
             <textarea id="editor"></textarea>
+            <br/>
             <input id="name-input" type="text" placeholder="Заголовок стікеру" name="title" th:value="${title}" required/>
+            <br/>
+            <br/>
             <button id="publish">Підтвердити зміни</button>
         </div>
     </div>

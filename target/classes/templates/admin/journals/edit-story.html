@@ -17,16 +17,23 @@
     <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
     <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
-<h2>Редагування історії</h2>
-<form id="pageForm" th:action="@{'/admin/story/edit/' + ${id}}" method="POST">
+<form id="pageForm" th:action="@{'/admin/story/edit/' + ${id}}" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="data" id="data">
     <div id="admin">
         <div id="body">
-            <h3>Картинка</h3>
+            <h2>Редагування історії</h2>
+            <br/>
+            <h3>Минула картинка</h3>
+            <img th:src="${imageURL}">
+            <br/>
+            <h3>Нова картинка</h3>
             <input type="file" name="image">
+            <br/>
             <h3>Текст історії (будь ласка, не вставляйте картинки)</h3>
             <textarea id="editor"></textarea>
-            <input id="name-input" type="text" placeholder="Назва сторінки" name="name" th:value="${title}" required/>
+            <br/>
+            <input id="name-input" type="text" placeholder="Назва історії" name="title" th:value="${title}" required/>
+            <br/>
             <button id="publish">Підтвердити зміни</button>
         </div>
     </div>

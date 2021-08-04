@@ -31,6 +31,9 @@
             <form style="display: none" sec:authorize="hasAuthority('EMPLOYER') || hasRole('EMPLOYER')" id="search"
                   method="get" th:action="@{/resume/list}">
             </form>
+            <input type="hidden" form="sortForm" name="key_words" th:value="${key_wordsVal}">
+            <input type="hidden" form="sortForm" name="catString" th:value="${catStringVal}">
+            <input type="hidden" form="sortForm" name="citString" th:value="${citStringVal}">
             <form>
                 <label>
                     <input type="text" name="key_words" class="search_input" placeholder="Ключові слова"
@@ -152,49 +155,52 @@
     </div>
 
     <div id="vacancies">
-        <div class="vacancy" th:each="v, iStat: ${vacancies.content}">
-            <div id="idLike" th:text="${v.getId()}"></div>
-            <div class="text">
-                <h3 th:text="${v.getUser().getName()}"></h3>
-                <ul>
-                    <li th:text="${v.getCategory().getLongName()}"></li>
-                    <li th:text="${v.getType().getName()}"></li>
-                    <li th:if="${v.getSalary() > 999}"
-                        th:text="${#numbers.formatInteger(v.getSalary(), 3, 'WHITESPACE') + ' грн'}">
-                    </li>
-                    <li th:if="${v.getSalary() <= 999}" th:text="${v.getSalary() + ' грн'}">
-                    </li>
-                    <li>
-                        <div th:each="c, index: ${v.getCity()}" th:remove="tag">
-                            <span th:if="${index.index == 0}" th:text="${c.getCountry()}" th:remove="tag"></span>
-                            <span th:text="${' / '+ c.getCity()}" th:remove="tag"></span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="hide">
-                <span class="roll-down">розгорнути ↓</span>
-                <span class="descript" th:utext="${v.getDescription()}">
-                </span>
-                <span class="roll-up">згорнути ↑</span>
-            </div>
-            <div class="buttons" sec:authorize="isAuthenticated()">
-                <a th:href="${'mailto:'+v.getUser().getUsername()}">
-                    <div class="mail">
-                        <img src="/images/mail-vacancy.png" alt="mail">
-                    </div>
-                </a>
-                <div class="heart">
-                    <img src="/images/heart-vacancy.png" alt="like">
+        <div th:if="${vacancies != null}" th:remove="tag">
+            <div class="vacancy" th:each="v, iStat: ${vacancies.content}">
+                <div id="idLike" th:text="${v.getId()}"></div>
+                <div class="text">
+                    <h3 th:text="${v.getUser().getName()}"></h3>
+                    <ul>
+                        <li th:text="${v.getCategory().getLongName()}"></li>
+                        <li th:text="${v.getType().getName()}"></li>
+                        <li th:if="${v.getSalary() > 999}"
+                            th:text="${#numbers.formatInteger(v.getSalary(), 3, 'WHITESPACE') + ' грн'}">
+                        </li>
+                        <li th:if="${v.getSalary() <= 999}" th:text="${v.getSalary() + ' грн'}">
+                        </li>
+                        <li>
+                            <div th:each="c, index: ${v.getCity()}" th:remove="tag">
+                                <span th:if="${index.index == 0}" th:text="${c.getCountry()}" th:remove="tag"></span>
+                                <span th:text="${' / '+ c.getCity()}" th:remove="tag"></span>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <a th:href="${'/profile/user/' + v.getUser().getId()}">
-                    <div class="eye">
-                        <img src="/images/eye-vacancy.png" alt="eye">
+                <div class="hide">
+                    <span class="roll-down">розгорнути ↓</span>
+                    <span class="descript" th:utext="${v.getDescription()}">
+                </span>
+                    <span class="roll-up">згорнути ↑</span>
+                </div>
+                <div class="buttons" sec:authorize="isAuthenticated()">
+                    <a th:href="${'mailto:'+v.getUser().getUsername()}">
+                        <div class="mail">
+                            <img src="/images/mail-vacancy.png" alt="mail">
+                        </div>
+                    </a>
+                    <div class="heart">
+                        <img src="/images/heart-vacancy.png" alt="like">
                     </div>
-                </a>
+                    <a th:href="${'/profile/user/' + v.getUser().getId()}">
+                        <div class="eye">
+                            <img src="/images/eye-vacancy.png" alt="eye">
+                        </div>
+                    </a>
 
+                </div>
             </div>
         </div>
+
         <div id="paginations">
             <div th:if="${vacancies.totalPages > 0 && userType == 'employer'}" class="pagination"
                  th:each="pageNumber : ${pageNumbers}">
