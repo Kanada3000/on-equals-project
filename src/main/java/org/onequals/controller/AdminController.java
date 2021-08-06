@@ -49,11 +49,13 @@ public class AdminController {
 
     @GetMapping("/category")
     public String adminCategoryPage(Model model,
+                                    @RequestParam("sort") Optional<String> sortVal,
                                     @RequestParam("page") Optional<Integer> page,
                                     @RequestParam("size") Optional<Integer> size) {
+        String sort = sortVal.orElse("id");
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
-        Page<Category> pageObj = categoryService.findPaginated(PageRequest.of(currentPage - 1, pageSize), categoryService.getAllAll());
+        Page<Category> pageObj = categoryService.findPaginated(PageRequest.of(currentPage - 1, pageSize), categoryService.getAllAll(sort));
         int totalPages = pageObj.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
@@ -68,6 +70,7 @@ public class AdminController {
         model.addAttribute("vacTotal", vacancyService.getUnapproved());
         model.addAttribute("resTotal", resumeService.getUnapproved());
         model.addAttribute("path", storageService.countFiles());
+        model.addAttribute("sort", sort);
         return "admin/category";
     }
 
@@ -85,11 +88,13 @@ public class AdminController {
 
     @GetMapping("/type")
     public String adminTypePage(Model model,
+                                @RequestParam("sort") Optional<String> sortVal,
                                 @RequestParam("page") Optional<Integer> page,
                                 @RequestParam("size") Optional<Integer> size) {
+        String sort = sortVal.orElse("id");
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
-        Page<Type> pageObj = typeService.findPaginated(PageRequest.of(currentPage - 1, pageSize), typeService.getAllAll());
+        Page<Type> pageObj = typeService.findPaginated(PageRequest.of(currentPage - 1, pageSize), typeService.getAllAll(sort));
         int totalPages = pageObj.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
@@ -104,6 +109,7 @@ public class AdminController {
         model.addAttribute("vacTotal", vacancyService.getUnapproved());
         model.addAttribute("resTotal", resumeService.getUnapproved());
         model.addAttribute("path", storageService.countFiles());
+        model.addAttribute("sort", sort);
         return "admin/type";
     }
 
@@ -121,8 +127,10 @@ public class AdminController {
 
     @GetMapping("/cities")
     public String adminCityPage(Model model,
+                                @RequestParam("sort") Optional<String> sortVal,
                                 @RequestParam("page") Optional<Integer> page,
                                 @RequestParam("size") Optional<Integer> size) {
+        String sort = sortVal.orElse("id");
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
         Page<City> cityPage = cityService.findPaginated(PageRequest.of(currentPage - 1, pageSize), cityService.getAllAll());
@@ -140,6 +148,7 @@ public class AdminController {
         model.addAttribute("vacTotal", vacancyService.getUnapproved());
         model.addAttribute("resTotal", resumeService.getUnapproved());
         model.addAttribute("path", storageService.countFiles());
+        model.addAttribute("sort", sort);
         return "admin/cities";
     }
 
@@ -164,11 +173,13 @@ public class AdminController {
 
     @GetMapping("/users")
     public String adminUsersPage(Model model,
+                                 @RequestParam("sort") Optional<String> sortVal,
                                  @RequestParam("page") Optional<Integer> page,
                                  @RequestParam("size") Optional<Integer> size) {
+        String sort = sortVal.orElse("id");
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
-        Page<User> pageObj = userService.findPaginated(PageRequest.of(currentPage - 1, pageSize), userService.getAll());
+        Page<User> pageObj = userService.findPaginated(PageRequest.of(currentPage - 1, pageSize), userService.getAllSort(sort));
         int totalPages = pageObj.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
@@ -183,6 +194,7 @@ public class AdminController {
         model.addAttribute("vacTotal", vacancyService.getUnapproved());
         model.addAttribute("resTotal", resumeService.getUnapproved());
         model.addAttribute("path", storageService.countFiles());
+        model.addAttribute("sort", sort);
 
         return "admin/users";
     }
@@ -219,15 +231,17 @@ public class AdminController {
 
     @GetMapping("/vacancies")
     public String adminVacanciesPage(Model model,
+                                     @RequestParam("sort") Optional<String> sortVal,
                                      @RequestParam("page") Optional<Integer> page,
                                      @RequestParam("size") Optional<Integer> size) {
+        String sort = sortVal.orElse("id");
         List<Vacancy> unapproved = vacancyService.getUnapproved();
         List<Vacancy> vacancies = vacancyService.getAllAll();
         vacancies.removeAll(unapproved);
 
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
-        Page<Vacancy> pageObj = vacancyService.findPaginated(PageRequest.of(currentPage - 1, pageSize), vacancies);
+        Page<Vacancy> pageObj = vacancyService.findPaginated(PageRequest.of(currentPage - 1, pageSize), vacancyService.adminSort(vacancies, sort));
         int totalPages = pageObj.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
@@ -246,6 +260,7 @@ public class AdminController {
         model.addAttribute("vacTotal", unapproved);
         model.addAttribute("resTotal", resumeService.getUnapproved());
         model.addAttribute("path", storageService.countFiles());
+        model.addAttribute("sort", sort);
         return "admin/vacancies";
     }
 
@@ -288,10 +303,12 @@ public class AdminController {
 
     @GetMapping("/resumes")
     public String adminResumePage(Model model,
+                                  @RequestParam("sort") Optional<String> sortVal,
                                   @RequestParam("page") Optional<Integer> page,
                                   @RequestParam("size") Optional<Integer> size) {
+        String sort = sortVal.orElse("id");
         List<Resume> unapproved = resumeService.getUnapproved();
-        List<Resume> resumes = resumeService.getAllAll();
+        List<Resume> resumes = resumeService.getAllAll(sort);
         resumes.removeAll(unapproved);
 
         int currentPage = page.orElse(1);
@@ -315,6 +332,7 @@ public class AdminController {
         model.addAttribute("vacTotal", vacancyService.getUnapproved());
         model.addAttribute("resTotal", unapproved);
         model.addAttribute("path", storageService.countFiles());
+        model.addAttribute("sort", sort);
         return "admin/resumes";
     }
 
@@ -357,10 +375,12 @@ public class AdminController {
 
     @GetMapping("/employer")
     public String adminEmployerPage(Model model,
+                                    @RequestParam("sort") Optional<String> sortVal,
                                     @RequestParam("page") Optional<Integer> page,
                                     @RequestParam("size") Optional<Integer> size) {
+        String sort = sortVal.orElse("id");
         List<Employer> unapproved = employerService.getUnapproved();
-        List<Employer> employers = employerService.getAll();
+        List<Employer> employers = employerService.getAll(sort);
         employers.removeAll(unapproved);
 
         int currentPage = page.orElse(1);
@@ -383,7 +403,7 @@ public class AdminController {
         model.addAttribute("vacTotal", vacancyService.getUnapproved());
         model.addAttribute("resTotal", resumeService.getUnapproved());
         model.addAttribute("path", storageService.countFiles());
-
+        model.addAttribute("sort", sort);
         return "admin/employer";
     }
 
@@ -448,10 +468,12 @@ public class AdminController {
 
     @GetMapping("/seeker")
     public String adminSeekerPage(Model model,
+                                  @RequestParam("sort") Optional<String> sortVal,
                                   @RequestParam("page") Optional<Integer> page,
                                   @RequestParam("size") Optional<Integer> size) {
+        String sort = sortVal.orElse("id");
         List<Seeker> unapproved = seekerService.getUnapproved();
-        List<Seeker> seekers = seekerService.getAll();
+        List<Seeker> seekers = seekerService.getAll(sort);
         seekers.removeAll(unapproved);
 
         int currentPage = page.orElse(1);
@@ -474,7 +496,7 @@ public class AdminController {
         model.addAttribute("vacTotal", vacancyService.getUnapproved());
         model.addAttribute("resTotal", resumeService.getUnapproved());
         model.addAttribute("path", storageService.countFiles());
-
+        model.addAttribute("sort", sort);
         return "admin/seeker";
     }
 
@@ -538,7 +560,7 @@ public class AdminController {
 
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
-        Page<String> pageObj = storageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), storageService.getAllPaths(true));
+        Page<String> pageObj = storageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), userService.getAllPaths(true));
         int totalPages = pageObj.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
@@ -558,13 +580,24 @@ public class AdminController {
 
     @PostMapping("/file/unapprove")
     public String unapproveFile(@RequestParam String path) {
-        storageService.renameFile("/uploads/resumes/" + path, false);
+        String newFile = storageService.renameFile("/uploads/resumes/" + path, false);
+
+        User user = userService.findUser(path.substring(0, path.indexOf("/")));
+        String file = user.getFile();
+        file = file.replace("/uploads/resumes/" + path.replace("\\", "/"), newFile.replace("\\", "/"));
+        user.setFile(file);
+        userService.save(user);
         return "redirect:/admin/file";
     }
 
     @PostMapping("/file/delete")
     public String removeFile(@RequestParam String path) {
         storageService.removeFile("/uploads/resumes/" + path);
+        User user = userService.findUser(path.substring(0, path.indexOf("/")));
+        String file = user.getFile();
+        file = file.replace("/uploads/resumes/" + path.replace("\\", "/"), "");
+        user.setFile(file);
+        userService.save(user);
         return "redirect:/admin/file";
     }
 }

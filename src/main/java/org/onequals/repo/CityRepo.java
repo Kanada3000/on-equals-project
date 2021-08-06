@@ -20,6 +20,9 @@ public interface CityRepo extends JpaRepository<City, Long> {
     @Query("SELECT c FROM City c")
     List<City> findAllAll();
 
+    @Query("SELECT c FROM City c")
+    List<City> findAllAll(Sort sort);
+
     @Query("SELECT c FROM City c WHERE c.city = ?1")
     City findCity(String city);
 

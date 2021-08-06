@@ -4,10 +4,8 @@ import org.onequals.domain.*;
 import org.onequals.repo.ResumeRepo;
 import org.onequals.repo.UserRepo;
 import org.onequals.repo.VacancyRepo;
+import org.springframework.data.domain.*;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -46,7 +45,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public void sendEmail(User user, String title, String msg){
+    public void sendEmail(User user, String title, String msg) {
         mailSender.send(user.getUsername(), title, msg);
     }
 
@@ -69,6 +68,12 @@ public class UserService implements UserDetailsService {
     public List<User> getAll() {
         return new ArrayList<>(
                 new LinkedHashSet<>(userRepo.findAllUsers(Collections.singleton(Role.ADMIN))));
+    }
+
+    @Transactional
+    public List<User> getAllSort(String sort) {
+        return new ArrayList<>(
+                new LinkedHashSet<>(userRepo.findAllUsersSort(Collections.singleton(Role.ADMIN), Sort.by(sort))));
     }
 
     @Transactional
@@ -195,7 +200,7 @@ public class UserService implements UserDetailsService {
             return userRepo.findAllByRoleUser(Collections.singleton(Role.EMPLOYER), 2);
         else if (role.equals("seeker"))
             return userRepo.findAllByRoleUser(Collections.singleton(Role.SEEKER), 2);
-        else if (role.equals("userseeker")){
+        else if (role.equals("userseeker")) {
             List<User> list1 = userRepo.findAllByRoleUser(Collections.singleton(Role.SEEKER), 2);
             List<User> list2 = userRepo.findAllByRoleUser(Collections.singleton(Role.USER), 1);
             list1.addAll(list2);
@@ -257,6 +262,33 @@ public class UserService implements UserDetailsService {
             list = pageList.subList(startItem, toIndex);
         }
         return new PageImpl<User>(list, PageRequest.of(currentPage, pageSize), pageList.size());
+    }
+
+    @Transactional
+    public List<String> getAllPaths(Boolean approved) {
+        List<String> files = userRepo.findAllFiles();
+        if (files == null)
+            if (files.isEmpty()) {
+                return null;
+            }
+
+        String result = files.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining("%"));
+        String[] strSplit = result.split("%");
+        List<String> list = new ArrayList<String>(
+                Arrays.asList(strSplit));
+        if (approved)
+            return list.stream()
+                    .filter(c -> !Objects.equals(c, ""))
+                    .filter(c -> c.contains("approved"))
+                    .map(c -> c.substring(17))
+                    .collect(Collectors.toList());
+        return list.stream()
+                .filter(c -> !Objects.equals(c, ""))
+                .filter(c -> !c.contains("approved"))
+                .map(c -> c.substring(17))
+                .collect(Collectors.toList());
     }
 
     @Override

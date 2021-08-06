@@ -92,6 +92,9 @@
         <div class="button yellow-button">
             <a href="/admin/journals/slider">Слайдер на головній</a>
         </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/career">Кар’єра / Резюме</a>
+        </div>
     </div>
     <div id="body">
         <h1>Файли резюме</h1>
@@ -106,8 +109,8 @@
                 </tr>
                 <tr th:each="p, iStat: ${paths.content}">
                     <td>&nbsp;</td>
-                    <td class="user" th:text="${#strings.substringBefore(p,'\')}"></td>
-                    <td class="file" th:text="${#strings.substringAfter(p,'\')}"></td>
+                    <td class="user" th:text="${#strings.substringBefore(p,'/')}"></td>
+                    <td class="file" th:text="${#strings.substringAfter(p,'/')}"></td>
                     <input type="hidden" th:value="${p}">
                     <td class="accept unapproved">&#10060;</td>
                     <td class="delete">&#128465;</td>
@@ -134,6 +137,15 @@
 </div>
 
 <div class="backdrop"></div>
+
+
+<form id="sortAdminForm" action="/admin/file" method="get">
+    <input id="sort" type="hidden" name="sort" th:value="${sort}">
+</form>
+
+<script th:inline="javascript">
+    var sortVal = [[${sort}]]
+</script>
 <script src="/script/script.js"></script>
 <script src="/script/script-list.js"></script>
 <script src="/script/script-admin-file.js"></script>

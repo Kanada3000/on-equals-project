@@ -60,4 +60,10 @@ public interface VacancyRepo extends JpaRepository<Vacancy, Long> {
 
     @Query("SELECT v FROM Vacancy v WHERE v.approved = false")
     List<Vacancy> findUnapproved();
+
+    @Query("SELECT v FROM Vacancy v WHERE v.approved = false")
+    List<Vacancy> findUnapproved(Sort sort);
+
+    @Query("SELECT v FROM Vacancy v WHERE v in ?1")
+    List<Vacancy> sortAdmin(List<Vacancy> vacancies, Sort sort);
 }

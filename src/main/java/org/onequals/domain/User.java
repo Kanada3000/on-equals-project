@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
@@ -20,6 +21,8 @@ public class User implements UserDetails {
     private Boolean blocked = Boolean.FALSE;
     private Boolean activated = Boolean.FALSE;
     private Boolean hidden = Boolean.FALSE;
+    private String file;
+    private Timestamp createdDate;
 
     @Column(unique = true)
     private String link;
@@ -44,10 +47,12 @@ public class User implements UserDetails {
     private Set<Resume> likedResume;
 
     public User() {
+        createdDate = new Timestamp(System.currentTimeMillis());
     }
 
     public User(Long id, String name, String username, String password, Boolean blocked, Boolean activated,
-                Boolean hidden, String link, Set<Role> roles, Set<Vacancy> likedVacancy, Set<Resume> likedResume) {
+                Boolean hidden, String link, Set<Role> roles, Set<Vacancy> likedVacancy, Set<Resume> likedResume,
+                String file, Timestamp createdDate) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -59,6 +64,8 @@ public class User implements UserDetails {
         this.roles = roles;
         this.likedVacancy = likedVacancy;
         this.likedResume = likedResume;
+        this.file = file;
+        this.createdDate = createdDate;
     }
 
     public Long getId() {
@@ -167,6 +174,22 @@ public class User implements UserDetails {
 
     public void setHidden(Boolean hidden) {
         this.hidden = hidden;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
+
+    public Timestamp getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
     }
 
     @Override

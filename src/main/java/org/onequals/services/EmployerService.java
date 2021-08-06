@@ -2,10 +2,8 @@ package org.onequals.services;
 
 import org.onequals.domain.*;
 import org.onequals.repo.EmployerRepo;
+import org.springframework.data.domain.*;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -25,6 +23,11 @@ public class EmployerService {
     @Transactional
     public List<Employer> getAll(){
         return employerRepo.findAll();
+    }
+
+    @Transactional
+    public List<Employer> getAll(String sort){
+        return employerRepo.findAll(Sort.by(sort));
     }
 
     @Transactional
@@ -53,6 +56,11 @@ public class EmployerService {
     @Transactional
     public List<Employer> getUnapproved(){
         return employerRepo.findUnapproved();
+    }
+
+    @Transactional
+    public List<Employer> getUnapproved(String sort){
+        return employerRepo.findUnapproved(Sort.by(sort));
     }
 
     @Transactional

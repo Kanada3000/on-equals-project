@@ -53,7 +53,7 @@ function list(string) {
         let id = "#" + $(this).attr("id")
         let idDiv = "#" + $(this).next().attr("id")
         e.preventDefault()
-        let div = thisList.find(".select" + idDiv)
+        let div = thisList.find(idDiv)
         let li = thisList.find(".select" + idDiv + " li")
         let list = "#" + $(this).parents(".list").first().attr("id")
         div.show();

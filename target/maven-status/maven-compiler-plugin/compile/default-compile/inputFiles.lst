@@ -18,6 +18,7 @@ E:\Work\onequals\src\main\java\org\onequals\domain\Type.java
 E:\Work\onequals\src\main\java\org\onequals\repo\StickerRepo.java
 E:\Work\onequals\src\main\java\org\onequals\repo\VacancyRepo.java
 E:\Work\onequals\src\main\java\org\onequals\config\MailConfig.java
+E:\Work\onequals\src\main\java\org\onequals\repo\CareerRepo.java
 E:\Work\onequals\src\main\java\org\onequals\config\WebSecurityConfig.java
 E:\Work\onequals\src\main\java\org\onequals\controller\PageController.java
 E:\Work\onequals\src\main\java\org\onequals\repo\SeekerRepo.java
@@ -29,8 +30,10 @@ E:\Work\onequals\src\main\java\org\onequals\OnequalsApplication.java
 E:\Work\onequals\src\main\java\org\onequals\services\MailSender.java
 E:\Work\onequals\src\main\java\org\onequals\domain\Seeker.java
 E:\Work\onequals\src\main\java\org\onequals\services\StorageService.java
+E:\Work\onequals\src\main\java\org\onequals\domain\Career.java
 E:\Work\onequals\src\main\java\org\onequals\services\ShowUserDetails.java
 E:\Work\onequals\src\main\java\org\onequals\services\StorageException.java
+E:\Work\onequals\src\main\java\org\onequals\controller\AdminSortController.java
 E:\Work\onequals\src\main\java\org\onequals\controller\RegistrationController.java
 E:\Work\onequals\src\main\java\org\onequals\services\StoryService.java
 E:\Work\onequals\src\main\java\org\onequals\domain\Sticker.java
@@ -46,6 +49,7 @@ E:\Work\onequals\src\main\java\org\onequals\domain\Category.java
 E:\Work\onequals\src\main\java\org\onequals\services\ReCaptchaRegisterService.java
 E:\Work\onequals\src\main\java\org\onequals\repo\CategoryRepo.java
 E:\Work\onequals\src\main\java\org\onequals\config\ConnectorConfig.java
+E:\Work\onequals\src\main\java\org\onequals\services\CareerService.java
 E:\Work\onequals\src\main\java\org\onequals\controller\AdminController.java
 E:\Work\onequals\src\main\java\org\onequals\repo\StoryRepo.java
 E:\Work\onequals\src\main\java\org\onequals\services\EmployerService.java

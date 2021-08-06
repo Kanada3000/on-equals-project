@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" th:content="${_csrf.token}">
+    <meta charset="UTF-8">
+    <title>OnEquals Admin Users</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<header>
+    <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
+</header>
+<form id="pageForm" th:action="@{'/admin/career/add'}" method="POST">
+    <div id="admin">
+        <div id="body">
+            <input type="text" placeholder="Заголовок" name="title" required/>
+            <textarea name="body" required></textarea>
+            <button id="publish">Підтвердити зміни</button>
+        </div>
+    </div>
+</form>
+
+<script src="/script/script.js"></script>
+<!--<script src="/script/script-newpage.js"></script>-->
+<!--<script src="/script/script-editpage.js"></script>-->
+<!--<script src="/script/script-admin.js"></script>-->
+</body>
+</html>

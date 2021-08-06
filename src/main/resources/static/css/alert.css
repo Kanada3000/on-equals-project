@@ -1,0 +1,29 @@
+#alert{
+    z-index: 999;
+    width: 80vw;
+    margin: 0 auto;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: -200px;
+    border: 4px black solid;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background-color: #FDD749;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 50vw;
+}
+
+#alert span{
+    display: inline-block;
+    font-size: larger;
+
+}

@@ -69,4 +69,7 @@ public interface ResumeRepo extends JpaRepository<Resume, Long> {
 
     @Query("SELECT r FROM Resume r WHERE r.approved = false")
     List<Resume> findUnapproved();
+
+    @Query("SELECT r FROM Resume r WHERE r.approved = false")
+    List<Resume> findUnapproved(Sort sort);
 }

@@ -2,10 +2,8 @@ package org.onequals.services;
 
 import org.onequals.domain.*;
 import org.onequals.repo.SeekerRepo;
+import org.springframework.data.domain.*;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -25,6 +23,11 @@ public class SeekerService {
     @Transactional
     public List<Seeker> getAll(){
         return seekerRepo.findAll();
+    }
+
+    @Transactional
+    public List<Seeker> getAll(String sort){
+        return seekerRepo.findAll(Sort.by(sort));
     }
 
     @Transactional
@@ -53,6 +56,11 @@ public class SeekerService {
     @Transactional
     public List<Seeker> getUnapproved(){
         return seekerRepo.findUnapproved();
+    }
+
+    @Transactional
+    public List<Seeker> getUnapproved(String sort){
+        return seekerRepo.findUnapproved(Sort.by(sort));
     }
 
     @Transactional

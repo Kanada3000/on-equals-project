@@ -69,6 +69,24 @@
             <span class="notification" th:if="${path != 0}" th:text="${path}"></span>
             <a href="/admin/approve/file">Непідтверджені файли резюме</a>
         </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/for-seeker">Журнали для шукачів</a>
+        </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/for-employer">Журнали для роботодавців</a>
+        </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/legislation">Журнали законодавство</a>
+        </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/history">Історії</a>
+        </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/slider">Слайдер на головній</a>
+        </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/career">Кар’єра / Резюме</a>
+        </div>
     </div>
     <div id="body">
         <h1>Типи зайнятості</h1>
@@ -77,9 +95,9 @@
         <table border="1">
             <tr class="head">
                 <td class="id-head">id</td>
-                <td>name<span class="text-red">*</span></td>
-                <td class="but-head"><span>&nbsp;</span></td>
-                <td class="but-head"><span>&nbsp;</span></td>
+                <td class="name-sort">name<span class="text-red">*</span></td>
+                <td class="but-head nosort"><span>&nbsp;</span></td>
+                <td class="but-head nosort"><span>&nbsp;</span></td>
             </tr>
             <tr class="hidden">
                 <td class="id"></td>
@@ -114,8 +132,16 @@
     </div>
 </div>
 
+<form id="sortAdminForm" action="/admin/type" method="get">
+    <input id="sort" type="hidden" name="sort" th:value="${sort}">
+</form>
+
+<script th:inline="javascript">
+    var sortVal = [[${sort}]]
+</script>
 <div class="backdrop"></div>
 <script src="/script/script.js"></script>
 <script src="/script/script-admin.js"></script>
+<script src="/script/script-admin-sort.js"></script>
 </body>
 </html>

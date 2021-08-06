@@ -71,7 +71,7 @@
             <a href="/admin/approve/resume">Непідтверджені резюме</a>
         </div>
         <div class="button red-button active">
-            <span class="notification" th:if="${path != 0}" th:text="${path}"></span>
+            <span class="notification" th:if="${paths != 0}" th:text="${paths}"></span>
             <a>Непідтверджені файли резюме</a>
         </div>
         <div class="button yellow-button">
@@ -89,6 +89,9 @@
         <div class="button yellow-button">
             <a href="/admin/journals/slider">Слайдер на головній</a>
         </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/career">Кар’єра / Резюме</a>
+        </div>
     </div>
     <div id="body">
         <h1>Непідтверджені файли резюме</h1>
@@ -103,8 +106,8 @@
                 </tr>
                 <tr th:each="p: ${path}">
                     <td>&nbsp;</td>
-                    <td class="user" th:text="${#strings.substringBefore(p,'\')}"></td>
-                    <td class="file" th:text="${#strings.substringAfter(p,'\')}"></td>
+                    <td class="user" th:text="${#strings.substringBefore(p,'/')}"></td>
+                    <td class="file" th:text="${#strings.substringAfter(p,'/')}"></td>
                     <input type="hidden" th:value="${p}">
                     <td class="accept">&#10004;</td>
                     <td id="approve/file" class="delete">&#128465;</td>

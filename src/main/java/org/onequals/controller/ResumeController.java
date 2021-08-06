@@ -143,7 +143,8 @@ public class ResumeController {
 
     @PostMapping("/new")
     public String addResume(Principal principal,
-                            @RequestParam("category") List<String> cat,
+                            Model model,
+                            @RequestParam(name = "categoryList") List<String> catList,
                             @RequestParam("typeList") List<String> typeList,
                             @RequestParam("citString") List<String> citString,
                             @RequestParam("description") List<String> desc,
@@ -156,8 +157,8 @@ public class ResumeController {
         }
 
         User user = userService.findUser(principal.getName());
-
-        for (int i = 0; i < cat.size(); i++) {
+        catList = catList.stream().map(c -> c.replaceAll("%",",")).collect(Collectors.toList());
+        for (int i = 0; i < typeList.size(); i++) {
             List<String> cities = new ArrayList<>();
             int j = 0;
             for (String c : citString) {
@@ -173,11 +174,13 @@ public class ResumeController {
 
             resume.setUser(user);
             resume.setType(typeService.findByName(typeList.get(i)));
-            resume.setCategory(categoryService.findByName(cat.get(i)));
+            resume.setCategory(categoryService.findByName(catList.get(i)));
             resume.setDescription(desc.get(i));
             resume.setSalary(salary.get(i));
             cityService.addCities(resume, cityService.findByNames(cities));
         }
+        model.addAttribute("alert","Вашу резюме успішно додано та після перевірки з'явиться на сайті");
+        model.addAttribute("alertMode","true");
         return "redirect:/";
     }
 
@@ -185,11 +188,17 @@ public class ResumeController {
     public String saveFile(Principal principal, @RequestParam MultipartFile file,
                            @RequestParam("g-recaptcha-response") String response){
         ReCaptchaResponse reCaptchaResponse = reCaptchaRegisterService.verify(response);
+        User user = userService.findUser(principal.getName());
 
         if(!reCaptchaResponse.isSuccess()){
             return "error";
         }
-        storageService.uploadFile(file, principal.getName());
+        if(user.getFile() == null || user.getFile().isEmpty()){
+            user.setFile(storageService.uploadFile(file, principal.getName()));
+        } else {
+            user.setFile(user.getFile() + "%" + storageService.uploadFile(file, principal.getName()));
+        }
+        userService.save(user);
         return "redirect:/";
     }
 

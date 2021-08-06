@@ -85,7 +85,9 @@
         <div class="button yellow-button">
             <a href="/admin/journals/slider">Слайдер на головній</a>
         </div>
-
+        <div class="button yellow-button">
+            <a href="/admin/journals/career">Кар’єра / Резюме</a>
+        </div>
     </div>
     <div id="body">
         <h1>Користувачі</h1>
@@ -94,14 +96,14 @@
             <table>
                 <tr class="head">
                     <td class="id-head">id</td>
-                    <td>name<span class="text-red">*</span></td>
-                    <td>username<span class="text-red">*</span></td>
-                    <td>roles</td>
-                    <td>hidden</td>
-                    <td>activated</td>
-                    <td>blocked</td>
-                    <td class="but-head"><span>&nbsp;</span></td>
-                    <td class="but-head"><span>&nbsp;</span></td>
+                    <td class="name-sort">name<span class="text-red">*</span></td>
+                    <td class="username-sort">username<span class="text-red">*</span></td>
+                    <td class="roles-sort nosort">roles</td>
+                    <td class="hidden-sort">hidden</td>
+                    <td class="activated-sort">activated</td>
+                    <td class="blocked-sort">blocked</td>
+                    <td class="but-head nosort"><span>&nbsp;</span></td>
+                    <td class="but-head nosort"><span>&nbsp;</span></td>
                 </tr>
 
                 <tr class="hidden">
@@ -173,7 +175,7 @@
         <div id="paginations">
             <div th:if="${user.totalPages > 0}" class="pagination"
                  th:each="pageNumber : ${pageNumbers}">
-                <a th:href="@{/admin/users(size=${user.size}, page=${pageNumber})}"
+                <a th:href="@{/admin/users(size=${user.size}, page=${pageNumber}, sort=${sort})}"
                    th:text="${pageNumber}"
                    th:class="${pageNumber==user.number + 1} ? active"></a>
             </div>
@@ -198,7 +200,16 @@
 </div>
 
 <div class="backdrop"></div>
+
+<form id="sortAdminForm" action="/admin/users" method="get">
+    <input id="sort" type="hidden" name="sort" th:value="${sort}">
+</form>
+
+<script th:inline="javascript">
+    var sortVal = [[${sort}]]
+</script>
 <script src="/script/script.js"></script>
 <script src="/script/script-admin.js"></script>
+<script src="/script/script-admin-sort.js"></script>
 </body>
 </html>

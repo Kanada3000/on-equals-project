@@ -84,6 +84,9 @@
         <div class="button yellow-button">
             <a href="/admin/journals/slider">Слайдер на головній</a>
         </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/career">Кар’єра / Резюме</a>
+        </div>
     </div>
     <div id="body">
         <h1>Резюме</h1>
@@ -92,15 +95,15 @@
         <table border="1">
             <tr class="head">
                 <td class="id-head">id</td>
-                <td>user<span class="text-red">*</span></td>
-                <td>type<span class="text-red">*</span></td>
-                <td>category<span class="text-red">*</span></td>
-                <td>city<span class="text-red">*</span></td>
-                <td>salary<span class="text-red">*</span></td>
-                <td>description<span class="text-red">*</span></td>
-                <td>approved</td>
-                <td class="but-head"><span>&nbsp;</span></td>
-                <td class="but-head"><span>&nbsp;</span></td>
+                <td class="user-sort">user<span class="text-red">*</span></td>
+                <td class="type-sort">type<span class="text-red">*</span></td>
+                <td class="category-sort">category<span class="text-red">*</span></td>
+                <td class="city-sort nosort">city<span class="text-red">*</span></td>
+                <td class="salary-sort">salary<span class="text-red">*</span></td>
+                <td class="description-sort">description<span class="text-red">*</span></td>
+                <td class="approved-sort">approved</td>
+                <td class="but-head nosort"><span>&nbsp;</span></td>
+                <td class="but-head nosort"><span>&nbsp;</span></td>
             </tr>
             <tr class="hidden">
                 <td class="id"></td>
@@ -166,9 +169,11 @@
             </tr>
             <tr th:each="r, iStat: ${resume.content}">
                 <td class="id" th:text="${r.getId()}"></td>
-                <td class="user" th:text="${r.getUser().getUsername()}"></td>
+                <td class="user" th:if="${r.getUser() != null}" th:text="${r.getUser().getUsername()}"></td>
+                <td class="user" th:if="${r.getUser() == null}" th:text="${'null'}"></td>
                 <td class="type" th:text="${r.getType().getName()}"></td>
-                <td class="category" th:text="${r.getCategory().getLongName()}"></td>
+                <td class="category" th:if="${r.getCategory != null}" th:text="${r.getCategory().getLongName()}"></td>
+                <td class="category" th:if="${r.getCategory == null}" th:text="${'null'}"></td>
                 <td class="city">
                     <div th:each="c: ${r.getCity()}">
                         <div th:remove="tag" th:text="${c.getCity()}"></div>
@@ -216,6 +221,11 @@
 </div>
 
 <div class="backdrop"></div>
+
+<form id="sortAdminForm" action="/admin/resumes" method="get">
+    <input id="sort" type="hidden" name="sort" th:value="${sort}">
+</form>
+
 <script th:inline="javascript">
     var catList = []
     $("#categoryList .li").each(function () {
@@ -237,11 +247,12 @@
         typeList.push($(this).text())
     })
 
-    console.log(userList)
+    var sortVal = [[${sort}]]
 </script>
 <script src="/script/script.js"></script>
 <script src="/script/script-list.js"></script>
 <script src="/script/script-admin.js"></script>
 <script src="/script/script-admin-city.js"></script>
+<script src="/script/script-admin-sort.js"></script>
 </body>
 </html>

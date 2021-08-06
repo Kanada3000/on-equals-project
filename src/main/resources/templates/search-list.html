@@ -31,9 +31,9 @@
             <form style="display: none" sec:authorize="hasAuthority('EMPLOYER') || hasRole('EMPLOYER')" id="search"
                   method="get" th:action="@{/resume/list}">
             </form>
-            <input type="hidden" form="sortForm" name="key_words" th:value="${key_wordsVal}">
-            <input type="hidden" form="sortForm" name="catString" th:value="${catStringVal}">
-            <input type="hidden" form="sortForm" name="citString" th:value="${citStringVal}">
+<!--            <input type="hidden" form="sortForm" name="key_words" th:value="${key_wordsVal}">-->
+<!--            <input type="hidden" form="sortForm" name="catString" th:value="${catStringVal}">-->
+<!--            <input type="hidden" form="sortForm" name="citString" th:value="${citStringVal}">-->
             <form>
                 <label>
                     <input type="text" name="key_words" class="search_input" placeholder="Ключові слова"
@@ -207,14 +207,11 @@
                 <a th:href="@{/resume/list(size=${vacancies.size},
                 page=${pageNumber},
                 sort=${sort},
-                catString=${catStringVal},
-                citString=${citStringVal},
                 likes=${likesId},
                 category=${category},
                 type=${typeVal},
                 min=${minVal},
-                max=${maxVal},
-                key_words=${key_wordsVal})
+                max=${maxVal})
                 }"
                    th:text="${pageNumber}"
                    th:class="${pageNumber==vacancies.number + 1} ? active"></a>
@@ -224,14 +221,11 @@
                 <a th:href="@{/vacancy/list(size=${vacancies.size},
                 page=${pageNumber},
                 sort=${sort},
-                catString=${catStringVal},
-                citString=${citStringVal},
                 likes=${likesId},
                 category=${category},
                 type=${typeVal},
                 min=${minVal},
-                max=${maxVal},
-                key_words=${key_wordsVal})
+                max=${maxVal})
                 }"
                    th:text="${pageNumber}"
                    th:class="${pageNumber==vacancies.number + 1} ? active"></a>

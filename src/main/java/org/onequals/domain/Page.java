@@ -1,8 +1,5 @@
 package org.onequals.domain;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -16,6 +13,7 @@ public class Page {
     private String name;
     private String shortBody;
     private String fullBody;
+
     private String label;
     private Timestamp createdDate;
 

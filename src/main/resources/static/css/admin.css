@@ -298,6 +298,15 @@ html{
     width: 50px;
 }
 
+#admin #body table tr.head td{
+    cursor: pointer;
+}
+
+#admin #body table tr.head td.sort{
+    background: #FDD749 url(../images/arrow-list.png) no-repeat right;
+    background-size: 9px auto;
+}
+
 #admin #body table td.file{
     cursor: pointer;
 }

@@ -1,5 +1,6 @@
 package org.onequals.repo;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -30,4 +31,11 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u join u.roles ur WHERE ur <> ?1")
     List<User> findAllUsers(Set<Role> roles);
+
+    @Query("SELECT u FROM User u join u.roles ur WHERE ur <> ?1")
+    List<User> findAllUsersSort(Set<Role> roles, Sort sort);
+
+    @Query("SELECT u.file FROM User u WHERE u.file <> null")
+    List<String> findAllFiles();
+
 }

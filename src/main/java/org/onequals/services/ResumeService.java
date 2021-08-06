@@ -36,6 +36,11 @@ public class ResumeService {
     }
 
     @Transactional
+    public List<Resume> getAllAll(String sort) {
+        return resumeRepo.findAllAll(Sort.by(sort));
+    }
+
+    @Transactional
     public Resume getById(Long id) {
         return resumeRepo.findById(id).get();
     }
@@ -132,6 +137,12 @@ public class ResumeService {
     public List<Resume> getUnapproved() {
         return resumeRepo.findUnapproved();
     }
+
+    @Transactional
+    public List<Resume> getUnapproved(String sort) {
+        return resumeRepo.findUnapproved(Sort.by(sort));
+    }
+
 
     @Transactional
     public HashMap<Object, Object> findMinMax(Integer min, Integer max) {

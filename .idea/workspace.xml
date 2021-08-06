@@ -19,8 +19,8 @@
         <option value="Interface" />
         <option value="JavaScript File" />
         <option value="HTML File" />
-        <option value="CSS File" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -50,7 +50,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="database.data.extractors.current.export.id" value="Comma-separated (CSV)_id" />
     <property name="database.data.extractors.current.id" value="Comma-separated (CSV)_id" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/script" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -62,11 +62,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Work\onequals\src\main\resources\templates" />
-      <recent name="E:\Work\onequals\src\main\resources\templates\admin" />
-      <recent name="E:\Work\onequals\src\main\resources\templates\admin\journals" />
       <recent name="E:\Work\onequals\src\main\resources\static\script" />
       <recent name="E:\Work\onequals\src\main\resources\db\migration" />
+      <recent name="E:\Work\onequals\src\main\resources\templates\admin\journals" />
+      <recent name="E:\Work\onequals\src\main\resources\templates" />
+      <recent name="E:\Work\onequals\src\main\resources\templates\admin" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Work\onequals" />
@@ -76,10 +76,10 @@
       <recent name="E:\Work\onequals\src\main\resources\static\css" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="org.onequals.repo" />
-      <recent name="org.onequals.services" />
-      <recent name="org.onequals.domain" />
       <recent name="org.onequals.controller" />
+      <recent name="org.onequals.services" />
+      <recent name="org.onequals.repo" />
+      <recent name="org.onequals.domain" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.OnequalsApplication">
@@ -170,6 +170,10 @@
       <workItem from="1628054247709" duration="115000" />
       <workItem from="1628054476221" duration="333000" />
       <workItem from="1628054937430" duration="20867000" />
+      <workItem from="1628096232925" duration="1429000" />
+      <workItem from="1628097700720" duration="1000" />
+      <workItem from="1628141589185" duration="31018000" />
+      <workItem from="1628227957581" duration="29814000" />
     </task>
     <servers />
   </component>

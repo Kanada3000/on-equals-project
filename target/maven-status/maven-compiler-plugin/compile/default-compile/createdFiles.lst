@@ -1,6 +1,7 @@
 org\onequals\domain\Resume.class
 org\onequals\controller\RegistrationController.class
 org\onequals\services\MailSender$1.class
+org\onequals\controller\AdminSortController.class
 org\onequals\controller\PageController.class
 org\onequals\domain\Page.class
 org\onequals\controller\VacancyController.class
@@ -24,6 +25,7 @@ org\onequals\services\EmployerService.class
 org\onequals\domain\Seeker.class
 org\onequals\services\StorageException.class
 org\onequals\services\StorageService.class
+org\onequals\repo\CareerRepo.class
 org\onequals\repo\TypeRepo.class
 org\onequals\repo\SeekerRepo.class
 org\onequals\services\ShowUserDetails.class
@@ -53,6 +55,8 @@ org\onequals\services\ReCaptchaRegisterService.class
 org\onequals\services\ReCaptchaService.class
 org\onequals\services\StoryService.class
 org\onequals\domain\City.class
+org\onequals\domain\Career.class
+org\onequals\services\CareerService.class
 org\onequals\services\SeekerService.class
 org\onequals\repo\PageRepo.class
 org\onequals\repo\CategoryRepo.class

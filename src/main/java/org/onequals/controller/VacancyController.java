@@ -141,7 +141,8 @@ public class VacancyController {
 
     @PostMapping("/new")
     public String addVacancy(Principal principal,
-                             @RequestParam("category") List<String> cat,
+                             Model model,
+                             @RequestParam(name = "categoryList") List<String> catList,
                              @RequestParam("typeList") List<String> typeList,
                              @RequestParam("citString") List<String> citString,
                              @RequestParam("description") List<String> desc,
@@ -149,13 +150,12 @@ public class VacancyController {
                              @RequestParam("g-recaptcha-response") String response) {
         ReCaptchaResponse reCaptchaResponse = reCaptchaRegisterService.verify(response);
 
-        if(!reCaptchaResponse.isSuccess()){
+        if (!reCaptchaResponse.isSuccess()) {
             return "error";
         }
-
+        catList = catList.stream().map(c -> c.replaceAll("%",",")).collect(Collectors.toList());
         User user = userService.findUser(principal.getName());
-
-        for (int i = 0; i < cat.size(); i++) {
+        for (int i = 0; i < typeList.size(); i++) {
             List<String> cities = new ArrayList<>();
             int j = 0;
             for (String c : citString) {
@@ -168,14 +168,15 @@ public class VacancyController {
             }
             citString.subList(0, j).clear();
             Vacancy vacancy = new Vacancy();
-
             vacancy.setUser(user);
             vacancy.setType(typeService.findByName(typeList.get(i)));
-            vacancy.setCategory(categoryService.findByName(cat.get(i)));
+            vacancy.setCategory(categoryService.findByName(catList.get(i)));
             vacancy.setDescription(desc.get(i));
             vacancy.setSalary(salary.get(i));
             cityService.addCities(vacancy, cityService.findByNames(cities));
         }
+        model.addAttribute("alert", "Ваша вакансія успішно додана та після перевірки з'явиться на сайті");
+        model.addAttribute("alertMode", "true");
         return "redirect:/";
     }
 

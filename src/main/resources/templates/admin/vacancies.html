@@ -69,6 +69,25 @@
             <span class="notification" th:if="${path != 0}" th:text="${path}"></span>
             <a href="/admin/approve/file">Непідтверджені файли резюме</a>
         </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/for-seeker">Журнали для шукачів</a>
+        </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/for-employer">Журнали для роботодавців</a>
+        </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/legislation">Журнали законодавство</a>
+        </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/history">Історії</a>
+        </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/slider">Слайдер на головній</a>
+        </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/career">Кар’єра / Резюме</a>
+        </div>
+
     </div>
     <div id="body">
         <h1>Вакансії</h1>
@@ -77,15 +96,15 @@
             <table border="1">
                 <tr class="head">
                     <td class="id-head">id</td>
-                    <td>user<span class="text-red">*</span></td>
-                    <td>type<span class="text-red">*</span></td>
-                    <td>category<span class="text-red">*</span></td>
-                    <td>city<span class="text-red">*</span></td>
-                    <td>salary<span class="text-red">*</span></td>
-                    <td>description<span class="text-red">*</span></td>
-                    <td>approved</td>
-                    <td class="but-head"><span>&nbsp;</span></td>
-                    <td class="but-head"><span>&nbsp;</span></td>
+                    <td class="user-sort">user<span class="text-red">*</span></td>
+                    <td class="type-sort">type<span class="text-red">*</span></td>
+                    <td class="category-sort">category<span class="text-red">*</span></td>
+                    <td class="city-sort nosort">city<span class="text-red">*</span></td>
+                    <td class="salary-sort">salary<span class="text-red">*</span></td>
+                    <td class="description-sort">description<span class="text-red">*</span></td>
+                    <td class="approved-sort">approved</td>
+                    <td class="but-head nosort"><span>&nbsp;</span></td>
+                    <td class="but-head nosort"><span>&nbsp;</span></td>
                 </tr>
                 <tr class="hidden">
                     <td class="id"></td>
@@ -151,9 +170,12 @@
                 </tr>
                 <tr th:each="v, iStat: ${vacancy.content}">
                     <td class="id" th:text="${v.getId()}"></td>
-                    <td class="user" th:text="${v.getUser().getUsername()}"></td>
+                    <td class="user" th:if="${v.getUser() != null}" th:text="${v.getUser().getUsername()}"></td>
+                    <td class="user" th:if="${v.getUser() == null}" th:text="${'null'}"></td>
                     <td class="type" th:text="${v.getType().getName()}"></td>
-                    <td class="category" th:text="${v.getCategory().getLongName()}"></td>
+                    <td class="category" th:if="${v.getCategory != null}"
+                        th:text="${v.getCategory().getLongName()}"></td>
+                    <td class="category" th:if="${v.getCategory == null}" th:text="${'null'}"></td>
                     <td class="city">
                         <div th:each="c: ${v.getCity()}">
                             <div th:remove="tag" th:text="${c.getCity()}"></div>
@@ -184,7 +206,7 @@
         <div id="paginations">
             <div th:if="${vacancy.totalPages > 0}" class="pagination"
                  th:each="pageNumber : ${pageNumbers}">
-                <a th:href="@{/admin/vacancies(size=${vacancy.size}, page=${pageNumber})}"
+                <a th:href="@{/admin/vacancies(size=${vacancy.size}, page=${pageNumber}, sort=${sort})}"
                    th:text="${pageNumber}"
                    th:class="${pageNumber==vacancy.number + 1} ? active"></a>
             </div>
@@ -201,6 +223,12 @@
 </div>
 
 <div class="backdrop"></div>
+
+
+<form id="sortAdminForm" action="/admin/vacancies" method="get">
+    <input id="sort" type="hidden" name="sort" th:value="${sort}">
+</form>
+
 
 <script th:inline="javascript">
     var catList = []
@@ -222,10 +250,13 @@
     $("#typeList .li").each(function () {
         typeList.push($(this).text())
     })
+
+    var sortVal = [[${sort}]]
 </script>
 <script src="/script/script.js"></script>
 <script src="/script/script-list.js"></script>
 <script src="/script/script-admin.js"></script>
+<script src="/script/script-admin-sort.js"></script>
 <script src="/script/script-admin-city.js"></script>
 
 </body>

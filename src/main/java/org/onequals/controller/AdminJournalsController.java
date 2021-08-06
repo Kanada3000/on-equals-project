@@ -1,8 +1,12 @@
 package org.onequals.controller;
 
+import org.onequals.domain.Career;
+import org.onequals.domain.Category;
 import org.onequals.domain.Sticker;
 import org.onequals.domain.Story;
 import org.onequals.services.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('ROLE_ADMIN')")
@@ -28,8 +36,9 @@ public class AdminJournalsController {
     private final PageService pageService;
     private final StoryService storyService;
     private final StickerService stickerService;
+    private final CareerService careerService;
 
-    public AdminJournalsController(CategoryService categoryService, VacancyService vacancyService, UserService userService, TypeService typeService, CityService cityService, ResumeService resumeService, EmployerService employerService, SeekerService seekerService, StorageService storageService, PageService pageService, StoryService storyService, StickerService stickerService) {
+    public AdminJournalsController(CategoryService categoryService, VacancyService vacancyService, UserService userService, TypeService typeService, CityService cityService, ResumeService resumeService, EmployerService employerService, SeekerService seekerService, StorageService storageService, PageService pageService, StoryService storyService, StickerService stickerService, CareerService careerService) {
         this.categoryService = categoryService;
         this.vacancyService = vacancyService;
         this.userService = userService;
@@ -42,6 +51,7 @@ public class AdminJournalsController {
         this.pageService = pageService;
         this.storyService = storyService;
         this.stickerService = stickerService;
+        this.careerService = careerService;
     }
 
     @GetMapping("/page/create")
@@ -106,49 +116,101 @@ public class AdminJournalsController {
     }
 
     @GetMapping("/journals/for-seeker")
-    public String forSeeker(Model model) {
+    public String forSeeker(Model model,
+                            @RequestParam("page") Optional<Integer> page,
+                            @RequestParam("size") Optional<Integer> size) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(15);
+        Page<org.onequals.domain.Page> pageObj = pageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), pageService.getByLabel("Шукачам"));
+        int totalPages = pageObj.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
         model.addAttribute("empTotal", employerService.getUnapproved());
         model.addAttribute("seekTotal", seekerService.getUnapproved());
         model.addAttribute("vacTotal", vacancyService.getUnapproved());
         model.addAttribute("resTotal", resumeService.getUnapproved());
         model.addAttribute("path", storageService.countFiles());
         model.addAttribute("mode", "seeker");
-        model.addAttribute("page", pageService.getByLabel("Шукачам"));
+        model.addAttribute("page", pageObj);
         return "admin/journals/journals";
     }
 
     @GetMapping("/journals/for-employer")
-    public String forEmployer(Model model) {
+    public String forEmployer(Model model,
+                              @RequestParam("page") Optional<Integer> page,
+                              @RequestParam("size") Optional<Integer> size) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(15);
+        Page<org.onequals.domain.Page> pageObj = pageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), pageService.getByLabel("Роботодавцям"));
+        int totalPages = pageObj.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
         model.addAttribute("empTotal", employerService.getUnapproved());
         model.addAttribute("seekTotal", seekerService.getUnapproved());
         model.addAttribute("vacTotal", vacancyService.getUnapproved());
         model.addAttribute("resTotal", resumeService.getUnapproved());
         model.addAttribute("path", storageService.countFiles());
         model.addAttribute("mode", "employer");
-        model.addAttribute("page", pageService.getByLabel("Роботодавцям"));
+        model.addAttribute("page", pageObj);
         return "admin/journals/journals";
     }
 
     @GetMapping("/journals/legislation")
-    public String legislation(Model model) {
+    public String legislation(Model model,
+                              @RequestParam("page") Optional<Integer> page,
+                              @RequestParam("size") Optional<Integer> size) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(15);
+        Page<org.onequals.domain.Page> pageObj = pageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), pageService.getByLabel("Законодавство"));
+        int totalPages = pageObj.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
         model.addAttribute("empTotal", employerService.getUnapproved());
         model.addAttribute("seekTotal", seekerService.getUnapproved());
         model.addAttribute("vacTotal", vacancyService.getUnapproved());
         model.addAttribute("resTotal", resumeService.getUnapproved());
         model.addAttribute("path", storageService.countFiles());
         model.addAttribute("mode", "legislation");
-        model.addAttribute("page", pageService.getByLabel("Законодавство"));
+        model.addAttribute("page", pageObj);
         return "admin/journals/journals";
     }
 
     @GetMapping("/journals/history")
-    public String story(Model model) {
+    public String story(Model model,
+                        @RequestParam("page") Optional<Integer> page,
+                        @RequestParam("size") Optional<Integer> size) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(15);
+        Page<Story> pageObj = storyService.findPaginated(PageRequest.of(currentPage - 1, pageSize), storyService.getAll());
+        int totalPages = pageObj.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
         model.addAttribute("empTotal", employerService.getUnapproved());
         model.addAttribute("seekTotal", seekerService.getUnapproved());
         model.addAttribute("vacTotal", vacancyService.getUnapproved());
         model.addAttribute("resTotal", resumeService.getUnapproved());
         model.addAttribute("path", storageService.countFiles());
-        model.addAttribute("story", storyService.getAll());
+        model.addAttribute("story", pageObj);
         return "admin/journals/story";
     }
 
@@ -204,13 +266,26 @@ public class AdminJournalsController {
     }
 
     @GetMapping("/journals/slider")
-    public String slider(Model model) {
+    public String slider(Model model,
+                         @RequestParam("page") Optional<Integer> page,
+                         @RequestParam("size") Optional<Integer> size) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(15);
+        Page<Sticker> pageObj = stickerService.findPaginated(PageRequest.of(currentPage - 1, pageSize), stickerService.getAll());
+        int totalPages = pageObj.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
         model.addAttribute("empTotal", employerService.getUnapproved());
         model.addAttribute("seekTotal", seekerService.getUnapproved());
         model.addAttribute("vacTotal", vacancyService.getUnapproved());
         model.addAttribute("resTotal", resumeService.getUnapproved());
         model.addAttribute("path", storageService.countFiles());
-        model.addAttribute("sticker", stickerService.getAll());
+        model.addAttribute("sticker", pageObj);
         return "admin/journals/sticker";
     }
 
@@ -263,5 +338,64 @@ public class AdminJournalsController {
     public String stickerDelete(@PathVariable Long id) {
         stickerService.delete(id);
         return "redirect:/admin/journals/slider";
+    }
+
+    @GetMapping("/journals/career")
+    public String pageCareer(Model model,
+                             @RequestParam("page") Optional<Integer> page,
+                             @RequestParam("size") Optional<Integer> size){
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(15);
+        Page<Career> pageObj = careerService.findPaginated(PageRequest.of(currentPage - 1, pageSize), careerService.findAll());
+        int totalPages = pageObj.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+
+        model.addAttribute("empTotal", employerService.getUnapproved());
+        model.addAttribute("seekTotal", seekerService.getUnapproved());
+        model.addAttribute("vacTotal", vacancyService.getUnapproved());
+        model.addAttribute("resTotal", resumeService.getUnapproved());
+        model.addAttribute("path", storageService.countFiles());
+        model.addAttribute("career", pageObj);
+        return "admin/journals/career";
+    }
+
+    @GetMapping("career/create")
+    public String pageAddCareer(){
+        return "admin/journals/career-add";
+    }
+
+    @PostMapping("career/add")
+    public String addCareer(@RequestParam String title,
+                            @RequestParam String body){
+        Career career = new Career();
+        career.setTitle(title);
+        career.setBody(body);
+        careerService.save(career);
+        return "redirect:/admin/journals/career";
+    }
+
+    @GetMapping("career/edit/{id}")
+    public String pageEditCareer(@PathVariable Long id, Model model){
+        Career career = careerService.findById(id);
+        model.addAttribute("id", id);
+        model.addAttribute("body", career.getBody());
+        model.addAttribute("title", career.getTitle());
+        return "admin/journals/career-edit";
+    }
+
+    @PostMapping("career/edit/{id}")
+    public String editCareer(@PathVariable Long id,
+                             @RequestParam String title,
+                            @RequestParam String body){
+        Career career = careerService.findById(id);
+        career.setTitle(title);
+        career.setBody(body);
+        careerService.save(career);
+        return "redirect:/admin/journals/career";
     }
 }

@@ -28,6 +28,12 @@ $(function () {
         window.location.href = "/admin/sticker/create";
         e.stopImmediatePropagation();
     })
+
+    $("#admin #body").on("click", "a.first.career", function (e){
+        e.preventDefault();
+        window.location.href = "/admin/career/create";
+        e.stopImmediatePropagation();
+    })
 })
 
 

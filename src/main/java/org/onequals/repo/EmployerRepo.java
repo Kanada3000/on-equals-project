@@ -3,6 +3,7 @@ package org.onequals.repo;
 import org.onequals.domain.Category;
 import org.onequals.domain.Employer;
 import org.onequals.domain.User;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -15,4 +16,7 @@ public interface EmployerRepo extends JpaRepository<Employer, Long> {
 
     @Query("SELECT e FROM Employer e WHERE e.approved = false")
     List<Employer> findUnapproved();
+
+    @Query("SELECT e FROM Employer e WHERE e.approved = false")
+    List<Employer> findUnapproved(Sort sort);
 }

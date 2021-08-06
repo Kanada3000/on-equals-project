@@ -84,6 +84,9 @@
         <div class="button yellow-button">
             <a href="/admin/journals/slider">Слайдер на головній</a>
         </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/career">Кар’єра / Резюме</a>
+        </div>
     </div>
     <div id="body">
         <h1>Категорії</h1>
@@ -92,9 +95,9 @@
         <table border="1">
             <tr class="head">
                 <td class="id-head">id</td>
-                <td>name<span class="text-red">*</span></td>
-                <td class="but-head"><span>&nbsp;</span></td>
-                <td class="but-head"><span>&nbsp;</span></td>
+                <td class="longName-sort">name<span class="text-red">*</span></td>
+                <td class="but-head nosort"><span>&nbsp;</span></td>
+                <td class="but-head nosort"><span>&nbsp;</span></td>
             </tr>
             <tr class="hidden">
                 <td class="id"></td>
@@ -128,33 +131,17 @@
         <div class="button no">Ні</div>
     </div>
 </div>
-
 <div class="backdrop"></div>
 
+<form id="sortAdminForm" action="/admin/category" method="get">
+    <input id="sort" type="hidden" name="sort" th:value="${sort}">
+</form>
+
 <script th:inline="javascript">
-    var catList = []
-    $("#categoryList .li").each(function () {
-        catList.push($(this).text())
-    })
-
-    var cityList = []
-    $("#cityList .li").each(function () {
-        cityList.push($(this).text())
-    })
-
-    var userList = []
-    $("#userList .li").each(function () {
-        userList.push($(this).text())
-    })
-
-    var typeList = []
-    $("#typeList .li").each(function () {
-        typeList.push($(this).text())
-    })
-
-    console.log(userList)
+    var sortVal = [[${sort}]]
 </script>
 <script src="/script/script.js"></script>
 <script src="/script/script-admin.js"></script>
+<script src="/script/script-admin-sort.js"></script>
 </body>
 </html>

@@ -69,6 +69,24 @@
             <span class="notification" th:if="${path != 0}" th:text="${path}"></span>
             <a href="/admin/approve/file">Непідтверджені файли резюме</a>
         </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/for-seeker">Журнали для шукачів</a>
+        </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/for-employer">Журнали для роботодавців</a>
+        </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/legislation">Журнали законодавство</a>
+        </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/history">Історії</a>
+        </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/slider">Слайдер на головній</a>
+        </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/career">Кар’єра / Резюме</a>
+        </div>
     </div>
     <div id="body">
         <h1>Шукачі</h1>
@@ -77,20 +95,20 @@
             <table border="1">
                 <tr class="head">
                     <td class="id-head">id</td>
-                    <td>username<span class="text-red">*</span></td>
-                    <td>name<span class="text-red">*</span></td>
-                    <td>email<span class="text-red">*</span></td>
-                    <td>category<span class="text-red">*</span></td>
-                    <td>city<span class="text-red">*</span></td>
-                    <td>site</td>
-                    <td>description<span class="text-red">*</span></td>
-                    <td>facebook</td>
-                    <td>instagram</td>
-                    <td>linkedIn</td>
-                    <td>twitter</td>
-                    <td>approved</td>
-                    <td class="but-head"><span>&nbsp;</span></td>
-                    <td class="but-head"><span>&nbsp;</span></td>
+                    <td class="user-sort">user<span class="text-red">*</span></td>
+                    <td class="name-sort">name<span class="text-red">*</span></td>
+                    <td class="email-sort">email<span class="text-red">*</span></td>
+                    <td class="category-sort">category<span class="text-red">*</span></td>
+                    <td class="city-sort nosort">city<span class="text-red">*</span></td>
+                    <td class="site-sort">site</td>
+                    <td class="description-sort">description<span class="text-red">*</span></td>
+                    <td class="linkFacebook-sort">facebook</td>
+                    <td class="linkInstagram-sort">instagram</td>
+                    <td class="linkLinkedIn-sort">linkedIn</td>
+                    <td class="linkTwitter-sort">twitter</td>
+                    <td class="approved-sort">approved</td>
+                    <td class="but-head nosort"><span>&nbsp;</span></td>
+                    <td class="but-head nosort"><span>&nbsp;</span></td>
                 </tr>
 
                 <tr class="hidden">
@@ -211,6 +229,11 @@
 
 <div class="backdrop"></div>
 
+
+<form id="sortAdminForm" action="/admin/seeker" method="get">
+    <input id="sort" type="hidden" name="sort" th:value="${sort}">
+</form>
+
 <script th:inline="javascript">
     var catList = []
     $("#categoryList .li").each(function () {
@@ -231,11 +254,14 @@
     $("#typeList .li").each(function () {
         typeList.push($(this).text())
     })
+
+    var sortVal = [[${sort}]]
 </script>
 <script src="/script/script.js"></script>
 <script src="/script/script-list.js"></script>
 <script src="/script/script-admin.js"></script>
 <script src="/script/script-admin-city.js"></script>
+<script src="/script/script-admin-sort.js"></script>
 
 </body>
 </html>

@@ -84,6 +84,9 @@
         <div class="button yellow-button">
             <a href="/admin/journals/slider">Слайдер на головній</a>
         </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/career">Кар’єра / Резюме</a>
+        </div>
     </div>
     <div id="body">
         <h1>Категорії</h1>
@@ -96,7 +99,7 @@
                 <td class="but-head"><span>&nbsp;</span></td>
                 <td class="but-head"><span>&nbsp;</span></td>
             </tr>
-            <tr th:each="s, iStat: ${story}">
+            <tr th:each="s, iStat: ${story.content}">
                 <td class="id" th:text="${s.getId()}"></td>
                 <td class="title" th:text="${s.getTitle()}"></td>
                 <td class="edit-story">&#9998;</td>
@@ -104,14 +107,14 @@
             </tr>
         </table>
         </div>
-<!--        <div id="paginations">-->
-<!--            <div th:if="${story.totalPages > 0}" class="pagination"-->
-<!--                 th:each="pageNumber : ${pageNumbers}">-->
-<!--                <a th:href="@{/admin/history(size=${category.size}, page=${pageNumber})}"-->
-<!--                   th:text="${pageNumber}"-->
-<!--                   th:class="${pageNumber==story.number + 1} ? active"></a>-->
-<!--            </div>-->
-<!--        </div>-->
+        <div id="paginations">
+            <div th:if="${story.totalPages > 0}" class="pagination"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{/admin/journals/history(size=${story.size}, page=${pageNumber})}"
+                   th:text="${pageNumber}"
+                   th:class="${pageNumber==story.number + 1} ? active"></a>
+            </div>
+        </div>
     </div>
 </div>
 

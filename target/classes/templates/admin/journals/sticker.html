@@ -84,6 +84,9 @@
         <div class="button yellow-button active">
             <a>Слайдер на головній</a>
         </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/career">Кар’єра / Резюме</a>
+        </div>
     </div>
     <div id="body">
         <h1>Слайдер на головній</h1>
@@ -103,6 +106,14 @@
                 <td class="delete" id="sticker">&#10060;</td>
             </tr>
         </table>
+        </div>
+        <div id="paginations">
+            <div th:if="${sticker.totalPages > 0}" class="pagination"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{/admin/journals/slider(size=${sticker.size}, page=${pageNumber})}"
+                   th:text="${pageNumber}"
+                   th:class="${pageNumber==sticker.number + 1} ? active"></a>
+            </div>
         </div>
     </div>
 </div>

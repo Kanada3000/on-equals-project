@@ -88,6 +88,9 @@
         <div class="button yellow-button">
             <a href="/admin/journals/slider">Слайдер на головній</a>
         </div>
+        <div class="button yellow-button">
+            <a href="/admin/journals/career">Кар’єра / Резюме</a>
+        </div>
 
     </div>
     <div id="body">
@@ -99,12 +102,12 @@
             <table>
                 <tr class="head">
                     <td class="id-head">id</td>
-                    <td>title</td>
+                    <td class="">title</td>
                     <td class="but-head"><span>&nbsp;</span></td>
                     <td class="but-head"><span>&nbsp;</span></td>
                 </tr>
 
-                <tr th:if="${page}" th:each="p: ${page}">
+                <tr th:if="${page}" th:each="p, iStat: ${page.content}">
                     <td class="id" th:text="${p.getId()}"></td>
                     <td class="name" th:text="${p.getName()}"></td>
                     <td class="edit-page">&#9998;</td>
@@ -113,6 +116,20 @@
                     <td id="page/legislation" class="delete" th:if="${mode == 'legislation'}">&#10060;</td>
                 </tr>
             </table>
+        </div>
+        <div id="paginations">
+            <div th:if="${page.totalPages > 0}" class="pagination"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a th:if="${mode == 'seeker'}" th:href="@{/admin/journals/for-seeker(size=${page.size}, page=${pageNumber})}"
+                   th:text="${pageNumber}"
+                   th:class="${pageNumber==page.number + 1} ? active"></a>
+                <a th:if="${mode == 'employer'}" th:href="@{/admin/journals/for-employer(size=${page.size}, page=${pageNumber})}"
+                   th:text="${pageNumber}"
+                   th:class="${pageNumber==page.number + 1} ? active"></a>
+                <a th:if="${mode == 'legislation'}" th:href="@{/admin/journals/legislation(size=${page.size}, page=${pageNumber})}"
+                   th:text="${pageNumber}"
+                   th:class="${pageNumber==page.number + 1} ? active"></a>
+            </div>
         </div>
     </div>
 </div>

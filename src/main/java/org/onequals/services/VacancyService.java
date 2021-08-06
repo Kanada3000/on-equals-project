@@ -132,6 +132,11 @@ public class VacancyService {
     }
 
     @Transactional
+    public List<Vacancy> getUnapproved(String sort) {
+        return vacancyRepo.findUnapproved(Sort.by(sort));
+    }
+
+    @Transactional
     public HashMap<Object, Object> findMinMax(Integer min, Integer max) {
         HashMap<Object, Object> minMax = new HashMap<Object, Object>();
         List<Vacancy> vacancies = vacancyRepo.findAll(Sort.by("salary"));
@@ -158,6 +163,11 @@ public class VacancyService {
         }
         return minMax;
 
+    }
+
+    @Transactional
+    public List<Vacancy> adminSort(List<Vacancy> vacancy, String sort){
+        return vacancyRepo.sortAdmin(vacancy, Sort.by(sort));
     }
 
 }

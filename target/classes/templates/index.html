@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/css/about.css">
     <link rel="stylesheet" href="/css/support.css">
     <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/alert.css">
 </head>
 <body>
 
@@ -289,12 +290,18 @@
     </div>
 </footer>
 
-
+<div id="alert">
+    <span th:if="${alert}" th:text="${alert}"></span>
+</div>
+<script th:inline="javascript">
+    var alertMode = [[${alertMode}]]
+</script>
 <script src="/script/script.js"></script>
 <script src="/script/script-list.js"></script>
 <script src="/script/script-index.js"></script>
 <script src="/script/script-up.js"></script>
 <script src="/script/script-sticker.js"></script>
 <script src="/script/script-slideshow.js"></script>
+<script src="/script/script-alert.js"></script>
 </body>
 </html>

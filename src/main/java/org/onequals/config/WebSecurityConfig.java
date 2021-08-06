@@ -74,9 +74,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .csrf().ignoringAntMatchers("/admin/journals/**")
-//                .and()
-//                .requiresChannel()
-//                .anyRequest().requiresSecure()
+                .and()
+                .requiresChannel().antMatchers("/login/oauth2/**").requiresSecure();
         ;
     }
 

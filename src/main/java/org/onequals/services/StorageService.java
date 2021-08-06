@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Service
 public class StorageService {
 
-    public void uploadFile(MultipartFile file, String username) {
+    public String uploadFile(MultipartFile file, String username) {
 
         int number;
 
@@ -46,6 +46,7 @@ public class StorageService {
 
             Files.copy(is, Paths.get("/uploads/resumes/" + username + "/cv_" + (number + 1) + ".pdf"),
                     StandardCopyOption.REPLACE_EXISTING);
+            return "/uploads/resumes/" + username + "/cv_" + (number + 1) + ".pdf";
         } catch (IOException e) {
 
             var msg = String.format("Failed to store file %f", file.getName());
@@ -111,18 +112,22 @@ public class StorageService {
     }
 
     @Transactional
-    public void renameFile(String path, Boolean approve) {
+    public String renameFile(String path, Boolean approve) {
         File source = new File(path);
         path = path.replace(source.getName(), "");
         if (approve && !source.getName().startsWith("approved")) {
             if (source.renameTo(new File(path + "approved_" + source.getName()))) {
+                return path + "approved_" + source.getName();
             }
         }
 
         if (!approve && source.getName().startsWith("approved")) {
             String name = source.getName();
             source.renameTo(new File(path + name.substring(9)));
+            return path + name.substring(9);
         }
+
+        return null;
     }
 
     @Transactional

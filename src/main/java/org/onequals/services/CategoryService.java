@@ -77,6 +77,11 @@ public class CategoryService{
     }
 
     @Transactional
+    public List<Category> getAllAll(String sort){
+        return categoryRepo.findAllAllSort(Sort.by(sort));
+    }
+
+    @Transactional
     public Category findByName(String name){
         return categoryRepo.findCategoryByLong(name);
     }

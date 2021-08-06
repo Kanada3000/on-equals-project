@@ -28,8 +28,9 @@ public class PageController {
     private final ServletContext servletContext;
     private final StoryService storyService;
     private final StickerService stickerService;
+    private final CareerService careerService;
 
-    public PageController(UserService userService, CategoryService categoryService, CityService cityService, PageService pageService, StorageService storageService, ServletContext servletContext, StoryService storyService, StickerService stickerService) {
+    public PageController(UserService userService, CategoryService categoryService, CityService cityService, PageService pageService, StorageService storageService, ServletContext servletContext, StoryService storyService, StickerService stickerService, CareerService careerService) {
         this.userService = userService;
         this.categoryService = categoryService;
         this.cityService = cityService;
@@ -38,6 +39,7 @@ public class PageController {
         this.servletContext = servletContext;
         this.storyService = storyService;
         this.stickerService = stickerService;
+        this.careerService = careerService;
     }
 
     @GetMapping("/")
@@ -86,7 +88,7 @@ public class PageController {
         if(path.contains("uploads")){
             path = path.substring(17);
         }
-        String headerValue = "attachment; filename=\"resume_" + path.substring(0, path.lastIndexOf('\\')) +".pdf\"";
+        String headerValue = "attachment; filename=\"resume_" + path.substring(0, path.lastIndexOf('/')) +".pdf\"";
         response.setHeader(headerKey, headerValue);
         FileInputStream inputStream;
         try {
@@ -152,6 +154,9 @@ public class PageController {
         model.addAttribute("body", page.getFullBody());
         model.addAttribute("shortBody", page.getShortBody());
         model.addAttribute("label", page.getLabel());
+        model.addAttribute("short", pageService.getShort());
+        model.addAttribute("prevId", pageService.getPrevId(id));
+        model.addAttribute("nextId", pageService.getNextId(id));
         return "template";
     }
 
@@ -178,6 +183,7 @@ public class PageController {
     @GetMapping("/journal/seeker")
     public String journalSeeker(Model model)
     {
+        model.addAttribute("career", careerService.findAll());
         model.addAttribute("page", pageService.getByLabel("Шукачам"));
         model.addAttribute("story", storyService.getAll());
         return "for-seeker";

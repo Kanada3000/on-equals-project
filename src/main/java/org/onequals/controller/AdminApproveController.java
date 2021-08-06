@@ -45,9 +45,11 @@ public class AdminApproveController {
 
     @GetMapping("/vacancy")
     public String adminVacanciesPage(Model model,
+                                     @RequestParam("sort") Optional<String> sortVal,
                                      @RequestParam("page") Optional<Integer> page,
                                      @RequestParam("size") Optional<Integer> size) {
-        List<Vacancy> unapproved = vacancyService.getUnapproved();
+        String sort = sortVal.orElse("id");
+        List<Vacancy> unapproved = vacancyService.getUnapproved(sort);
 
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
@@ -70,6 +72,7 @@ public class AdminApproveController {
         model.addAttribute("vacTotal", unapproved);
         model.addAttribute("resTotal", resumeService.getUnapproved());
         model.addAttribute("path", storageService.countFiles());
+        model.addAttribute("sort", sort);
         return "admin/approve/vacancy";
     }
 
@@ -112,9 +115,11 @@ public class AdminApproveController {
 
     @GetMapping("/resume")
     public String adminResumePage(Model model,
+                                  @RequestParam("sort") Optional<String> sortVal,
                                   @RequestParam("page") Optional<Integer> page,
                                   @RequestParam("size") Optional<Integer> size) {
-        List<Resume> unapproved = resumeService.getUnapproved();
+        String sort = sortVal.orElse("id");
+        List<Resume> unapproved = resumeService.getUnapproved(sort);
 
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
@@ -137,6 +142,7 @@ public class AdminApproveController {
         model.addAttribute("vacTotal", vacancyService.getUnapproved());
         model.addAttribute("resTotal", unapproved);
         model.addAttribute("path", storageService.countFiles());
+        model.addAttribute("sort", sort);
         return "admin/approve/resume";
     }
 
@@ -179,9 +185,11 @@ public class AdminApproveController {
 
     @GetMapping("/employer")
     public String adminEmployerPage(Model model,
+                                    @RequestParam("sort") Optional<String> sortVal,
                                     @RequestParam("page") Optional<Integer> page,
                                     @RequestParam("size") Optional<Integer> size) {
-        List<Employer> unapproved = employerService.getUnapproved();
+        String sort = sortVal.orElse("id");
+        List<Employer> unapproved = employerService.getUnapproved(sort);
 
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
@@ -203,7 +211,7 @@ public class AdminApproveController {
         model.addAttribute("vacTotal", vacancyService.getUnapproved());
         model.addAttribute("resTotal", resumeService.getUnapproved());
         model.addAttribute("path", storageService.countFiles());
-
+        model.addAttribute("sort", sort);
         return "admin/approve/employer";
     }
 
@@ -268,9 +276,11 @@ public class AdminApproveController {
 
     @GetMapping("/seeker")
     public String adminSeekerPage(Model model,
+                                  @RequestParam("sort") Optional<String> sortVal,
                                   @RequestParam("page") Optional<Integer> page,
                                   @RequestParam("size") Optional<Integer> size) {
-        List<Seeker> unapproved = seekerService.getUnapproved();
+        String sort = sortVal.orElse("id");
+        List<Seeker> unapproved = seekerService.getUnapproved(sort);
 
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
@@ -292,7 +302,7 @@ public class AdminApproveController {
         model.addAttribute("vacTotal", vacancyService.getUnapproved());
         model.addAttribute("resTotal", resumeService.getUnapproved());
         model.addAttribute("path", storageService.countFiles());
-
+        model.addAttribute("sort", sort);
         return "admin/approve/seeker";
     }
 
@@ -355,7 +365,7 @@ public class AdminApproveController {
 
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
-        Page<String> pageObj = storageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), storageService.getAllPaths(false));
+        Page<String> pageObj = storageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), userService.getAllPaths(false));
         int totalPages = pageObj.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
@@ -363,6 +373,7 @@ public class AdminApproveController {
                     .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
+        model.addAttribute("paths", userService.getAllPaths(false).size());
         model.addAttribute("path", pageObj);
         model.addAttribute("empTotal", employerService.getUnapproved());
         model.addAttribute("seekTotal", seekerService.getUnapproved());
@@ -373,13 +384,24 @@ public class AdminApproveController {
 
     @PostMapping("/file/approve")
     public String approveFile(@RequestParam String path) {
-        storageService.renameFile("/uploads/resumes/" + path, true);
+        System.out.println(path);
+        String newFile = storageService.renameFile("/uploads/resumes/" + path, true);
+        User user = userService.findUser(path.substring(0, path.indexOf("/")));
+        String file = user.getFile();
+        file = file.replace("/uploads/resumes/" + path.replace("\\", "/"), newFile.replace("\\", "/"));
+        user.setFile(file);
+        userService.save(user);
         return "redirect:/admin/approve/file";
     }
 
     @PostMapping("/file/delete")
     public String removeFile(@RequestParam String path) {
         storageService.removeFile("/uploads/resumes/" + path);
+        User user = userService.findUser(path.substring(0, path.indexOf("/")));
+        String file = user.getFile();
+        file = file.replace("/uploads/resumes/" + path.replace("\\", "/"), "");
+        user.setFile(file);
+        userService.save(user);
         return "redirect:/admin/approve/file";
     }
 }

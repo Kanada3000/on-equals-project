@@ -2,10 +2,8 @@ package org.onequals.services;
 
 import org.onequals.domain.*;
 import org.onequals.repo.CityRepo;
+import org.springframework.data.domain.*;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -38,6 +36,11 @@ public class CityService {
     @Transactional
     public List<City> getAllAll() {
         return cityRepo.findAllAll();
+    }
+
+    @Transactional
+    public List<City> getAllAll(String sort) {
+        return cityRepo.findAllAll(Sort.by(sort));
     }
 
     @Transactional
