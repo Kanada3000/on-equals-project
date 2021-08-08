@@ -120,13 +120,16 @@
         <div id="paginations">
             <div th:if="${page.totalPages > 0}" class="pagination"
                  th:each="pageNumber : ${pageNumbers}">
-                <a th:if="${mode == 'seeker'}" th:href="@{/admin/journals/for-seeker(size=${page.size}, page=${pageNumber})}"
+                <a th:if="${mode == 'seeker'}"
+                   th:href="@{/admin/journals/for-seeker(size=${page.size}, page=${pageNumber})}"
                    th:text="${pageNumber}"
                    th:class="${pageNumber==page.number + 1} ? active"></a>
-                <a th:if="${mode == 'employer'}" th:href="@{/admin/journals/for-employer(size=${page.size}, page=${pageNumber})}"
+                <a th:if="${mode == 'employer'}"
+                   th:href="@{/admin/journals/for-employer(size=${page.size}, page=${pageNumber})}"
                    th:text="${pageNumber}"
                    th:class="${pageNumber==page.number + 1} ? active"></a>
-                <a th:if="${mode == 'legislation'}" th:href="@{/admin/journals/legislation(size=${page.size}, page=${pageNumber})}"
+                <a th:if="${mode == 'legislation'}"
+                   th:href="@{/admin/journals/legislation(size=${page.size}, page=${pageNumber})}"
                    th:text="${pageNumber}"
                    th:class="${pageNumber==page.number + 1} ? active"></a>
             </div>

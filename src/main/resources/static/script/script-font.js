@@ -10,7 +10,7 @@ $(function () {
     //     }
     // })
 
-    $("#resume-list .block").click(function (){
+    $("#resume-list .block").click(function () {
         let id = $(this).find("#id").val()
         window.location.href = ("/pages/" + id);
     })

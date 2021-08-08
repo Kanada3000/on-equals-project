@@ -1,22 +1,22 @@
-#support{
+#support {
     padding: 80px calc(-420px + 33.3vw) calc(20px + 2.1vw);
     background-color: #076D46;
     font-size: 46px;
 }
 
-#support span{
+#support span {
     font-size: inherit;
     color: white;
 }
 
-#support .buttons{
+#support .buttons {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: calc(-60px + 8.3vw) 0 calc(10px + 4.2vw);
 }
 
-#support .buttons .support-button{
+#support .buttons .support-button {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -31,16 +31,16 @@
     cursor: pointer;
 }
 
-#support .buttons .support-button:last-child{
+#support .buttons .support-button:last-child {
     flex-direction: row-reverse;
 }
 
-#support .buttons .support-button .image img{
+#support .buttons .support-button .image img {
     width: 170px;
     height: auto;
 }
 
-#support .buttons .support-button span{
+#support .buttons .support-button span {
     display: block;
     text-align: center;
     font-size: inherit;
@@ -48,117 +48,117 @@
     width: 371px;
 }
 
-#support p{
+#support p {
     font-size: 22px;
     color: white;
 }
 
-#support p:last-child{
+#support p:last-child {
     padding-top: 20px;
 }
 
-@media screen and (max-width: 1400px){
+@media screen and (max-width: 1400px) {
 
-    #support{
+    #support {
         padding: 80px 60px calc(122px - 5vw);
     }
 
-    #support .buttons{
+    #support .buttons {
         padding: 60px 0 calc(42px + 2.4vw);
     }
 
-    #support .buttons .support-button{
+    #support .buttons .support-button {
         width: calc(-70px + 49.8vw);
         padding: 0 30px;
         justify-content: center;
     }
 
-    #support .buttons .support-button .image{
+    #support .buttons .support-button .image {
         display: none;
     }
 }
 
-@media screen and (max-width: 1020px){
-    #support{
+@media screen and (max-width: 1020px) {
+    #support {
         padding: calc(-1px + 7.9vw) calc(-61px + 11.9vw) calc(-48px + 11.5vw);
         font-size: calc(30px + 1.6vw);
     }
 
-    #support .buttons{
+    #support .buttons {
         flex-direction: column;
         justify-content: flex-start;
         padding: 61px 0 65px;
     }
 
-    #support .buttons .support-button{
+    #support .buttons .support-button {
         width: 100%;
         padding: 0 14vw;
         justify-content: space-between;
     }
 
-    #support .buttons .support-button:last-child{
+    #support .buttons .support-button:last-child {
         margin-top: 54px;
     }
 
-    #support .buttons .support-button .image{
+    #support .buttons .support-button .image {
         display: block;
     }
 
-    #support .buttons .support-button .image img{
+    #support .buttons .support-button .image img {
         width: 162px;
     }
 }
 
-@media screen and (max-width: 700px){
-    #support{
+@media screen and (max-width: 700px) {
+    #support {
         padding: calc(28px + 4.1vw) 30px 55px;
         font-size: calc(16px + 3.4vw);
     }
 
-    #support .buttons{
+    #support .buttons {
         padding: 65px 0;
     }
 
-    #support .buttons .support-button{
+    #support .buttons .support-button {
         width: calc(-55px + 99vw);
         padding: 0 30px;
         justify-content: center;
         font-size: 42px;
     }
 
-    #support .buttons .support-button .image{
+    #support .buttons .support-button .image {
         display: none;
     }
 
-    #support p{
+    #support p {
         font-size: calc(11px + 1.4vw);
     }
 }
 
-@media screen and (max-width: 480px){
-    #support{
+@media screen and (max-width: 480px) {
+    #support {
         padding: calc(6px + 8.8vw) calc(-18px + 10vw) 50px;
         font-size: calc(2px + 6.3vw);
     }
 
-    #support .buttons{
+    #support .buttons {
         padding: calc(-10px + 15.6vw) 0;
     }
 
-    #support .buttons .support-button{
+    #support .buttons .support-button {
         width: calc(-55px + 99vw);
         height: calc(30px + 37.5vw);
         padding: 0 calc(-60px + 18.8vw);
         font-size: calc(12px + 6.3vw);
     }
 
-    #support p{
+    #support p {
         font-size: calc(6px + 2.5vw);
     }
 }
 
-@media screen and (max-width: 320px){
-    #support .buttons .support-button{
+@media screen and (max-width: 320px) {
+    #support .buttons .support-button {
         padding: 0;
     }
 }

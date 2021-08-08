@@ -1,35 +1,35 @@
-@media screen and (max-width: 605px){
+@media screen and (max-width: 605px) {
 
-    #reg2 .green-choice{
+    #reg2 .green-choice {
         display: flex;
         flex-direction: column;
         margin-top: 5.2vw;
         width: auto;
     }
 
-    #reg2 .green-choice label{
+    #reg2 .green-choice label {
         margin-top: 29px;
         margin-right: auto;
         font-size: 32px;
     }
 
-    #reg2 .green-choice label:nth-of-type(2){
+    #reg2 .green-choice label:nth-of-type(2) {
         margin-left: 0;
         margin-top: inherit;
     }
 
-    #reg2 .green-choice label:nth-of-type(3){
+    #reg2 .green-choice label:nth-of-type(3) {
         margin-left: 0;
         margin-top: inherit;
     }
 
 
-    #reg2 .green-choice label:nth-of-type(4){
+    #reg2 .green-choice label:nth-of-type(4) {
         margin-top: inherit;
         margin-left: 0;
     }
 
-    #reg2 .green-choice label:nth-of-type(5){
+    #reg2 .green-choice label:nth-of-type(5) {
         margin-top: inherit;
         margin-right: auto;
     }
@@ -62,7 +62,7 @@
 
 }
 
-@media screen and (max-width: 480px){
+@media screen and (max-width: 480px) {
 
     #reg1 {
         width: calc(30px + 81.3vw);
@@ -112,7 +112,7 @@
         margin-top: 40px;
     }
 
-    #reg2 .green-choice label{
+    #reg2 .green-choice label {
         font-size: 6.7vw;
     }
 
@@ -140,7 +140,7 @@
         background: unset;
     }
 
-    .select-label{
+    .select-label {
         font-size: 1.8vw;
         background-size: 15px auto;
     }
@@ -155,7 +155,7 @@
         background-size: 20px auto;
     }
 
-    input[type="checkbox"]:checked + label{
+    input[type="checkbox"]:checked + label {
         background: top 30% left 0 url(../images/check-box.png) no-repeat;
         background-size: 20px auto;
     }
@@ -174,7 +174,7 @@
         padding: 0 0 0 52px;
     }
 
-    #reg2_sub{
+    #reg2_sub {
         padding: 0 5.4%
     }
 
@@ -196,12 +196,12 @@
         font-size: 8.75vw;
     }
 
-    #reg2_sub .add-vacancy-btn button{
+    #reg2_sub .add-vacancy-btn button {
         margin-top: 42px;
         height: 43.75vw;
     }
 
-    #reg2_sub .add-vacancy-btn button[data-action=submit]{
+    #reg2_sub .add-vacancy-btn button[data-action=submit] {
         margin-top: 37px;
         padding: 0 40px;
     }
@@ -218,36 +218,36 @@
         padding: 77px 0 61px;
     }
 
-    #footer-reg .star{
+    #footer-reg .star {
         left: 17.26%;
     }
 
-    #footer-reg .download{
+    #footer-reg .download {
         width: 87.5%;
         min-width: 290px;
         height: calc(30px + 37.5vw);
     }
 
-    #footer-reg .download label , #footer-reg .download button{
+    #footer-reg .download label, #footer-reg .download button {
         font-size: 8.75vw;
     }
 
-    #footer-reg p{
+    #footer-reg p {
         margin: 24px auto 0;
         width: 86.7%;
         min-width: 290px;
         font-size: 6.67vw;
     }
 
-    #reg-last{
+    #reg-last {
         padding-top: calc(-14px + 17.5vw);
     }
 
-    #reg-last .image img{
+    #reg-last .image img {
         width: calc(-20px + 74.4vw);
     }
 
-    #reg-last .text{
+    #reg-last .text {
         padding-top: 41px;
         width: calc(30px + 81.3vw);
         font-size: calc(12px + 6.3vw);
@@ -277,7 +277,7 @@
         font-size: 18px;
     }
 
-    #reg2_sub .add-vacancy-btn button[type=submit]{
+    #reg2_sub .add-vacancy-btn button[type=submit] {
         padding: 0 70px;
     }
 

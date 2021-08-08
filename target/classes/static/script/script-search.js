@@ -10,7 +10,7 @@ $(function () {
     }, 200);
 
 
-        if (likesId !== null) {
+    if (likesId !== null) {
         let likesIdList = likesId.split("&")
         let id
         $("#vacancies .vacancy").each(function () {

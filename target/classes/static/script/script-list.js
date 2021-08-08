@@ -2,7 +2,7 @@ $(function () {
 
     list("")
     //Добавление страны/города
-    $("#form-reg-employer").on('click', ".accept.add",function (e) {
+    $("#form-reg-employer").on('click', ".accept.add", function (e) {
         e.preventDefault()
         let added = $(this).closest(".accept.add");
         let i = 1;

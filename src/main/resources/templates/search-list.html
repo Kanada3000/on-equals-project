@@ -31,9 +31,9 @@
             <form style="display: none" sec:authorize="hasAuthority('EMPLOYER') || hasRole('EMPLOYER')" id="search"
                   method="get" th:action="@{/resume/list}">
             </form>
-<!--            <input type="hidden" form="sortForm" name="key_words" th:value="${key_wordsVal}">-->
-<!--            <input type="hidden" form="sortForm" name="catString" th:value="${catStringVal}">-->
-<!--            <input type="hidden" form="sortForm" name="citString" th:value="${citStringVal}">-->
+            <!--            <input type="hidden" form="sortForm" name="key_words" th:value="${key_wordsVal}">-->
+            <!--            <input type="hidden" form="sortForm" name="catString" th:value="${catStringVal}">-->
+            <!--            <input type="hidden" form="sortForm" name="citString" th:value="${citStringVal}">-->
             <form>
                 <label>
                     <input type="text" name="key_words" class="search_input" placeholder="Ключові слова"

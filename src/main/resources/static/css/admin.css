@@ -1,4 +1,4 @@
-#name-input{
+#name-input {
     width: 100%;
     padding: 10px;
 }
@@ -29,21 +29,21 @@
     background-color: #e7fdc6;
 }
 
-#admin #sidebar .button.red-button{
+#admin #sidebar .button.red-button {
     background-color: #f5a7a7;
     position: relative;
 }
 
-#admin #sidebar .button.red-button.active{
+#admin #sidebar .button.red-button.active {
     background-color: #ffd6d6;
 }
 
-#admin #sidebar .button.yellow-button{
+#admin #sidebar .button.yellow-button {
     background-color: #edf5a7;
     position: relative;
 }
 
-#admin #sidebar .button.yellow-button.active{
+#admin #sidebar .button.yellow-button.active {
     background-color: #fffdd6;
 }
 
@@ -103,7 +103,7 @@
     box-sizing: border-box;
 }
 
-#admin #body table td span.text-red{
+#admin #body table td span.text-red {
     font-size: inherit;
     color: #ff5b54;
 }
@@ -152,23 +152,25 @@
     width: 60px;
 }
 
-#admin #body table td:first-of-type{
+#admin #body table td:first-of-type {
     position: absolute;
     width: 50px;
     left: 0;
     top: auto;
 }
 
-#admin #body table td:last-of-type, #admin #body table td:nth-last-of-type(2){
+#admin #body table td:last-of-type, #admin #body table td:nth-last-of-type(2) {
     position: absolute;
     width: 60px;
     right: 0;
     top: auto;
 }
-#admin #body table td:nth-last-of-type(2){
+
+#admin #body table td:nth-last-of-type(2) {
     right: 60px;
 }
-#admin #body .table{
+
+#admin #body .table {
     width: calc(100vw - 270px);
     margin-left: 55px;
     margin-right: 95px;
@@ -176,7 +178,7 @@
     overflow-x: scroll;
 }
 
-#admin #body .table td{
+#admin #body .table td {
     border: 1px solid black;
 }
 
@@ -259,13 +261,13 @@
     padding: 50px;
 }
 
-#accept-delete .buttons, #change-password .buttons{
+#accept-delete .buttons, #change-password .buttons {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-#accept-delete .button, #change-password .button{
+#accept-delete .button, #change-password .button {
     border: 1px solid black;
     height: auto;
     width: auto;
@@ -281,63 +283,64 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0, 0, 0, 0.7);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-html{
-    overflow-x:  hidden;
+html {
+    overflow-x: hidden;
 }
 
-#admin #body table tr.edit td.accept, #admin #body table tr.edit td.cancel{
+#admin #body table tr.edit td.accept, #admin #body table tr.edit td.cancel {
     width: 60px;
 }
 
-#admin #body table tr.edit td.id{
+#admin #body table tr.edit td.id {
     width: 50px;
 }
 
-#admin #body table tr.head td{
+#admin #body table tr.head td {
     cursor: pointer;
 }
 
-#admin #body table tr.head td.sort{
+#admin #body table tr.head td.sort {
     background: #FDD749 url(../images/arrow-list.png) no-repeat right;
     background-size: 9px auto;
 }
 
-#admin #body table td.file{
+#admin #body table td.file {
     cursor: pointer;
 }
-#admin #body table td.description{
+
+#admin #body table td.description {
     max-width: 700px;
     word-wrap: break-word;
 }
 
-#admin #sidebar .button.red-button span.notification{
+#admin #sidebar .button.red-button span.notification {
     display: block;
     position: absolute;
     background-color: #FDD749;
     padding: 5px;
     border-radius: 50%;
-    top:0;
-    right:0;
+    top: 0;
+    right: 0;
     min-width: 26px;
 }
 
-#paginations{
+#paginations {
     display: flex;
     flex-direction: row;
     margin: 30px 0 50px;
 }
 
-#paginations a{
+#paginations a {
     font-size: inherit;
     padding: 10px;
     border-radius: 100px;
 }
 
-#paginations a.active{
+#paginations a.active {
     background-color: #FDD749;
 }

@@ -1,6 +1,7 @@
-#head-edit{
+#head-edit {
     display: none;
 }
+
 #head-edit .info input {
     width: 90%;
     background-color: #C4DE95;
@@ -49,7 +50,7 @@
     border-radius: 7px;
 }
 
-#modal{
+#modal {
     z-index: 999;
     width: 70%;
     height: auto;
@@ -73,17 +74,17 @@
     padding: 50px;
 }
 
-#modal input{
+#modal input {
     margin-top: 30px;
     padding: 10px;
 }
 
-#modal button{
+#modal button {
     margin-top: 50px;
     padding: 20px 0;
 }
 
-#modal #cityModal{
+#modal #cityModal {
     display: none;
 }
 
@@ -93,16 +94,16 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0, 0, 0, 0.7);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-html{
-    overflow-x:  hidden;
+html {
+    overflow-x: hidden;
 }
 
-#descr{
+#descr {
     font-size: 46px;
     width: 100%;
     resize: vertical;
@@ -110,29 +111,29 @@ html{
     box-sizing: border-box;
 }
 
-#profile-body .container .block.edit{
+#profile-body .container .block.edit {
     display: none;
 }
 
-#profile-body .container .block.edit:nth-of-type(2){
+#profile-body .container .block.edit:nth-of-type(2) {
     border-top: 4px solid black;
 }
 
-#profile-body .container .block.edit .list input{
+#profile-body .container .block.edit .list input {
     border: none;
 }
 
-#profile-body .container .block.edit input#salary{
+#profile-body .container .block.edit input#salary {
     font-size: inherit;
     border: none;
     width: auto;
 }
 
-#profile-body .container .block.edit .hide .descript{
+#profile-body .container .block.edit .hide .descript {
     display: inline;
 }
 
-#salar{
+#salar {
     /*display: inline;*/
     font-size: inherit;
     width: calc(541px + 32.7vw);
@@ -141,16 +142,16 @@ html{
     box-sizing: border-box;
 }
 
-#city-span{
+#city-span {
     cursor: pointer;
 }
 
-.buttons a[href=accept] img{
+.buttons a[href=accept] img {
     width: 55px;
     height: auto;
 }
 
-.buttons a[href=delete] img{
+.buttons a[href=delete] img {
     width: 55px;
     height: auto;
 }
@@ -165,7 +166,7 @@ html{
         height: 100px;
     }
 
-    #salar{
+    #salar {
         width: calc(-431px + 100.2vw);
     }
 }
@@ -174,26 +175,27 @@ html{
     #head-edit .info h1 {
         font-size: 68px;
     }
+
     #head-edit button {
         font-size: 36px;
         height: 80px;
     }
 
-    #descr{
+    #descr {
         font-size: calc(30px + 1.6vw);
     }
 
-    #salar{
+    #salar {
         width: 571px;
     }
 }
 
 @media screen and (max-width: 771px) {
-    #descr{
+    #descr {
         font-size: calc(16px + 3.4vw);
     }
 
-    #salar{
+    #salar {
         width: calc(128px + 57.4vw);
     }
 }
@@ -202,16 +204,17 @@ html{
     #head-edit .info h1 {
         font-size: calc(-12px + 13.8vw);
     }
+
     #head-edit button {
         font-size: 24px;
         height: 70px;
     }
 
-    #descr{
+    #descr {
         font-size: calc(14px + 2.5vw);
     }
 
-    #salar{
+    #salar {
         width: calc(53px + 73.1vw);
     }
 }

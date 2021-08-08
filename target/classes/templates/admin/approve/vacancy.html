@@ -91,115 +91,116 @@
     <div id="body">
         <h1>Непідтверджені вакансії</h1>
         <div class="table">
-        <table border="1">
-            <tr class="head">
-                <td class="id-head">id</td>
-                <td class="user-sort">user<span class="text-red">*</span></td>
-                <td class="type-sort">type<span class="text-red">*</span></td>
-                <td class="category-sort">category<span class="text-red">*</span></td>
-                <td class="city-sort nosort">city<span class="text-red">*</span></td>
-                <td class="salary-sort">salary<span class="text-red">*</span></td>
-                <td class="description-sort">description<span class="text-red">*</span></td>
-                <td class="approved-sort">approved</td>
-                <td class="but-head nosort"><span>&nbsp;</span></td>
-                <td class="but-head nosort"><span>&nbsp;</span></td>
-            </tr>
-            <tr class="hidden">
-                <td class="id"></td>
-                <td>
-                    <div class="list" id="userList">
-                        <input autocomplete="off" id="user" type="text" class="select-label" required>
-                        <div class="select green" id="user-div">
-                            <ul>
-                                <li th:each="u: ${user}">
-                                    <div class="li" th:text="${u.getUsername()}"></div>
-                                </li>
-                            </ul>
+            <table border="1">
+                <tr class="head">
+                    <td class="id-head">id</td>
+                    <td class="user-sort">user<span class="text-red">*</span></td>
+                    <td class="type-sort">type<span class="text-red">*</span></td>
+                    <td class="category-sort">category<span class="text-red">*</span></td>
+                    <td class="city-sort nosort">city<span class="text-red">*</span></td>
+                    <td class="salary-sort">salary<span class="text-red">*</span></td>
+                    <td class="description-sort">description<span class="text-red">*</span></td>
+                    <td class="approved-sort">approved</td>
+                    <td class="but-head nosort"><span>&nbsp;</span></td>
+                    <td class="but-head nosort"><span>&nbsp;</span></td>
+                </tr>
+                <tr class="hidden">
+                    <td class="id"></td>
+                    <td>
+                        <div class="list" id="userList">
+                            <input autocomplete="off" id="user" type="text" class="select-label" required>
+                            <div class="select green" id="user-div">
+                                <ul>
+                                    <li th:each="u: ${user}">
+                                        <div class="li" th:text="${u.getUsername()}"></div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="list" id="typeList">
-                        <input autocomplete="off" id="type" type="text" class="select-label" required>
-                        <div class="select green" id="type-div">
-                            <ul>
-                                <li th:each="t: ${types}">
-                                    <div class="li" th:text="${t.getName()}"></div>
-                                </li>
-                            </ul>
+                    </td>
+                    <td>
+                        <div class="list" id="typeList">
+                            <input autocomplete="off" id="type" type="text" class="select-label" required>
+                            <div class="select green" id="type-div">
+                                <ul>
+                                    <li th:each="t: ${types}">
+                                        <div class="li" th:text="${t.getName()}"></div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="list" id="categoryList">
-                        <input autocomplete="off" id="category" type="text" class="select-label" required>
-                        <div class="select green" id="category-div">
-                            <ul>
-                                <li th:each="c: ${category}">
-                                    <div class="li" th:text="${c.getLongName()}"></div>
-                                </li>
-                            </ul>
+                    </td>
+                    <td>
+                        <div class="list" id="categoryList">
+                            <input autocomplete="off" id="category" type="text" class="select-label" required>
+                            <div class="select green" id="category-div">
+                                <ul>
+                                    <li th:each="c: ${category}">
+                                        <div class="li" th:text="${c.getLongName()}"></div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td class="cityDiv">
-                    <div class="list" id="cityList">
-                        <input autocomplete="off" id="city" type="text" class="select-label" required>
-                        <div class="select green" id="city-div">
-                            <ul>
-                                <li th:each="c: ${city}">
-                                    <div class="li" th:text="${c.getCity()}"></div>
-                                </li>
-                            </ul>
+                    </td>
+                    <td class="cityDiv">
+                        <div class="list" id="cityList">
+                            <input autocomplete="off" id="city" type="text" class="select-label" required>
+                            <div class="select green" id="city-div">
+                                <ul>
+                                    <li th:each="c: ${city}">
+                                        <div class="li" th:text="${c.getCity()}"></div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <a href="#" class="addCity">&#10133;</a>
-                </td>
-                <td><input autocomplete="off" id="salary" type="text" required></td>
-                <td><input id="description" type="text" required></td>
-                <td>
-                    <select id="approved" name="approved">
-                        <option value="false">Ні</option>
-                        <option value="true">Так</option>
-                    </select>
-                </td>
-                <td class="accept">&#10004;</td>
-                <td class="cancel">&#10060;</td>
-            </tr>
-            <tr th:each="v, iStat: ${vacancy.content}">
-                <td class="id" th:text="${v.getId()}"></td>
-                <td class="user" th:if="${v.getUser() != null}" th:text="${v.getUser().getUsername()}"></td>
-                <td class="user" th:if="${v.getUser() == null}" th:text="${'null'}"></td>
-                <td class="type" th:text="${v.getType().getName()}"></td>
-                <td class="category" th:if="${v.getCategory != null}" th:text="${v.getCategory().getLongName()}"></td>
-                <td class="category" th:if="${v.getCategory == null}" th:text="${'null'}"></td>
-                <td class="city">
-                    <div th:each="c: ${v.getCity()}">
-                        <div th:remove="tag" th:text="${c.getCity()}"></div>
-                    </div>
-                </td>
-                <td class="salary" th:text="${v.getSalary()}"></td>
-                <td class="description" th:text="${v.getDescription()}">1000 знаків</td>
-                <td class="approved" th:if="${v.getApproved()}">Так</td>
-                <td class="approved" th:unless="${v.getApproved()}">Ні</td>
-                <td class="edit">&#9998;</td>
-                <td id="approve/vacancy" class="delete">&#10060;</td>
-            </tr>
+                        <a href="#" class="addCity">&#10133;</a>
+                    </td>
+                    <td><input autocomplete="off" id="salary" type="text" required></td>
+                    <td><input id="description" type="text" required></td>
+                    <td>
+                        <select id="approved" name="approved">
+                            <option value="false">Ні</option>
+                            <option value="true">Так</option>
+                        </select>
+                    </td>
+                    <td class="accept">&#10004;</td>
+                    <td class="cancel">&#10060;</td>
+                </tr>
+                <tr th:each="v, iStat: ${vacancy.content}">
+                    <td class="id" th:text="${v.getId()}"></td>
+                    <td class="user" th:if="${v.getUser() != null}" th:text="${v.getUser().getUsername()}"></td>
+                    <td class="user" th:if="${v.getUser() == null}" th:text="${'null'}"></td>
+                    <td class="type" th:text="${v.getType().getName()}"></td>
+                    <td class="category" th:if="${v.getCategory != null}"
+                        th:text="${v.getCategory().getLongName()}"></td>
+                    <td class="category" th:if="${v.getCategory == null}" th:text="${'null'}"></td>
+                    <td class="city">
+                        <div th:each="c: ${v.getCity()}">
+                            <div th:remove="tag" th:text="${c.getCity()}"></div>
+                        </div>
+                    </td>
+                    <td class="salary" th:text="${v.getSalary()}"></td>
+                    <td class="description" th:text="${v.getDescription()}">1000 знаків</td>
+                    <td class="approved" th:if="${v.getApproved()}">Так</td>
+                    <td class="approved" th:unless="${v.getApproved()}">Ні</td>
+                    <td class="edit">&#9998;</td>
+                    <td id="approve/vacancy" class="delete">&#10060;</td>
+                </tr>
 
-            <tr class="clear">
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td class="but-head"><span>&nbsp;</span></td>
-                <td class="but-head"><span>&nbsp;</span></td>
-            </tr>
+                <tr class="clear">
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td class="but-head"><span>&nbsp;</span></td>
+                    <td class="but-head"><span>&nbsp;</span></td>
+                </tr>
 
-        </table>
+            </table>
         </div>
         <div id="paginations">
             <div th:if="${vacancy.totalPages > 0}" class="pagination"

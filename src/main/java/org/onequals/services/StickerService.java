@@ -20,22 +20,22 @@ public class StickerService {
     }
 
     @Transactional
-    public List<Sticker> getAll(){
+    public List<Sticker> getAll() {
         return stickerRepo.findAll(Sort.by("createdDate"));
     }
 
     @Transactional
-    public Sticker getById(Long id){
+    public Sticker getById(Long id) {
         return stickerRepo.findById(id).get();
     }
 
     @Transactional
-    public void save(Sticker story){
+    public void save(Sticker story) {
         stickerRepo.save(story);
     }
 
     @Transactional
-    public void delete(Long id){
+    public void delete(Long id) {
         stickerRepo.deleteById(id);
     }
 

@@ -33,7 +33,7 @@ $(function () {
     })
 })
 
-function addCityfunc($this, $val){
+function addCityfunc($this, $val) {
     let clone = $this.prev().clone(false)
     let prevId = $this.prev().attr("id")
     let prevInputId = $this.prev().find("input").attr("id")

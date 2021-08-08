@@ -32,7 +32,6 @@ public class ReCaptchaRegisterService implements ReCaptchaService {
         if (reCaptchaResponse != null)
             if (reCaptchaResponse.isSuccess() && reCaptchaResponse.getScore() < reCaptchaKeys.getThreshold())
                 reCaptchaResponse.setSuccess(false);
-//        System.out.println(reCaptchaResponse);
         return reCaptchaResponse;
     }
 }

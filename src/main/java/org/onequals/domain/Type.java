@@ -20,27 +20,27 @@ public class Type {
         this.total = total.intValue();
     }
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id){
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
-    public int getTotal(){
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(int total){
+    public void setTotal(int total) {
         this.total = total;
     }
 }

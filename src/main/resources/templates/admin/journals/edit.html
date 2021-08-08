@@ -18,7 +18,7 @@
     <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
 <form id="pageForm" th:action="@{'/admin/page/edit/' + ${id}}" method="POST">
-<!--    <input type="hidden" name="id" id="id" th:value="${id}">-->
+    <!--    <input type="hidden" name="id" id="id" th:value="${id}">-->
     <input type="hidden" name="data" id="data">
     <input type="hidden" name="shortData" id="shortData">
     <div id="admin">

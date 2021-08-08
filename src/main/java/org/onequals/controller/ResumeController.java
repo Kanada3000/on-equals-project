@@ -62,7 +62,7 @@ public class ResumeController {
 
         User user = userService.findUser(principal.getName());
 
-        if(key_words != null){
+        if (key_words != null) {
             key_words = key_words.toLowerCase();
         }
 
@@ -152,12 +152,12 @@ public class ResumeController {
                             @RequestParam("g-recaptcha-response") String response) {
         ReCaptchaResponse reCaptchaResponse = reCaptchaRegisterService.verify(response);
 
-        if(!reCaptchaResponse.isSuccess()){
+        if (!reCaptchaResponse.isSuccess()) {
             return "error";
         }
 
         User user = userService.findUser(principal.getName());
-        catList = catList.stream().map(c -> c.replaceAll("%",",")).collect(Collectors.toList());
+        catList = catList.stream().map(c -> c.replaceAll("%", ",")).collect(Collectors.toList());
         for (int i = 0; i < typeList.size(); i++) {
             List<String> cities = new ArrayList<>();
             int j = 0;
@@ -179,21 +179,20 @@ public class ResumeController {
             resume.setSalary(salary.get(i));
             cityService.addCities(resume, cityService.findByNames(cities));
         }
-        model.addAttribute("alert","Вашу резюме успішно додано та після перевірки з'явиться на сайті");
-        model.addAttribute("alertMode","true");
-        return "redirect:/";
+
+        return "redirect:/index/resume";
     }
 
     @PostMapping("/file")
     public String saveFile(Principal principal, @RequestParam MultipartFile file,
-                           @RequestParam("g-recaptcha-response") String response){
+                           @RequestParam("g-recaptcha-response") String response) {
         ReCaptchaResponse reCaptchaResponse = reCaptchaRegisterService.verify(response);
         User user = userService.findUser(principal.getName());
 
-        if(!reCaptchaResponse.isSuccess()){
+        if (!reCaptchaResponse.isSuccess()) {
             return "error";
         }
-        if(user.getFile() == null || user.getFile().isEmpty()){
+        if (user.getFile() == null || user.getFile().isEmpty()) {
             user.setFile(storageService.uploadFile(file, principal.getName()));
         } else {
             user.setFile(user.getFile() + "%" + storageService.uploadFile(file, principal.getName()));

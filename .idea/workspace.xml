@@ -13,6 +13,16 @@
   <component name="ComposerSettings">
     <execution />
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view />
+      </state>
+    </system>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -59,14 +69,15 @@
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/main/resources/static/script/script.js" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\onequals\src\main\resources\static\script" />
       <recent name="E:\Work\onequals\src\main\resources\static\script" />
       <recent name="E:\Work\onequals\src\main\resources\db\migration" />
       <recent name="E:\Work\onequals\src\main\resources\templates\admin\journals" />
       <recent name="E:\Work\onequals\src\main\resources\templates" />
-      <recent name="E:\Work\onequals\src\main\resources\templates\admin" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Work\onequals" />
@@ -174,6 +185,8 @@
       <workItem from="1628097700720" duration="1000" />
       <workItem from="1628141589185" duration="31018000" />
       <workItem from="1628227957581" duration="31807000" />
+      <workItem from="1628426273629" duration="4294000" />
+      <workItem from="1628430791284" duration="248000" />
     </task>
     <servers />
   </component>

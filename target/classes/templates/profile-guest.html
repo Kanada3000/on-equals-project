@@ -109,7 +109,8 @@
                 <div class="text">
                     <div th:remove="tag" th:each="f: ${l}">
                         <input type="hidden" th:if="${f.key == 'path'}" name="path" th:value="${f.value}">
-                        <span class="file-name" th:if="${f.key == 'name'}"  th:text="${#strings.replace(f.value,'approved_cv','resume')}"></span>
+                        <span class="file-name" th:if="${f.key == 'name'}"
+                              th:text="${#strings.replace(f.value,'approved_cv','resume')}"></span>
                         <span class="file-size" th:if="${f.key == 'size'}" th:text="${f.value + 'КБ'}"></span>
                     </div>
                 </div>

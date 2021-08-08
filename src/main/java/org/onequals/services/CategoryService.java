@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class CategoryService{
+public class CategoryService {
     private final CategoryRepo categoryRepo;
 
     public CategoryService(CategoryRepo categoryRepo) {
@@ -24,7 +24,7 @@ public class CategoryService{
     }
 
     @Transactional
-    public List<Category> updateTotal(List<Vacancy> vacancies){
+    public List<Category> updateTotal(List<Vacancy> vacancies) {
         List<Category> categories = categoryRepo.findAll(Sort.by("id"));
 
         List<Long> vacanciesId = vacancies.stream()
@@ -45,7 +45,7 @@ public class CategoryService{
     }
 
     @Transactional
-    public List<Category> updateTotalResumes(List<Resume> resumes){
+    public List<Category> updateTotalResumes(List<Resume> resumes) {
         List<Category> categories = categoryRepo.findAll(Sort.by("id"));
 
         List<Long> resumesId = resumes.stream()
@@ -67,37 +67,37 @@ public class CategoryService{
     }
 
     @Transactional
-    public List<Category> getAll(){
+    public List<Category> getAll() {
         return categoryRepo.findAll();
     }
 
     @Transactional
-    public List<Category> getAllAll(){
+    public List<Category> getAllAll() {
         return categoryRepo.findAllAll();
     }
 
     @Transactional
-    public List<Category> getAllAll(String sort){
+    public List<Category> getAllAll(String sort) {
         return categoryRepo.findAllAllSort(Sort.by(sort));
     }
 
     @Transactional
-    public Category findByName(String name){
+    public Category findByName(String name) {
         return categoryRepo.findCategoryByLong(name);
     }
 
     @Transactional
-    public Category findById(Long id){
+    public Category findById(Long id) {
         return categoryRepo.findById(id).get();
     }
 
     @Transactional
-    public void save(Category category){
+    public void save(Category category) {
         categoryRepo.save(category);
     }
 
     @Transactional
-    public void delete(Long id){
+    public void delete(Long id) {
         categoryRepo.deleteFromVacancy(id);
         categoryRepo.deleteFromResume(id);
         categoryRepo.deleteFromEmployer(id);

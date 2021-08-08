@@ -1,4 +1,4 @@
-@media screen and (max-width: 1440px){
+@media screen and (max-width: 1440px) {
     main .search {
         padding: calc(195px - 3.6vw) 60px 0;
     }
@@ -18,23 +18,23 @@
         padding: calc(26px + 6.3vw) 60px;
     }
 
-    main .main__place .smile-button{
+    main .main__place .smile-button {
         width: calc(-70px + 49.8vw);
         padding: 0 60px;
     }
 }
 
-@media screen and (max-width: 1350px){
-    main .main__place .smile-button .smile-image{
+@media screen and (max-width: 1350px) {
+    main .main__place .smile-button .smile-image {
         display: none;
     }
 
-    main .main__place .smile-button{
+    main .main__place .smile-button {
         justify-content: center;
     }
 }
 
-@media screen and (max-width: 1023px){
+@media screen and (max-width: 1023px) {
     main {
         font-size: calc(30px + 1.6vw);
     }
@@ -48,7 +48,7 @@
         height: 360px;
     }
 
-    main label{
+    main label {
         width: 100%;
     }
 
@@ -69,27 +69,27 @@
         height: 484px;
     }
 
-    main .main__place .smile-button .smile-image{
+    main .main__place .smile-button .smile-image {
         display: block;
         padding: 0 40px;
     }
 
-    main .main__place .smile-button{
+    main .main__place .smile-button {
         justify-content: flex-start;
         width: 100%;
         padding: 0 calc(267px - 17vw);
     }
 
-    main .main__place .smile-button.right{
+    main .main__place .smile-button.right {
         padding-left: 0;
     }
 
-    main .main__place .smile-button.left{
+    main .main__place .smile-button.left {
         padding-right: 0;
     }
 }
 
-@media screen and (max-width: 775px){
+@media screen and (max-width: 775px) {
     main {
         font-size: 42px;
     }
@@ -113,28 +113,28 @@
         height: calc(420px + 8.2vw);
     }
 
-    main .main__place .smile-button .smile-image{
+    main .main__place .smile-button .smile-image {
         display: block;
         padding: 0 40px;
     }
 
-    main .main__place .smile-button{
+    main .main__place .smile-button {
         padding: 0 calc(22px + 14.8vw);
     }
 }
 
-@media screen and (max-width: 666px){
-    main .main__place .smile-button .smile-image{
+@media screen and (max-width: 666px) {
+    main .main__place .smile-button .smile-image {
         display: none;
     }
 
-    main .main__place .smile-button{
+    main .main__place .smile-button {
         justify-content: center;
         padding: 0;
     }
 }
 
-@media screen and (max-width: 480px){
+@media screen and (max-width: 480px) {
     main {
         font-size: calc(12px + 6.3vw);
     }
@@ -164,7 +164,7 @@
         height: calc(100px + 75vw);
     }
 
-    main .main__place .smile-button{
+    main .main__place .smile-button {
         height: calc(30px + 37.5vw);
     }
 }

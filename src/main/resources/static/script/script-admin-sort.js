@@ -1,13 +1,13 @@
 $(function () {
 
-    if(sortVal === "id"){
+    if (sortVal === "id") {
         $("tr.head td.id-head").addClass("sort")
-    } else{
+    } else {
         $("tr.head td." + sortVal + "-sort").addClass("sort")
     }
 
-    $("tr.head td").click(function (){
-        if(!$(this).hasClass("nosort")){
+    $("tr.head td").click(function () {
+        if (!$(this).hasClass("nosort")) {
             let $class = $(this).attr("class")
             let sort = $class.substring(0, $class.indexOf("-"))
 

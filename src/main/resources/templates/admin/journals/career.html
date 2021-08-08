@@ -92,20 +92,20 @@
         <h1>Кар’єра / Резюме</h1>
         <a href="#" class="first career">Додати новий запис &#10133;</a>
         <div class="table">
-        <table border="1">
-            <tr class="head">
-                <td class="id-head">id</td>
-                <td>title</td>
-                <td class="but-head"><span>&nbsp;</span></td>
-                <td class="but-head"><span>&nbsp;</span></td>
-            </tr>
-            <tr th:each="c, iStat: ${career.content}">
-                <td class="id" th:text="${c.getId()}"></td>
-                <td class="title" th:text="${c.getTitle()}"></td>
-                <td class="edit-career">&#9998;</td>
-                <td class="delete" id="career">&#10060;</td>
-            </tr>
-        </table>
+            <table border="1">
+                <tr class="head">
+                    <td class="id-head">id</td>
+                    <td>title</td>
+                    <td class="but-head"><span>&nbsp;</span></td>
+                    <td class="but-head"><span>&nbsp;</span></td>
+                </tr>
+                <tr th:each="c, iStat: ${career.content}">
+                    <td class="id" th:text="${c.getId()}"></td>
+                    <td class="title" th:text="${c.getTitle()}"></td>
+                    <td class="edit-career">&#9998;</td>
+                    <td class="delete" id="career">&#10060;</td>
+                </tr>
+            </table>
         </div>
         <div id="paginations">
             <div th:if="${career.totalPages > 0}" class="pagination"

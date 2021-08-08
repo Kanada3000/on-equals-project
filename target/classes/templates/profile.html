@@ -125,6 +125,9 @@
                                             <span th:text="${' / '+ c.getCity()}" th:remove="tag"></span>
                                         </div>
                 </span>
+                    <span>
+                    Статус: <span th:if="${!b.getApproved()}" th:remove="tag">На перевірці</span><span th:if="${b.getApproved()}" th:remove="tag">Опубліковано</span>
+                </span>
                     <div class="hide">
                         <span class="roll-down">розгорнути ↓</span>
                         <span class="descript" th:text="${b.getDescription()}">
@@ -181,7 +184,7 @@
                     </div>
                 </span>
                     <span>
-                    <input id="salary" type="text" name="salary"  th:value="${b.getSalary()}"/> грн
+                    <input id="salary" type="text" name="salary" th:value="${b.getSalary()}"/> грн
                 </span>
                     <span id="city-span">
                         <div th:remove="tag" th:each="c, index: ${b.getCity()}">

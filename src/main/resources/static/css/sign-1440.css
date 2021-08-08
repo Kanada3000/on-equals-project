@@ -9,7 +9,7 @@
         width: calc(-646px + 120.9vw);
     }
 
-    #sign .form.up .column-1, #sign .form.up .column-2{
+    #sign .form.up .column-1, #sign .form.up .column-2 {
         width: calc(737px - 14.2vw);
         height: 240px;
     }
@@ -22,11 +22,11 @@
         width: 55px;
     }
 
-    #sign-button .sign-in, .account{
+    #sign-button .sign-in, .account {
         width: calc(995px - 24.3vw);
     }
 
-    #sign-button{
+    #sign-button {
         margin: calc(52px + 2.1vw) calc(333px - 19vw) calc(195px - 6vw);
     }
 
@@ -41,25 +41,25 @@
         align-items: center;
     }
 
-    #sign .form.up .column-2{
+    #sign .form.up .column-2 {
         margin-top: 44px;
     }
 }
 
 @media screen and (max-width: 1280px) {
-    #sign-button{
+    #sign-button {
         flex-direction: column;
         align-items: center;
     }
 
-    #sign-button .account{
+    #sign-button .account {
         margin-top: 54px;
     }
 }
 
 @media screen and (max-width: 1024px) {
 
-    #sign .form.up .column-1, #sign .form.up .column-2{
+    #sign .form.up .column-1, #sign .form.up .column-2 {
         width: 100%;
         height: calc(116px + 12vw);
     }
@@ -69,7 +69,7 @@
         padding: 107px 0 0;
     }
 
-    #sign-button{
+    #sign-button {
         margin: 90px 60px calc(266px - 12.9vw);
         font-size: 42px;
     }
@@ -90,7 +90,7 @@
         height: calc(34px + 6.3vw);
     }
 
-    #sign-button .sign-in, .account{
+    #sign-button .sign-in, .account {
         width: calc(591px + 15.2vw);
     }
 
@@ -101,11 +101,11 @@
 
 @media screen and (max-width: 768px) {
 
-    #sign .form.up .column-1, #sign .form.up .column-2{
+    #sign .form.up .column-1, #sign .form.up .column-2 {
         height: calc(184px + 3.4vw);
     }
 
-    #sign .form.up .column-2{
+    #sign .form.up .column-2 {
         margin-top: calc(28px + 2vw);
     }
 
@@ -122,25 +122,25 @@
         height: 82px;
     }
 
-    #sign-button{
+    #sign-button {
         margin: calc(34px + 7.3vw) 60px calc(2px + 21.5vw);
         font-size: 42px;
     }
 
-    #sign-button .sign-in, .account{
+    #sign-button .sign-in, .account {
         width: calc(-60px + 100vw);
     }
 
-    #sign-button .sign-in{
+    #sign-button .sign-in {
         height: calc(27px + 38.2vw);
     }
 
-    #sign-button .account{
+    #sign-button .account {
         height: calc(702px - 50vw);
         margin-top: calc(9px + 5.9vw);
     }
 
-    #sign-button .account button{
+    #sign-button .account button {
         height: calc(331px - 25.3vw);
     }
 
@@ -163,11 +163,11 @@
 
 @media screen and (max-width: 480px) {
 
-    #sign .form.up .column-1, #sign .form.up .column-2{
+    #sign .form.up .column-1, #sign .form.up .column-2 {
         height: calc(50px + 31.3vw);
     }
 
-    #sign .form.up .column-2{
+    #sign .form.up .column-2 {
         margin-top: calc(14px + 5vw);
     }
 
@@ -202,25 +202,25 @@
         width: calc(6px + 7.5vw);
     }
 
-    #sign-button{
+    #sign-button {
         margin: calc(15px + 11.3vw) 60px calc(-18px + 25.6vw);
         font-size: 42px;
     }
 
-    #sign-button .sign-in, .account{
+    #sign-button .sign-in, .account {
         width: calc(30px + 81.3vw);
     }
 
-    #sign-button .sign-in, #sign-button .account button{
+    #sign-button .sign-in, #sign-button .account button {
         height: calc(30px + 37.5vw);
     }
 
-    #sign-button .account{
+    #sign-button .account {
         height: calc(66px + 82.5vw);
         margin-top: calc(1px + 7.5vw);
     }
 
-    #sign-button{
+    #sign-button {
         font-size: calc(12px + 6.2vw);
     }
 

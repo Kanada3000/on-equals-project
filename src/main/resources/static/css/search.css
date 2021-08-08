@@ -1,8 +1,8 @@
-#search-list{
+#search-list {
     padding: 105px 0 0;
 }
 
-#category{
+#category {
     /*width: calc(-358px + 51vw);*/
     width: calc(-358px + 49vw);
     padding-left: calc(-140px + 11.3vw);
@@ -12,38 +12,38 @@
     box-sizing: border-box;
 }
 
-#category h3{
+#category h3 {
     font-size: 46px;
     margin-bottom: 63px;
 }
 
-#category label.checkbox{
-     display: block;
-     font-size: 32px;
-     background: top 7px left 0 url(/images/check-box-0.png) no-repeat;
-     background-size: 30px auto;
-     padding-left: 68px;
-     cursor: pointer;
-     margin-bottom: 9px;
-     min-height: 74px;
- }
+#category label.checkbox {
+    display: block;
+    font-size: 32px;
+    background: top 7px left 0 url(/images/check-box-0.png) no-repeat;
+    background-size: 30px auto;
+    padding-left: 68px;
+    cursor: pointer;
+    margin-bottom: 9px;
+    min-height: 74px;
+}
 
-#category label.checkbox:last-of-type{
+#category label.checkbox:last-of-type {
     margin-bottom: 45px;
 }
 
-#category input[type=checkbox]{
+#category input[type=checkbox] {
     display: none;
     margin: 0;
     padding: 0;
 }
 
-#category input:checked + label.checkbox{
+#category input:checked + label.checkbox {
     background: top 7px left 0 url(/images/check-box.png) no-repeat;
     background-size: 30px auto;
 }
 
-#category input[type=range]{
+#category input[type=range] {
     width: 100%;
     margin-bottom: 66px;
     -webkit-appearance: none;
@@ -53,19 +53,19 @@
     cursor: pointer;
 }
 
-#category span{
+#category span {
     font-size: 22px;
     color: #999999;
 }
 
 
-#category input[type=range]::-webkit-slider-runnable-track{
+#category input[type=range]::-webkit-slider-runnable-track {
     -webkit-appearance: none;
     background-color: #999999;
     height: 2px;
 }
 
-#category input[type=range]::-webkit-slider-thumb{
+#category input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     background: #509FC8;
     border-radius: 50%;
@@ -94,26 +94,26 @@
     height: 40px;
     width: 40px;
 }
+
 #category input[type=range]::-ms-track {
     background-color: #999999;
     height: 2px;
 }
 
-#category .input{
+#category .input {
     position: relative;
     font-size: 32px;
     width: 100%;
 }
 
-#category .input label{
+#category .input label {
     position: absolute;
     transform: translate(-50%, 0);
     top: -55px;
 }
 
 
-
-#sort{
+#sort {
     display: flex;
     flex-direction: row;
     padding-top: 25px;
@@ -129,55 +129,55 @@
     justify-content: space-between;
 }
 
-#sort .summary{
+#sort .summary {
     width: 20px;
     flex-grow: 1;
 }
 
-#sort .summary span{
+#sort .summary span {
     display: block;
     font-size: inherit;
 }
 
-#sort .sort-by{
+#sort .sort-by {
     width: 20px;
     flex-grow: 1;
 }
 
-#sort h4{
+#sort h4 {
     color: #999999;
     font-size: 22px;
     margin-bottom: 25px;
 }
 
-#sort h4.sort{
+#sort h4.sort {
     padding: 0 7px;
 }
 
-#sort .buttons{
+#sort .buttons {
     display: flex;
     justify-content: space-between;
     font-size: inherit;
     padding-right: calc(-159px + 16.3vw);
 }
 
-#sort input[type=radio]{
+#sort input[type=radio] {
     display: none;
 }
 
-#sort input[type=radio] + label{
+#sort input[type=radio] + label {
     font-size: inherit;
     padding: 0 7px;
     cursor: pointer;
 }
 
-#sort input[type=radio]:checked + label{
+#sort input[type=radio]:checked + label {
     background-color: #FED849;
     border-radius: 100px;
 }
 
 
-#vacancies{
+#vacancies {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -187,12 +187,12 @@
     padding-left: 60px;
 }
 
-#vacancies .vacancy h3{
+#vacancies .vacancy h3 {
     font-size: 46px;
     margin-bottom: 40px;
 }
 
-#vacancies .vacancy{
+#vacancies .vacancy {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -208,12 +208,12 @@
     width: calc(389px + 10vw);
 }
 
-#vacancies .vacancy .text ul{
+#vacancies .vacancy .text ul {
     display: flex;
     flex-direction: column;
 }
 
-#vacancies .vacancy .text li{
+#vacancies .vacancy .text li {
     border-bottom: 2px solid black;
     width: calc(389px + 10vw);
     font-size: 32px;
@@ -221,11 +221,11 @@
     padding: 0 0 10px;
 }
 
-#vacancies .vacancy .text li:last-child{
+#vacancies .vacancy .text li:last-child {
     margin-bottom: 0;
 }
 
-#vacancies .vacancy .text .hide{
+#vacancies .vacancy .text .hide {
     padding-top: 29px;
     font-size: 22px;
     color: #999999;
@@ -257,29 +257,30 @@
     cursor: pointer;
 }
 
-#vacancies .vacancy .buttons div img{
+#vacancies .vacancy .buttons div img {
     width: calc(33px + 0.6vw);
     height: auto;
 }
 
-#vacancies .vacancy .buttons .eye{
+#vacancies .vacancy .buttons .eye {
     border: 4px solid black;
     background-color: white;
 }
 
-#vacancies .vacancy .buttons .eye img{
+#vacancies .vacancy .buttons .eye img {
     width: calc(31px + 1vw);
     height: auto;
 }
 
-#vacancies .vacancy .buttons .heart{
+#vacancies .vacancy .buttons .heart {
     background-color: #F98DC0;
 }
-#vacancies .vacancy .buttons .heart.red{
+
+#vacancies .vacancy .buttons .heart.red {
     background-color: #FF5C55;
 }
 
-#vacancies .vacancy .buttons .mail{
+#vacancies .vacancy .buttons .mail {
     background-color: #509FC8;
 }
 
@@ -291,45 +292,45 @@
     order: 2;
 }
 
-#vacancies .vacancy .hide span.roll-down{
+#vacancies .vacancy .hide span.roll-down {
     display: block;
     cursor: pointer;
 }
 
-#vacancies .vacancy .hide span.roll-up{
+#vacancies .vacancy .hide span.roll-up {
     padding-top: 20px;
     display: none;
     cursor: pointer;
 }
 
-#vacancies .vacancy .hide span.descript{
+#vacancies .vacancy .hide span.descript {
     color: black;
     display: none;
     font-size: 32px;
     padding-top: 9px;
 }
 
-#vacancies #paginations{
+#vacancies #paginations {
     display: flex;
     flex-direction: row;
     margin: 30px 0 50px;
 }
 
-#vacancies #paginations a{
+#vacancies #paginations a {
     font-size: 32px;
     padding: 10px;
     border-radius: 100px;
 }
 
-#vacancies #paginations a.active{
+#vacancies #paginations a.active {
     background-color: #FDD749;
 }
 
-#idLike{
+#idLike {
     display: none;
 }
 
-input:disabled +  label{
+input:disabled + label {
     color: #999999;
     cursor: default !important;
 }

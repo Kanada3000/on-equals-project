@@ -4,7 +4,7 @@
     font-family: "NAMU Pro", serif;
 }
 
-*:focus{
+*:focus {
     outline: none;
 }
 
@@ -44,11 +44,12 @@ button {
 
 .unselectable {
     -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none;   /* Chrome/Safari/Opera */
-    -moz-user-select: none;      /* Firefox */
-    -ms-user-select: none;       /* Internet Explorer/Edge */
-    user-select: none;           /* Non-prefixed version, currently
-                                  not supported by any browser */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                           not supported by any browser */
 }
 
 
@@ -56,9 +57,9 @@ button {
     border-bottom: 2px solid #cc0033;
 }
 
-label.error{
-    font-size: 16px!important;
-    margin-top: 0!important;
+label.error {
+    font-size: 16px !important;
+    margin-top: 0 !important;
     color: #cc0033;
     background-color: #fce4e4;
     padding: 10px;
@@ -66,10 +67,9 @@ label.error{
 }
 
 
-.underline{
+.underline {
     text-decoration: underline;
 }
-
 
 
 @font-face {

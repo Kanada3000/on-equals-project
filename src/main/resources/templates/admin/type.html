@@ -92,26 +92,26 @@
         <h1>Типи зайнятості</h1>
         <a href="#" class="first">Додати новий тип &#10133;</a>
         <div class="table">
-        <table border="1">
-            <tr class="head">
-                <td class="id-head">id</td>
-                <td class="name-sort">name<span class="text-red">*</span></td>
-                <td class="but-head nosort"><span>&nbsp;</span></td>
-                <td class="but-head nosort"><span>&nbsp;</span></td>
-            </tr>
-            <tr class="hidden">
-                <td class="id"></td>
-                <td><input id="name" type="text" required></td>
-                <td class="accept">&#10004;</td>
-                <td class="cancel">&#10060;</td>
-            </tr>
-            <tr th:each="t, iStat: ${types.content}">
-                <td class="id" th:text="${t.getId()}"></td>
-                <td class="name" th:text="${t.getName()}"></td>
-                <td class="edit">&#9998;</td>
-                <td class="delete" id="type">&#10060;</td>
-            </tr>
-        </table>
+            <table border="1">
+                <tr class="head">
+                    <td class="id-head">id</td>
+                    <td class="name-sort">name<span class="text-red">*</span></td>
+                    <td class="but-head nosort"><span>&nbsp;</span></td>
+                    <td class="but-head nosort"><span>&nbsp;</span></td>
+                </tr>
+                <tr class="hidden">
+                    <td class="id"></td>
+                    <td><input id="name" type="text" required></td>
+                    <td class="accept">&#10004;</td>
+                    <td class="cancel">&#10060;</td>
+                </tr>
+                <tr th:each="t, iStat: ${types.content}">
+                    <td class="id" th:text="${t.getId()}"></td>
+                    <td class="name" th:text="${t.getName()}"></td>
+                    <td class="edit">&#9998;</td>
+                    <td class="delete" id="type">&#10060;</td>
+                </tr>
+            </table>
         </div>
         <div id="paginations">
             <div th:if="${types.totalPages > 0}" class="pagination"

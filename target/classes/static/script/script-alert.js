@@ -1,5 +1,5 @@
 $(function () {
-    if(alertMode === "true"){
+    if (alertMode === "true") {
         $("#alert").css("display", "flex")
         $("#alert").animate({
             bottom: '20px'

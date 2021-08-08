@@ -36,16 +36,16 @@ public interface CityRepo extends JpaRepository<City, Long> {
     List<Long> findByCities(List<String> names);
 
     @Query("SELECT v FROM Vacancy v WHERE ?1 MEMBER OF v.city")
-    List<Vacancy> findInVacancy (City city);
+    List<Vacancy> findInVacancy(City city);
 
     @Query("SELECT r FROM Resume r WHERE ?1 MEMBER OF r.city")
-    List<Resume> findInResume (City city);
+    List<Resume> findInResume(City city);
 
     @Query("SELECT s FROM Seeker s WHERE ?1 MEMBER OF s.city")
-    List<Seeker> findInSeeker (City city);
+    List<Seeker> findInSeeker(City city);
 
     @Query("SELECT e FROM Employer e WHERE ?1 MEMBER OF e.city")
-    List<Employer> findInEmployer (City city);
+    List<Employer> findInEmployer(City city);
 
     @Query("SELECT c FROM City c WHERE c.city = 'Undefined'")
     Set<City> findUndefined();

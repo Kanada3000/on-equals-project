@@ -71,7 +71,7 @@
 <div id="questions">
     <h2>Кар’єра / Резюме</h2>
     <div class="container">
-        <div class="box" th:each="c: ${career}">
+        <div class="box" th:each="c, i: ${career.content}">
             <div class="text">
                 <h3 th:text="${c.getTitle()}"></h3>
                 <span th:text="${c.getBody()}"></span>
@@ -80,12 +80,36 @@
             <hr/>
         </div>
     </div>
+    <div class="paginate">
+        <a th:onclick="'javascript: setPosition()'" th:if="${currentPageCareer <= 1}" th:href="@{/journal/seeker(pageCareer=${totalPagesCareer})}">
+            ←
+        </a>
+        <a th:onclick="'javascript: setPosition()'" th:if="${currentPageCareer > 1}" th:href="@{/journal/seeker(pageCareer=${currentPageCareer - 1})}">
+            ←
+        </a>
+        <a th:onclick="'javascript: setPosition()'" th:if="${totalPagesCareer > currentPageCareer}" th:href="@{/journal/seeker(pageCareer=${currentPageCareer + 1})}">
+            далі&nbsp;→
+        </a>
+        <a th:onclick="'javascript: setPosition()'" th:if="${totalPagesCareer <= currentPageCareer}" th:href="@{/journal/seeker(pageCareer = 1)}">
+            далі&nbsp;→
+        </a>
+    </div>
 </div>
 
 <div id="tile">
     <h2>Можливості</h2>
     <div class="container">
-        <div th:each="p, i: ${page}" th:remove="tag">
+        <a th:onclick="'javascript: setPosition()'" th:if="${currentPage > 1}" th:href="@{/journal/seeker(page=${currentPage - 1})}">
+            <div class="block prev-page" id="grey" th:if="${totalPages > 1}">
+                Попередня сторінка...
+            </div>
+        </a>
+        <a th:onclick="'javascript: setPosition()'" th:if="${currentPage <= 1}" th:href="@{/journal/seeker(page=${totalPages})}">
+            <div class="block prev-page" id="grey" th:if="${totalPages > 1}">
+                Попередня сторінка...
+            </div>
+        </a>
+        <div th:each="p, i: ${page.content}" th:remove="tag">
             <a th:href="@{'/pages/' + ${p.id}}">
                 <div th:if="${(i.count % 5) == 1}" class="block first" th:text="${p.name}"></div>
                 <div th:if="${(i.count % 5) == 2}" class="block second" th:text="${p.name}"></div>
@@ -94,10 +118,23 @@
                 <div th:if="${(i.count % 5) == 0}" class="block fifth" th:text="${p.name}"></div>
             </a>
         </div>
+        <a th:onclick="'javascript: setPosition()'" th:if="${totalPages > currentPage}" th:href="@{/journal/seeker(page=${currentPage + 1})}">
+            <div class="block next-page" id="grey" th:if="${totalPages > 1}">
+                Наступна сторінка...
+            </div>
+        </a>
+
+        <a th:onclick="'javascript: setPosition()'" th:if="${totalPages <= currentPage}" th:href="@{/journal/seeker(page=1)}">
+            <div class="block next-page" id="grey" th:if="${totalPages > 1}">
+                Наступна сторінка...
+            </div>
+        </a>
+
     </div>
 </div>
 
 <script src="/script/script.js"></script>
+<script src="/script/script-journal-position.js"></script>
 <script src="/script/script-slideshow.js"></script>
 <script src="/script/script-journals.js"></script>
 </body>

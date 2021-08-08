@@ -155,14 +155,14 @@ public class StorageService {
         if (source.listFiles() != null) {
             for (File f : source.listFiles()) {
                 if (f.listFiles() != null)
-                    count = count + (int)Arrays.stream(f.listFiles()).filter(v -> !v.getName().contains("approved")).count();
+                    count = count + (int) Arrays.stream(f.listFiles()).filter(v -> !v.getName().contains("approved")).count();
             }
         }
         return count;
     }
 
     @Transactional
-    public void removeFile(String path){
+    public void removeFile(String path) {
         File source = new File(path);
         source.delete();
     }

@@ -122,11 +122,11 @@
         width: calc(-91px + 80.1vw);
     }
 
-    #reg-last{
+    #reg-last {
         padding-top: 69px;
     }
 
-    #reg-last .text{
+    #reg-last .text {
         padding-top: calc(7px + 6.9vw);
         width: calc(-53px + 98.6vw);
         font-size: 42px;

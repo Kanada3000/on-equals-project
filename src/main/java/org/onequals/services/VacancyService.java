@@ -166,7 +166,7 @@ public class VacancyService {
     }
 
     @Transactional
-    public List<Vacancy> adminSort(List<Vacancy> vacancy, String sort){
+    public List<Vacancy> adminSort(List<Vacancy> vacancy, String sort) {
         return vacancyRepo.sortAdmin(vacancy, Sort.by(sort));
     }
 

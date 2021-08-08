@@ -1,4 +1,4 @@
-@media screen and (max-width: 320px){
+@media screen and (max-width: 320px) {
 
     #reg1 {
         width: calc(30px + 81.3vw);
@@ -46,27 +46,27 @@
         font-size: 14px;
     }
 
-    #reg2 .green-choice{
+    #reg2 .green-choice {
         margin-top: 20px;
         width: auto;
     }
 
-    #reg2 .green-choice label{
+    #reg2 .green-choice label {
         margin-top: 10px;
         margin-right: auto;
         font-size: 22px;
     }
 
-    #reg2 .green-choice label:nth-of-type(2), .green-choice label:nth-of-type(3){
+    #reg2 .green-choice label:nth-of-type(2), .green-choice label:nth-of-type(3) {
         margin-left: 0;
     }
 
-    #reg2 .green-choice label:nth-of-type(4){
+    #reg2 .green-choice label:nth-of-type(4) {
         margin-top: 10px;
         margin-left: 0;
     }
 
-    #reg2 .green-choice label:nth-of-type(5){
+    #reg2 .green-choice label:nth-of-type(5) {
         margin-top: 10px;
         margin-right: auto;
     }
@@ -85,7 +85,7 @@
         height: 65px;
     }
 
-    #reg2 .choice  {
+    #reg2 .choice {
         margin-top: 15px;
     }
 
@@ -93,13 +93,13 @@
         padding-top: 0;
     }
 
-    #reg2 .choice .cell:nth-of-type(2){
+    #reg2 .choice .cell:nth-of-type(2) {
         padding-top: 40px;
         border-right: none;
         padding-left: 0;
     }
 
-    #reg2 .choice .cell:nth-of-type(3){
+    #reg2 .choice .cell:nth-of-type(3) {
         padding-top: 40px;
         border-right: none;
     }
@@ -116,7 +116,7 @@
         background: unset;
     }
 
-    .select-label{
+    .select-label {
         font-size: 1.8vw;
         background-size: 11px auto;
     }
@@ -134,7 +134,7 @@
         padding-top: 40px;
     }
 
-    #reg2_sub{
+    #reg2_sub {
         padding: 0 4.6%
     }
 
@@ -151,12 +151,12 @@
         padding-top: 29px;
     }
 
-    #reg2_sub .add-vacancy-btn button{
+    #reg2_sub .add-vacancy-btn button {
         margin-top: 42px;
         height: 140px;
     }
 
-    #reg2_sub .add-vacancy-btn button[data-action=submit]{
+    #reg2_sub .add-vacancy-btn button[data-action=submit] {
         margin-top: 37px;
     }
 
@@ -164,18 +164,18 @@
         padding: 60px 0 60px;
     }
 
-    #footer-reg .star{
+    #footer-reg .star {
         top: -50px;
         left: 45px;
     }
 
-    #footer-reg .download{
+    #footer-reg .download {
         width: 90.6%;
         min-width: 0;
         height: 150px;
     }
 
-    #footer-reg p{
+    #footer-reg p {
         margin: 22px auto 0;
         width: 90.6%;
         min-width: 0;
@@ -193,7 +193,7 @@
         font-size: 32px;
     }
 
-    #footer-reg .download label , #footer-reg .download button{
+    #footer-reg .download label, #footer-reg .download button {
         font-size: 32px;
     }
 

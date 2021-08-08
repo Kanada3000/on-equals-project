@@ -19,7 +19,7 @@ public class CKEditorController {
 
     @PostMapping("/image/upload")
     public String uploadImage(@RequestPart MultipartFile upload,
-                              @RequestParam(name="CKEditorFuncNum", required = false) String callback,
+                              @RequestParam(name = "CKEditorFuncNum", required = false) String callback,
                               HttpServletRequest request) throws IOException {
         String sourceName = upload.getOriginalFilename();
         String sourceExt = FilenameUtils.getExtension(sourceName).toLowerCase();

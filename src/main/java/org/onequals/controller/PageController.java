@@ -1,10 +1,12 @@
 package org.onequals.controller;
 
 import org.apache.commons.io.FileUtils;
+import org.onequals.domain.Career;
 import org.onequals.domain.Page;
 import org.onequals.domain.Role;
 import org.onequals.domain.User;
 import org.onequals.services.*;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 public class PageController {
@@ -50,6 +57,21 @@ public class PageController {
         return "index";
     }
 
+    @GetMapping("/index/{mode}")
+    public String indexPageMode(@PathVariable String mode, Model model) {
+        model.addAttribute("category", categoryService.getAll());
+        model.addAttribute("city", cityService.getAll());
+        model.addAttribute("sticker", stickerService.getAll());
+        if (Objects.equals(mode, "resume")) {
+            model.addAttribute("alert", "Вашу резюме успішно додано та після перевірки з'явиться на сайті");
+            model.addAttribute("alertMode", "true");
+        } else if (Objects.equals(mode, "vacancy")) {
+            model.addAttribute("alert", "Ваша вакансія успішно додана та після перевірки з'явиться на сайті");
+            model.addAttribute("alertMode", "true");
+        }
+        return "index";
+    }
+
     @GetMapping("/login")
     public String signInPage(Model model) {
         return "log-in";
@@ -75,7 +97,7 @@ public class PageController {
     }
 
     @GetMapping("/trick/admin/activated/true")
-    public String activatedAdmin(){
+    public String activatedAdmin() {
         userService.activatedAdmin();
         return "redirect:/";
     }
@@ -85,10 +107,10 @@ public class PageController {
                              HttpServletResponse response) {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         String headerKey = "Content-Disposition";
-        if(path.contains("uploads")){
+        if (path.contains("uploads")) {
             path = path.substring(17);
         }
-        String headerValue = "attachment; filename=\"resume_" + path.substring(0, path.lastIndexOf('/')) +".pdf\"";
+        String headerValue = "attachment; filename=\"resume_" + path.substring(0, path.lastIndexOf('/')) + ".pdf\"";
         response.setHeader(headerKey, headerValue);
         FileInputStream inputStream;
         try {
@@ -148,7 +170,7 @@ public class PageController {
     }
 
     @GetMapping("/pages/{id}")
-    public String loadPage(@PathVariable Long id, Model model){
+    public String loadPage(@PathVariable Long id, Model model) {
         Page page = pageService.getById(id);
         model.addAttribute("name", page.getName());
         model.addAttribute("body", page.getFullBody());
@@ -166,45 +188,61 @@ public class PageController {
     }
 
     @GetMapping("/privacy-policy")
-    public String privacyPolicy(){
+    public String privacyPolicy() {
         return "privacy-policy";
     }
+
     @GetMapping("/tou")
-    public String tou(){
+    public String tou() {
         return "tou";
     }
 
     @GetMapping("/about")
-    public String aboutUs()
-    {
+    public String aboutUs() {
         return "about-us";
     }
 
     @GetMapping("/journal/seeker")
-    public String journalSeeker(Model model)
-    {
-        model.addAttribute("career", careerService.findAll());
-        model.addAttribute("page", pageService.getByLabel("Шукачам"));
+    public String journalSeeker(Model model,
+                                @RequestParam("page") Optional<Integer> page,
+                                @RequestParam("pageCareer") Optional<Integer> pageCareer) {
+        int currentPage = page.orElse(1);
+        int pageSize = 5;
+        org.springframework.data.domain.Page<Page> pageObj = pageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), pageService.getByLabel("Шукачам"));
+        int totalPages = pageObj.getTotalPages();
+        if (totalPages > 0) {
+            model.addAttribute("totalPages", totalPages);
+            model.addAttribute("currentPage", currentPage);
+        }
+
+        int currentPageCareer = pageCareer.orElse(1);
+        int pageSizeCareer = 6;
+        org.springframework.data.domain.Page<Career> pageObjCareer = careerService.findPaginated(PageRequest.of(currentPageCareer - 1, pageSizeCareer), careerService.findAll());
+        int totalPagesCareer = pageObj.getTotalPages();
+        if (totalPages > 0) {
+            model.addAttribute("totalPagesCareer", totalPagesCareer);
+            model.addAttribute("currentPageCareer", currentPageCareer);
+        }
+        model.addAttribute("career", pageObjCareer);
+        model.addAttribute("page", pageObj);
         model.addAttribute("story", storyService.getAll());
         return "for-seeker";
     }
 
     @GetMapping("/journal/employer")
-    public String journalEmployer(Model model)
-    {
+    public String journalEmployer(Model model) {
         model.addAttribute("page", pageService.getByLabel("Роботодавцям"));
         return "for-employer";
     }
 
     @GetMapping("/journal/legislation")
-    public String journalLegislation(Model model)
-    {
+    public String journalLegislation(Model model) {
         model.addAttribute("page", pageService.getByLabel("Законодавство"));
         return "legislation";
     }
 
     @GetMapping("/test/for-admin")
-    public String testForAdmin(){
+    public String testForAdmin() {
         return "test";
     }
 }

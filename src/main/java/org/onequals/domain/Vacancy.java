@@ -9,21 +9,21 @@ import java.util.Set;
 
 @Entity
 @Table(name = "vacancy")
-public class Vacancy{
+public class Vacancy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name="category_id")
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name="type_id")
+    @JoinColumn(name = "type_id")
     private Type type;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToMany
@@ -38,7 +38,7 @@ public class Vacancy{
 
     private Boolean approved = Boolean.FALSE;
 
-    public Vacancy(){
+    public Vacancy() {
     }
 
     public Vacancy(Long id, Category category, Type type, User user, Set<City> city, int salary,

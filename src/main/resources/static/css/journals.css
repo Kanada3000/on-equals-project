@@ -189,21 +189,21 @@ h2 {
 }
 
 
-#tile{
+#tile {
     padding: calc(66px + 5vw) 30px calc(15px + 10.2vw) 60px;
 }
 
-#tile h2{
+#tile h2 {
     margin-left: calc(-438px + 30.4vw);
 }
 
-#tile .container{
+#tile .container {
     margin-top: calc(114px - 1.7vw);
     display: flex;
     flex-wrap: wrap;
 }
 
-#tile .container .block{
+#tile .container .block {
     width: calc(395px + 1.7vw);
     height: calc(395px + 1.7vw);
     font-size: 46px;
@@ -214,23 +214,27 @@ h2 {
     cursor: pointer;
 }
 
-#tile .container .block.first{
+#tile .container .block.first {
     background-color: #C4DE95;
 }
-#tile .container .block.second{
+
+#tile .container .block.second {
     background-color: #FDD749;
 }
-#tile .container .block.third{
+
+#tile .container .block.third {
     background-color: #509FC8;
 }
-#tile .container .block.forth{
-    background-color: #F98DC0;
-}
-#tile .container .block.fifth{
+
+#tile .container .block.forth {
     background-color: #F98DC0;
 }
 
-#tile .container .block#grey{
+#tile .container .block.fifth {
+    background-color: #F98DC0;
+}
+
+#tile .container .block#grey {
     background-color: #E5E5E5;
 }
 
@@ -307,19 +311,19 @@ h2 {
         margin: 30px 0;
     }
 
-    #tile{
+    #tile {
         padding: calc(-38px + 12.3vw) 30px 162px 60px;
     }
 
-    #tile h2{
+    #tile h2 {
         margin-left: 0;
     }
 
-    #tile .container{
+    #tile .container {
         margin-top: 122px;
     }
 
-    #tile .container .block{
+    #tile .container .block {
         width: calc(478px - 4.1vw);
         height: calc(478px - 4.1vw);
     }
@@ -409,15 +413,15 @@ h2 {
         margin: calc(-7px + 2.4vw) 0 45px;
     }
 
-    #tile{
+    #tile {
         padding: calc(184px - 9.5vw) calc(-51px + 7.9vw) calc(393px - 22.5vw) calc(-61px + 11.9vw);
     }
 
-    #tile .container{
+    #tile .container {
         margin-top: calc(-22px + 14.2vw);
     }
 
-    #tile .container .block{
+    #tile .container .block {
         width: calc(59px + 36.8vw);
         height: calc(59px + 36.8vw);
         margin-right: calc(-11px + 4vw);
@@ -522,17 +526,17 @@ h2 {
         font-size: 42px;
     }
 
-    #tile{
+    #tile {
         padding: calc(95px + 2.1vw) 30px calc(-83px + 39.2vw);
     }
 
-    #tile .container{
+    #tile .container {
         margin-top: calc(67px + 2.7vw);
         flex-wrap: nowrap;
         flex-direction: column;
     }
 
-    #tile .container .block{
+    #tile .container .block {
         width: 100%;
         height: calc(-90px + 56.4vw);
         margin-right: 0;
@@ -630,15 +634,15 @@ h2 {
         font-size: calc(6px + 2.5vw);
     }
 
-    #tile{
+    #tile {
         padding: calc(-69px + 36.3vw) calc(-15px + 9.4vw) calc(-6px + 23.1vw);
     }
 
-    #tile .container{
+    #tile .container {
         margin-top: calc(-55px + 28.1vw);
     }
 
-    #tile .container .block{
+    #tile .container .block {
         height: calc(57px + 25.6vw);
         font-size: calc(2px + 6.3vw);
         padding: calc(-6px + 5vw) calc(-22px + 10vw);

@@ -21,27 +21,27 @@ public class SeekerService {
     }
 
     @Transactional
-    public List<Seeker> getAll(){
+    public List<Seeker> getAll() {
         return seekerRepo.findAll();
     }
 
     @Transactional
-    public List<Seeker> getAll(String sort){
+    public List<Seeker> getAll(String sort) {
         return seekerRepo.findAll(Sort.by(sort));
     }
 
     @Transactional
-    public Seeker findByUser(User user){
+    public Seeker findByUser(User user) {
         return seekerRepo.findByUser(user);
     }
 
     @Transactional
-    public void save(Seeker seeker){
+    public void save(Seeker seeker) {
         seekerRepo.save(seeker);
     }
 
     @Transactional
-    public void delete(Long id){
+    public void delete(Long id) {
         Seeker seeker = seekerRepo.findById(id).get();
         List<Resume> resumes = resumeService.findByUser(seeker.getUser());
         resumeService.deleteAll(resumes);
@@ -49,17 +49,17 @@ public class SeekerService {
     }
 
     @Transactional
-    public Seeker findById(Long id){
+    public Seeker findById(Long id) {
         return seekerRepo.findById(id).get();
     }
 
     @Transactional
-    public List<Seeker> getUnapproved(){
+    public List<Seeker> getUnapproved() {
         return seekerRepo.findUnapproved();
     }
 
     @Transactional
-    public List<Seeker> getUnapproved(String sort){
+    public List<Seeker> getUnapproved(String sort) {
         return seekerRepo.findUnapproved(Sort.by(sort));
     }
 

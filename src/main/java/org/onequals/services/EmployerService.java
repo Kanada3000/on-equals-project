@@ -21,27 +21,27 @@ public class EmployerService {
     }
 
     @Transactional
-    public List<Employer> getAll(){
+    public List<Employer> getAll() {
         return employerRepo.findAll();
     }
 
     @Transactional
-    public List<Employer> getAll(String sort){
+    public List<Employer> getAll(String sort) {
         return employerRepo.findAll(Sort.by(sort));
     }
 
     @Transactional
-    public Employer findByUser(User user){
+    public Employer findByUser(User user) {
         return employerRepo.findEmployerByUser(user);
     }
 
     @Transactional
-    public void save(Employer employer){
+    public void save(Employer employer) {
         employerRepo.save(employer);
     }
 
     @Transactional
-    public void delete(Long id){
+    public void delete(Long id) {
         Employer employer = employerRepo.findById(id).get();
         List<Vacancy> vacancies = vacancyService.findByUser(employer.getUser());
         vacancyService.deleteAll(vacancies);
@@ -49,17 +49,17 @@ public class EmployerService {
     }
 
     @Transactional
-    public Employer findById(Long id){
+    public Employer findById(Long id) {
         return employerRepo.findById(id).get();
     }
 
     @Transactional
-    public List<Employer> getUnapproved(){
+    public List<Employer> getUnapproved() {
         return employerRepo.findUnapproved();
     }
 
     @Transactional
-    public List<Employer> getUnapproved(String sort){
+    public List<Employer> getUnapproved(String sort) {
         return employerRepo.findUnapproved(Sort.by(sort));
     }
 

@@ -1,25 +1,24 @@
-
 $(function () {
-    $("#news .switch-r").click(function(){
+    $("#news .switch-r").click(function () {
         let first = $(".posts :first")
         first.removeClass("active").next().addClass("active");
         $(".posts").append(first)
     });
 
-    $("#news .switch-l").click(function(){
+    $("#news .switch-l").click(function () {
         $(".posts :first").removeClass("active");
         $(".post").last().addClass("active").prependTo($(".posts"));
     });
 });
 
 $(function () {
-    $("#stories .switch-r").click(function(){
+    $("#stories .switch-r").click(function () {
         let first = $(".posts :first")
         first.removeClass("active").next().addClass("active");
         $(".posts").append(first)
     });
 
-    $("#stories .switch-l").click(function(){
+    $("#stories .switch-l").click(function () {
         $(".posts :first").removeClass("active");
         $(".post").last().addClass("active").prependTo($(".posts"));
     });

@@ -28,27 +28,27 @@ public class Category {
 
     }
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id){
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getLongName(){
+    public String getLongName() {
         return longName;
     }
 
-    public void setLongName(String longName){
+    public void setLongName(String longName) {
         this.longName = longName;
     }
 
-    public int getTotal(){
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(int total){
+    public void setTotal(int total) {
         this.total = total;
     }
 }

@@ -117,7 +117,6 @@ public class VacancyController {
         model.addAttribute("key_wordsVal", key_words);
         model.addAttribute("catStringVal", catString);
         model.addAttribute("citStringVal", citString);
-        System.out.println(key_words);
         model.addAttribute("sort", sort);
         model.addAttribute("category", category);
         model.addAttribute("typeVal", type);
@@ -153,7 +152,7 @@ public class VacancyController {
         if (!reCaptchaResponse.isSuccess()) {
             return "error";
         }
-        catList = catList.stream().map(c -> c.replaceAll("%",",")).collect(Collectors.toList());
+        catList = catList.stream().map(c -> c.replaceAll("%", ",")).collect(Collectors.toList());
         User user = userService.findUser(principal.getName());
         for (int i = 0; i < typeList.size(); i++) {
             List<String> cities = new ArrayList<>();
@@ -175,9 +174,7 @@ public class VacancyController {
             vacancy.setSalary(salary.get(i));
             cityService.addCities(vacancy, cityService.findByNames(cities));
         }
-        model.addAttribute("alert", "Ваша вакансія успішно додана та після перевірки з'явиться на сайті");
-        model.addAttribute("alertMode", "true");
-        return "redirect:/";
+        return "redirect:/index/vacancy";
     }
 
 }

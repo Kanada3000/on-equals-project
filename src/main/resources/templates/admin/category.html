@@ -92,26 +92,26 @@
         <h1>Категорії</h1>
         <a href="#" class="first">Додати нову категорію &#10133;</a>
         <div class="table">
-        <table border="1">
-            <tr class="head">
-                <td class="id-head">id</td>
-                <td class="longName-sort">name<span class="text-red">*</span></td>
-                <td class="but-head nosort"><span>&nbsp;</span></td>
-                <td class="but-head nosort"><span>&nbsp;</span></td>
-            </tr>
-            <tr class="hidden">
-                <td class="id"></td>
-                <td><input id="longName" type="text" required></td>
-                <td class="accept">&#10004;</td>
-                <td class="cancel">&#10060;</td>
-            </tr>
-            <tr th:each="c, iStat: ${category.content}">
-                <td class="id" th:text="${c.getId()}"></td>
-                <td class="longName" th:text="${c.getLongName()}"></td>
-                <td class="edit">&#9998;</td>
-                <td class="delete" id="category">&#10060;</td>
-            </tr>
-        </table>
+            <table border="1">
+                <tr class="head">
+                    <td class="id-head">id</td>
+                    <td class="longName-sort">name<span class="text-red">*</span></td>
+                    <td class="but-head nosort"><span>&nbsp;</span></td>
+                    <td class="but-head nosort"><span>&nbsp;</span></td>
+                </tr>
+                <tr class="hidden">
+                    <td class="id"></td>
+                    <td><input id="longName" type="text" required></td>
+                    <td class="accept">&#10004;</td>
+                    <td class="cancel">&#10060;</td>
+                </tr>
+                <tr th:each="c, iStat: ${category.content}">
+                    <td class="id" th:text="${c.getId()}"></td>
+                    <td class="longName" th:text="${c.getLongName()}"></td>
+                    <td class="edit">&#9998;</td>
+                    <td class="delete" id="category">&#10060;</td>
+                </tr>
+            </table>
         </div>
         <div id="paginations">
             <div th:if="${category.totalPages > 0}" class="pagination"

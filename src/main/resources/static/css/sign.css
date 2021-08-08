@@ -23,20 +23,21 @@
     padding-left: 37px;
 }
 
-#sign .form input.error{
+#sign .form input.error {
     border: 2px solid #cc0033;
 }
-#sign .form input.validate-equalTo-blur.error{
+
+#sign .form input.validate-equalTo-blur.error {
     border: 2px solid #cc0033;
     border-right: none;
 }
 
-#invalid label.error{
+#invalid label.error {
     display: block;
     box-sizing: border-box;
 }
 
-#sign .form .pass{
+#sign .form .pass {
     display: flex;
     flex-direction: row;
     align-items: center; /*vertical align*/
@@ -73,7 +74,7 @@
     height: auto;
 }
 
-#sign-button{
+#sign-button {
     display: flex;
     flex-direction: row;
     margin: calc(52px + 2.1vw) 60px calc(-22px + 9vw);
@@ -81,7 +82,7 @@
     justify-content: space-between;
 }
 
-#sign-button .sign-in, .account{
+#sign-button .sign-in, .account {
     text-align: center;
     height: 320px;
     justify-content: space-between;
@@ -91,20 +92,20 @@
     width: 45vw;
 }
 
-#sign-button .sign-in button{
+#sign-button .sign-in button {
     height: 100%;
     background-color: #FED849;
     padding: 0 50px;
 }
 
-#sign-button .account button{
+#sign-button .account button {
     height: 137px;
     color: white;
     background-color: #5C96F6;
     padding: 0 40px;
 }
 
-#sign-button .account button.fb{
+#sign-button .account button.fb {
     background-color: #4267B2;
 }
 
@@ -118,16 +119,20 @@
 #sign input::placeholder { /* Chrome/Opera/Safari */
     color: #999999;
 }
+
 #sign input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: #999999;
 }
+
 #sign input::-moz-placeholder { /* Firefox 19+ */
     color: #999999;
     opacity: 1;
 }
+
 #sign input:-ms-input-placeholder { /* IE 10+ */
     color: #999999;
 }
+
 #sign input:-moz-placeholder { /* Firefox 18- */
     color: #999999;
 }
@@ -141,7 +146,7 @@
     flex-direction: row;
 }
 
-#sign .form.up .column-1, #sign .form.up .column-2{
+#sign .form.up .column-1, #sign .form.up .column-2 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;

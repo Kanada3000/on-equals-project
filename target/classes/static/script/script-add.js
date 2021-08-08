@@ -14,7 +14,6 @@ $(function () {
 
     $("#reg2_sub .submit .add-vacancy").click(function (e) {
         e.preventDefault();
-        console.log(i)
         if (i !== 4) {
             if ($("#form-reg-employer").valid()) {
                 let plus = ""
@@ -125,10 +124,10 @@ function onSubmit(token) {
         }
     } else {
         if ($("#form-reg-employer").valid()) {
-            $("input[name=category]").each(function (){
+            $("input[name=category]").each(function () {
                 let val = $(this).val()
                 $(this).after("<input type='hidden' name='categoryList'>")
-                $(this).next().val(val.replaceAll(",","%"))
+                $(this).next().val(val.replaceAll(",", "%"))
             })
             $("#form-reg-employer input[type=radio]:checked").each(function () {
                 $(this).after("<input type='hidden' name='typeList' value='" + $(this).val() + "'>")

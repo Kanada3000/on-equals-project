@@ -384,7 +384,6 @@ public class AdminApproveController {
 
     @PostMapping("/file/approve")
     public String approveFile(@RequestParam String path) {
-        System.out.println(path);
         String newFile = storageService.renameFile("/uploads/resumes/" + path, true);
         User user = userService.findUser(path.substring(0, path.indexOf("/")));
         String file = user.getFile();

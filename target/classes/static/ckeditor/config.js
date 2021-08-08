@@ -3,10 +3,10 @@
  * For licensing, see https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-CKEDITOR.editorConfig = function( config ) {
-	// Define changes to default configuration here. For example:
-	// config.language = 'fr';
-	// config.uiColor = '#AADC6E';
+CKEDITOR.editorConfig = function (config) {
+    // Define changes to default configuration here. For example:
+    // config.language = 'fr';
+    // config.uiColor = '#AADC6E';
 
     config.extraPlugins = 'youtube';
     config.youtube_width = '640';
@@ -14,7 +14,7 @@ CKEDITOR.editorConfig = function( config ) {
     // config.youtube_responsive = true;
 
     config.filebrowserUploadMethod = 'form';
-    config.image_previewText=' ';
+    config.image_previewText = ' ';
 
     config.fileTools_requestHeaders = {
         'X-Frame-Options': 'SAMEORIGIN',

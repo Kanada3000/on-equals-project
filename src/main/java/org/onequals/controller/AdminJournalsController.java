@@ -343,7 +343,7 @@ public class AdminJournalsController {
     @GetMapping("/journals/career")
     public String pageCareer(Model model,
                              @RequestParam("page") Optional<Integer> page,
-                             @RequestParam("size") Optional<Integer> size){
+                             @RequestParam("size") Optional<Integer> size) {
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
         Page<Career> pageObj = careerService.findPaginated(PageRequest.of(currentPage - 1, pageSize), careerService.findAll());
@@ -365,13 +365,13 @@ public class AdminJournalsController {
     }
 
     @GetMapping("career/create")
-    public String pageAddCareer(){
+    public String pageAddCareer() {
         return "admin/journals/career-add";
     }
 
     @PostMapping("career/add")
     public String addCareer(@RequestParam String title,
-                            @RequestParam String body){
+                            @RequestParam String body) {
         Career career = new Career();
         career.setTitle(title);
         career.setBody(body);
@@ -380,7 +380,7 @@ public class AdminJournalsController {
     }
 
     @GetMapping("career/edit/{id}")
-    public String pageEditCareer(@PathVariable Long id, Model model){
+    public String pageEditCareer(@PathVariable Long id, Model model) {
         Career career = careerService.findById(id);
         model.addAttribute("id", id);
         model.addAttribute("body", career.getBody());
@@ -391,11 +391,17 @@ public class AdminJournalsController {
     @PostMapping("career/edit/{id}")
     public String editCareer(@PathVariable Long id,
                              @RequestParam String title,
-                            @RequestParam String body){
+                             @RequestParam String body) {
         Career career = careerService.findById(id);
         career.setTitle(title);
         career.setBody(body);
         careerService.save(career);
+        return "redirect:/admin/journals/career";
+    }
+
+    @GetMapping("/career/delete/{id}")
+    public String careerDelete(@PathVariable Long id) {
+        careerService.delete(id);
         return "redirect:/admin/journals/career";
     }
 }

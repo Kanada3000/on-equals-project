@@ -144,16 +144,19 @@
 #profile-body .container .block .text .hide span {
     border: none;
 }
+
 #profile-body .container .block .text .hide .descript {
     color: black;
     display: none;
     font-size: 32px;
     padding-top: 9px;
 }
+
 #profile-body .container .block .text .hide .roll-up {
     display: none;
     cursor: pointer;
 }
+
 #profile-body .container .block .text .hide .roll-down {
     display: block;
     cursor: pointer;
@@ -187,13 +190,15 @@
     background-color: #509FC8;
 }
 
-#profile-body .container .block .buttons .heart{
+#profile-body .container .block .buttons .heart {
     background-color: #F98DC0;
 }
-#profile-body .container .block .buttons .heart.red{
+
+#profile-body .container .block .buttons .heart.red {
     background-color: #FF5C55;
 }
-#profile-body .container .block .buttons .mail{
+
+#profile-body .container .block .buttons .mail {
     background-color: #509FC8;
 }
 
@@ -273,7 +278,7 @@
     margin-left: calc(-170px + 32.3vw);
 }
 
-#vacancies .vacancy .buttons a{
+#vacancies .vacancy .buttons a {
     box-sizing: border-box;
 }
 
@@ -388,19 +393,19 @@
 }
 
 @media screen and (max-width: 1024px) {
-    #likes{
+    #likes {
         padding: calc(19px + 3.2vw) calc(-61px + 11.9vw) calc(195px - 8.3vw);
     }
 
-    #likes span.hint{
+    #likes span.hint {
         font-size: calc(30px + 1.6vw);
     }
 
-    #vacancies{
+    #vacancies {
         margin-top: calc(133px - 7.9vw);
     }
 
-    #vacancies .vacancy{
+    #vacancies .vacancy {
         padding: calc(91px - 4vw) 0 55px;
     }
 
@@ -505,7 +510,7 @@
         flex-direction: column;
     }
 
-    #profile-body .container .block .buttons .edit, #profile-body .container .block .buttons .mail{
+    #profile-body .container .block .buttons .edit, #profile-body .container .block .buttons .mail {
         margin-bottom: 28px;
     }
 }
@@ -569,7 +574,7 @@
         width: calc(54px - 3vw);
     }
 
-    #profile-body .container .block .buttons .edit, #profile-body .container .block .buttons .mail{
+    #profile-body .container .block .buttons .edit, #profile-body .container .block .buttons .mail {
         margin: 0;
     }
 
@@ -647,16 +652,16 @@
         width: 46px;
     }
 
-    #vacancies .vacancy .buttons .eye img{
+    #vacancies .vacancy .buttons .eye img {
         width: 52px;
     }
 
-    .hide{
+    .hide {
         padding-top: 15px;
         width: 100%;
     }
 
-    .hide span.descript{
+    .hide span.descript {
         font-size: calc(16px + 2.1vw);
     }
 
@@ -799,16 +804,16 @@
         width: calc(4px + 8.8vw);
     }
 
-    #vacancies .vacancy .buttons .eye img{
+    #vacancies .vacancy .buttons .eye img {
         width: calc(4px + 10vw);
     }
 
-    .hide{
+    .hide {
         font-size: calc(-2px + 5vw);
         width: calc(30px + 81.3vw);
     }
 
-    .hide span.descript{
+    .hide span.descript {
         font-size: calc(14px + 2.5vw);
     }
 

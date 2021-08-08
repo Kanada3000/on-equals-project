@@ -56,7 +56,7 @@ public class EmployerController {
                                  @RequestParam int age,
                                  @RequestParam int quantity,
                                  @RequestParam int size,
-                                 @RequestParam String description){
+                                 @RequestParam String description) {
         User user = userService.findUser(principal.getName());
         Employer employer = new Employer();
         employer.setUser(user);

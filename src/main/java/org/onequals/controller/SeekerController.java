@@ -53,7 +53,7 @@ public class SeekerController {
                                @RequestParam String linkInstagram,
                                @RequestParam String linkTwitter,
                                @RequestParam String linkLinkedIn,
-                               @RequestParam String description){
+                               @RequestParam String description) {
         User user = userService.findUser(principal.getName());
         Seeker seeker = new Seeker();
         seeker.setUser(user);
@@ -77,7 +77,6 @@ public class SeekerController {
         userService.updateRole(Role.SEEKER);
         user.setName(name);
         userService.save(user);
-
 
 
         return "redirect:/resume/new";

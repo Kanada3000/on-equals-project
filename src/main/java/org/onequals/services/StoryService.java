@@ -19,22 +19,22 @@ public class StoryService {
     }
 
     @Transactional
-    public List<Story> getAll(){
+    public List<Story> getAll() {
         return storyRepo.findAll(Sort.by("createdDate"));
     }
 
     @Transactional
-    public Story getById(Long id){
+    public Story getById(Long id) {
         return storyRepo.findById(id).get();
     }
 
     @Transactional
-    public void save(Story story){
+    public void save(Story story) {
         storyRepo.save(story);
     }
 
     @Transactional
-    public void delete(Long id){
+    public void delete(Long id) {
         storyRepo.deleteById(id);
     }
 

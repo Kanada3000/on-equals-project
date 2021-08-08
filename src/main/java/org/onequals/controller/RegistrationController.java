@@ -49,7 +49,7 @@ public class RegistrationController {
                           @RequestParam("g-recaptcha-response") String response) {
         ReCaptchaResponse reCaptchaResponse = reCaptchaRegisterService.verify(response);
 
-        if(!reCaptchaResponse.isSuccess()){
+        if (!reCaptchaResponse.isSuccess()) {
             return "error";
         }
 
@@ -117,7 +117,7 @@ public class RegistrationController {
             String username = (String) userAttributes.get("email");
             String name = (String) userAttributes.get("name");
             User user = new User();
-            if(userService.findUser(username) == null){
+            if (userService.findUser(username) == null) {
                 user.setUsername(username);
                 user.setRoles(Collections.singleton(Role.USER));
                 user.setActivated(true);
@@ -134,12 +134,12 @@ public class RegistrationController {
     }
 
     @GetMapping("/register/password")
-    public String forgotPassword(){
+    public String forgotPassword() {
         return "email";
     }
 
     @PostMapping("/sendPassword")
-    public String sendPassword(@RequestParam String username){
+    public String sendPassword(@RequestParam String username) {
         User user = userService.findUser(username);
         String password = userService.getRandomLink();
         user.setPassword(password);
@@ -158,9 +158,9 @@ public class RegistrationController {
     @GetMapping("/activatePassword/{id}/{password}")
     public String activatePassword(@PathVariable String password,
                                    @PathVariable Long id,
-                                   Model model){
+                                   Model model) {
         User user = userService.findById(id).get();
-        if(user.getPassword().equals(password)){
+        if (user.getPassword().equals(password)) {
             model.addAttribute("userId", id);
             return "new-password";
         } else {
@@ -170,7 +170,7 @@ public class RegistrationController {
 
     @PostMapping("acceptPassword")
     public String newPassword(@RequestParam Long id,
-                              @RequestParam String password){
+                              @RequestParam String password) {
         User user = userService.findById(id).get();
         user.setPassword(userService.setPassword(password));
         userService.save(user);

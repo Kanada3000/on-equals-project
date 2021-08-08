@@ -53,10 +53,10 @@ public interface VacancyRepo extends JpaRepository<Vacancy, Long> {
     List<Vacancy> sort(int min, int max, List<Vacancy> vacancy, Sort sort);
 
     @Query("SELECT v FROM Vacancy v WHERE CONCAT(v.id,'') IN ?1")
-    Set<Vacancy> findByIdString (List<String> likes);
+    Set<Vacancy> findByIdString(List<String> likes);
 
     @Query("SELECT u FROM User u WHERE (SELECT v FROM Vacancy v WHERE v.id = ?1) MEMBER OF u.likedVacancy")
-    List<User> getUsersByLike (Long id);
+    List<User> getUsersByLike(Long id);
 
     @Query("SELECT v FROM Vacancy v WHERE v.approved = false")
     List<Vacancy> findUnapproved();

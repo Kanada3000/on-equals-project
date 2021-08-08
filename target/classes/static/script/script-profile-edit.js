@@ -1,10 +1,10 @@
 $(function () {
 
-    $("#edit-button").click(function (e){
+    $("#edit-button").click(function (e) {
         e.preventDefault();
         $("#profile-head").first().hide()
         $("#head-edit").show()
-        $("html, body").animate({"scrollTop":"0"}, 500, 'swing')
+        $("html, body").animate({"scrollTop": "0"}, 500, 'swing')
         $("#profile-body span").first().hide()
     })
 
@@ -66,8 +66,8 @@ $(function () {
         let string = ""
         $("#save").click(function () {
             $("#modal input").each(function () {
-                if($(this).val() !== "" && $(this).attr("id").startsWith("city"))
-                string = string + $(this).val() + "$"
+                if ($(this).val() !== "" && $(this).attr("id").startsWith("city"))
+                    string = string + $(this).val() + "$"
             })
             $("#head-edit span.city input").val(string)
 
@@ -124,30 +124,30 @@ $(function () {
     })
 
 
-    $(".buttons a[href='edit']").click(function (e){
+    $(".buttons a[href='edit']").click(function (e) {
         e.preventDefault();
         let block = $(this).parent().parent()
-        block.next().css("display","flex");
+        block.next().css("display", "flex");
         block.hide();
-        $(".buttons a[href='accept']").click(function (e){
+        $(".buttons a[href='accept']").click(function (e) {
             e.preventDefault()
-            block.next().find("input").each(function (){
-                $(this).attr("form","vacancyEdit")
+            block.next().find("input").each(function () {
+                $(this).attr("form", "vacancyEdit")
             })
-            block.next().find("textarea").each(function (){
-                $(this).attr("form","vacancyEdit")
+            block.next().find("textarea").each(function () {
+                $(this).attr("form", "vacancyEdit")
             })
             localStorage.setItem("scrollPos", $(window).scrollTop())
             $("#vacancyEdit").submit()
         })
-        $(".buttons a[href='delete']").click(function (e){
+        $(".buttons a[href='delete']").click(function (e) {
             e.preventDefault()
-            block.next().css("display","none");
-            block.css("display","flex");
+            block.next().css("display", "none");
+            block.css("display", "flex");
         })
     })
 
-    $("span#city-span").click(function (){
+    $("span#city-span").click(function () {
         let div = $(this)
         $("#modal").css("display", "flex")
         $(".backdrop").css({
@@ -162,7 +162,7 @@ $(function () {
         let string = ""
         $("#save").click(function () {
             $("#modal input").each(function () {
-                if($(this).val() !== "" && $(this).attr("id").startsWith("city"))
+                if ($(this).val() !== "" && $(this).attr("id").startsWith("city"))
                     string = string + $(this).val() + "$"
             })
             div.find("input").val(string)

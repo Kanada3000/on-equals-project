@@ -11,15 +11,15 @@ public class Resume {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name="category_id")
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name="type_id")
+    @JoinColumn(name = "type_id")
     private Type type;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToMany
@@ -33,7 +33,7 @@ public class Resume {
     private String description;
     private Boolean approved = Boolean.FALSE;
 
-    public Resume(){
+    public Resume() {
     }
 
     public Resume(Long id, Category category, Type type, User user, Set<City> city, Set<User> likes, int salary,

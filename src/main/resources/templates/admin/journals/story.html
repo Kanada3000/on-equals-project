@@ -92,20 +92,20 @@
         <h1>Категорії</h1>
         <a href="#" class="first story">Додати нову історію &#10133;</a>
         <div class="table">
-        <table border="1">
-            <tr class="head">
-                <td class="id-head">id</td>
-                <td>title</td>
-                <td class="but-head"><span>&nbsp;</span></td>
-                <td class="but-head"><span>&nbsp;</span></td>
-            </tr>
-            <tr th:each="s, iStat: ${story.content}">
-                <td class="id" th:text="${s.getId()}"></td>
-                <td class="title" th:text="${s.getTitle()}"></td>
-                <td class="edit-story">&#9998;</td>
-                <td class="delete" id="story">&#10060;</td>
-            </tr>
-        </table>
+            <table border="1">
+                <tr class="head">
+                    <td class="id-head">id</td>
+                    <td>title</td>
+                    <td class="but-head"><span>&nbsp;</span></td>
+                    <td class="but-head"><span>&nbsp;</span></td>
+                </tr>
+                <tr th:each="s, iStat: ${story.content}">
+                    <td class="id" th:text="${s.getId()}"></td>
+                    <td class="title" th:text="${s.getTitle()}"></td>
+                    <td class="edit-story">&#9998;</td>
+                    <td class="delete" id="story">&#10060;</td>
+                </tr>
+            </table>
         </div>
         <div id="paginations">
             <div th:if="${story.totalPages > 0}" class="pagination"

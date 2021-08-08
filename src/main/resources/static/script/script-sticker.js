@@ -15,7 +15,7 @@ $(function () {
                 src = img.attr("src")
                 n = src.indexOf("-");
                 $("#celebrities .text").hide()
-                $("#celebrities .text-"+src.slice(n+1, -4)).show()
+                $("#celebrities .text-" + src.slice(n + 1, -4)).show()
                 i++;
             }
         }, 300);
@@ -31,7 +31,7 @@ $(function () {
                 "height": "-=5.2vw",
                 "width": "-=5.2vw",
             }, 300).css("z-index", "auto").removeClass("active");
-            $("#celebrities .text-"+src.slice(n+1, -4)).hide()
+            $("#celebrities .text-" + src.slice(n + 1, -4)).hide()
             $("#celebrities .text").show()
             i--;
         }

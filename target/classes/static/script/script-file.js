@@ -37,19 +37,19 @@ $(function () {
         $("#formResume").reset()
     })
 
-    $("#profile-body .file .cancel").click(function(e){
+    $("#profile-body .file .cancel").click(function (e) {
         e.preventDefault()
-        if(!$(this).hasClass("download")){
-            $(this).parent().find("input").attr("form","formFile")
+        if (!$(this).hasClass("download")) {
+            $(this).parent().find("input").attr("form", "formFile")
             $("#formFile").submit();
         } else {
-            $(this).parent().find("input").attr("form","formDownload")
+            $(this).parent().find("input").attr("form", "formDownload")
             $("#formDownload").submit();
         }
         e.stopImmediatePropagation()
     })
 
-    $("#formResume button").click(function (){
+    $("#formResume button").click(function () {
         $("#form-type").val("file")
     })
 

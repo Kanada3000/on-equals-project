@@ -58,7 +58,7 @@ $(function () {
                 jQuery.inArray(input.val(), userList) === -1) {
                 alert("Поле user обране не зі списку!")
                 i = 0;
-            } else if(id === "username" && h === 0){
+            } else if (id === "username" && h === 0) {
                 k = 1
                 h = 1
             } else if (id.indexOf("salary") > -1 &&

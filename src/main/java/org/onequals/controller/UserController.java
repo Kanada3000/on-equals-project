@@ -282,40 +282,40 @@ public class UserController {
                               @RequestParam String descript,
                               @RequestParam int salary) {
         User user = userService.findUser(principal.getName());
-        if (user.getRoles().contains(Role.EMPLOYER)){
+        if (user.getRoles().contains(Role.EMPLOYER)) {
             Vacancy vacancy = vacancyService.getById(id);
             Category categoryDB = categoryService.findByName(category);
             Type typeDB = typeService.findByName(type);
             if (vacancy.getCategory() != categoryDB)
                 vacancy.setCategory(categoryDB);
-            if(vacancy.getType() != typeDB)
+            if (vacancy.getType() != typeDB)
                 vacancy.setType(typeDB);
             if (!city.equals("")) {
                 List<String> cities = Arrays.asList(city.split("\\$"));
                 vacancy.setCity(null);
                 cityService.addCities(vacancy, cityService.findByNames(cities));
             }
-            if(!vacancy.getDescription().equals(descript))
+            if (!vacancy.getDescription().equals(descript))
                 vacancy.setDescription(descript);
-            if(vacancy.getSalary() != salary)
+            if (vacancy.getSalary() != salary)
                 vacancy.setSalary(salary);
             vacancyService.save(vacancy);
-        } else if (user.getRoles().contains(Role.SEEKER)){
+        } else if (user.getRoles().contains(Role.SEEKER)) {
             Resume resume = resumeService.getById(id);
             Category categoryDB = categoryService.findByName(category);
             Type typeDB = typeService.findByName(type);
             if (resume.getCategory() != categoryDB)
                 resume.setCategory(categoryDB);
-            if(resume.getType() != typeDB)
+            if (resume.getType() != typeDB)
                 resume.setType(typeDB);
             if (!city.equals("")) {
                 List<String> cities = Arrays.asList(city.split("\\$"));
                 resume.setCity(null);
                 cityService.addCities(resume, cityService.findByNames(cities));
             }
-            if(!resume.getDescription().equals(descript))
+            if (!resume.getDescription().equals(descript))
                 resume.setDescription(descript);
-            if(resume.getSalary() != salary)
+            if (resume.getSalary() != salary)
                 resume.setSalary(salary);
             resumeService.save(resume);
         }

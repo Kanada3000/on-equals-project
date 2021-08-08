@@ -19,23 +19,23 @@ footer li {
     font-size: 46px;
 }
 
-footer li:first-child, footer li:last-child{
+footer li:first-child, footer li:last-child {
     border-left: 2px solid white;
     border-right: 2px solid white;
 }
 
-footer .ukf{
+footer .ukf {
     display: flex;
     align-self: flex-start;
     margin-top: 125px;
 }
 
-footer .ukf .image img{
+footer .ukf .image img {
     width: 166px;
     height: auto;
 }
 
-footer .ukf .text{
+footer .ukf .text {
     font-size: 32px;
     width: 515px;
     text-align: left;
@@ -58,11 +58,11 @@ footer .scroll {
 }
 
 @media screen and (max-width: 1440px) {
-    footer .ukf, footer .scroll{
+    footer .ukf, footer .scroll {
         margin-top: calc(38px + 6vw);
     }
 
-    footer .ukf .text{
+    footer .ukf .text {
         width: calc(-278px + 55vw);
     }
 
@@ -72,7 +72,7 @@ footer .scroll {
 }
 
 @media screen and (max-width: 1000px) {
-    footer{
+    footer {
         padding: 44px calc(8px + 5.2vw) 60px;
     }
 
@@ -90,20 +90,20 @@ footer .scroll {
         width: auto;
     }
 
-    footer li:first-child, footer li:last-child{
+    footer li:first-child, footer li:last-child {
         border: none;
     }
 
-    footer li:last-child{
+    footer li:last-child {
         padding: 0;
     }
 
-    footer .ukf{
+    footer .ukf {
         margin: 0;
         align-self: flex-start;
     }
 
-    footer .ukf .text{
+    footer .ukf .text {
         font-size: calc(-12px + 4.4vw);
         width: calc(-269px + 55.5vw);
         align-self: center;
@@ -117,7 +117,7 @@ footer .scroll {
 }
 
 @media screen and (max-width: 775px) {
-    footer .ukf .text{
+    footer .ukf .text {
         font-size: 22px;
         width: 159px;
     }
@@ -129,15 +129,15 @@ footer .scroll {
 
 @media screen and (max-width: 700px) {
 
-    footer{
+    footer {
         padding: 44px calc(19px + 4.1vw) 60px;
     }
 
-    footer .ukf{
+    footer .ukf {
         margin-top: 62px;
     }
 
-    footer .ukf .text{
+    footer .ukf .text {
         padding-left: calc(55px - 4.1vw);
     }
 
@@ -145,13 +145,13 @@ footer .scroll {
         width: 100%;
     }
 
-    footer .ukf .image img{
+    footer .ukf .image img {
         width: calc(137px + 4.1vw);
     }
 }
 
 @media screen and (max-width: 480px) {
-    footer{
+    footer {
         padding: 44px calc(-33px + 15vw) 60px;
     }
 
@@ -161,17 +161,17 @@ footer .scroll {
         font-size: calc(2px + 6.3vw);
     }
 
-    footer .ukf{
+    footer .ukf {
         margin-top: calc(-37px + 20.6vw);
     }
 
-    footer .ukf .text{
+    footer .ukf .text {
         font-size: calc(-2px + 5vw);
         width: calc(10px + 31.3vw);
         padding-left: calc(5px + 6.3vw);
     }
 
-    footer .ukf .image img{
+    footer .ukf .image img {
         width: calc(70px + 20vw);
     }
 

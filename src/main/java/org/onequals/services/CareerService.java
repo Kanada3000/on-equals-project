@@ -20,18 +20,18 @@ public class CareerService {
     }
 
     @Transactional
-    public List<Career> findAll(){
+    public List<Career> findAll() {
         return careerRepo.findAll();
     }
 
     @Transactional
-    public void save(Career career){
+    public void save(Career career) {
         careerRepo.save(career);
     }
 
     @Transactional
-    public void delete(Career career){
-        careerRepo.delete(career);
+    public void delete(Long id) {
+        careerRepo.deleteById(id);
     }
 
     @Transactional

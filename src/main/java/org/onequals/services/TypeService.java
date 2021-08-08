@@ -24,39 +24,39 @@ public class TypeService {
 
 
     @Transactional
-    public Type findByName(String name){
+    public Type findByName(String name) {
         return typeRepo.findTypeByName(name);
     }
 
     @Transactional
-    public List<Type> getAll(){
+    public List<Type> getAll() {
         return typeRepo.findAll(Sort.by("id"));
     }
 
     @Transactional
-    public List<Type> getAllAll(){
+    public List<Type> getAllAll() {
         return typeRepo.findAllAll(Sort.by("id"));
     }
 
     @Transactional
-    public List<Type> getAllAll(String sort){
+    public List<Type> getAllAll(String sort) {
         return typeRepo.findAllAll(Sort.by(sort));
     }
 
     @Transactional
-    public void save(Type type){
+    public void save(Type type) {
         typeRepo.save(type);
     }
 
     @Transactional
-    public void delete(Long id){
+    public void delete(Long id) {
         typeRepo.deleteFromResume(id);
         typeRepo.deleteFromVacancy(id);
         typeRepo.deleteById(id);
     }
 
     @Transactional
-    public List<Type> updateTotal(List<Vacancy> vacancies){
+    public List<Type> updateTotal(List<Vacancy> vacancies) {
         List<Type> types = typeRepo.findAll(Sort.by("id"));
 
         List<Long> vacanciesId = vacancies.stream()
@@ -77,7 +77,7 @@ public class TypeService {
     }
 
     @Transactional
-    public List<Type> updateTotalResumes(List<Resume> resumes){
+    public List<Type> updateTotalResumes(List<Resume> resumes) {
         List<Type> types = typeRepo.findAll(Sort.by("id"));
 
         List<Long> resumesId = resumes.stream()

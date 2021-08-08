@@ -44,16 +44,16 @@ $(function () {
 
 
     $("#form-reg-employer").submit(function (e) {
-        if($("#description").length){
-            let val  = $("#description").val()
+        if ($("#description").length) {
+            let val = $("#description").val()
             val = val.replace(/\(/g, "&#40;");
             val = val.replace(/\)+/g, '&#41;');
             val = val.replace(/\.+/g, '&#46;');
             val = val.replace(/:+/g, '&#58;');
             $("#description").val(val)
         }
-        if($("#story").length){
-            let val  = $("#story").val()
+        if ($("#story").length) {
+            let val = $("#story").val()
             val = val.replace(/\(/g, "&#40;");
             val = val.replace(/\)+/g, '&#41;');
             val = val.replace(/\.+/g, '&#46;');

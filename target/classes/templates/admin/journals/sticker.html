@@ -92,20 +92,20 @@
         <h1>Слайдер на головній</h1>
         <a href="#" class="first sticker">Додати новий стікер &#10133;</a>
         <div class="table">
-        <table border="1">
-            <tr class="head">
-                <td class="id-head">id</td>
-                <td>title</td>
-                <td class="but-head"><span>&nbsp;</span></td>
-                <td class="but-head"><span>&nbsp;</span></td>
-            </tr>
-            <tr th:each="s, iStat: ${sticker}">
-                <td class="id" th:text="${s.getId()}"></td>
-                <td class="title" th:text="${s.getTitle()}"></td>
-                <td class="edit-sticker">&#9998;</td>
-                <td class="delete" id="sticker">&#10060;</td>
-            </tr>
-        </table>
+            <table border="1">
+                <tr class="head">
+                    <td class="id-head">id</td>
+                    <td>title</td>
+                    <td class="but-head"><span>&nbsp;</span></td>
+                    <td class="but-head"><span>&nbsp;</span></td>
+                </tr>
+                <tr th:each="s, iStat: ${sticker}">
+                    <td class="id" th:text="${s.getId()}"></td>
+                    <td class="title" th:text="${s.getTitle()}"></td>
+                    <td class="edit-sticker">&#9998;</td>
+                    <td class="delete" id="sticker">&#10060;</td>
+                </tr>
+            </table>
         </div>
         <div id="paginations">
             <div th:if="${sticker.totalPages > 0}" class="pagination"

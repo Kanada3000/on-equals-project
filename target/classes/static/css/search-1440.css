@@ -1,37 +1,37 @@
-@media screen and (max-width: 1400px){
-    #search-list{
+@media screen and (max-width: 1400px) {
+    #search-list {
         padding: 90px 0 0;
     }
 
-    #category{
+    #category {
         /*width: calc(460px - 5.5vw);*/
         width: calc(460px - 6.5vw);
         padding: 51px 60px 0 calc(87px - 4.3vw);
-     }
+    }
 
-    #sort{
+    #sort {
         padding-top: 0;
         border-right: none;
         width: calc(100vw - 120px);
         height: 130px;
     }
 
-    #vacancies{
+    #vacancies {
         /*width: calc(-477px + 105.5vw);*/
         width: calc(-477px + 101vw);
     }
 
-    #vacancies .vacancy{
+    #vacancies .vacancy {
         flex-direction: column;
         padding: 51px 29px 43px 0;
         position: relative;
     }
 
-    #vacancies .vacancy .text{
+    #vacancies .vacancy .text {
         width: 100%;
     }
 
-    #vacancies .vacancy .text li{
+    #vacancies .vacancy .text li {
         border-bottom: 2px solid black;
         width: 100%;
         font-size: 32px;
@@ -39,11 +39,11 @@
         padding: 0 0 10px;
     }
 
-    #vacancies #paginations a{
+    #vacancies #paginations a {
         font-size: 32px;
     }
 
-    #vacancies .vacancy .buttons{
+    #vacancies .vacancy .buttons {
         flex-wrap: nowrap;
         justify-content: space-between;
         align-items: center;
@@ -54,17 +54,17 @@
         order: 3;
     }
 
-    #vacancies .vacancy .buttons div{
+    #vacancies .vacancy .buttons div {
         width: 126px;
         height: 126px;
         margin-right: 0;
     }
 
-    #vacancies .vacancy .buttons div img{
+    #vacancies .vacancy .buttons div img {
         width: 47px;
     }
 
-    #vacancies .vacancy .buttons .eye img{
+    #vacancies .vacancy .buttons .eye img {
         width: 53px;
     }
 
@@ -73,20 +73,20 @@
     }
 }
 
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 1024px) {
     #vacancies .vacancy .hide {
         width: 100%;
     }
 }
 
-@media screen and (max-width: 950px){
-    #search-list{
+@media screen and (max-width: 950px) {
+    #search-list {
         padding: 160px 63px 0 30px;
         display: flex;
         flex-direction: column;
     }
 
-    #category{
+    #category {
         display: flex;
         flex-wrap: wrap;
         width: 100%;
@@ -96,11 +96,11 @@
         justify-content: space-between;
     }
 
-    #category h3{
+    #category h3 {
         width: 100%;
     }
 
-    #category .cat-list{
+    #category .cat-list {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -108,27 +108,27 @@
         margin-bottom: 58px;
     }
 
-    #category .type-list, .salary{
+    #category .type-list, .salary {
         display: flex;
         flex-direction: column;
         width: 40.5vw;
     }
 
-    #category label.checkbox{
+    #category label.checkbox {
         width: 100%;
         box-sizing: border-box;
     }
 
-    #category label.checkbox:last-of-type{
+    #category label.checkbox:last-of-type {
         margin-bottom: 0;
     }
 
-    #category .cat-list label.checkbox{
+    #category .cat-list label.checkbox {
         width: 40.5vw;
         box-sizing: border-box;
     }
 
-    #sort{
+    #sort {
         padding-top: 20px;
         border-top: 4px solid black;
         width: 100%;
@@ -138,42 +138,42 @@
         order: 2;
     }
 
-    #sort h4{
+    #sort h4 {
         margin-bottom: 17px;
     }
 
-    #sort .sort-by, #sort .summary{
+    #sort .sort-by, #sort .summary {
         width: auto;
         flex-grow: unset;
     }
 
-    #sort input[type=radio] + label{
+    #sort input[type=radio] + label {
         margin: 0 1.23vw;
     }
 
-    #vacancies{
+    #vacancies {
         width: 100%;
         padding-left: 0;
         float: unset;
         order: 3;
     }
 
-    #vacancies .vacancy{
+    #vacancies .vacancy {
         justify-content: space-between;
         flex-direction: row;
         border-right: none;
         padding: 51px 0 49px;
     }
 
-    #vacancies .vacancy .text{
+    #vacancies .vacancy .text {
         width: auto;
     }
 
-    #vacancies .vacancy .text li{
+    #vacancies .vacancy .text li {
         width: 66.8vw;
     }
 
-    #vacancies .vacancy .buttons{
+    #vacancies .vacancy .buttons {
         flex-direction: column-reverse;
         flex-wrap: wrap;
         padding: 0;
@@ -182,64 +182,64 @@
         width: auto;
     }
 
-    #vacancies .vacancy .buttons div{
+    #vacancies .vacancy .buttons div {
         width: 101px;
         height: 101px;
     }
 
-    #vacancies .vacancy .buttons div img{
+    #vacancies .vacancy .buttons div img {
         width: 38px;
     }
 
-    #vacancies .vacancy .buttons .eye img{
-         width: 42px;
-     }
+    #vacancies .vacancy .buttons .eye img {
+        width: 42px;
+    }
 
 }
 
-@media screen and (max-width: 740px){
-    #search-list{
+@media screen and (max-width: 740px) {
+    #search-list {
         padding: calc(17px + 18.6vw) 30px 0;
     }
 
-    #category{
+    #category {
         padding: 0 0 calc(-27px + 17.5vw);
     }
 
-    #category h3{
+    #category h3 {
         font-size: calc(35px + 1.4vw);
     }
 
-    #category .cat-list{
+    #category .cat-list {
         flex-wrap: nowrap;
         flex-direction: column;
     }
 
-    #category .type-list{
+    #category .type-list {
         width: 100%;
         margin-bottom: 58px;
     }
 
-    #category .salary{
+    #category .salary {
         width: 100%;
     }
 
-    #category label.checkbox{
+    #category label.checkbox {
         width: 100%;
         min-height: 44px;
         font-size: calc(16px + 2.1vw);
     }
 
-    #category .cat-list label.checkbox{
+    #category .cat-list label.checkbox {
         width: 100%;
         background-size: calc(25px + 0.7vw) auto;
     }
 
-    #category input#max{
+    #category input#max {
         margin-bottom: 0;
     }
 
-    #category .input{
+    #category .input {
         font-size: calc(16px + 2.1vw);
     }
 
@@ -247,7 +247,7 @@
         margin-bottom: calc(22px + 6.3vw);
     }
 
-    #sort{
+    #sort {
         flex-direction: column;
         padding-top: 20px;
         padding-bottom: 31px;
@@ -256,47 +256,47 @@
         justify-content: flex-start;
     }
 
-    #sort h4{
+    #sort h4 {
         margin-bottom: 6px;
         padding: 0 7px;
     }
 
-    #sort .summary{
+    #sort .summary {
         margin-bottom: 16px;
     }
 
-    #sort .summary span{
+    #sort .summary span {
         padding: 0 7px;
     }
 
-    #sort .buttons{
+    #sort .buttons {
         justify-content: flex-start;
         padding-right: 0;
     }
 
-    #sort label.radio[for=date]{
+    #sort label.radio[for=date] {
         margin-left: 0;
     }
 
-    #vacancies .vacancy{
+    #vacancies .vacancy {
         flex-direction: column;
         padding: 41px 0 58px;
     }
 
-    #vacancies .vacancy h3{
+    #vacancies .vacancy h3 {
         font-size: calc(35px + 1.4vw);
     }
 
-    #vacancies .vacancy .text li{
+    #vacancies .vacancy .text li {
         width: 100%;
         font-size: calc(16px + 2.1vw);
     }
 
-    #vacancies #paginations a{
+    #vacancies #paginations a {
         font-size: calc(16px + 2.1vw);
     }
 
-    #vacancies .vacancy .buttons{
+    #vacancies .vacancy .buttons {
         flex-direction: row-reverse;
         padding: 41px 0 0;
         max-height: unset;
@@ -304,63 +304,63 @@
         order: 3;
     }
 
-    #vacancies .vacancy .buttons div{
+    #vacancies .vacancy .buttons div {
         width: 126px;
         height: 126px;
     }
 
-    #vacancies .vacancy .buttons div img{
+    #vacancies .vacancy .buttons div img {
         width: 47px;
     }
 
-    #vacancies .vacancy .buttons .eye img{
+    #vacancies .vacancy .buttons .eye img {
         width: 53px;
     }
 
-    #vacancies .vacancy .hide{
+    #vacancies .vacancy .hide {
         padding-top: 15px;
         width: 100%;
     }
 
-    #vacancies .vacancy .hide span.descript{
+    #vacancies .vacancy .hide span.descript {
         font-size: calc(16px + 2.1vw);
     }
 }
 
-@media screen and (max-width: 480px){
-    #search-list{
+@media screen and (max-width: 480px) {
+    #search-list {
         padding: 106px calc(-15px + 9.4vw) 0;
     }
 
-    #category{
+    #category {
         padding: 0 0 60px;
     }
 
-    #category .cat-list{
+    #category .cat-list {
         margin-bottom: calc(34px + 5vw);
     }
 
-    #category h3{
+    #category h3 {
         font-size: calc(12px + 6.3vw);
         margin-bottom: calc(10px + 6.3vw);
     }
 
-    #category .type-list{
+    #category .type-list {
         margin-bottom: calc(34px + 5vw);
     }
 
-    #category label.checkbox{
+    #category label.checkbox {
         width: 100%;
         min-height: 44px;
         font-size: calc(14px + 2.5vw);
     }
 
-    #category .cat-list label.checkbox{
+    #category .cat-list label.checkbox {
         width: 100%;
         background-size: calc(19px + 1.9vw) auto;
     }
 
-    #category .input{
+    #category .input {
         font-size: calc(14px + 2.5vw);
     }
 
@@ -368,55 +368,55 @@
         margin-bottom: calc(22px + 6.3vw);
     }
 
-    #sort{
+    #sort {
         padding-bottom: calc(-2px + 6.9vw);
         font-size: calc(14px + 2.5vw);
     }
 
-    #sort h4{
+    #sort h4 {
         margin-bottom: 0;
     }
 
-    #vacancies .vacancy{
+    #vacancies .vacancy {
         padding: calc(-22px + 13.1vw) 0 calc(-29px + 18.1vw);
     }
 
-    #vacancies .vacancy h3{
+    #vacancies .vacancy h3 {
         font-size: calc(12px + 6.3vw);
     }
 
-    #vacancies .vacancy .text li{
+    #vacancies .vacancy .text li {
         width: 100%;
         font-size: calc(14px + 2.5vw);
     }
 
-    #vacancies #paginations a{
+    #vacancies #paginations a {
         font-size: calc(14px + 2.5vw);
     }
 
-    #vacancies .vacancy .buttons{
+    #vacancies .vacancy .buttons {
         padding: calc(-10px + 10.6vw) 0 0;
     }
 
-    #vacancies .vacancy .buttons div{
+    #vacancies .vacancy .buttons div {
         width: calc(9px + 24.4vw);
         height: calc(9px + 24.4vw);
     }
 
-    #vacancies .vacancy .buttons div img{
+    #vacancies .vacancy .buttons div img {
         width: calc(2px + 9.4vw)
     }
 
-    #vacancies .vacancy .buttons .eye img{
+    #vacancies .vacancy .buttons .eye img {
         width: calc(4px + 10vw)
     }
 
-    #vacancies .vacancy .hide{
+    #vacancies .vacancy .hide {
         font-size: calc(-2px + 5vw);
         width: calc(30px + 81.3vw);
     }
 
-    #vacancies .vacancy .hide span.descript{
+    #vacancies .vacancy .hide span.descript {
         font-size: calc(14px + 2.5vw);
     }
 

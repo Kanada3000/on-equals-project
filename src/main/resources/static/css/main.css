@@ -166,7 +166,7 @@ main .main__place {
     font-size: inherit;
 }
 
-main .main__place .smile-button{
+main .main__place .smile-button {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -179,28 +179,28 @@ main .main__place .smile-button{
     padding: 0 calc(-45px + 9.6vw);
 }
 
-main .main__place .smile-button.right{
+main .main__place .smile-button.right {
     flex-direction: row-reverse;
 }
 
-main .main__place .smile-button span{
+main .main__place .smile-button span {
     width: 254px;
     text-align: center;
 }
 
-main .main__place .smile-button .smile-image{
+main .main__place .smile-button .smile-image {
     padding: 0 calc(76px - 1.7vw);
 }
 
-main .main__place .smile-button .smile-image.left{
+main .main__place .smile-button .smile-image.left {
     padding-left: 0;
 }
 
-main .main__place .smile-button .smile-image.right{
+main .main__place .smile-button .smile-image.right {
     padding-right: 0;
 }
 
-main .main__place .smile-button .smile-image img{
+main .main__place .smile-button .smile-image img {
     width: 152px;
     height: auto;
 }

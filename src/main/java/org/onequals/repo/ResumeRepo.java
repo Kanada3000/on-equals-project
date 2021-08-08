@@ -62,10 +62,10 @@ public interface ResumeRepo extends JpaRepository<Resume, Long> {
     List<Resume> sort(int min, int max, List<Resume> resumes, Sort sort);
 
     @Query("SELECT r FROM Resume r WHERE CONCAT(r.id,'') IN ?1")
-    Set<Resume> findByIdString (List<String> likes);
+    Set<Resume> findByIdString(List<String> likes);
 
     @Query("SELECT u FROM User u WHERE (SELECT r FROM Resume r WHERE r.id = ?1) MEMBER OF u.likedResume")
-    List<User> getUsersByLike (Long id);
+    List<User> getUsersByLike(Long id);
 
     @Query("SELECT r FROM Resume r WHERE r.approved = false")
     List<Resume> findUnapproved();

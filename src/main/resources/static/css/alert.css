@@ -1,4 +1,4 @@
-#alert{
+#alert {
     z-index: 999;
     width: 80vw;
     margin: 0 auto;
@@ -22,7 +22,7 @@
     border-radius: 50vw;
 }
 
-#alert span{
+#alert span {
     display: inline-block;
     font-size: larger;
 
