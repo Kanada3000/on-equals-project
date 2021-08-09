@@ -10,6 +10,7 @@
     box-sizing: border-box;
     width: 100%;
     margin: auto;
+    position: relative;
 }
 
 #about .video {

@@ -63,11 +63,13 @@ public class AdminJournalsController {
     public String pageCreate(@RequestParam("name") String title,
                              @RequestParam String data,
                              @RequestParam String shortData,
+                             @RequestParam String author,
                              @RequestParam String label) throws IOException {
         org.onequals.domain.Page page = new org.onequals.domain.Page();
         page.setName(title);
         page.setFullBody(data);
         page.setShortBody(shortData);
+        page.setAuthor(author);
         page.setLabel(label);
         Timestamp ts = new Timestamp(System.currentTimeMillis());
         page.setCreatedDate(ts);
@@ -86,6 +88,7 @@ public class AdminJournalsController {
         model.addAttribute("data", page.getFullBody());
         model.addAttribute("shortData", page.getShortBody());
         model.addAttribute("label", page.getLabel());
+        model.addAttribute("author", page.getAuthor());
         model.addAttribute("name", page.getName());
         return "admin/journals/edit";
     }
@@ -95,11 +98,13 @@ public class AdminJournalsController {
                            @RequestParam("name") String title,
                            @RequestParam String data,
                            @RequestParam String shortData,
+                           @RequestParam String author,
                            @RequestParam String label) {
         org.onequals.domain.Page page = pageService.getById(id);
         page.setName(title);
         page.setFullBody(data);
         page.setShortBody(shortData);
+        page.setAuthor(author);
         page.setLabel(label);
         pageService.save(page);
         return switch (label) {

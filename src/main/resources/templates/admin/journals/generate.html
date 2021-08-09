@@ -20,15 +20,18 @@
 <h2>Створення нової сторінки</h2>
 <form id="pageForm" th:action="@{/admin/page/create}" method="POST">
     <input type="hidden" name="data" id="data">
-    <input type="hidden" name="shortData" id="shortData">
     <div id="admin">
         <div id="body">
             <h3>Повний текст</h3>
             <textarea id="editor"></textarea>
             <br/>
             <h3>Короткий опис (до 500 символів)</h3>
-            <textarea id="editor2"></textarea>
+            <textarea name="shortData" maxlength="500" required></textarea>
             <br/>
+            <h3>Підпис статті</h3>
+            <input id="author-input" type="text" placeholder="Наприклад: 'Авторка: Вікторія Павленко'" name="author" required/>
+            <br/>
+            <h3>Назва сторінки</h3>
             <input id="name-input" type="text" placeholder="Назва сторінки" name="name" required/>
             <br/>
             <select name="label" required>

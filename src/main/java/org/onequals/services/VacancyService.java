@@ -166,7 +166,12 @@ public class VacancyService {
     }
 
     @Transactional
-    public List<Vacancy> adminSort(List<Vacancy> vacancy, String sort) {
+    public List<Vacancy> adminSort(List<Vacancy> vacancy, String sort, String field, String search) {
+        if(search != null){
+            if (!search.isEmpty()){
+                return vacancyRepo.sortAdmin(vacancy, field, search, Sort.by(sort));
+            }
+        }
         return vacancyRepo.sortAdmin(vacancy, Sort.by(sort));
     }
 

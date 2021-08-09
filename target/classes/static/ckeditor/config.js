@@ -8,6 +8,8 @@ CKEDITOR.editorConfig = function (config) {
     // config.language = 'fr';
     // config.uiColor = '#AADC6E';
 
+    config.contentsCss = '/css/pages-generator.css';
+
     config.extraPlugins = 'youtube';
     config.youtube_width = '640';
     config.youtube_height = '480';

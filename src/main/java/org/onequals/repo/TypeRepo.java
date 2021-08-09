@@ -1,5 +1,6 @@
 package org.onequals.repo;
 
+import org.onequals.domain.Category;
 import org.onequals.domain.Type;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -38,4 +39,9 @@ public interface TypeRepo extends JpaRepository<Type, Long> {
     @Modifying
     @Query("UPDATE Vacancy v SET v.type = (SELECT t FROM Type t WHERE t.name = 'Undefined') WHERE v.type.id = ?1")
     void deleteFromVacancy(Long id);
+
+    @Query("SELECT c FROM Type c WHERE " +
+            "((?1 LIKE 'id') AND (CONCAT(c.id, '') = ?2)) OR " +
+            "((?1 LIKE 'name') AND (lower(c.name) LIKE CONCAT('%', lower(?2), '%' ) ))")
+    List<Type> findAllAllSortFilter(String field, String value, Sort sort);
 }

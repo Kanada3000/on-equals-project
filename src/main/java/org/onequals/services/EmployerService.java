@@ -26,7 +26,12 @@ public class EmployerService {
     }
 
     @Transactional
-    public List<Employer> getAll(String sort) {
+    public List<Employer> getAll(String sort, String field, String search) {
+        if(search != null){
+            if (!search.isEmpty()){
+                return employerRepo.findAll(field, search, Sort.by(sort));
+            }
+        }
         return employerRepo.findAll(Sort.by(sort));
     }
 

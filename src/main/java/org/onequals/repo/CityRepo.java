@@ -49,4 +49,10 @@ public interface CityRepo extends JpaRepository<City, Long> {
 
     @Query("SELECT c FROM City c WHERE c.city = 'Undefined'")
     Set<City> findUndefined();
+
+    @Query("SELECT c FROM City c WHERE " +
+            "((?1 LIKE 'id') AND (CONCAT(c.id, '') = ?2)) OR " +
+            "((?1 LIKE 'city') AND (lower(c.city) LIKE CONCAT('%', lower(?2), '%' ))) OR " +
+            "((?1 LIKE 'country') AND (lower(c.country) LIKE CONCAT('%', lower(?2), '%' )))")
+    List<City> findAllAllSortFilter(String field, String value, Sort sort);
 }

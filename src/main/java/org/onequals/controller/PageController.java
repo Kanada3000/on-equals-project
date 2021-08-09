@@ -176,6 +176,7 @@ public class PageController {
         model.addAttribute("body", page.getFullBody());
         model.addAttribute("shortBody", page.getShortBody());
         model.addAttribute("label", page.getLabel());
+        model.addAttribute("author", page.getAuthor());
         model.addAttribute("short", pageService.getShort());
         model.addAttribute("prevId", pageService.getPrevId(id));
         model.addAttribute("nextId", pageService.getNextId(id));

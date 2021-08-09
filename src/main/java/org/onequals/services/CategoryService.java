@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -77,6 +78,16 @@ public class CategoryService {
     }
 
     @Transactional
+    public List<Category> getAllAllSort(String sort, String field, String search) {
+        if(search != null){
+            if (!search.isEmpty()){
+                return categoryRepo.findAllAllSortFilter(field, search, Sort.by(sort));
+            }
+        }
+        return categoryRepo.findAllAllSort(Sort.by(sort));
+    }
+
+    @Transactional
     public List<Category> getAllAll(String sort) {
         return categoryRepo.findAllAllSort(Sort.by(sort));
     }
@@ -119,5 +130,10 @@ public class CategoryService {
             list = pageList.subList(startItem, toIndex);
         }
         return new PageImpl<Category>(list, PageRequest.of(currentPage, pageSize), pageList.size());
+    }
+
+    @Transactional
+    public List<Category> searchAdmin(String fieldName, String searchField){
+        return categoryRepo.searchAdmin(searchField);
     }
 }

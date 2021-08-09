@@ -90,6 +90,15 @@
     </div>
     <div id="body">
         <h1>Типи зайнятості</h1>
+        <h2>Пошук по полю</h2>
+        <select name="fieldName" form="sortAdminForm">
+            <div th:each="f:${fields}" th:remove="tag">
+                <option th:value="${f}" th:text="${f}"
+                        th:selected="${f == fieldName ? true : false}"></option>
+            </div>
+        </select>
+        <input type="text" name="searchField" th:value="${searchField}" form="sortAdminForm">
+        <button type="submit" form="sortAdminForm">Пошук</button>
         <a href="#" class="first">Додати новий тип &#10133;</a>
         <div class="table">
             <table border="1">
@@ -116,7 +125,9 @@
         <div id="paginations">
             <div th:if="${types.totalPages > 0}" class="pagination"
                  th:each="pageNumber : ${pageNumbers}">
-                <a th:href="@{/admin/type(size=${types.size}, page=${pageNumber})}"
+                <a th:href="@{/admin/type(size=${types.size}, page=${pageNumber},
+                searchField=${searchField},
+                fieldName=${fieldName})}"
                    th:text="${pageNumber}"
                    th:class="${pageNumber==types.number + 1} ? active"></a>
             </div>

@@ -17,15 +17,23 @@
     <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
     <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
+<h2>Редагування сторінки</h2>
 <form id="pageForm" th:action="@{'/admin/page/edit/' + ${id}}" method="POST">
-    <!--    <input type="hidden" name="id" id="id" th:value="${id}">-->
     <input type="hidden" name="data" id="data">
-    <input type="hidden" name="shortData" id="shortData">
     <div id="admin">
         <div id="body">
+            <h3>Повний текст</h3>
             <textarea id="editor"></textarea>
-            <textarea id="editor2"></textarea>
+            <br/>
+            <h3>Короткий опис (до 500 символів)</h3>
+            <textarea name="shortData" maxlength="500" required th:text="${shortData}"></textarea>
+            <br/>
+            <h3>Підпис статті</h3>
+            <input id="author-input" type="text" placeholder="Наприклад: 'Авторка: Вікторія Павленко'" name="author" th:value="${author}" required/>
+            <br/>
+            <h3>Назва сторінки</h3>
             <input type="text" placeholder="Назва сторінки" name="name" th:value="${name}" required/>
+            <br/>
             <select name="label" required th:if="${label == 'Шукачам'}">
                 <option selected>Шукачам</option>
                 <option>Роботодавцям</option>
@@ -47,7 +55,6 @@
 </form>
 <script th:inline="javascript">
     var longData = [[${data}]]
-    var shortData = [[${shortData}]]
 </script>
 <script src="/script/script.js"></script>
 <script src="/script/script-newpage.js"></script>

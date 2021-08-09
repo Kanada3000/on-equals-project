@@ -71,7 +71,12 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public List<User> getAllSort(String sort) {
+    public List<User> getAllSort(String sort, String field, String search) {
+        if(search != null){
+            if (!search.isEmpty()){
+                return userRepo.findAllUsersSort(Collections.singleton(Role.ADMIN), field, search, Sort.by(sort));
+            }
+        }
         return new ArrayList<>(
                 new LinkedHashSet<>(userRepo.findAllUsersSort(Collections.singleton(Role.ADMIN), Sort.by(sort))));
     }

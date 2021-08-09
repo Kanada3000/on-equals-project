@@ -26,6 +26,14 @@ public interface CategoryRepo extends JpaRepository<Category, Long> {
     @Query("SELECT c FROM Category c")
     List<Category> findAllAll();
 
+    @Query("SELECT c FROM Category c WHERE " +
+            "((?1 LIKE 'id') AND (CONCAT(c.id, '') = ?2)) OR " +
+            "((?1 LIKE 'name') AND (lower(c.longName) LIKE CONCAT('%', lower(?2), '%' ) ))")
+    List<Category> findAllAllSortFilter(String field, String value, Sort sort);
+
+    @Query("SELECT c FROM Category c")
+    List<Category> findAllAllSort(String value, Sort sort);
+
     @Query("SELECT c FROM Category c")
     List<Category> findAllAllSort(Sort sort);
 
@@ -50,4 +58,7 @@ public interface CategoryRepo extends JpaRepository<Category, Long> {
     @Modifying
     @Query("UPDATE Seeker s SET s.category = (SELECT c FROM Category c WHERE c.longName = 'Undefined') WHERE s.category.id = ?1")
     void deleteFromSeeker(Long id);
+
+    @Query("select c from Category c where CONCAT(c.id, '')=:value")
+    List<Category> searchAdmin(@Param("value") String value);
 }

@@ -344,3 +344,13 @@ html {
 #paginations a.active {
     background-color: #FDD749;
 }
+
+#name-input, #author-input{
+    width: 100%;
+    padding: 10px;
+}
+
+textarea{
+    width: 100%;
+    height: 400px;
+}

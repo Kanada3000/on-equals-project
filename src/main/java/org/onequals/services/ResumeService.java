@@ -36,7 +36,12 @@ public class ResumeService {
     }
 
     @Transactional
-    public List<Resume> getAllAll(String sort) {
+    public List<Resume> getAllAll(String sort, String field, String search) {
+        if(search != null){
+            if (!search.isEmpty()){
+                return resumeRepo.findAllAll(field, search, Sort.by(sort));
+            }
+        }
         return resumeRepo.findAllAll(Sort.by(sort));
     }
 

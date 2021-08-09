@@ -34,13 +34,18 @@ public class CityService {
     }
 
     @Transactional
-    public List<City> getAllAll() {
+    public List<City> getAllAll(String sort, String field, String search) {
+        if(search != null){
+            if (!search.isEmpty()){
+                return cityRepo.findAllAllSortFilter(field, search, Sort.by(sort));
+            }
+        }
         return cityRepo.findAllAll();
     }
 
     @Transactional
-    public List<City> getAllAll(String sort) {
-        return cityRepo.findAllAll(Sort.by(sort));
+    public List<City> getAllAll() {
+        return cityRepo.findAllAll(Sort.by("id"));
     }
 
     @Transactional

@@ -26,7 +26,12 @@ public class SeekerService {
     }
 
     @Transactional
-    public List<Seeker> getAll(String sort) {
+    public List<Seeker> getAll(String sort, String field, String search) {
+        if(search != null){
+            if (!search.isEmpty()){
+                return seekerRepo.findAll(field, search, Sort.by(sort));
+            }
+        }
         return seekerRepo.findAll(Sort.by(sort));
     }
 

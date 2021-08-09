@@ -1,0 +1,216 @@
+#admin #body {
+    margin: 0 calc(-396px + 31.7vw) 0 60px;
+}
+
+#admin #body p, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 35px;
+    margin-left: calc(-22px + 25vw);
+}
+
+#admin #body h2 {
+    margin-top: 75px;
+    font-size: 46px;
+}
+
+#admin #body p {
+    font-size: 32px;
+}
+
+#admin #body .image-left .image-span{
+    display: inline-block;
+    width: calc(-52px + 25vw);
+    font-size: 22px;
+    margin-top: 26px;
+}
+
+#admin #body .image-center .image-span{
+    display: inline-block;
+    width: calc(-53px + 25vw);
+    font-size: 22px;
+    margin-left: 30px;
+}
+
+#admin #body .image-left {
+    display: flex;
+    flex-direction: column;
+    object-fit: contain;
+    float: left;
+    box-sizing: border-box;
+    margin: 0 30px 0 0;
+
+}
+
+#admin #body .image-left img {
+    max-width: calc(-52px + 25vw);
+}
+
+#admin #body .image-center {
+    display: flex;
+    object-fit: contain;
+    box-sizing: border-box;
+    flex-direction: row;
+    align-items: flex-end;
+    width: 100%;
+}
+
+#admin #body .image-center img{
+    max-height: calc(198px + 23.5vw);
+    max-width: calc(362px + 43.1vw);
+}
+
+#admin #body img {
+    height: auto !important;
+    object-fit: contain;
+}
+
+@media screen and (max-width: 1440px) {
+    #admin #body {
+        margin: 0 60px 0;
+    }
+
+    #admin #body p, h1, h2, h3, h4, h5, h6 {
+        margin-left: calc(-832px + 81.3vw);
+    }
+
+    #admin #body .image-left .image-span{
+        margin-top: 0;
+        margin-left: 30px;
+        width: 308px;
+    }
+
+    #admin #body .image-center .image-span{
+        margin-top: 30px;
+        margin-left: 0;
+        width: 307px;
+    }
+
+    #admin #body .image-left {
+        float: unset !important;
+        flex-direction: row;
+        align-items: flex-end;
+    }
+
+    #admin #body .image-left img {
+        max-width: calc(474px - 11.5vw);
+    }
+
+    #admin #body .image-center{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #admin #body .image-center img{
+        max-height: calc(388px + 10.3vw);
+        max-width: calc(710px + 19vw);
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    #admin #body {
+        margin: 0 calc(-61px + 11.9vw) 0;
+    }
+
+    #admin #body p, h1, h2, h3, h4, h5, h6 {
+        margin-left: 0;
+    }
+
+    #admin #body h2 {
+        font-size: calc(30px + 1.6vw);
+    }
+
+    #admin #body .image-left .image-span{
+        margin-left: calc(-10px + 4vw);
+        width: calc(207px + 9.9vw);
+    }
+
+
+    #admin #body .image-left img{
+        max-width: calc(544px - 18.2vw);
+    }
+
+    #admin #body .image-center img{
+        max-height: calc(61px + 42.3vw);
+        max-width: calc(111px + 77.5vw);
+    }
+}
+
+@media screen and (max-width: 771px) {
+
+    #admin #body h2 {
+        font-size: calc(15px + 3.4vw);
+    }
+
+    #admin #body p {
+        font-size: calc(16px + 2.1vw);
+    }
+
+    #admin #body .image-left .image-span{
+        margin-left: 20px;
+        font-size: calc(11px + 1.4vw);
+        width: calc(-128px + 53.3vw);
+    }
+
+    #admin #body .image-center .image-span{
+        margin-top: calc(3px + 3.4vw);
+        font-size: calc(11px + 1.4vw);
+        width: 307px;
+    }
+
+
+    #admin #body .image-left img{
+        max-width: calc(54px + 45.4vw);
+    }
+
+    #admin #body .image-center img{
+        max-height: calc(-29px + 54vw);
+        max-width: calc(-55px + 99vw);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #admin #body {
+        margin: 0 calc(-15px + 9.4vw) 0;
+    }
+
+    #admin #body h2 {
+        font-size: calc(2px + 6.3vw);
+    }
+
+    #admin #body p {
+        font-size: calc(2px + 5vw);
+    }
+
+    #admin #body .image-left .image-span{
+        margin-left: 0;
+        font-size: calc(6px + 2.5vw);
+        width: 100%;
+        margin-top: 14px;
+    }
+
+    #admin #body .image-left .image-span{
+        margin-top: calc(2px + 3.8vw);
+        font-size: calc(6px + 2.5vw);
+        width: 100%;
+    }
+
+    #admin #body .image-left{
+        flex-direction: column;
+    }
+
+    #admin #body .image-left img{
+        max-width: calc(323px - 10.6vw);
+    }
+
+    #admin #body .image-center img{
+        max-height: calc(14px + 45vw);
+        max-width: calc(24px + 82.5vw);
+    }
+}
+
+@font-face {
+    font-family: "NAMU Pro";
+    font-style: normal;
+    src: url(../fonts/NAMU-Pro.eot);
+    src: url(../fonts/NAMU-Pro.otf);
+    src: url(../fonts/NAMU-Pro.ttf);
+}

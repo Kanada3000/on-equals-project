@@ -39,7 +39,12 @@ public class TypeService {
     }
 
     @Transactional
-    public List<Type> getAllAll(String sort) {
+    public List<Type> getAllAll(String sort, String field, String search) {
+        if(search != null){
+            if (!search.isEmpty()){
+                return typeRepo.findAllAllSortFilter(field, search, Sort.by(sort));
+            }
+        }
         return typeRepo.findAllAll(Sort.by(sort));
     }
 
