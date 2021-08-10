@@ -23,6 +23,7 @@ public class User implements UserDetails {
     private Boolean hidden = Boolean.FALSE;
     private String file;
     private Timestamp createdDate;
+    private String photo;
 
     @Column(unique = true)
     private String link;
@@ -50,9 +51,10 @@ public class User implements UserDetails {
         createdDate = new Timestamp(System.currentTimeMillis());
     }
 
-    public User(Long id, String name, String username, String password, Boolean blocked, Boolean activated,
-                Boolean hidden, String link, Set<Role> roles, Set<Vacancy> likedVacancy, Set<Resume> likedResume,
-                String file, Timestamp createdDate) {
+    public User(Long id, String name, String username, String password,
+                Boolean blocked, Boolean activated, Boolean hidden, String file,
+                Timestamp createdDate, String photo, String link, Set<Role> roles,
+                Set<Vacancy> likedVacancy, Set<Resume> likedResume) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -60,12 +62,13 @@ public class User implements UserDetails {
         this.blocked = blocked;
         this.activated = activated;
         this.hidden = hidden;
+        this.file = file;
+        this.createdDate = createdDate;
+        this.photo = photo;
         this.link = link;
         this.roles = roles;
         this.likedVacancy = likedVacancy;
         this.likedResume = likedResume;
-        this.file = file;
-        this.createdDate = createdDate;
     }
 
     public Long getId() {
@@ -192,6 +195,14 @@ public class User implements UserDetails {
         this.createdDate = createdDate;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
@@ -207,6 +218,9 @@ public class User implements UserDetails {
                 ", blocked=" + blocked +
                 ", activated=" + activated +
                 ", hidden=" + hidden +
+                ", file='" + file + '\'' +
+                ", createdDate=" + createdDate +
+                ", photo='" + photo + '\'' +
                 ", link='" + link + '\'' +
                 ", roles=" + roles +
                 ", likedVacancy=" + likedVacancy +

@@ -64,7 +64,12 @@ public class SeekerService {
     }
 
     @Transactional
-    public List<Seeker> getUnapproved(String sort) {
+    public List<Seeker> getUnapproved(String sort, String field, String search) {
+        if(search != null){
+            if (!search.isEmpty()){
+                return seekerRepo.findUnapproved(field, search, Sort.by(sort));
+            }
+        }
         return seekerRepo.findUnapproved(Sort.by(sort));
     }
 

@@ -19,11 +19,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.Principal;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Controller
 public class PageController {
@@ -31,19 +28,18 @@ public class PageController {
     private final CategoryService categoryService;
     private final CityService cityService;
     private final PageService pageService;
-    private final StorageService storageService;
-    private final ServletContext servletContext;
     private final StoryService storyService;
     private final StickerService stickerService;
     private final CareerService careerService;
 
-    public PageController(UserService userService, CategoryService categoryService, CityService cityService, PageService pageService, StorageService storageService, ServletContext servletContext, StoryService storyService, StickerService stickerService, CareerService careerService) {
+    public PageController(UserService userService, CategoryService categoryService,
+                          CityService cityService, PageService pageService,
+                          StoryService storyService, StickerService stickerService,
+                          CareerService careerService) {
         this.userService = userService;
         this.categoryService = categoryService;
         this.cityService = cityService;
         this.pageService = pageService;
-        this.storageService = storageService;
-        this.servletContext = servletContext;
         this.storyService = storyService;
         this.stickerService = stickerService;
         this.careerService = careerService;
@@ -141,6 +137,17 @@ public class PageController {
         byte[] image = new byte[0];
         try {
             image = FileUtils.readFileToByteArray(new File("/uploads/images/" + filename));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
+    }
+
+    @GetMapping("/uploads/profile-photo/{filename}")
+    public ResponseEntity<byte[]> getPhoto(@PathVariable("filename") String filename) {
+        byte[] image = new byte[0];
+        try {
+            image = FileUtils.readFileToByteArray(new File("/uploads/profile-photo/" + filename));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -9,9 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -46,10 +44,12 @@ public class AdminApproveController {
     @GetMapping("/vacancy")
     public String adminVacanciesPage(Model model,
                                      @RequestParam("sort") Optional<String> sortVal,
+                                     @RequestParam(required = false) String fieldName,
+                                     @RequestParam(required = false) String searchField,
                                      @RequestParam("page") Optional<Integer> page,
                                      @RequestParam("size") Optional<Integer> size) {
         String sort = sortVal.orElse("id");
-        List<Vacancy> unapproved = vacancyService.getUnapproved(sort);
+        List<Vacancy> unapproved = vacancyService.getUnapproved(sort, fieldName, searchField);
 
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
@@ -73,6 +73,9 @@ public class AdminApproveController {
         model.addAttribute("resTotal", resumeService.getUnapproved());
         model.addAttribute("path", storageService.countFiles());
         model.addAttribute("sort", sort);
+        model.addAttribute("fieldName", fieldName);
+        model.addAttribute("searchField", searchField);
+        model.addAttribute("fields", Arrays.asList("id", "user", "type", "category", "city", "salary", "description"));
         return "admin/approve/vacancy";
     }
 
@@ -116,10 +119,12 @@ public class AdminApproveController {
     @GetMapping("/resume")
     public String adminResumePage(Model model,
                                   @RequestParam("sort") Optional<String> sortVal,
+                                  @RequestParam(required = false) String fieldName,
+                                  @RequestParam(required = false) String searchField,
                                   @RequestParam("page") Optional<Integer> page,
                                   @RequestParam("size") Optional<Integer> size) {
         String sort = sortVal.orElse("id");
-        List<Resume> unapproved = resumeService.getUnapproved(sort);
+        List<Resume> unapproved = resumeService.getUnapproved(sort, fieldName, searchField);
 
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
@@ -143,6 +148,9 @@ public class AdminApproveController {
         model.addAttribute("resTotal", unapproved);
         model.addAttribute("path", storageService.countFiles());
         model.addAttribute("sort", sort);
+        model.addAttribute("fieldName", fieldName);
+        model.addAttribute("searchField", searchField);
+        model.addAttribute("fields", Arrays.asList("id", "user", "type", "category", "city", "salary", "description"));
         return "admin/approve/resume";
     }
 
@@ -186,10 +194,12 @@ public class AdminApproveController {
     @GetMapping("/employer")
     public String adminEmployerPage(Model model,
                                     @RequestParam("sort") Optional<String> sortVal,
+                                    @RequestParam(required = false) String fieldName,
+                                    @RequestParam(required = false) String searchField,
                                     @RequestParam("page") Optional<Integer> page,
                                     @RequestParam("size") Optional<Integer> size) {
         String sort = sortVal.orElse("id");
-        List<Employer> unapproved = employerService.getUnapproved(sort);
+        List<Employer> unapproved = employerService.getUnapproved(sort, fieldName, searchField);
 
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
@@ -212,6 +222,10 @@ public class AdminApproveController {
         model.addAttribute("resTotal", resumeService.getUnapproved());
         model.addAttribute("path", storageService.countFiles());
         model.addAttribute("sort", sort);
+        model.addAttribute("fieldName", fieldName);
+        model.addAttribute("searchField", searchField);
+        model.addAttribute("fields", Arrays.asList("id", "user", "name", "email", "category", "city", "site",
+                "description", "age", "amount", "size", "facebook", "instagram", "linkedIn", "twitter"));
         return "admin/approve/employer";
     }
 
@@ -277,10 +291,12 @@ public class AdminApproveController {
     @GetMapping("/seeker")
     public String adminSeekerPage(Model model,
                                   @RequestParam("sort") Optional<String> sortVal,
+                                  @RequestParam(required = false) String fieldName,
+                                  @RequestParam(required = false) String searchField,
                                   @RequestParam("page") Optional<Integer> page,
                                   @RequestParam("size") Optional<Integer> size) {
         String sort = sortVal.orElse("id");
-        List<Seeker> unapproved = seekerService.getUnapproved(sort);
+        List<Seeker> unapproved = seekerService.getUnapproved(sort, fieldName, searchField);
 
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
@@ -303,6 +319,10 @@ public class AdminApproveController {
         model.addAttribute("resTotal", resumeService.getUnapproved());
         model.addAttribute("path", storageService.countFiles());
         model.addAttribute("sort", sort);
+        model.addAttribute("fieldName", fieldName);
+        model.addAttribute("searchField", searchField);
+        model.addAttribute("fields", Arrays.asList("id", "user", "name", "email", "category", "city", "site",
+                "description", "facebook", "instagram", "linkedIn", "twitter"));
         return "admin/approve/seeker";
     }
 

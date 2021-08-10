@@ -73,6 +73,22 @@ public class StorageService {
         return ("/uploads/images/" + folder + "/" + destFileName);
     }
 
+    public String uploadPhoto(MultipartFile file, String folder) throws IOException {
+        String sourceName = file.getOriginalFilename();
+        String sourceExt = FilenameUtils.getExtension(sourceName).toLowerCase();
+
+
+        File directory = new File("/uploads/profile-photo/" + folder);
+        directory.mkdirs();
+
+        String destFileName = folder.concat(".").concat(sourceExt);
+
+        var is = file.getInputStream();
+        Files.copy(is, Paths.get("/uploads/profile-photo/" + destFileName),
+                StandardCopyOption.REPLACE_EXISTING);
+        return ("/uploads/profile-photo/" + destFileName);
+    }
+
     @Transactional
     public List<Object> findFiles(User user, Boolean approved) {
         List<Object> list = new ArrayList<Object>();

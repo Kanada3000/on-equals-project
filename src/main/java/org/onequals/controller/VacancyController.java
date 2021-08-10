@@ -28,7 +28,9 @@ public class VacancyController {
     private final CityService cityService;
     private final ReCaptchaRegisterService reCaptchaRegisterService;
 
-    public VacancyController(CategoryService categoryService, VacancyService vacancyService, UserService userService, TypeService typeService, CityService cityService, ReCaptchaRegisterService reCaptchaRegisterService) {
+    public VacancyController(CategoryService categoryService, VacancyService vacancyService,
+                             UserService userService, TypeService typeService,
+                             CityService cityService, ReCaptchaRegisterService reCaptchaRegisterService) {
         this.categoryService = categoryService;
         this.vacancyService = vacancyService;
         this.userService = userService;

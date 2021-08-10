@@ -64,7 +64,12 @@ public class EmployerService {
     }
 
     @Transactional
-    public List<Employer> getUnapproved(String sort) {
+    public List<Employer> getUnapproved(String sort, String field, String search) {
+        if(search != null){
+            if (!search.isEmpty()){
+                return employerRepo.findUnapproved(field, search, Sort.by(sort));
+            }
+        }
         return employerRepo.findUnapproved(Sort.by(sort));
     }
 

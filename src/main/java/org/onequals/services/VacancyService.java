@@ -132,7 +132,12 @@ public class VacancyService {
     }
 
     @Transactional
-    public List<Vacancy> getUnapproved(String sort) {
+    public List<Vacancy> getUnapproved(String sort, String field, String search) {
+        if(search != null){
+            if (!search.isEmpty()){
+                return vacancyRepo.findUnapproved(field, search, Sort.by(sort));
+            }
+        }
         return vacancyRepo.findUnapproved(Sort.by(sort));
     }
 

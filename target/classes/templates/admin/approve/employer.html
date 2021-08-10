@@ -109,6 +109,15 @@
         <p>3: працюємо й поза Україною</p>
         <br/>
         <br/>
+        <h2>Пошук по полю</h2>
+        <select name="fieldName" form="sortAdminForm">
+            <div th:each="f:${fields}" th:remove="tag">
+                <option th:value="${f}" th:text="${f}"
+                        th:selected="${f == fieldName ? true : false}"></option>
+            </div>
+        </select>
+        <input type="text" name="searchField" th:value="${searchField}" form="sortAdminForm">
+        <button type="submit" form="sortAdminForm">Пошук</button>
         <div class="table">
             <table border="1">
                 <tr class="head">
@@ -241,7 +250,9 @@
         <div id="paginations">
             <div th:if="${employer.totalPages > 0}" class="pagination"
                  th:each="pageNumber : ${pageNumbers}">
-                <a th:href="@{/admin/approve/employer(size=${employer.size}, page=${pageNumber})}"
+                <a th:href="@{/admin/approve/employer(size=${employer.size}, page=${pageNumber},
+                searchField=${searchField},
+                fieldName=${fieldName}))}"
                    th:text="${pageNumber}"
                    th:class="${pageNumber==employer.number + 1} ? active"></a>
             </div>

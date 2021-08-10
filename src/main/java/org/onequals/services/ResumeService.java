@@ -144,7 +144,12 @@ public class ResumeService {
     }
 
     @Transactional
-    public List<Resume> getUnapproved(String sort) {
+    public List<Resume> getUnapproved(String sort, String field, String search) {
+        if(search != null){
+            if (!search.isEmpty()){
+                return resumeRepo.findUnapproved(field, search, Sort.by(sort));
+            }
+        }
         return resumeRepo.findUnapproved(Sort.by(sort));
     }
 

@@ -9,11 +9,40 @@
 #profile-head .avatar {
     width: auto;
     height: auto;
+    position: relative;
 }
 
 #profile-head .avatar img {
     width: 326px;
     height: auto;
+    cursor: pointer;
+    border-radius: 50vw;
+}
+
+#profile-head .avatar img.ava {
+    display: inline;
+}
+
+#profile-head .avatar img.hide {
+    display: none;
+}
+
+#profile-head input{
+    display: none;
+}
+
+#profile-head .avatar img.ava:hover{
+    -webkit-filter: brightness(60%);
+    filter: brightness(60%);
+}
+
+#profile-head .avatar img.ava:hover ~ img.hide {
+    display: inline;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
 }
 
 #profile-head .info {

@@ -6,7 +6,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +27,11 @@ public class UserController {
     private final CategoryService categoryService;
     private final TypeService typeService;
 
-    public UserController(UserService userService, EmployerService employerService, SeekerService seekerService, VacancyService vacancyService, ResumeService resumeService, StorageService storageService, CityService cityService, CategoryService categoryService, TypeService typeService) {
+    public UserController(UserService userService, EmployerService employerService,
+                          SeekerService seekerService, VacancyService vacancyService,
+                          ResumeService resumeService, StorageService storageService,
+                          CityService cityService, CategoryService categoryService,
+                          TypeService typeService) {
         this.userService = userService;
         this.employerService = employerService;
         this.seekerService = seekerService;
@@ -58,6 +64,10 @@ public class UserController {
         model.addAttribute("country", cityService.getAllCountry());
         model.addAttribute("categories", categoryService.getAll());
         model.addAttribute("types", typeService.getAll());
+        if (user.getPhoto() != null)
+            if (!user.getPhoto().isEmpty()) {
+                model.addAttribute("photo", user.getPhoto());
+            }
         return "profile";
     }
 
@@ -319,6 +329,14 @@ public class UserController {
                 resume.setSalary(salary);
             resumeService.save(resume);
         }
+        return "redirect:/profile";
+    }
+
+    @PostMapping("/add-photo")
+    public String addPhoto(Principal principal, @RequestParam MultipartFile file) throws IOException {
+        User user = userService.findUser(principal.getName());
+        user.setPhoto(storageService.uploadPhoto(file, principal.getName()));
+        userService.save(user);
         return "redirect:/profile";
     }
 }

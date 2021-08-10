@@ -185,6 +185,9 @@ $(function () {
     })
 })
 
+function photoForm(){
+    $("#photoForm").submit()
+}
 
 
 

@@ -7,7 +7,6 @@ import org.onequals.services.CategoryService;
 import org.onequals.services.CityService;
 import org.onequals.services.SeekerService;
 import org.onequals.services.UserService;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +26,8 @@ public class SeekerController {
     private final UserService userService;
     private final SeekerService seekerService;
 
-    public SeekerController(CityService cityService, CategoryService categoryService, UserService userService, SeekerService seekerService) {
+    public SeekerController(CityService cityService, CategoryService categoryService,
+                            UserService userService, SeekerService seekerService) {
         this.cityService = cityService;
         this.categoryService = categoryService;
         this.userService = userService;

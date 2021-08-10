@@ -24,7 +24,13 @@
 <div id="profile-head">
     <div class="avatar">
         <div class="out avatarblock"><a href="/logout">Вийти</a></div>
-        <img src="/images/avatar.png">
+
+        <label for="file">
+            <img class="ava" th:if="${photo}" th:src="${photo}">
+            <img class="ava" th:unless="${photo}" src="/images/avatar.png">
+            <img class="hide" src="/images/camera.png">
+        </label>
+        <input id="file" type="file" name="file" form="photoForm" onchange="photoForm()">
     </div>
     <div class="info">
         <h1 th:text="${user.getName()}"></h1>
@@ -381,6 +387,7 @@
 <div class="backdrop"></div>
 
 <form id="likeForm" th:action="@{/profile/deleteLike}" method="POST"></form>
+<form id="photoForm" th:action="@{/profile/add-photo}" method="POST" enctype="multipart/form-data"></form>
 <form id="formFile" th:action="@{/profile/deleteFile}" method="POST"></form>
 <form id="formEdit" th:action="@{/profile/editProfile}" method="POST"></form>
 <form id="vacancyEdit" th:action="@{/profile/editVacancy}" method="POST"></form>

@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -22,23 +20,16 @@ import java.util.stream.IntStream;
 public class AdminSortController {
     private final CategoryService categoryService;
     private final VacancyService vacancyService;
-    private final UserService userService;
-    private final TypeService typeService;
-    private final CityService cityService;
     private final ResumeService resumeService;
     private final EmployerService employerService;
     private final SeekerService seekerService;
     private final StorageService storageService;
 
-    public AdminSortController(CategoryService categoryService, VacancyService vacancyService, UserService userService,
-                               TypeService typeService, CityService cityService, ResumeService resumeService,
-                               EmployerService employerService, SeekerService seekerService,
-                               StorageService storageService) {
+    public AdminSortController(CategoryService categoryService, VacancyService vacancyService,
+                               ResumeService resumeService, EmployerService employerService,
+                               SeekerService seekerService, StorageService storageService) {
         this.categoryService = categoryService;
         this.vacancyService = vacancyService;
-        this.userService = userService;
-        this.typeService = typeService;
-        this.cityService = cityService;
         this.resumeService = resumeService;
         this.employerService = employerService;
         this.seekerService = seekerService;

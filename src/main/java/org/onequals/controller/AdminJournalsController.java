@@ -1,7 +1,6 @@
 package org.onequals.controller;
 
 import org.onequals.domain.Career;
-import org.onequals.domain.Category;
 import org.onequals.domain.Sticker;
 import org.onequals.domain.Story;
 import org.onequals.services.*;
@@ -24,11 +23,7 @@ import java.util.stream.IntStream;
 @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('ROLE_ADMIN')")
 @RequestMapping("/admin")
 public class AdminJournalsController {
-    private final CategoryService categoryService;
     private final VacancyService vacancyService;
-    private final UserService userService;
-    private final TypeService typeService;
-    private final CityService cityService;
     private final ResumeService resumeService;
     private final EmployerService employerService;
     private final SeekerService seekerService;
@@ -38,12 +33,11 @@ public class AdminJournalsController {
     private final StickerService stickerService;
     private final CareerService careerService;
 
-    public AdminJournalsController(CategoryService categoryService, VacancyService vacancyService, UserService userService, TypeService typeService, CityService cityService, ResumeService resumeService, EmployerService employerService, SeekerService seekerService, StorageService storageService, PageService pageService, StoryService storyService, StickerService stickerService, CareerService careerService) {
-        this.categoryService = categoryService;
+    public AdminJournalsController(VacancyService vacancyService, ResumeService resumeService,
+                                   EmployerService employerService, SeekerService seekerService,
+                                   StorageService storageService, PageService pageService, StoryService storyService,
+                                   StickerService stickerService, CareerService careerService) {
         this.vacancyService = vacancyService;
-        this.userService = userService;
-        this.typeService = typeService;
-        this.cityService = cityService;
         this.resumeService = resumeService;
         this.employerService = employerService;
         this.seekerService = seekerService;

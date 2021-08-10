@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.onequals.domain.Role;
 import org.onequals.domain.User;
-import org.onequals.domain.Vacancy;
 
 import java.util.List;
 import java.util.Set;

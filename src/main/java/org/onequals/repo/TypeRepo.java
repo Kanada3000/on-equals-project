@@ -1,6 +1,5 @@
 package org.onequals.repo;
 
-import org.onequals.domain.Category;
 import org.onequals.domain.Type;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;

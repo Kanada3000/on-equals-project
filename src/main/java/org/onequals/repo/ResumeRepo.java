@@ -1,12 +1,9 @@
 package org.onequals.repo;
 
-import org.onequals.domain.Employer;
 import org.onequals.domain.Resume;
 import org.onequals.domain.User;
-import org.onequals.domain.Vacancy;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -73,4 +70,14 @@ public interface ResumeRepo extends JpaRepository<Resume, Long> {
 
     @Query("SELECT r FROM Resume r WHERE r.approved = false")
     List<Resume> findUnapproved(Sort sort);
+
+    @Query("SELECT c FROM Resume c join c.city cit WHERE c.approved = false AND " +
+            "((?1 LIKE 'id') AND (CONCAT(c.id, '') = ?2)) OR " +
+            "((?1 LIKE 'user') AND (lower(c.user.username) LIKE CONCAT('%', lower(?2), '%' ))) OR " +
+            "((?1 LIKE 'type') AND (lower(c.type.name) LIKE CONCAT('%', lower(?2), '%' ))) OR " +
+            "((?1 LIKE 'category') AND (lower(c.category.longName) LIKE CONCAT('%', lower(?2), '%' ))) OR " +
+            "((?1 LIKE 'city') AND (lower(cit.city) LIKE CONCAT('%', lower(?2), '%' ))) OR " +
+            "((?1 LIKE 'salary') AND (lower(c.salary) LIKE CONCAT('%', lower(?2), '%' ))) OR " +
+            "((?1 LIKE 'description') AND (lower(c.description) LIKE CONCAT('%', lower(?2), '%' )))")
+    List<Resume> findUnapproved(String field, String value, Sort sort);
 }

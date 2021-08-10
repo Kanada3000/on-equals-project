@@ -7,7 +7,6 @@ import org.onequals.services.CategoryService;
 import org.onequals.services.CityService;
 import org.onequals.services.EmployerService;
 import org.onequals.services.UserService;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +26,8 @@ public class EmployerController {
     private final UserService userService;
     private final EmployerService employerService;
 
-    public EmployerController(CityService cityService, CategoryService categoryService, UserService userService, EmployerService employerService) {
+    public EmployerController(CityService cityService, CategoryService categoryService,
+                              UserService userService, EmployerService employerService) {
         this.cityService = cityService;
         this.categoryService = categoryService;
         this.userService = userService;
