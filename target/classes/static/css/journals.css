@@ -127,7 +127,7 @@ h2 {
     font-size: 32px;
 }
 
-#stories .slideshow .post .post-text img {
+#stories .slideshow .post .post-text .title img {
     display: none;
 }
 
@@ -373,7 +373,7 @@ h2 {
         display: none;
     }
 
-    #stories .slideshow .post .post-text img {
+    #stories .slideshow .post .post-text .title img {
         display: block;
         width: calc(281px - 7.5vw);
         height: calc(281px - 7.5vw);
@@ -473,7 +473,7 @@ h2 {
         font-size: calc(11px + 1.4vw);
     }
 
-    #stories .slideshow .post .post-text img {
+    #stories .slideshow .post .post-text .title img {
         width: calc(93px + 16.8vw);
         height: calc(93px + 16.8vw);
         margin-right: calc(28px + 3.8vw);
@@ -589,7 +589,7 @@ h2 {
         font-size: calc(6px + 2.5vw);
     }
 
-    #stories .slideshow .post .post-text img {
+    #stories .slideshow .post .post-text .title img {
         width: calc(-9px + 38.1vw);
         height: calc(-9px + 38.1vw);
         margin-right: calc(25px + 4.4vw);
