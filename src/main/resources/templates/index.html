@@ -152,7 +152,7 @@
 
 <div id="about">
     <div class="video">
-        <iframe src="https://www.youtube.com/embed/34oTCkwwiNk"
+        <iframe src="https://www.youtube.com/embed/140KSPfCjSU"
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen>
@@ -298,7 +298,8 @@
 </footer>
 
 <div id="alert">
-    <span th:if="${alert}" th:text="${alert}"></span>
+    <span th:if="${alert}" th:text="${alert}">Ваше резюме успішно додано та після перевірки з'явиться на сайті</span>
+    <div class="button">Окей :)</div>
 </div>
 <script th:inline="javascript">
     var alertMode = [[${alertMode}]]

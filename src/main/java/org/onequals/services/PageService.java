@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class PageService {
@@ -36,8 +37,11 @@ public class PageService {
     }
 
     @Transactional
-    public List<Page> getByLabel(String label) {
-        return pageRepo.findAllByLabel(label);
+    public List<Page> getByLabel(String label, String category) {
+        if (Objects.equals(category, "All")) {
+            return pageRepo.findAllByLabel(label);
+        } else
+            return pageRepo.findAllByLabel(label, category);
     }
 
     @Transactional

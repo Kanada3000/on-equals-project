@@ -57,6 +57,7 @@ public class VacancyController {
         int pageSize = size.orElse(15);
         model.addAttribute("minVal", min);
         model.addAttribute("maxVal", max);
+        model.addAttribute("currentPage", currentPage);
 
         User user = new User();
 
@@ -104,6 +105,7 @@ public class VacancyController {
                             .boxed()
                             .collect(Collectors.toList());
                     model.addAttribute("pageNumbers", pageNumbers);
+                    model.addAttribute("totalPages", totalPages);
                 }
             } else {
                 model.addAttribute("categories", categoryService.getAll());

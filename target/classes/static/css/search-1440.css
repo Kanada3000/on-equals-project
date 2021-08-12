@@ -39,10 +39,6 @@
         padding: 0 0 10px;
     }
 
-    #vacancies #paginations a {
-        font-size: 32px;
-    }
-
     #vacancies .vacancy .buttons {
         flex-wrap: nowrap;
         justify-content: space-between;
@@ -71,11 +67,32 @@
     #vacancies .vacancy .hide {
         width: calc(-546px + 103.6vw);
     }
+
+    #vacancies #paginations {
+        margin: calc(59px + 1.2vw) calc(-99px + 12.5vw) calc(244px - 13vw);
+    }
 }
 
 @media screen and (max-width: 1024px) {
     #vacancies .vacancy .hide {
         width: 100%;
+    }
+
+    #vacancies #paginations {
+        margin: 70px 30px 110px;
+    }
+
+    #vacancies #paginations .pagination{
+        height: calc(30px + 9.1vw);
+    }
+
+    #vacancies #paginations a {
+        font-size: calc(30px + 1.6vw);
+    }
+
+    #vacancies #paginations .pagination a {
+        width: calc(30px + 9.1vw);
+        height: calc(30px + 9.1vw);
     }
 }
 
@@ -156,6 +173,7 @@
         padding-left: 0;
         float: unset;
         order: 3;
+        border-right: none;
     }
 
     #vacancies .vacancy {
@@ -325,6 +343,23 @@
     #vacancies .vacancy .hide span.descript {
         font-size: calc(16px + 2.1vw);
     }
+
+    #vacancies #paginations {
+        margin: calc(49px + 2.7vw) 0 calc(-20px + 16.8vw);
+    }
+
+    #vacancies #paginations .pagination{
+        height: calc(162px - 7.9vw);
+    }
+
+    #vacancies #paginations a {
+        font-size: calc(16px + 3.4vw);
+    }
+
+    #vacancies #paginations .pagination a {
+        width: calc(162px - 7.9vw);
+        height: calc(162px - 7.9vw);
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -418,6 +453,23 @@
 
     #vacancies .vacancy .hide span.descript {
         font-size: calc(14px + 2.5vw);
+    }
+
+    #vacancies #paginations {
+        margin: calc(5px + 11.9vw) 0 calc(4px + 11.9vw);
+    }
+
+    #vacancies #paginations .pagination{
+        height: calc(13px + 23.1vw);
+    }
+
+    #vacancies #paginations a {
+        font-size: calc(2px + 6.3vw);
+    }
+
+    #vacancies #paginations .pagination a {
+        width: calc(13px + 23.1vw);
+        height: calc(13px + 23.1vw);
     }
 
 }

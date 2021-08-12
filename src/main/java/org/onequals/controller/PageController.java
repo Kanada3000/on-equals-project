@@ -213,14 +213,22 @@ public class PageController {
     @GetMapping("/journal/seeker")
     public String journalSeeker(Model model,
                                 @RequestParam("page") Optional<Integer> page,
+                                @RequestParam("pageAdvice") Optional<Integer> pageAdvice,
                                 @RequestParam("pageCareer") Optional<Integer> pageCareer) {
         int currentPage = page.orElse(1);
+        int currentPageAdvice = pageAdvice.orElse(1);
         int pageSize = 5;
-        org.springframework.data.domain.Page<Page> pageObj = pageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), pageService.getByLabel("Шукачам"));
+        org.springframework.data.domain.Page<Page> pageObj = pageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), pageService.getByLabel("Шукачам", "Доступність"));
         int totalPages = pageObj.getTotalPages();
         if (totalPages > 0) {
             model.addAttribute("totalPages", totalPages);
             model.addAttribute("currentPage", currentPage);
+        }
+        org.springframework.data.domain.Page<Page> pageObjAdvice = pageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), pageService.getByLabel("Шукачам", "Поради"));
+        int totalPagesAdvice = pageObjAdvice.getTotalPages();
+        if (totalPagesAdvice > 0) {
+            model.addAttribute("totalPagesAdvice", totalPagesAdvice);
+            model.addAttribute("currentPageAdvice", currentPageAdvice);
         }
 
         int currentPageCareer = pageCareer.orElse(1);
@@ -233,19 +241,47 @@ public class PageController {
         }
         model.addAttribute("career", pageObjCareer);
         model.addAttribute("page", pageObj);
+        model.addAttribute("pageAdvice", pageObjAdvice);
         model.addAttribute("story", storyService.getAll());
         return "for-seeker";
     }
 
     @GetMapping("/journal/employer")
-    public String journalEmployer(Model model) {
-        model.addAttribute("page", pageService.getByLabel("Роботодавцям"));
+    public String journalEmployer(Model model,
+                                  @RequestParam("page") Optional<Integer> page,
+                                  @RequestParam("pageAdvice") Optional<Integer> pageAdvice) {
+        int currentPage = page.orElse(1);
+        int currentPageAdvice = pageAdvice.orElse(1);
+        int pageSize = 5;
+        org.springframework.data.domain.Page<Page> pageObj = pageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), pageService.getByLabel("Роботодавцям", "Доступність"));
+        int totalPages = pageObj.getTotalPages();
+        if (totalPages > 0) {
+            model.addAttribute("totalPages", totalPages);
+            model.addAttribute("currentPage", currentPage);
+        }
+        org.springframework.data.domain.Page<Page> pageObjAdvice = pageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), pageService.getByLabel("Роботодавцям", "Поради"));
+        int totalPagesAdvice = pageObjAdvice.getTotalPages();
+        if (totalPagesAdvice > 0) {
+            model.addAttribute("totalPagesAdvice", totalPagesAdvice);
+            model.addAttribute("currentPageAdvice", currentPageAdvice);
+        }
+        model.addAttribute("page", pageObj);
+        model.addAttribute("pageAdvice", pageObjAdvice);
         return "for-employer";
     }
 
     @GetMapping("/journal/legislation")
-    public String journalLegislation(Model model) {
-        model.addAttribute("page", pageService.getByLabel("Законодавство"));
+    public String journalLegislation(Model model,
+                                  @RequestParam("page") Optional<Integer> page) {
+        int currentPage = page.orElse(1);
+        int pageSize = 5;
+        org.springframework.data.domain.Page<Page> pageObj = pageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), pageService.getByLabel("Законодавство", "Доступність"));
+        int totalPages = pageObj.getTotalPages();
+        if (totalPages > 0) {
+            model.addAttribute("totalPages", totalPages);
+            model.addAttribute("currentPage", currentPage);
+        }
+        model.addAttribute("page", pageObj);
         return "legislation";
     }
 

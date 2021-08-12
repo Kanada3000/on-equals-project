@@ -58,13 +58,15 @@ public class AdminJournalsController {
                              @RequestParam String data,
                              @RequestParam String shortData,
                              @RequestParam String author,
-                             @RequestParam String label) throws IOException {
+                             @RequestParam String label,
+                             @RequestParam String category) throws IOException {
         org.onequals.domain.Page page = new org.onequals.domain.Page();
         page.setName(title);
         page.setFullBody(data);
         page.setShortBody(shortData);
         page.setAuthor(author);
         page.setLabel(label);
+        page.setCategory(category);
         Timestamp ts = new Timestamp(System.currentTimeMillis());
         page.setCreatedDate(ts);
         pageService.save(page);
@@ -82,6 +84,7 @@ public class AdminJournalsController {
         model.addAttribute("data", page.getFullBody());
         model.addAttribute("shortData", page.getShortBody());
         model.addAttribute("label", page.getLabel());
+        model.addAttribute("category", page.getCategory());
         model.addAttribute("author", page.getAuthor());
         model.addAttribute("name", page.getName());
         return "admin/journals/edit";
@@ -93,13 +96,15 @@ public class AdminJournalsController {
                            @RequestParam String data,
                            @RequestParam String shortData,
                            @RequestParam String author,
-                           @RequestParam String label) {
+                           @RequestParam String label,
+                           @RequestParam String category) {
         org.onequals.domain.Page page = pageService.getById(id);
         page.setName(title);
         page.setFullBody(data);
         page.setShortBody(shortData);
         page.setAuthor(author);
         page.setLabel(label);
+        page.setCategory(category);
         pageService.save(page);
         return switch (label) {
             case ("Шукачам") -> "redirect:/admin/journals/for-seeker";
@@ -120,7 +125,7 @@ public class AdminJournalsController {
                             @RequestParam("size") Optional<Integer> size) {
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
-        Page<org.onequals.domain.Page> pageObj = pageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), pageService.getByLabel("Шукачам"));
+        Page<org.onequals.domain.Page> pageObj = pageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), pageService.getByLabel("Шукачам", "All"));
         int totalPages = pageObj.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
@@ -145,7 +150,7 @@ public class AdminJournalsController {
                               @RequestParam("size") Optional<Integer> size) {
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
-        Page<org.onequals.domain.Page> pageObj = pageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), pageService.getByLabel("Роботодавцям"));
+        Page<org.onequals.domain.Page> pageObj = pageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), pageService.getByLabel("Роботодавцям", "All"));
         int totalPages = pageObj.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
@@ -170,7 +175,7 @@ public class AdminJournalsController {
                               @RequestParam("size") Optional<Integer> size) {
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(15);
-        Page<org.onequals.domain.Page> pageObj = pageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), pageService.getByLabel("Законодавство"));
+        Page<org.onequals.domain.Page> pageObj = pageService.findPaginated(PageRequest.of(currentPage - 1, pageSize), pageService.getByLabel("Законодавство", "All"));
         int totalPages = pageObj.getTotalPages();
         if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)

@@ -24,15 +24,37 @@
     <img class="img6" src="/images/star-5.png">
 </div>
 
-<div id="tile">
+<div id="tile" th:if="${page}">
     <h2>Доступність</h2>
     <div class="container">
+        <a th:onclick="'javascript: setPosition()'" th:if="${currentPage > 1}" th:href="@{/journal/legislation(page=${currentPage - 1})}">
+            <div class="block prev-page" id="grey" th:if="${totalPages > 1}">
+                Попередня сторінка...
+            </div>
+        </a>
+        <a th:onclick="'javascript: setPosition()'" th:if="${currentPage <= 1}" th:href="@{/journal/legislation(page=${totalPages})}">
+            <div class="block prev-page" id="grey" th:if="${totalPages > 1}">
+                Попередня сторінка...
+            </div>
+        </a>
         <div th:each="p: ${page}" th:remove="tag">
             <a th:href="@{'/pages/' + ${p.id}}">
                 <div class="block" id="grey" th:text="${p.name}">
                 </div>
             </a>
         </div>
+        <a th:onclick="'javascript: setPosition()'" th:if="${totalPages > currentPage}" th:href="@{/journal/legislation(page=${currentPage + 1})}">
+            <div class="block next-page" id="grey" th:if="${totalPages > 1}">
+                Наступна сторінка...
+            </div>
+        </a>
+
+        <a th:onclick="'javascript: setPosition()'" th:if="${totalPages <= currentPage}" th:href="@{/journal/legislation(page=1)}">
+            <div class="block next-page" id="grey" th:if="${totalPages > 1}">
+                Наступна сторінка...
+            </div>
+        </a>
+
     </div>
 </div>
 

@@ -58,8 +58,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="database.data.extractors.current.export.id" value="Comma-separated (CSV)_id" />
-    <property name="database.data.extractors.current.id" value="Comma-separated (CSV)_id" />
+    <property name="database.data.extractors.current.export.id" value="CSV-Groovy.csv.groovy" />
+    <property name="database.data.extractors.current.id" value="CSV-Groovy.csv.groovy" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/db/migration" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -190,7 +190,8 @@
       <workItem from="1628486252804" duration="30329000" />
       <workItem from="1628578399109" duration="6309000" />
       <workItem from="1628586722338" duration="1194000" />
-      <workItem from="1628588719639" duration="888000" />
+      <workItem from="1628588719639" duration="1124000" />
+      <workItem from="1628751845371" duration="20232000" />
     </task>
     <servers />
   </component>

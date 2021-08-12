@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface PageRepo extends JpaRepository<Page, Long> {
 
+    @Query("SELECT p FROM Page p WHERE p.label = ?1 AND p.category = ?2")
+    List<Page> findAllByLabel(String label, String category);
+
     @Query("SELECT p FROM Page p WHERE p.label = ?1")
     List<Page> findAllByLabel(String label);
 

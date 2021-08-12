@@ -206,10 +206,37 @@
             </div>
         </div>
 
-        <div id="paginations">
-            <div th:if="${vacancies.totalPages > 0 && userType == 'employer'}" class="pagination"
-                 th:each="pageNumber : ${pageNumbers}">
-                <a th:href="@{/resume/list(size=${vacancies.size},
+        <div id="paginations" th:if="${vacancies.totalPages > 1}">
+            <div th:if="${vacancies.totalPages > 0 && userType == 'employer'}" th:remove="tag">
+                <a th:if="${currentPage > 1}" th:onclick="setPos()" th:href="@{/resume/list(size=${vacancies.size},
+                page=${currentPage - 1},
+                sort=${sort},
+                likes=${likesId},
+                category=${category},
+                type=${typeVal},
+                min=${minVal},
+                max=${maxVal})
+                }">&#8592;</a>
+
+                <a th:unless="${currentPage > 1}" th:onclick="setPos()" th:href="@{/resume/list(size=${vacancies.size},
+                page=${totalPages},
+                sort=${sort},
+                likes=${likesId},
+                category=${category},
+                type=${typeVal},
+                min=${minVal},
+                max=${maxVal})
+                }">&#8592;</a>
+
+                <div class="pagination">
+                    <a th:onclick="setPos()"
+                       th:if="${((currentPage == 1 && iter.count < 6) ||
+                       (iter.count >= currentPage - 1 && iter.count <= currentPage + 3 && currentPage + 3 <= iter.size) ||
+                       (iter.count >= currentPage - 2 && iter.count <= currentPage + 2 && currentPage + 2 <= iter.size && currentPage + 3 > iter.size) ||
+                       (iter.count >= currentPage - 3 && iter.count <= currentPage + 1 && currentPage + 1 <= iter.size && currentPage + 2 > iter.size) ||
+                       (iter.count >= currentPage - 4 && iter.count <= currentPage && currentPage <= iter.size && currentPage + 1 > iter.size))}"
+                       th:each="pageNumber, iter: ${pageNumbers}"
+                       th:href="@{/resume/list(size=${vacancies.size},
                 page=${pageNumber},
                 sort=${sort},
                 likes=${likesId},
@@ -218,12 +245,65 @@
                 min=${minVal},
                 max=${maxVal})
                 }"
-                   th:text="${pageNumber}"
-                   th:class="${pageNumber==vacancies.number + 1} ? active"></a>
+                       th:text="${pageNumber}"
+                       th:class="${pageNumber==vacancies.number + 1} ? active">
+
+                    </a>
+                </div>
+
+                <a th:if="${currentPage < totalPages}" th:onclick="setPos()" th:href="@{/resume/list(size=${vacancies.size},
+                page=${currentPage + 1},
+                sort=${sort},
+                likes=${likesId},
+                category=${category},
+                type=${typeVal},
+                min=${minVal},
+                max=${maxVal})
+                }">&#8594;</a>
+
+                <a th:unless="${currentPage < totalPages}" th:onclick="setPos()" th:href="@{/resume/list(size=${vacancies.size},
+                page=${1},
+                sort=${sort},
+                likes=${likesId},
+                category=${category},
+                type=${typeVal},
+                min=${minVal},
+                max=${maxVal})
+                }">&#8594;</a>
             </div>
-            <div th:if="${vacancies.totalPages > 0 && userType == 'seeker'}" class="pagination"
-                 th:each="pageNumber : ${pageNumbers}">
-                <a th:href="@{/vacancy/list(size=${vacancies.size},
+
+
+
+            <div th:if="${vacancies.totalPages > 0 && userType == 'seeker'}" th:remove="tag">
+                <a th:if="${currentPage > 1}" th:onclick="setPos()" th:href="@{/vacancy/list(size=${vacancies.size},
+                page=${currentPage - 1},
+                sort=${sort},
+                likes=${likesId},
+                category=${category},
+                type=${typeVal},
+                min=${minVal},
+                max=${maxVal})
+                }">&#8592;</a>
+
+                <a th:unless="${currentPage > 1}" th:onclick="setPos()" th:href="@{/vacancy/list(size=${vacancies.size},
+                page=${totalPages},
+                sort=${sort},
+                likes=${likesId},
+                category=${category},
+                type=${typeVal},
+                min=${minVal},
+                max=${maxVal})
+                }">&#8592;</a>
+
+                <div class="pagination">
+                    <a th:onclick="setPos()"
+                       th:if="${((currentPage == 1 && iter.count < 6) ||
+                       (iter.count >= currentPage - 1 && iter.count <= currentPage + 3 && currentPage + 3 <= iter.size) ||
+                       (iter.count >= currentPage - 2 && iter.count <= currentPage + 2 && currentPage + 2 <= iter.size && currentPage + 3 > iter.size) ||
+                       (iter.count >= currentPage - 3 && iter.count <= currentPage + 1 && currentPage + 1 <= iter.size && currentPage + 2 > iter.size) ||
+                       (iter.count >= currentPage - 4 && iter.count <= currentPage && currentPage <= iter.size && currentPage + 1 > iter.size))}"
+                       th:each="pageNumber, iter: ${pageNumbers}"
+                       th:href="@{/vacancy/list(size=${vacancies.size},
                 page=${pageNumber},
                 sort=${sort},
                 likes=${likesId},
@@ -232,9 +312,35 @@
                 min=${minVal},
                 max=${maxVal})
                 }"
-                   th:text="${pageNumber}"
-                   th:class="${pageNumber==vacancies.number + 1} ? active"></a>
+                       th:text="${pageNumber}"
+                       th:class="${pageNumber==vacancies.number + 1} ? active">
+
+                    </a>
+                </div>
+
+                <a th:if="${currentPage < totalPages}" th:onclick="setPos()" th:href="@{/vacancy/list(size=${vacancies.size},
+                page=${currentPage + 1},
+                sort=${sort},
+                likes=${likesId},
+                category=${category},
+                type=${typeVal},
+                min=${minVal},
+                max=${maxVal})
+                }">&#8594;</a>
+
+                <a th:unless="${currentPage < totalPages}" th:onclick="setPos()" th:href="@{/vacancy/list(size=${vacancies.size},
+                page=${1},
+                sort=${sort},
+                likes=${likesId},
+                category=${category},
+                type=${typeVal},
+                min=${minVal},
+                max=${maxVal})
+                }">&#8594;</a>
             </div>
+
+
+
         </div>
     </div>
 </div>

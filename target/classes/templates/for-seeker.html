@@ -99,8 +99,8 @@
     </div>
 </div>
 
-<div id="tile">
-    <h2>Можливості</h2>
+<div id="tile" th:if="${page}">
+    <h2>Доступність</h2>
     <div class="container">
         <a th:onclick="'javascript: setPosition()'" th:if="${currentPage > 1}" th:href="@{/journal/seeker(page=${currentPage - 1})}">
             <div class="block prev-page" id="grey" th:if="${totalPages > 1}">
@@ -129,6 +129,43 @@
 
         <a th:onclick="'javascript: setPosition()'" th:if="${totalPages <= currentPage}" th:href="@{/journal/seeker(page=1)}">
             <div class="block next-page" id="grey" th:if="${totalPages > 1}">
+                Наступна сторінка...
+            </div>
+        </a>
+
+    </div>
+</div>
+
+<div id="tile" th:if="${pageAdvice}">
+    <h2>Поради</h2>
+    <div class="container">
+        <a th:onclick="'javascript: setPosition()'" th:if="${currentPageAdvice > 1}" th:href="@{/journal/seeker(pageAdvice=${currentPageAdvice - 1})}">
+            <div class="block prev-page" id="grey" th:if="${totalPagesAdvice > 1}">
+                Попередня сторінка...
+            </div>
+        </a>
+        <a th:onclick="'javascript: setPosition()'" th:if="${currentPageAdvice <= 1}" th:href="@{/journal/seeker(pageAdvice=${totalPagesAdvice})}">
+            <div class="block prev-page" id="grey" th:if="${totalPagesAdvice > 1}">
+                Попередня сторінка...
+            </div>
+        </a>
+        <div th:each="p, i: ${pageAdvice.content}" th:remove="tag">
+            <a th:href="@{'/pages/' + ${p.id}}">
+                <div th:if="${(i.count % 5) == 1}" class="block first" th:text="${p.name}"></div>
+                <div th:if="${(i.count % 5) == 2}" class="block second" th:text="${p.name}"></div>
+                <div th:if="${(i.count % 5) == 3}" class="block third" th:text="${p.name}"></div>
+                <div th:if="${(i.count % 5) == 4}" class="block forth" th:text="${p.name}"></div>
+                <div th:if="${(i.count % 5) == 0}" class="block fifth" th:text="${p.name}"></div>
+            </a>
+        </div>
+        <a th:onclick="'javascript: setPosition()'" th:if="${totalPagesAdvice > currentPageAdvice}" th:href="@{/journal/seeker(pageAdvice=${currentPageAdvice + 1})}">
+            <div class="block next-page" id="grey" th:if="${totalPagesAdvice > 1}">
+                Наступна сторінка...
+            </div>
+        </a>
+
+        <a th:onclick="'javascript: setPosition()'" th:if="${totalPagesAdvice <= currentPageAdvice}" th:href="@{/journal/seeker(pageAdvice=1)}">
+            <div class="block next-page" id="grey" th:if="${totalPagesAdvice > 1}">
                 Наступна сторінка...
             </div>
         </a>

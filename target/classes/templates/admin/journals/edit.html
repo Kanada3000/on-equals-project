@@ -49,6 +49,15 @@
                 <option>Роботодавцям</option>
                 <option selected>Законодавство</option>
             </select>
+            <br/>
+            <select name="category" required th:if="${category == 'Доступність'}">
+                <option selected>Доступність</option>
+                <option>Поради</option>
+            </select>
+            <select name="category" required th:if="${category == 'Поради'}">
+                <option>Доступність</option>
+                <option selected>Поради</option>
+            </select>
             <button id="publish">Підтвердити зміни</button>
         </div>
     </div>

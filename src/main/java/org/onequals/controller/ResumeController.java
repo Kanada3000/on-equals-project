@@ -56,9 +56,10 @@ public class ResumeController {
                               @RequestParam("size") Optional<Integer> size) {
 
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(15);
+        int pageSize = size.orElse(2);
         model.addAttribute("minVal", min);
         model.addAttribute("maxVal", max);
+        model.addAttribute("currentPage", currentPage);
 
         User user = userService.findUser(principal.getName());
 
@@ -105,6 +106,7 @@ public class ResumeController {
                             .boxed()
                             .collect(Collectors.toList());
                     model.addAttribute("pageNumbers", pageNumbers);
+                    model.addAttribute("totalPages", totalPages);
                 }
             } else {
                 model.addAttribute("categories", categoryService.getAll());

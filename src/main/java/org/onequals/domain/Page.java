@@ -17,11 +17,14 @@ public class Page {
     private String label;
     private String author;
     private Timestamp createdDate;
+    private String category;
 
     public Page() {
     }
 
-    public Page(Long id, String name, String shortBody, String fullBody, String label, String author, Timestamp createdDate) {
+    public Page(Long id, String name, String shortBody,
+                String fullBody, String label, String author,
+                Timestamp createdDate, String category) {
         this.id = id;
         this.name = name;
         this.shortBody = shortBody;
@@ -29,6 +32,7 @@ public class Page {
         this.label = label;
         this.author = author;
         this.createdDate = createdDate;
+        this.category = category;
     }
 
     public Long getId() {
@@ -85,5 +89,13 @@ public class Page {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
