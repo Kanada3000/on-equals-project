@@ -298,12 +298,10 @@
 </footer>
 
 <div id="alert">
-    <span th:if="${alert}" th:text="${alert}">Ваше резюме успішно додано та після перевірки з'явиться на сайті</span>
+    <span sec:authorize="!hasAuthority('SEEKER') && !hasRole('SEEKER')">Ваша вакансія успішно додана та після перевірки з'явиться на сайті</span>
+    <span sec:authorize="!hasAuthority('EMPLOYER') && !hasRole('EMPLOYER')">Ваше резюме успішно додано та після перевірки з'явиться на сайті</span>
     <div class="button">Окей :)</div>
 </div>
-<script th:inline="javascript">
-    var alertMode = [[${alertMode}]]
-</script>
 <script src="/script/script.js"></script>
 <script src="/script/script-list.js"></script>
 <script src="/script/script-index.js"></script>

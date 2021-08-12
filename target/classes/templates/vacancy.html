@@ -22,7 +22,7 @@
     <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
     <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
 </header>
-<form id="form-reg-employer" th:action="@{/vacancy/new}" method="post">
+<form id="form-reg-employer" th:action="@{/vacancy/new}" method="post" class="vac">
     <div id="reg2">
         <div class="reg-head">
             <h1>крок 2 / мої вакансії</h1>

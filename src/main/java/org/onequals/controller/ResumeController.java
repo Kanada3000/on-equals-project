@@ -145,7 +145,6 @@ public class ResumeController {
 
     @PostMapping("/new")
     public String addResume(Principal principal,
-                            Model model,
                             @RequestParam(name = "categoryList") List<String> catList,
                             @RequestParam("typeList") List<String> typeList,
                             @RequestParam("citString") List<String> citString,
@@ -182,7 +181,7 @@ public class ResumeController {
             cityService.addCities(resume, cityService.findByNames(cities));
         }
 
-        return "redirect:/index/resume";
+        return "redirect:/";
     }
 
     @PostMapping("/file")

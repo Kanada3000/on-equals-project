@@ -205,9 +205,8 @@
                 </div>
             </div>
         </div>
-
-        <div id="paginations" th:if="${vacancies.totalPages > 1}">
-            <div th:if="${vacancies.totalPages > 0 && userType == 'employer'}" th:remove="tag">
+        <div id="paginations" th:if="${totalPages > 1}">
+            <div th:if="${totalPages > 0 && userType == 'employer'}" th:remove="tag">
                 <a th:if="${currentPage > 1}" th:onclick="setPos()" th:href="@{/resume/list(size=${vacancies.size},
                 page=${currentPage - 1},
                 sort=${sort},
@@ -271,7 +270,6 @@
                 max=${maxVal})
                 }">&#8594;</a>
             </div>
-
 
 
             <div th:if="${vacancies.totalPages > 0 && userType == 'seeker'}" th:remove="tag">
@@ -338,8 +336,6 @@
                 max=${maxVal})
                 }">&#8594;</a>
             </div>
-
-
 
         </div>
     </div>

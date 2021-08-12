@@ -53,21 +53,6 @@ public class PageController {
         return "index";
     }
 
-    @GetMapping("/index/{mode}")
-    public String indexPageMode(@PathVariable String mode, Model model) {
-        model.addAttribute("category", categoryService.getAll());
-        model.addAttribute("city", cityService.getAll());
-        model.addAttribute("sticker", stickerService.getAll());
-        if (Objects.equals(mode, "resume")) {
-            model.addAttribute("alert", "Вашу резюме успішно додано та після перевірки з'явиться на сайті");
-            model.addAttribute("alertMode", "true");
-        } else if (Objects.equals(mode, "vacancy")) {
-            model.addAttribute("alert", "Ваша вакансія успішно додана та після перевірки з'явиться на сайті");
-            model.addAttribute("alertMode", "true");
-        }
-        return "index";
-    }
-
     @GetMapping("/login")
     public String signInPage(Model model) {
         return "log-in";

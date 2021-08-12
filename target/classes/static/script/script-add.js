@@ -115,6 +115,7 @@ function onSubmit(token) {
         let size = $("#size").val()
         if ($("#download").val().split('.').pop().toLowerCase() === "pdf") {
             if (size / 1048576 < 10) {
+                localStorage.setItem("alertMode", "res")
                 $("#formResume").submit();
             } else if (!$("#error2").length) {
                 $("#invalid").append("<label id='error2' class='error'>Розмір перевищує ліміт (10МБ)</label>")
@@ -133,6 +134,7 @@ function onSubmit(token) {
                 $(this).after("<input type='hidden' name='typeList' value='" + $(this).val() + "'>")
             })
             $("#reg2").first().after("<input type='hidden' name='categoryList' value=''>")
+            localStorage.setItem("alertMode", "res")
             $("#form-reg-employer").submit();
         }
     }

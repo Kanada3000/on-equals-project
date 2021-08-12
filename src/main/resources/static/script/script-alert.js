@@ -1,19 +1,16 @@
 $(function () {
-    if (alertMode === "true") {
+    if (localStorage.getItem("alertMode") === "res") {
+        localStorage.removeItem("alertMode")
         $("#alert").css("display", "flex")
-        $("#alert").animate({
-            bottom: '20px'
-        }, 400, function () {
-        });
-        setTimeout(function () {
-            $("#alert").stop().animate({
-                bottom: '-200px'
-            }, 400, function () {
-            });
-            setTimeout(function () {
-                $("#alert").css("display", "none")
-            }, 1000);
-        }, 4000);
+        $("#alert .button").click(function (){
+            $("#alert").css("display", "none")
+        })
+    } else if(localStorage.getItem("alertMode") === "vac") {
+        localStorage.removeItem("alertMode")
+        $("#alert").css("display", "flex")
+        $("#alert .button").click(function (){
+            $("#alert").css("display", "none")
+        })
     }
 });
 

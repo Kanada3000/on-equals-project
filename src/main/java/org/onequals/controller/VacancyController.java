@@ -178,7 +178,7 @@ public class VacancyController {
             vacancy.setSalary(salary.get(i));
             cityService.addCities(vacancy, cityService.findByNames(cities));
         }
-        return "redirect:/index/vacancy";
+        return "redirect:/";
     }
 
 }
