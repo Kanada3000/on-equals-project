@@ -212,6 +212,8 @@ h2 {
     margin-right: 30px;
     margin-bottom: 30px;
     cursor: pointer;
+    overflow: hidden;
+    word-wrap: break-word;
 }
 
 #tile .container .block.first {

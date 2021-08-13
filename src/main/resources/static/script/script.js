@@ -1,18 +1,20 @@
 $(function () {
 
     setTimeout(function () {
-        $(window).resize(function () {
+
+        $(window).on('resize', function(){
+            let win = $(this)
             let text
             let logo = $("header .header__logo")
             let panel = $("header .header__panel")
             let name = $("header .header__sign .button.profile").parent()
             let paddings = $("header").css("padding-left")
             let res = panel.width() + logo.width() + 2 * paddings.substring(0, paddings.length - 2)
-            if (res >= $(window).width()) {
+            if (res >= win.width()) {
                 text = name.children().text().substring(0, 1)
                 name.children().text(text)
                 name.children().css("padding", "0")
-                if ($(window).width() < 480) {
+                if (win.width() < 480) {
                     name.children().css("width", "calc(-11px + 16.9vw)")
                     name.children().css("height", "calc(-11px + 16.9vw)")
                 } else {

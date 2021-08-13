@@ -1,5 +1,11 @@
 $(function () {
 
+    $("#exit").click(function (e){
+        e.preventDefault()
+        $("#logoutForm").submit()
+        e.stopImmediatePropagation()
+    })
+
     $("#edit-button").click(function (e) {
         e.preventDefault();
         $("#profile-head").first().hide()

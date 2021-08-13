@@ -216,7 +216,7 @@
                  th:each="pageNumber : ${pageNumbers}">
                 <a th:href="@{/admin/approve/vacancy(size=${vacancy.size}, page=${pageNumber},
                 searchField=${searchField},
-                fieldName=${fieldName}))}"
+                fieldName=${fieldName})}"
                    th:text="${pageNumber}"
                    th:class="${pageNumber==vacancy.number + 1} ? active"></a>
             </div>
