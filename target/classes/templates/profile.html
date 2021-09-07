@@ -107,7 +107,7 @@
 
         </div>
     </div>
-    <textarea id="descr" form="formEdit" th:text="${user.getDescription()}" name="description" maxlength="1000">Some desc</textarea>
+    <textarea id="descr" form="formEdit" th:utext="${user.getDescription()}" name="description" maxlength="1000">Some desc</textarea>
     <button type="submit" form="formEdit">Зберегти</button>
 </div>
 <div id="profile-body">
@@ -136,7 +136,7 @@
                 </span>
                     <div class="hide">
                         <span class="roll-down">розгорнути ↓</span>
-                        <span class="descript" th:text="${b.getDescription()}">
+                        <span class="descript" th:utext="${b.getDescription()}">
                 </span>
                         <span class="roll-up">згорнути ↑</span>
                     </div>
@@ -202,7 +202,7 @@
                 </span>
                     <div class="hide">
                     <span class="descript">
-                        <textarea id="salar" name="descript" th:text="${b.getDescription()}">
+                        <textarea id="salar" name="descript" th:utext="${b.getDescription()}">
                         </textarea>
                 </span>
                     </div>
@@ -312,7 +312,7 @@
             </div>
             <div class="hide">
                 <span class="roll-down">розгорнути ↓</span>
-                <span class="descript" th:text="${l.getDescription()}">
+                <span class="descript" th:utext="${l.getDescription()}">
                 </span>
                 <span class="roll-up">згорнути ↑</span>
             </div>
