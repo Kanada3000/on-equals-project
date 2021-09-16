@@ -1,0 +1,45 @@
+#editForm{
+    padding: 0 20px;
+}
+
+h2, button{
+    margin: 0 20px;
+}
+
+html{
+    padding-bottom: 60px;
+}
+
+
+.text-red{
+    font-size: inherit;
+    color: #ff5b54;
+}
+
+#editForm #cityList{
+    display: none;
+}
+
+#editForm input{
+    margin-top: 5px;
+    padding: 5px;
+}
+
+#editForm textarea{
+    padding: 20px;
+}
+
+#editForm .city-block{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+#editForm .city-block .block{
+    padding: 5px 10px;
+    margin: 2px 0;
+    border-radius: 50vw;
+    background-color: #d5d5d5;
+    cursor: pointer;
+}

@@ -164,7 +164,7 @@
                         </div>
                     </td>
                     <td><input autocomplete="off" id="salary" type="text" required></td>
-                    <td><input id="description" type="text" required></td>
+                    <td><textarea id="description" required></textarea></td>
                     <td>
                         <select id="approved" name="approved">
                             <option value="false">Ні</option>
@@ -188,25 +188,12 @@
                         </div>
                     </td>
                     <td class="salary" th:text="${r.getSalary()}"></td>
-                    <td class="description" th:utext="${r.getDescription()}">1000 знаків</td>
+                    <td class="description" th:utext="${#strings.abbreviate(r.getDescription(),10)}">1000 знаків</td>
                     <td class="approved" th:if="${r.getApproved()}">Так</td>
                     <td class="approved" th:unless="${r.getApproved()}">Ні</td>
-                    <td class="edit">&#9998;</td>
+                    <td><a th:href="@{/admin/resumes/edit/{id}(id=${r.getId()})}">&#9998;</a></td>
                     <td id="approve/resume" class="delete">&#10060;</td>
                 </tr>
-                <tr class="clear">
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td class="but-head"><span>&nbsp;</span></td>
-                    <td class="but-head"><span>&nbsp;</span></td>
-                </tr>
-
             </table>
         </div>
         <div id="paginations">

@@ -213,7 +213,7 @@
                         </div>
                     </td>
                     <td class="site" th:text="${e.getSite()}"></td>
-                    <td class="description" th:text="${e.getDescription()}"></td>
+                    <td class="description" th:utext="${#strings.abbreviate(e.getDescription(),10)}"></td>
                     <td class="age" th:text="${e.getAge()}"></td>
                     <td class="emp_count" th:text="${e.getEmpCount()}"></td>
                     <td class="size" th:text="${e.getSize()}"></td>
@@ -223,27 +223,8 @@
                     <td class="link_twitter" th:text="${e.getLinkTwitter()}"></td>
                     <td class="approved" th:if="${e.getApproved()}">Так</td>
                     <td class="approved" th:unless="${e.getApproved()}">Ні</td>
-                    <td class="edit">&#9998;</td>
+                    <td><a th:href="@{/admin/employer/edit/{id}(id=${e.getId()})}">&#9998;</a></td>
                     <td id="approve/employer" class="delete">&#10060;</td>
-                </tr>
-                <tr class="clear">
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td class="but-head"><span>&nbsp;</span></td>
-                    <td class="but-head"><span>&nbsp;</span></td>
                 </tr>
             </table>
         </div>

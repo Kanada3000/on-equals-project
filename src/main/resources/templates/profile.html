@@ -111,7 +111,7 @@
     <button type="submit" form="formEdit">Зберегти</button>
 </div>
 <div id="profile-body">
-    <span th:text="${user.getDescription()}">
+    <span th:utext="${#strings.replace( #strings.escapeXml(user.getDescription()),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}">
     </span>
     <div class="container">
         <div th:each="b: ${block}" th:remove="tag">
@@ -136,7 +136,7 @@
                 </span>
                     <div class="hide">
                         <span class="roll-down">розгорнути ↓</span>
-                        <span class="descript" th:utext="${b.getDescription()}">
+                        <span class="descript" th:utext="${#strings.replace( #strings.escapeXml(b.getDescription()),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}">
                 </span>
                         <span class="roll-up">згорнути ↑</span>
                     </div>
@@ -312,7 +312,7 @@
             </div>
             <div class="hide">
                 <span class="roll-down">розгорнути ↓</span>
-                <span class="descript" th:utext="${l.getDescription()}">
+                <span class="descript" th:utext="${#strings.replace( #strings.escapeXml(l.getDescription()),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}">
                 </span>
                 <span class="roll-up">згорнути ↑</span>
             </div>

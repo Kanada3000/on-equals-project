@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ua">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" th:content="${_csrf.token}">
+    <meta charset="UTF-8">
+    <title>OnEquals Admin Resume Edit</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-edit.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+</head>
+<body>
+<header>
+    <th:block sec:authorize="!isAuthenticated()" th:include="block/block-header.html :: header"></th:block>
+    <th:block sec:authorize="isAuthenticated()" th:include="block/block-header-autho.html :: header"></th:block>
+</header>
+<h2>Редагування резюме</h2>
+<form id="editForm" th:action="@{'/admin/resumes/add'}" method="POST">
+    <input type="hidden" name="id" th:value="${resume.getId()}">
+    <br/>
+    <br/>
+    <span>Користувач<span class="text-red">*</span>: </span>
+    <div class="list" id="userList">
+        <input name="user" autocomplete="off" id="user" type="text" class="select-label" required
+               th:value="${resume.getUser().getUsername()}">
+        <div class="select green" id="user-div">
+            <ul>
+                <li th:each="u: ${user}">
+                    <div class="li" th:text="${u.getUsername()}"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br/>
+    <span>Категорія<span class="text-red">*</span>: </span>
+    <div class="list" id="categoryList">
+        <input name="category" autocomplete="off" id="category" type="text" class="select-label" required
+               th:value="${resume.getCategory().getLongName()}">
+        <div class="select green" id="category-div">
+            <ul>
+                <li th:each="c: ${category}">
+                    <div class="li" th:text="${c.getLongName()}"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br/>
+    <span>Тип зайнятості<span class="text-red">*</span>: </span>
+    <div class="list" id="typeList">
+        <input name="type" autocomplete="off" id="type" type="text" class="select-label" required
+               th:value="${resume.getType().getName()}">
+        <div class="select green" id="type-div">
+            <ul>
+                <li th:each="t: ${types}">
+                    <div class="li" th:text="${t.getName()}"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br/>
+    <span>Місто<span class="text-red">*</span>: </span>
+    <div class="city-block">
+        <div class="block" th:each="c: ${resume.getCity()}">
+            <span th:text="${c.getCity() + ' &#10008;'}"></span>
+            <input type="hidden" name="city" th:value="${c.getCity()}">
+        </div>
+        <div class="list" id="cityList">
+            <input name="cityl" autocomplete="off" id="city" type="text" class="select-label" required>
+            <div class="select green" id="city-div">
+                <ul>
+                    <li th:each="c: ${city}">
+                        <div class="li" th:text="${c.getCity()}"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <a href="#" class="addCity">&#10133;</a>
+    </div>
+    <br/>
+    <span>Зарплата<span class="text-red">*</span>: </span>
+    <input name="salary" autocomplete="off" id="salary" type="text" required th:value="${resume.getSalary()}">
+    <br/>
+    <span>Опис<span class="text-red">*</span>: </span>
+    <textarea name="description" id="description" required th:text="${resume.getDescription()}"></textarea>
+    <br/>
+    <br/>
+    <span>Підтверджено? </span>
+    <select id="approved" name="approved" th:if="${resume.getApproved() == true}">
+        <option value="false">Ні</option>
+        <option value="true" selected>Так</option>
+    </select>
+    <select id="approved" name="approved" th:if="${resume.getApproved() == false}">
+        <option value="false" selected>Ні</option>
+        <option value="true">Так</option>
+    </select>
+</form>
+<br/>
+<button id="accept">Зберегти</button>
+
+<script th:inline="javascript">
+    var catList = []
+    $("#categoryList .li").each(function () {
+        catList.push($(this).text())
+    })
+
+    var cityList = []
+    $("#cityList .li").each(function () {
+        cityList.push($(this).text())
+    })
+
+    var userList = []
+    $("#userList .li").each(function () {
+        userList.push($(this).text())
+    })
+
+    var typeList = []
+    $("#typeList .li").each(function () {
+        typeList.push($(this).text())
+    })
+
+    var sortVal = [[${sort}]]
+</script>
+<script src="/script/script.js"></script>
+<script src="/script/script-edit.js"></script>
+<script src="/script/script-validedit.js"></script>
+<script src="/script/script-list.js"></script>
+<script src="/script/script-admin.js"></script>
+<script src="/script/script-admin-city.js"></script>
+<script src="/script/script-admin-sort.js"></script>
+
+</body>
+</html>

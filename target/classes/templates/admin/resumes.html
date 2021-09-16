@@ -99,7 +99,7 @@
         </select>
         <input type="text" name="searchField" th:value="${searchField}" form="sortAdminForm">
         <button type="submit" form="sortAdminForm">Пошук</button>
-        <a href="#" class="first">Додати нове резюме &#10133;</a>
+        <a th:href="@{/admin/resume/addd}" class="firsta">Додати нове резюме &#10133;</a>
         <div class="table">
             <table border="1">
                 <tr class="head">
@@ -190,23 +190,11 @@
                         </div>
                     </td>
                     <td class="salary" th:text="${r.getSalary()}"></td>
-                    <td class="description" th:text="${r.getDescription()}">1000 знаків</td>
+                    <td class="description" th:utext="${#strings.abbreviate(r.getDescription(),10)}">1000 знаків</td>
                     <td class="approved" th:if="${r.getApproved()}">Так</td>
                     <td class="approved" th:unless="${r.getApproved()}">Ні</td>
-                    <td class="edit">&#9998;</td>
+                    <td><a th:href="@{/admin/resumes/edit/{id}(id=${r.getId()})}">&#9998;</a></td>
                     <td id="resumes" class="delete">&#10060;</td>
-                </tr>
-                <tr class="clear">
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td class="but-head"><span>&nbsp;</span></td>
-                    <td class="but-head"><span>&nbsp;</span></td>
                 </tr>
 
             </table>

@@ -189,26 +189,12 @@
                         </div>
                     </td>
                     <td class="salary" th:text="${v.getSalary()}"></td>
-                    <td class="description" th:text="${v.getDescription()}">1000 знаків</td>
+                    <td class="description" th:utext="${#strings.abbreviate(v.getDescription(),10)}">1000 знаків</td>
                     <td class="approved" th:if="${v.getApproved()}">Так</td>
                     <td class="approved" th:unless="${v.getApproved()}">Ні</td>
-                    <td class="edit">&#9998;</td>
+                    <td><a th:href="@{/admin/vacancies/edit/{id}(id=${v.getId()})}">&#9998;</a></td>
                     <td id="approve/vacancy" class="delete">&#10060;</td>
                 </tr>
-
-                <tr class="clear">
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td class="but-head"><span>&nbsp;</span></td>
-                    <td class="but-head"><span>&nbsp;</span></td>
-                </tr>
-
             </table>
         </div>
         <div id="paginations">

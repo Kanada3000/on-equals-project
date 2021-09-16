@@ -56,7 +56,7 @@ public class ResumeController {
                               @RequestParam("size") Optional<Integer> size) {
 
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(2);
+        int pageSize = size.orElse(15);
         model.addAttribute("minVal", min);
         model.addAttribute("maxVal", max);
         model.addAttribute("currentPage", currentPage);
@@ -151,6 +151,8 @@ public class ResumeController {
                             @RequestParam("description") List<String> desc,
                             @RequestParam("salary") List<Integer> salary,
                             @RequestParam("g-recaptcha-response") String response) {
+
+        System.out.println(desc);
         ReCaptchaResponse reCaptchaResponse = reCaptchaRegisterService.verify(response);
 
         if (!reCaptchaResponse.isSuccess()) {

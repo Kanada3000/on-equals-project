@@ -99,7 +99,7 @@
         </select>
         <input type="text" name="searchField" th:value="${searchField}" form="sortAdminForm">
         <button type="submit" form="sortAdminForm">Пошук</button>
-        <a href="#" class="first">Додати нового шукача &#10133;</a>
+        <a th:href="@{/admin/seeker/addd}" class="firsta">Додати нового шукача &#10133;</a>
         <div class="table">
             <table border="1">
                 <tr class="head">
@@ -189,32 +189,15 @@
                         </div>
                     </td>
                     <td class="site" th:text="${s.getSite()}"></td>
-                    <td class="description" th:text="${s.getDescription()}"></td>
+                    <td class="description" th:utext="${#strings.abbreviate(s.getDescription(),10)}"></td>
                     <td class="link_facebook" th:text="${s.getLinkFacebook()}"></td>
                     <td class="link_instagram" th:text="${s.getLinkInstagram()}"></td>
                     <td class="link_linked_in" th:text="${s.getLinkLinkedIn()}"></td>
                     <td class="link_twitter" th:text="${s.getLinkTwitter()}"></td>
                     <td class="approved" th:if="${s.getApproved()}">Так</td>
                     <td class="approved" th:unless="${s.getApproved()}">Ні</td>
-                    <td class="edit">&#9998;</td>
+                    <td><a th:href="@{/admin/seeker/edit/{id}(id=${s.getId()})}">&#9998;</a></td>
                     <td id="seeker" class="delete">&#10060;</td>
-                </tr>
-                <tr class="clear">
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td class="but-head"><span>&nbsp;</span></td>
-                    <td class="but-head"><span>&nbsp;</span></td>
                 </tr>
             </table>
         </div>

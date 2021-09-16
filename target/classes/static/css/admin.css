@@ -66,7 +66,7 @@
     margin-bottom: 30px;
 }
 
-#admin #body a.first {
+#admin #body a.first, #admin #body a.firsta {
     display: block;
     margin-bottom: 30px;
     width: auto;
@@ -101,6 +101,9 @@
     padding-left: 10px;
     padding-right: 10px;
     box-sizing: border-box;
+}
+#admin #body table td.description {
+    white-space: pre-line;
 }
 
 #admin #body table td span.text-red {

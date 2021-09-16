@@ -5,8 +5,8 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title th:if="${userType == 'seeker'}">OnEquals - Список резюме</title>
-    <title th:if="${userType == 'employer'}">OnEquals - Список вакансій</title>
+    <title th:if="${userType == 'seeker'}">OnEquals - Список вакансій</title>
+    <title th:if="${userType == 'employer'}">OnEquals - Список резюме</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/header.css">
@@ -184,7 +184,8 @@
                 </div>
                 <div class="hide">
                     <span class="roll-down">розгорнути ↓</span>
-                    <span class="descript" th:utext="${v.getDescription()}">
+                    <span class="descript"
+                          th:utext="${#strings.replace( #strings.escapeXml(v.getDescription()),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}">
                 </span>
                     <span class="roll-up">згорнути ↑</span>
                 </div>

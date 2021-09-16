@@ -179,6 +179,7 @@
     display: none;
     font-size: 32px;
     padding-top: 9px;
+    white-space: pre-line;
 }
 
 #profile-body .container .block .text .hide .roll-up {

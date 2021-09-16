@@ -59,7 +59,7 @@
     </div>
 </div>
 <div id="profile-body">
-    <span th:text="${user.getDescription()}">
+    <span th:utext="${#strings.replace( #strings.escapeXml(user.getDescription()),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}">
     </span>
     <div class="container">
         <div class="block" th:each="b: ${block}">
@@ -79,7 +79,7 @@
                 </span>
                 <div class="hide">
                     <span class="roll-down">розгорнути ↓</span>
-                    <span class="descript" th:utext="${b.getDescription()}">
+                    <span class="descript" th:utext="${#strings.replace( #strings.escapeXml(b.getDescription()),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}">
                 </span>
                     <span class="roll-up">згорнути ↑</span>
                 </div>

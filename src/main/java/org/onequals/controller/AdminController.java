@@ -312,7 +312,28 @@ public class AdminController {
             vacancy.setApproved(approved);
         vacancyService.save(vacancy);
 
-        return "redirect:/admin/vacancies";
+        if (Boolean.TRUE.equals(approved))
+            return "redirect:/admin/vacancies";
+        else return "redirect:/admin/approve/vacancy";
+    }
+
+    @GetMapping("/vacancies/edit/{id}")
+    public String adminVacancyEdit(@PathVariable("id") long id, Model model) {
+        model.addAttribute("vacancy", vacancyService.getById(id));
+        model.addAttribute("user", userService.getAllUser("employer"));
+        model.addAttribute("types", typeService.getAllAll());
+        model.addAttribute("category", categoryService.getAllAll());
+        model.addAttribute("city", cityService.getAllAll());
+        return "admin/edit-vacancy";
+    }
+
+    @GetMapping("/vacancy/addd")
+    public String adminVacancy(Model model) {
+        model.addAttribute("user", userService.getAllUser("employer"));
+        model.addAttribute("types", typeService.getAllAll());
+        model.addAttribute("category", categoryService.getAllAll());
+        model.addAttribute("city", cityService.getAllAll());
+        return "admin/add-vacancy";
     }
 
     @GetMapping("/vacancies/delete/{id}")
@@ -389,13 +410,35 @@ public class AdminController {
             resume.setApproved(approved);
         resumeService.save(resume);
 
-        return "redirect:/admin/resumes";
+        if (Boolean.TRUE.equals(approved))
+            return "redirect:/admin/resumes";
+        else
+            return "redirect:/admin/approve/resume";
     }
 
     @GetMapping("/resumes/delete/{id}")
     public String adminResumeDelete(@PathVariable("id") long id) {
         resumeService.delete(id);
         return "redirect:/admin/resumes";
+    }
+
+    @GetMapping("/resumes/edit/{id}")
+    public String adminResumeEdit(@PathVariable("id") long id, Model model) {
+        model.addAttribute("resume", resumeService.getById(id));
+        model.addAttribute("user", userService.getAllUser("seeker"));
+        model.addAttribute("types", typeService.getAllAll());
+        model.addAttribute("category", categoryService.getAllAll());
+        model.addAttribute("city", cityService.getAllAll());
+        return "admin/edit-resume";
+    }
+
+    @GetMapping("/resume/addd")
+    public String adminResume(Model model) {
+        model.addAttribute("user", userService.getAllUser("seeker"));
+        model.addAttribute("types", typeService.getAllAll());
+        model.addAttribute("category", categoryService.getAllAll());
+        model.addAttribute("city", cityService.getAllAll());
+        return "admin/add-resume";
     }
 
     @GetMapping("/employer")
@@ -485,7 +528,30 @@ public class AdminController {
 
         userService.addRole(userDB, Role.EMPLOYER);
         employerService.save(emp);
-        return "redirect:/admin/employer";
+
+        if (approved)
+            return "redirect:/admin/employer";
+        else
+            return "redirect:/admin/approve/employer";
+    }
+
+    @GetMapping("/employer/edit/{id}")
+    public String adminEmployerEdit(@PathVariable("id") long id, Model model) {
+        model.addAttribute("employer", employerService.findById(id));
+        model.addAttribute("user", userService.getAllUser("useremployer"));
+        model.addAttribute("types", typeService.getAllAll());
+        model.addAttribute("category", categoryService.getAllAll());
+        model.addAttribute("city", cityService.getAllAll());
+        return "admin/edit-employer";
+    }
+
+    @GetMapping("/employer/addd")
+    public String adminEmployer(Model model) {
+        model.addAttribute("user", userService.getAllUser("useremployer"));
+        model.addAttribute("types", typeService.getAllAll());
+        model.addAttribute("category", categoryService.getAllAll());
+        model.addAttribute("city", cityService.getAllAll());
+        return "admin/add-employer";
     }
 
     @GetMapping("/employer/delete/{id}")
@@ -578,7 +644,30 @@ public class AdminController {
 
         userService.addRole(userDB, Role.SEEKER);
         seekerService.save(seek);
-        return "redirect:/admin/seeker";
+
+        if (approved)
+            return "redirect:/admin/seeker";
+        else
+            return "redirect:/admin/approve/seeker";
+    }
+
+    @GetMapping("/seeker/edit/{id}")
+    public String adminSeekerEdit(@PathVariable("id") long id, Model model) {
+        model.addAttribute("seeker", seekerService.findById(id));
+        model.addAttribute("user", userService.getAllUser("userseeker"));
+        model.addAttribute("types", typeService.getAllAll());
+        model.addAttribute("category", categoryService.getAllAll());
+        model.addAttribute("city", cityService.getAllAll());
+        return "admin/edit-seeker";
+    }
+
+    @GetMapping("/seeker/addd")
+    public String adminSeeker(Model model) {
+        model.addAttribute("user", userService.getAllUser("userseeker"));
+        model.addAttribute("types", typeService.getAllAll());
+        model.addAttribute("category", categoryService.getAllAll());
+        model.addAttribute("city", cityService.getAllAll());
+        return "admin/add-seeker";
     }
 
     @GetMapping("/seeker/delete/{id}")

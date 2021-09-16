@@ -16,6 +16,13 @@ $(function () {
                 input.attr("form", "form")
             });
 
+            $("tr.edit textarea").each(function () {
+                let input = $(this);
+                let inputId = input.attr("id")
+                input.attr("name", inputId)
+                input.attr("form", "form")
+            });
+
             $("tr.edit select").each(function () {
                 let select = $(this);
                 let selectId = select.attr("id")
@@ -132,6 +139,14 @@ $(function () {
                 input.attr("name", inputId)
                 input.attr("form", "form")
                 block.find("input#" + inputId).val(val)
+            });
+            $("tr.edit textarea").each(function () {
+                let input = $(this);
+                let inputId = input.attr("id")
+                let val = $("#admin #body tr.temp").find("td." + inputId).text()
+                input.attr("name", inputId)
+                input.attr("form", "form")
+                block.find("textarea#" + inputId).val(val)
             });
 
             let i = 0
